@@ -60,7 +60,8 @@ async function captureRun(run) {
 
     for (const [name, viewport] of Object.entries(viewports)) {
       await page.setViewportSize(viewport);
-      await page.goto(pageUrl, { waitUntil: 'networkidle' });
+      await page.goto(pageUrl, { waitUntil: 'domcontentloaded' });
+      await page.waitForTimeout(500);
       await page.screenshot({
         path: path.join(screenshotDir, `${name}.png`),
         fullPage: true,
