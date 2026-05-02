@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Preview: WordPress VIP (Dark)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Aktiv Grotesk VF is the real brand font (commercial, requires license).
+       DM Sans is a free Google Fonts fallback with similar geometric proportions. */
+    --font-primary: 'Aktiv Grotesk VF', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-extended: 'Aktiv Grotesk EX', 'DM Sans', sans-serif;
+    --font-mono: 'AkkuratMonoLLWeb-Regular', 'DM Mono', 'Courier New', monospace;
+
+    --dark-bg: #13191e;
+    --text-inverse: #fbfbfb;
+    --text-muted: rgba(251,251,251,0.7);
+    --text-dim: rgba(251,251,251,0.5);
+    --brand-gold: #d8a45f;
+    --accent-1: #dfc39e;
+    --gold-dark: #ba7920;
+    --gold-darker: #8c5407;
+    --card-bg: rgba(255,255,255,0.06);
+    --card-border: rgba(255,255,255,0.1);
+    --card-hover: rgba(255,255,255,0.09);
+    --border-dark: rgba(255,255,255,0.12);
+    --surface-elevated: rgba(255,255,255,0.04);
+
+    /* Warm accents */
+    --salmon: #fbb7b4;
+    --coral: #ff8872;
+    --peach: #ffa378;
+    --orange: #fe9f5f;
+    --amber: #ffb84a;
+    --green: #6dd18b;
+
+    /* Shadows on dark */
+    --shadow-dark-low: 0px 1px 1px rgba(0,0,0,0.3), 0px 1px 5px rgba(0,0,0,0.2);
+    --shadow-dark-medium: 0px 1px 2px rgba(0,0,0,0.1), 0px 15px 30px rgba(0,0,0,0.2);
+    --shadow-dark-high: 0px 2.767px 2.214px rgba(0,0,0,0.05), 0px 6.65px 5.32px rgba(0,0,0,0.07), 0px 12.522px 10.017px rgba(0,0,0,0.09), 0px 22.336px 17.869px rgba(0,0,0,0.1), 0px 41.778px 33.422px rgba(0,0,0,0.12), 0px 100px 80px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark-bg);
+    color: var(--text-inverse);
+    font-family: var(--font-primary);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px clamp(1rem, 0.4rem + 3.01vw, 3.5rem);
+    background: rgba(19,25,30,0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-dark);
+  }
+  .nav-brand { display: flex; align-items: center; text-decoration: none; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a { font-size: 14px; font-weight: 400; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--text-inverse); }
+  .nav-cta {
+    display: inline-block;
+    background: linear-gradient(55deg, #d8a45f 10%, #dfc39e 90%);
+    color: var(--dark-bg);
+    padding: 8px 20px; border-radius: 999999px; font-size: 14px; font-weight: 500;
+    text-decoration: none; transition: all 0.15s;
+  }
+  .nav-cta:hover { background: linear-gradient(55deg, #8c5407 10%, #c5832a 90%); }
+
+  /* HERO */
+  .hero {
+    padding: clamp(3.5rem, 3.14rem + 1.81vw, 5rem) clamp(1rem, 0.4rem + 3.01vw, 3.5rem);
+    text-align: center;
+    /* Atmospheric dark gradient */
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(45,20,20,0.6) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(15,50,50,0.5) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 80%, rgba(20,45,30,0.4) 0%, transparent 60%),
+      var(--dark-bg);
+  }
+  .hero h1 {
+    font-size: clamp(2.125rem, 7.7vw, 6.4rem);
+    font-weight: 700; line-height: 1.0;
+    letter-spacing: -0.01em; color: var(--text-inverse);
+    margin-bottom: clamp(1rem, 0.88rem + 0.6vw, 1.5rem);
+  }
+  .hero p {
+    font-size: clamp(1.14rem, 1.04rem + 0.47vw, 1.53rem);
+    font-weight: 400; line-height: 1.4; color: var(--text-muted);
+    max-width: 600px; margin: 0 auto clamp(1.5rem, 1.38rem + 0.6vw, 2rem);
+  }
+  .hero-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  /* BUTTONS */
+  .btn-display {
+    display: inline-block;
+    background: linear-gradient(55deg, #d8a45f 10%, #dfc39e 90%);
+    color: var(--dark-bg);
+    padding: clamp(0.50rem, 0.81rem + -0.30vw, 0.75rem) 1.50rem;
+    border-radius: 999999px; border: none;
+    font-family: var(--font-primary); font-size: clamp(1rem, 1.16rem + -0.15vw, 1.13rem);
+    font-weight: 500; text-decoration: none; cursor: pointer; transition: all 0.15s;
+  }
+  .btn-display:hover { background: linear-gradient(55deg, #8c5407 10%, #c5832a 90%); }
+
+  .btn-primary-dark {
+    display: inline-block; background: var(--text-inverse); color: var(--dark-bg);
+    padding: clamp(0.50rem, 0.81rem + -0.30vw, 0.75rem) 1.50rem;
+    border-radius: 999999px; border: none;
+    font-family: var(--font-primary); font-size: clamp(1rem, 1.16rem + -0.15vw, 1.13rem);
+    font-weight: 500; text-decoration: none; cursor: pointer; transition: all 0.15s;
+  }
+  .btn-primary-dark:hover { background: var(--brand-gold); }
+
+  .btn-secondary-dark {
+    display: inline-block; background: transparent; color: var(--text-inverse);
+    padding: clamp(0.50rem, 0.81rem + -0.30vw, 0.75rem) 1.50rem;
+    border-radius: 999999px; border: 1px solid var(--border-dark);
+    font-family: var(--font-primary); font-size: clamp(1rem, 1.16rem + -0.15vw, 1.13rem);
+    font-weight: 500; text-decoration: none; cursor: pointer; transition: all 0.15s;
+  }
+  .btn-secondary-dark:hover { background: rgba(255,255,255,0.1); border-color: var(--brand-gold); }
+
+  .btn-tertiary-dark {
+    display: inline-block; background: transparent; color: var(--text-inverse);
+    padding: clamp(0.50rem, 0.81rem + -0.30vw, 0.75rem) 1.50rem;
+    border-radius: 999999px; border: none;
+    font-family: var(--font-primary); font-size: clamp(1rem, 1.16rem + -0.15vw, 1.13rem);
+    font-weight: 500; text-decoration: none; cursor: pointer; transition: all 0.15s;
+  }
+  .btn-tertiary-dark:hover { background: rgba(255,255,255,0.08); }
+
+  /* SECTIONS */
+  .section {
+    padding: clamp(2rem, 1.64rem + 1.81vw, 3.5rem) clamp(1rem, 0.4rem + 3.01vw, 3.5rem);
+    max-width: 1536px; margin: 0 auto;
+  }
+  .section-label {
+    font-family: var(--font-extended);
+    font-size: 12px; font-weight: 500; color: var(--brand-gold);
+    text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 8px;
+  }
+  .section h2 {
+    font-size: clamp(1.38rem, 1.08rem + 1.52vw, 2.64rem);
+    font-weight: 500; line-height: 1.2;
+    letter-spacing: -0.01em; margin-bottom: clamp(1.5rem, 1.38rem + 0.6vw, 2rem);
+    color: var(--text-inverse);
+  }
+
+  /* COLOR SWATCHES */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; margin-bottom: 48px; }
+  .swatch { border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-dark-low); }
+  .swatch-color { height: 80px; }
+  .swatch-info { padding: 10px 12px; background: rgba(255,255,255,0.04); }
+  .swatch-name { font-size: 12px; font-weight: 500; margin-bottom: 2px; color: var(--text-inverse); }
+  .swatch-hex { font-size: 11px; color: var(--text-dim); }
+
+  /* TYPE SCALE */
+  .type-scale { margin-bottom: 48px; }
+  .type-row { padding: 16px 0; border-bottom: 1px solid var(--border-dark); display: flex; align-items: baseline; gap: 24px; }
+  .type-label { font-size: 11px; color: var(--text-dim); min-width: 140px; flex-shrink: 0; }
+  .type-sample { flex: 1; color: var(--text-inverse); }
+
+  /* COMPONENT GRID */
+  .component-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 48px; }
+
+  /* CARDS */
+  .card {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 32px; padding: 32px;
+    transition: background 0.25s ease-in-out;
+  }
+  .card:hover { background: var(--card-hover); }
+  .card h3 {
+    font-size: clamp(1.14rem, 1.04rem + 0.47vw, 1.53rem);
+    font-weight: 500; margin-bottom: 8px; color: var(--text-inverse);
+  }
+  .card p { font-size: 16px; color: var(--text-muted); line-height: 1.4; margin-bottom: 16px; }
+
+  /* TAGS */
+  .tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 400; padding: 6px 14px;
+    border-radius: 999999px;
+  }
+  .tag-dot { width: 8px; height: 8px; border-radius: 50%; }
+  /* Dark-adapted tags with reduced opacity backgrounds */
+  .tag-gray { background: rgba(227,224,223,0.15); color: #e3e0df; }
+  .tag-gray .tag-dot { background: #8f8c8b; }
+  .tag-blue { background: rgba(205,230,235,0.15); color: #cde6eb; }
+  .tag-blue .tag-dot { background: #4db8c9; }
+  .tag-green { background: rgba(198,234,208,0.15); color: #c6ead0; }
+  .tag-green .tag-dot { background: #6dd18b; }
+  .tag-red { background: rgba(255,213,206,0.15); color: #ffd5ce; }
+  .tag-red .tag-dot { background: #ff8872; }
+  .tag-gold { background: rgba(234,227,218,0.15); color: #eae3da; }
+  .tag-gold .tag-dot { background: #d8a45f; }
+  .tag-yellow { background: rgba(255,216,165,0.15); color: #ffd8a5; }
+  .tag-yellow .tag-dot { background: #ffb84a; }
+  .tag-orange { background: rgba(255,215,189,0.15); color: #ffd7bd; }
+  .tag-orange .tag-dot { background: #fe9f5f; }
+  .tag-salmon { background: rgba(254,214,206,0.15); color: #fed6ce; }
+  .tag-salmon .tag-dot { background: #fbb7b4; }
+  .tag-pink { background: rgba(255,214,210,0.15); color: #ffd6d2; }
+  .tag-pink .tag-dot { background: #fbb7b4; }
+
+  /* BUTTON SHOWCASE */
+  .button-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 24px; }
+
+  /* SHADOW SHOWCASE */
+  .shadow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-bottom: 48px; }
+  .shadow-box {
+    background: var(--card-bg); border-radius: 16px; padding: 24px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 120px; text-align: center; border: 1px solid var(--card-border);
+  }
+  .shadow-box .label { font-size: 12px; font-weight: 500; color: var(--text-dim); margin-top: 8px; }
+
+  /* SPACING */
+  .spacing-row { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .spacing-bar { height: 24px; background: linear-gradient(55deg, #d8a45f 10%, #dfc39e 90%); border-radius: 4px; }
+  .spacing-label { font-size: 12px; color: var(--text-dim); min-width: 80px; }
+
+  /* RADIUS */
+  .radius-grid { display: flex; flex-wrap: wrap; gap: 24px; margin-bottom: 48px; }
+  .radius-box {
+    width: 80px; height: 80px; background: var(--surface-elevated);
+    border: 2px solid var(--border-dark);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 500; color: var(--text-dim);
+  }
+
+  /* FORM ELEMENTS */
+  .input-demo {
+    padding: 10px 16px; border: 1px solid var(--border-dark); border-radius: 8px;
+    font-family: var(--font-primary); font-size: 16px; color: var(--text-inverse);
+    background: transparent; outline: none; width: 100%; max-width: 360px;
+    transition: border-color 0.15s;
+  }
+  .input-demo::placeholder { color: var(--text-dim); }
+  .input-demo:focus { border-color: #0F62FE; outline: 2px solid #0F62FE; outline-offset: 2px; }
+  .input-label { font-size: 14px; font-weight: 500; color: var(--text-inverse); margin-bottom: 6px; display: block; }
+  .input-helper { font-size: 12px; color: var(--text-dim); letter-spacing: 0.03em; margin-top: 4px; margin-bottom: 16px; }
+
+  /* STATUS */
+  .status-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; }
+  .status-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 500;
+  }
+
+  /* ATMOSPHERIC GRADIENT SECTIONS */
+  .gradient-section-dark {
+    padding: clamp(3.5rem, 3.14rem + 1.81vw, 5rem) clamp(1rem, 0.4rem + 3.01vw, 3.5rem);
+    background:
+      radial-gradient(ellipse at 30% 0%, rgba(50,25,25,0.5) 0%, transparent 50%),
+      radial-gradient(ellipse at 70% 100%, rgba(15,55,55,0.4) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(20,50,30,0.3) 0%, transparent 60%),
+      var(--dark-bg);
+  }
+
+  .gradient-section-warm {
+    padding: clamp(3.5rem, 3.14rem + 1.81vw, 5rem) clamp(1rem, 0.4rem + 3.01vw, 3.5rem);
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(60,30,15,0.4) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 70%, rgba(50,20,20,0.3) 0%, transparent 50%),
+      var(--dark-bg);
+  }
+
+  @media (max-width: 656px) {
+    .nav-links { display: none; }
+    .section { padding: 40px 20px; }
+    .color-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+    .type-row { flex-direction: column; gap: 8px; }
+    .type-label { min-width: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <a href="#" class="nav-brand"><svg viewBox="0 0 2665 500" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:28px;width:auto;"><path d="M250 0C388.071 0 500 111.929 500 250C500 388.071 388.071 500 250 500C111.929 500 0 388.071 0 250C0 111.929 111.929 0 250 0ZM250.004 99.9912C167.302 99.9915 100 167.291 100 249.991C100 332.691 167.302 399.991 250.004 399.991C332.706 399.991 400.009 332.691 400.009 249.991C400.009 167.291 332.737 99.9912 250.004 99.9912ZM293.841 375.375C294.114 376.042 294.448 376.648 294.812 377.224C280.775 382.135 265.708 384.864 250.034 384.864H250.004C236.756 384.864 223.993 382.892 211.897 379.376L252.369 261.784L293.841 375.375ZM191.13 371.344C146.111 349.486 115.128 303.376 115.128 249.961C115.128 230.408 119.342 211.855 126.8 195.061L191.13 371.344ZM317.822 366.554V366.523C317.827 366.521 317.831 366.518 317.835 366.516L317.822 366.554ZM368.358 185.269C378.878 204.458 384.882 226.527 384.882 249.961C384.882 299.703 357.936 343.141 317.835 366.516L359.021 247.445C366.691 228.195 369.269 212.825 369.269 199.152C369.269 194.211 368.934 189.573 368.358 185.269ZM250.004 115.118C285.14 115.118 317.094 128.548 341.074 150.557C340.498 150.526 339.922 150.436 339.346 150.436C326.068 150.436 316.7 161.986 316.7 174.354C316.7 185.48 323.097 194.878 329.979 206.004C335.102 214.977 341.104 226.528 341.104 243.201C341.104 254.751 337.678 269.272 330.827 286.824L317.367 331.781L268.619 186.813V186.753H268.589C276.672 186.331 283.944 185.489 284.019 185.48C291.264 184.632 290.416 173.931 283.171 174.354C283.171 174.354 261.342 176.053 247.215 176.053C233.963 176.053 211.773 174.361 211.685 174.354C204.409 173.931 203.56 185.056 210.836 185.48C210.871 185.485 217.736 186.33 224.993 186.753L246.003 244.353L216.475 332.873L167.363 186.723C175.479 186.3 182.724 185.458 182.793 185.45C190.038 184.601 189.19 173.9 181.944 174.324C181.834 174.333 160.081 176.022 145.989 176.022C143.473 176.022 140.472 175.961 137.289 175.87C161.451 139.31 202.893 115.118 250.004 115.118Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M995.614 191.779C1011.27 191.779 1024.94 195.368 1036.61 202.546C1048.29 209.724 1057.35 219.801 1063.8 232.779C1070.26 245.757 1073.48 260.91 1073.48 278.238C1073.48 295.494 1070.26 310.574 1063.8 323.479C1057.35 336.385 1048.29 346.427 1036.61 353.604C1024.94 360.782 1011.27 364.371 995.614 364.371C979.954 364.371 966.287 360.782 954.614 353.604C942.941 346.427 933.878 336.385 927.426 323.479C920.973 310.574 917.747 295.494 917.747 278.238C917.747 260.91 920.973 245.757 927.426 232.779C933.878 219.801 942.941 209.724 954.614 202.546C966.287 195.368 979.954 191.779 995.614 191.779ZM995.724 218.968C985.501 218.968 977.018 221.687 970.275 227.124C963.605 232.562 958.639 239.776 955.376 248.767C952.186 257.684 950.591 267.472 950.591 278.13C950.591 288.86 952.186 298.684 955.376 307.602C958.639 316.519 963.605 323.661 970.275 329.026C977.018 334.391 985.501 337.074 995.724 337.074C1005.87 337.074 1014.28 334.391 1020.95 329.026C1027.62 323.661 1032.56 316.519 1035.75 307.602C1039.01 298.684 1040.64 288.86 1040.64 278.13C1040.64 267.472 1039.01 257.684 1035.75 248.767C1032.56 239.776 1027.62 232.562 1020.95 227.124C1014.28 221.686 1005.87 218.968 995.724 218.968Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M1744.26 191.779C1753.68 191.779 1762.82 193.338 1771.66 196.456C1780.51 199.574 1788.45 204.468 1795.48 211.138C1802.51 217.808 1808.06 226.472 1812.12 237.13C1816.18 247.715 1818.21 260.584 1818.21 275.737V287.265H1699.48C1699.73 297.447 1701.68 306.184 1705.32 313.475C1709.31 321.305 1714.86 327.286 1721.96 331.419C1729.07 335.479 1737.37 337.509 1746.87 337.509C1753.03 337.509 1758.65 336.639 1763.72 334.899C1768.8 333.087 1773.19 330.404 1776.88 326.852C1780.58 323.299 1783.41 318.912 1785.37 313.692L1816.14 319.238C1813.68 328.301 1809.26 336.24 1802.88 343.056C1796.57 349.798 1788.63 355.055 1779.06 358.825C1769.56 362.523 1758.72 364.371 1746.54 364.371C1730.08 364.371 1715.91 360.855 1704.02 353.822C1692.2 346.717 1683.07 336.748 1676.61 323.915C1670.23 311.01 1667.04 295.893 1667.04 278.564C1667.04 261.454 1670.23 246.374 1676.61 233.323C1683.07 220.273 1692.06 210.086 1703.58 202.764C1715.18 195.441 1728.74 191.779 1744.26 191.779ZM1744.48 218.642C1735.34 218.642 1727.36 220.889 1720.55 225.384C1713.81 229.806 1708.59 235.607 1704.89 242.785C1701.71 249.017 1699.92 255.724 1699.53 262.904H1786.35C1786.35 254.349 1784.61 246.773 1781.12 240.175C1777.64 233.505 1772.75 228.248 1766.44 224.405C1760.21 220.563 1752.89 218.642 1744.48 218.642Z" fill="white"/><path d="M1907.09 191.779C1925.14 191.779 1939.35 195.694 1949.72 203.524C1960.09 211.282 1966.94 221.687 1970.28 234.737L1940.8 239.957C1939.57 236.187 1937.62 232.598 1934.93 229.19C1932.32 225.783 1928.77 222.991 1924.27 220.816C1919.78 218.641 1914.16 217.554 1907.42 217.554C1898.21 217.554 1890.52 219.62 1884.36 223.753C1878.2 227.813 1875.12 233.07 1875.12 239.522C1875.12 245.105 1877.18 249.6 1881.32 253.008C1885.45 256.415 1892.12 259.207 1901.33 261.382L1927.86 267.472C1943.23 271.024 1954.69 276.498 1962.23 283.894C1969.77 291.289 1973.54 300.895 1973.54 312.713C1973.54 322.718 1970.64 331.637 1964.84 339.467C1959.11 347.225 1951.1 353.315 1940.8 357.737C1930.58 362.16 1918.73 364.371 1905.24 364.371C1886.54 364.371 1871.27 360.383 1859.46 352.408C1847.64 344.361 1840.39 332.942 1837.71 318.151L1869.14 313.366C1871.09 321.559 1875.12 327.758 1881.21 331.963C1887.3 336.095 1895.24 338.161 1905.03 338.161C1915.68 338.161 1924.2 335.95 1930.58 331.527C1936.96 327.032 1940.15 321.558 1940.15 315.105C1940.15 309.885 1938.19 305.499 1934.28 301.946C1930.44 298.394 1924.53 295.711 1916.55 293.898L1888.28 287.7C1872.69 284.148 1861.16 278.492 1853.69 270.734C1846.3 262.977 1842.6 253.152 1842.6 241.262C1842.6 231.402 1845.36 222.774 1850.87 215.379C1856.38 207.984 1863.99 202.22 1873.7 198.087C1883.42 193.882 1894.55 191.779 1907.09 191.779Z" fill="white"/><path d="M2062.09 191.779C2080.15 191.779 2094.36 195.694 2104.73 203.524C2115.09 211.282 2121.95 221.687 2125.28 234.737L2095.81 239.957C2094.58 236.187 2092.62 232.598 2089.94 229.19C2087.33 225.783 2083.77 222.991 2079.28 220.816C2074.78 218.641 2069.16 217.554 2062.42 217.554C2053.21 217.554 2045.53 219.62 2039.37 223.753C2033.2 227.813 2030.12 233.07 2030.12 239.522C2030.12 245.105 2032.19 249.6 2036.32 253.008C2040.45 256.415 2047.12 259.207 2056.33 261.382L2082.87 267.472C2098.24 271.024 2109.69 276.498 2117.23 283.894C2124.77 291.289 2128.54 300.895 2128.54 312.713C2128.54 322.718 2125.64 331.637 2119.84 339.467C2114.12 347.224 2106.1 353.315 2095.81 357.737C2085.59 362.16 2073.73 364.371 2060.25 364.371C2041.54 364.371 2026.28 360.383 2014.46 352.408C2002.64 344.361 1995.39 332.942 1992.71 318.151L2024.14 313.366C2026.1 321.559 2030.12 327.758 2036.21 331.963C2042.3 336.095 2050.24 338.161 2060.03 338.161C2070.69 338.161 2079.21 335.95 2085.59 331.527C2091.97 327.032 2095.16 321.558 2095.16 315.105C2095.16 309.885 2093.2 305.499 2089.28 301.946C2085.44 298.394 2079.53 295.711 2071.56 293.898L2043.28 287.7C2027.69 284.148 2016.17 278.492 2008.7 270.734C2001.3 262.977 1997.6 253.152 1997.6 241.262C1997.6 231.402 2000.36 222.774 2005.87 215.379C2011.38 207.984 2018.99 202.22 2028.71 198.087C2038.42 193.882 2049.55 191.779 2062.09 191.779Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M1348.25 361.001H1316.5V335.009H1313.78C1311.82 338.561 1308.99 342.622 1305.29 347.189C1301.67 351.757 1296.67 355.745 1290.29 359.152C1283.91 362.56 1275.64 364.264 1265.49 364.264C1252.01 364.264 1239.97 360.819 1229.38 353.932C1218.87 346.971 1210.61 337.075 1204.59 324.242C1198.64 311.337 1195.67 295.858 1195.67 277.805C1195.67 259.752 1198.68 244.308 1204.7 231.476C1210.79 218.643 1219.13 208.818 1229.71 202.003C1240.3 195.188 1252.3 191.78 1265.71 191.78C1276.08 191.78 1284.41 193.52 1290.72 197C1297.1 200.408 1302.03 204.395 1305.51 208.963C1309.06 213.531 1311.82 217.555 1313.78 221.035H1315.73V138.273H1348.25V361.001ZM1272.67 219.403C1262.88 219.403 1254.72 221.942 1248.2 227.017C1241.67 232.092 1236.74 239.015 1233.41 247.788C1230.15 256.561 1228.51 266.457 1228.51 277.478C1228.51 288.643 1230.18 298.685 1233.52 307.603C1236.85 316.52 1241.78 323.589 1248.31 328.81C1254.91 333.957 1263.03 336.531 1272.67 336.531C1282.02 336.531 1289.92 334.066 1296.38 329.136C1302.9 324.133 1307.83 317.209 1311.17 308.364C1314.57 299.519 1316.28 289.223 1316.28 277.478C1316.28 265.878 1314.61 255.727 1311.28 247.027C1307.94 238.327 1303.05 231.548 1296.59 226.69C1290.14 221.833 1282.17 219.403 1272.67 219.403Z" fill="white"/><path d="M714.702 310.757H716.769L761.901 138.273H796.92L842.053 310.865H844.119L887.402 138.273H922.856L860.976 361.001H827.153L780.28 194.173H778.54L731.668 361.001H697.736L635.964 138.273H671.31L714.702 310.757Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M1467.48 138.273C1484.8 138.273 1499.16 141.428 1510.54 147.735C1521.92 154.043 1530.44 162.67 1536.1 173.618C1541.75 184.493 1544.58 196.747 1544.58 210.377C1544.58 224.08 1541.72 236.406 1535.99 247.354C1530.34 258.229 1521.78 266.856 1510.32 273.236C1498.94 279.544 1484.62 282.698 1467.37 282.698H1421.69V361.001H1388.09V138.273H1467.48ZM1421.69 254.205H1464.32C1475.27 254.205 1484.15 252.32 1490.97 248.55C1497.78 244.707 1502.78 239.486 1505.97 232.889C1509.16 226.291 1510.76 218.787 1510.76 210.377C1510.76 201.967 1509.16 194.499 1505.97 187.974C1502.78 181.448 1497.75 176.337 1490.86 172.64C1484.04 168.942 1475.05 167.093 1463.89 167.093H1421.69V254.205Z" fill="white"/><path d="M2311.04 319.675H2313.54L2375.53 138.273H2411.85L2331.7 361.001H2292.87L2212.72 138.273H2249.05L2311.04 319.675Z" fill="white"/><path d="M2468.43 361.001H2434.83V138.273H2468.43V361.001Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M2587.57 138.273C2604.9 138.273 2619.26 141.428 2630.64 147.735C2642.02 154.043 2650.54 162.671 2656.2 173.618C2661.85 184.493 2664.68 196.747 2664.68 210.377C2664.68 224.08 2661.82 236.406 2656.09 247.354C2650.43 258.229 2641.88 266.856 2630.42 273.236C2619.04 279.544 2604.72 282.698 2587.46 282.698H2541.79V361.001H2508.18V138.273H2587.57ZM2541.79 254.205H2584.42C2595.37 254.205 2604.25 252.32 2611.06 248.55C2617.88 244.707 2622.88 239.486 2626.07 232.889C2629.26 226.291 2630.86 218.787 2630.86 210.377C2630.86 201.967 2629.26 194.499 2626.07 187.974C2622.88 181.448 2617.84 176.337 2610.96 172.64C2604.14 168.942 2595.15 167.093 2583.98 167.093H2541.79V254.205Z" fill="white"/><path d="M1176.17 191.453C1178.2 191.453 1180.6 191.526 1183.35 191.671C1186.18 191.816 1188.39 191.997 1189.99 192.215V223.318C1188.68 222.956 1186.36 222.557 1183.03 222.122C1179.69 221.615 1176.36 221.36 1173.02 221.36C1165.34 221.36 1158.48 222.991 1152.47 226.254C1146.52 229.444 1141.81 233.903 1138.33 239.631C1134.85 245.286 1133.11 251.739 1133.11 258.989V361H1100.59V193.954H1132.02V220.49H1133.76C1136.81 211.5 1142.17 204.431 1149.86 199.283C1157.61 194.063 1166.39 191.453 1176.17 191.453Z" fill="white"/><path d="M1647.76 191.453C1649.79 191.453 1652.19 191.526 1654.94 191.671C1657.77 191.816 1659.98 191.997 1661.58 192.215V223.318C1660.27 222.956 1657.95 222.557 1654.62 222.122C1651.28 221.615 1647.95 221.36 1644.61 221.36C1636.93 221.36 1630.07 222.991 1624.06 226.254C1618.11 229.444 1613.4 233.903 1609.92 239.631C1606.44 245.286 1604.7 251.739 1604.7 258.989V361H1572.18V193.954H1603.61V220.49H1605.35C1608.4 211.5 1613.76 204.431 1621.45 199.283C1629.2 194.063 1637.98 191.453 1647.76 191.453Z" fill="white"/></svg></a>
+  <ul class="nav-links">
+    <li><a href="#">Platform</a></li>
+    <li><a href="#">Solutions</a></li>
+    <li><a href="#">Resources</a></li>
+    <li><a href="#">Pricing</a></li>
+  </ul>
+  <a href="#" class="nav-cta">Get Started</a>
+</nav>
+
+<!-- HERO with atmospheric dark gradient -->
+<section class="hero">
+  <h1>Enterprise content at scale</h1>
+  <p>The agile content platform for the world's largest brands. Build, launch, and grow with WordPress VIP.</p>
+  <div class="hero-buttons">
+    <button class="btn-display">Talk to sales</button>
+    <button class="btn-primary-dark">See the platform</button>
+    <button class="btn-secondary-dark">View case studies</button>
+  </div>
+</section>
+
+<!-- COLORS: GOLD SCALE -->
+<section class="section">
+  <div class="section-label">Color Palette</div>
+  <h2>Gold & Warm Accent Scale</h2>
+  <div class="color-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#dfc39e"></div><div class="swatch-info"><div class="swatch-name">Accent 1</div><div class="swatch-hex">#dfc39e</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#d8a45f"></div><div class="swatch-info"><div class="swatch-name">Brand Gold</div><div class="swatch-hex">#d8a45f</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#ba7920"></div><div class="swatch-info"><div class="swatch-name">Gold Dark</div><div class="swatch-hex">#ba7920</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#8c5407"></div><div class="swatch-info"><div class="swatch-name">Gold Darker</div><div class="swatch-hex">#8c5407</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#9a6014"></div><div class="swatch-info"><div class="swatch-name">Link Default</div><div class="swatch-hex">#9a6014</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#7a4909"></div><div class="swatch-info"><div class="swatch-name">Link Hover</div><div class="swatch-hex">#7a4909</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#522e03"></div><div class="swatch-info"><div class="swatch-name">Link Active</div><div class="swatch-hex">#522e03</div></div></div>
+  </div>
+
+  <h2>Neutral Scale</h2>
+  <div class="color-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#13191e"></div><div class="swatch-info"><div class="swatch-name">Dark BG</div><div class="swatch-hex">#13191e</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#444140"></div><div class="swatch-info"><div class="swatch-name">Text Secondary</div><div class="swatch-hex">#444140</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#6a6766"></div><div class="swatch-info"><div class="swatch-name">Helper</div><div class="swatch-hex">#6a6766</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#8f8c8b"></div><div class="swatch-info"><div class="swatch-name">Placeholder</div><div class="swatch-hex">#8f8c8b</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#bfbcbb"></div><div class="swatch-info"><div class="swatch-name">Disabled</div><div class="swatch-hex">#bfbcbb</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#d7d4d3"></div><div class="swatch-info"><div class="swatch-name">Border 4</div><div class="swatch-hex">#d7d4d3</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#f5f2f1"></div><div class="swatch-info"><div class="swatch-name">Light BG</div><div class="swatch-hex">#f5f2f1</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#fcfafa"></div><div class="swatch-info"><div class="swatch-name">Layer 1</div><div class="swatch-hex">#fcfafa</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#fbfbfb"></div><div class="swatch-info"><div class="swatch-name">Inverse</div><div class="swatch-hex">#fbfbfb</div></div></div>
+  </div>
+
+  <h2>Warm Accent Colors</h2>
+  <div class="color-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#fbb7b4"></div><div class="swatch-info"><div class="swatch-name">Salmon</div><div class="swatch-hex">#fbb7b4</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#ff8872"></div><div class="swatch-info"><div class="swatch-name">Coral</div><div class="swatch-hex">#ff8872</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#ffa378"></div><div class="swatch-info"><div class="swatch-name">Peach</div><div class="swatch-hex">#ffa378</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#fe9f5f"></div><div class="swatch-info"><div class="swatch-name">Orange</div><div class="swatch-hex">#fe9f5f</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#ffb84a"></div><div class="swatch-info"><div class="swatch-name">Amber</div><div class="swatch-hex">#ffb84a</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#6dd18b"></div><div class="swatch-info"><div class="swatch-name">Green</div><div class="swatch-hex">#6dd18b</div></div></div>
+  </div>
+
+  <h2>Tag Colors (9 Variants)</h2>
+  <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 48px;">
+    <span class="tag tag-gray"><span class="tag-dot"></span>Gray</span>
+    <span class="tag tag-blue"><span class="tag-dot"></span>Blue</span>
+    <span class="tag tag-green"><span class="tag-dot"></span>Green</span>
+    <span class="tag tag-red"><span class="tag-dot"></span>Red</span>
+    <span class="tag tag-gold"><span class="tag-dot"></span>Gold</span>
+    <span class="tag tag-yellow"><span class="tag-dot"></span>Yellow</span>
+    <span class="tag tag-orange"><span class="tag-dot"></span>Orange</span>
+    <span class="tag tag-salmon"><span class="tag-dot"></span>Salmon</span>
+    <span class="tag tag-pink"><span class="tag-dot"></span>Pink</span>
+  </div>
+
+  <h2>Status Colors</h2>
+  <div class="status-row">
+    <span class="status-badge" style="background:rgba(191,42,35,0.2); color:#ff8872;">Error</span>
+    <span class="status-badge" style="background:rgba(152,86,0,0.2); color:#ffb84a;">Warning</span>
+    <span class="status-badge" style="background:rgba(0,117,134,0.2); color:#4db8c9;">Info</span>
+    <span class="status-badge" style="background:rgba(0,121,52,0.2); color:#6dd18b;">Success</span>
+  </div>
+</section>
+
+<!-- TYPOGRAPHY -->
+<section class="gradient-section-dark">
+  <div style="max-width: 1536px; margin: 0 auto;">
+    <div class="section-label">Typography</div>
+    <h2>Type Scale</h2>
+    <div class="type-scale">
+      <div class="type-row">
+        <span class="type-label">Display Hero<br>clamp(2.125-6.4rem) / 700</span>
+        <span class="type-sample" style="font-size:clamp(2.125rem, 7.7vw, 6.4rem);font-weight:700;line-height:1.0;letter-spacing:-0.01em;">Enterprise scale</span>
+      </div>
+      <div class="type-row">
+        <span class="type-label">H1<br>clamp(1.57-3.81rem) / 700</span>
+        <span class="type-sample" style="font-size:clamp(1.57rem, 1.04rem + 2.69vw, 3.81rem);font-weight:700;line-height:1.0;letter-spacing:-0.01em;">Content platform</span>
+      </div>
+      <div class="type-row">
+        <span class="type-label">H2<br>clamp(1.38-2.64rem) / 500</span>
+        <span class="type-sample" style="font-size:clamp(1.38rem, 1.08rem + 1.52vw, 2.64rem);font-weight:500;line-height:1.2;letter-spacing:-0.01em;">Build with confidence</span>
+      </div>
+      <div class="type-row">
+        <span class="type-label">H3<br>clamp(1.30-2.20rem) / 500</span>
+        <span class="type-sample" style="font-size:clamp(1.30rem, 1.08rem + 1.09vw, 2.20rem);font-weight:500;line-height:1.2;letter-spacing:-0.01em;">Security and performance</span>
+      </div>
+      <div class="type-row">
+        <span class="type-label">H4<br>clamp(1.14-1.53rem) / 500</span>
+        <span class="type-sample" style="font-size:clamp(1.14rem, 1.04rem + 0.47vw, 1.53rem);font-weight:500;line-height:1.3;">Trusted by leading brands</span>
+      </div>
+      <div class="type-row">
+        <span class="type-label">Paragraph 1<br>clamp(1.14-1.53rem) / 400</span>
+        <span class="type-sample" style="font-size:clamp(1.14rem, 1.04rem + 0.47vw, 1.53rem);font-weight:400;line-height:1.4;">WordPress VIP provides enterprise content management with unmatched performance.</span>
+      </div>
+      <div class="type-row">
+        <span class="type-label">Body 2<br>16px / 400</span>
+        <span class="type-sample" style="font-size:16px;font-weight:400;line-height:1.4;">Deploy with confidence knowing your content is backed by enterprise-grade infrastructure.</span>
+      </div>
+      <div class="type-row">
+        <span class="type-label">Support Text (Extended)<br>12px / 500</span>
+        <span class="type-sample" style="font-family:var(--font-extended);font-size:12px;font-weight:500;line-height:1.4;">CASE STUDY</span>
+      </div>
+      <div class="type-row">
+        <span class="type-label">Code<br>14px / Mono</span>
+        <span class="type-sample" style="font-family:var(--font-mono);font-size:14px;font-weight:400;line-height:1.4;">wp vip deploy --production</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUTTONS -->
+<section class="section">
+  <div class="section-label">Components</div>
+  <h2>Buttons</h2>
+  <div class="button-row">
+    <button class="btn-display">Display Gradient</button>
+    <button class="btn-primary-dark">Primary Inverse</button>
+    <button class="btn-secondary-dark">Secondary</button>
+    <button class="btn-tertiary-dark">Tertiary</button>
+  </div>
+</section>
+
+<!-- CARDS on atmospheric gradient -->
+<section class="gradient-section-warm">
+  <div style="max-width: 1536px; margin: 0 auto;">
+    <div class="section-label">Cards</div>
+    <h2>Content Cards on Dark Gradient</h2>
+    <div class="component-grid">
+      <div class="card">
+        <h3>Content Management</h3>
+        <p>Streamlined workflows for enterprise teams with approval chains and multi-site management.</p>
+        <span class="tag tag-blue"><span class="tag-dot"></span>Platform</span>
+      </div>
+      <div class="card">
+        <h3>Performance</h3>
+        <p>Global edge caching, auto-scaling infrastructure, and sub-second response times.</p>
+        <span class="tag tag-green"><span class="tag-dot"></span>Infrastructure</span>
+      </div>
+      <div class="card">
+        <h3>Security</h3>
+        <p>SOC 2 compliant, automated security scanning, and dedicated WordPress expert support.</p>
+        <span class="tag tag-gold"><span class="tag-dot"></span>Enterprise</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM ELEMENTS -->
+<section class="section">
+  <h2>Form Elements</h2>
+  <div style="max-width: 400px;">
+    <label class="input-label">Organization name</label>
+    <input class="input-demo" type="text" placeholder="Acme Corporation">
+    <div class="input-helper">The name of your organization on WordPress VIP.</div>
+    <label class="input-label">Work email</label>
+    <input class="input-demo" type="email" placeholder="you@company.com">
+    <div class="input-helper">We'll use this to set up your account.</div>
+    <div style="margin-top: 8px;">
+      <button class="btn-display" style="width:100%;">Request a demo</button>
+    </div>
+  </div>
+</section>
+
+<!-- SHADOWS -->
+<section class="gradient-section-dark">
+  <div style="max-width: 1536px; margin: 0 auto;">
+    <h2>Elevation & Shadows</h2>
+    <div class="shadow-grid">
+      <div class="shadow-box" style="box-shadow: none;">
+        <span class="label">Flat (Level 0)</span>
+      </div>
+      <div class="shadow-box" style="box-shadow: var(--shadow-dark-low);">
+        <span class="label">Low (Level 1)</span>
+      </div>
+      <div class="shadow-box" style="box-shadow: var(--shadow-dark-medium);">
+        <span class="label">Medium (Level 2)</span>
+      </div>
+      <div class="shadow-box" style="box-shadow: var(--shadow-dark-high);">
+        <span class="label">High (Level 3)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPACING -->
+<section class="section">
+  <h2>Spacing Scale (Static)</h2>
+  <div style="max-width: 700px;">
+    <div class="spacing-row"><span class="spacing-label">4px (X-Small)</span><div class="spacing-bar" style="width:4px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">8px (Small)</span><div class="spacing-bar" style="width:8px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">12px (Medium)</span><div class="spacing-bar" style="width:12px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">16px (Large)</span><div class="spacing-bar" style="width:16px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">24px (X-Large)</span><div class="spacing-bar" style="width:24px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">32px (XX-Large)</span><div class="spacing-bar" style="width:32px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">56px (XXX-Large)</span><div class="spacing-bar" style="width:56px;"></div></div>
+  </div>
+  <h2 style="margin-top: 48px;">Spacing Scale (Responsive)</h2>
+  <div style="max-width: 700px;">
+    <div class="spacing-row"><span class="spacing-label">X-Small</span><div class="spacing-bar" style="width:clamp(0.75rem, 0.69rem + 0.30vw, 1rem);"></div></div>
+    <div class="spacing-row"><span class="spacing-label">Small</span><div class="spacing-bar" style="width:clamp(1rem, 0.88rem + 0.60vw, 1.5rem);"></div></div>
+    <div class="spacing-row"><span class="spacing-label">Medium</span><div class="spacing-bar" style="width:clamp(1.5rem, 1.38rem + 0.60vw, 2rem);"></div></div>
+    <div class="spacing-row"><span class="spacing-label">Large</span><div class="spacing-bar" style="width:clamp(2rem, 1.64rem + 1.81vw, 3.5rem);"></div></div>
+    <div class="spacing-row"><span class="spacing-label">X-Large</span><div class="spacing-bar" style="width:clamp(3.5rem, 3.14rem + 1.81vw, 5rem);"></div></div>
+    <div class="spacing-row"><span class="spacing-label">XX-Large</span><div class="spacing-bar" style="width:clamp(5rem, 4.52rem + 2.41vw, 7rem);"></div></div>
+    <div class="spacing-row"><span class="spacing-label">XXX-Large</span><div class="spacing-bar" style="width:clamp(7rem, 6.28rem + 3.61vw, 10rem);"></div></div>
+  </div>
+</section>
+
+<!-- BORDER RADIUS -->
+<section class="gradient-section-dark">
+  <div style="max-width: 1536px; margin: 0 auto;">
+    <h2>Border Radius</h2>
+    <div class="radius-grid">
+      <div class="radius-box" style="border-radius:4px;">4px</div>
+      <div class="radius-box" style="border-radius:8px;">8px</div>
+      <div class="radius-box" style="border-radius:16px;">16px</div>
+      <div class="radius-box" style="border-radius:32px;">32px</div>
+      <div class="radius-box" style="border-radius:40px;">40px</div>
+      <div class="radius-box" style="border-radius:56px;">56px</div>
+      <div class="radius-box" style="border-radius:999999px;">pill</div>
+    </div>
+  </div>
+</section>
+
+<!-- GOLD BRAND SECTION -->
+<section style="padding: clamp(3.5rem, 3.14rem + 1.81vw, 5rem) clamp(1rem, 0.4rem + 3.01vw, 3.5rem); background: linear-gradient(145deg, rgba(60,35,10,0.4) 0%, transparent 50%), linear-gradient(300deg, rgba(15,50,50,0.3) 0%, transparent 50%), var(--dark-bg);">
+  <div style="max-width: 1536px; margin: 0 auto; text-align: center;">
+    <div class="section-label">WordPress VIP</div>
+    <h2 style="font-size:clamp(1.57rem, 1.04rem + 2.69vw, 3.81rem);font-weight:700;line-height:1.0;letter-spacing:-0.01em;margin-bottom:16px;">Built for the world's biggest brands</h2>
+    <p style="font-size:clamp(1.14rem, 1.04rem + 0.47vw, 1.53rem); color: var(--text-muted); max-width:600px; margin: 0 auto 32px;">WordPress VIP powers content for enterprises that demand performance, security, and agility at global scale.</p>
+    <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+      <button class="btn-display">Explore the platform</button>
+      <button class="btn-secondary-dark">Read case studies</button>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

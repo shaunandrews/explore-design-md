@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Preview: WooCommerce (Dark)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple-100: #1f0342;
+    --purple-60: #6108ce;
+    --purple-50: #720eec;
+    --purple-40: #873eff;
+    --purple-30: #a77eff;
+    --purple-20: #b999ff;
+    --purple-10: #d1c1ff;
+    --purple-5: #e1d7ff;
+    --purple-0: #f2edff;
+    --text-gray: #101517;
+    --gray-90: #1d2327;
+    --gray-80: #2C3338;
+    --gray-70: #3C434A;
+    --gray-60: #50575E;
+    --gray-50: #646970;
+    --gray-40: #787c82;
+    --gray-10: #C3C4C7;
+    --gray-5: #dcdcde;
+    --gray-0: #f6f7f7;
+    --green: #73ae39;
+    --green-40: #06e782;
+    --orange-40: #ff9000;
+    --blue-vivid: #1AD0FD;
+    --pink-20: #fca8ff;
+    --white: #ffffff;
+    --black: #000000;
+    --shadow-card: 0px 2px 8px rgba(0,0,0,0.4);
+    --shadow-card-hover: 0px 2px 24px rgba(0,0,0,0.4);
+    --shadow-menu: 4px 8px 16px rgba(0,0,0,0.4);
+    --shadow-natural: 6px 6px 9px rgba(0,0,0,0.5);
+    --shadow-deep: 12px 12px 50px rgba(0,0,0,0.6);
+    /* Proxima Nova (proxima-vara) is the correct heading font. Montserrat is a free fallback for previews without a Typekit/Adobe Fonts license. */
+    --font-heading: 'proxima-vara', 'Proxima Nova', 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    /* Dark surface colors */
+    --surface-0: #0c0116;
+    --surface-1: #150227;
+    --surface-2: #1f0342;
+    --surface-3: #2a0a52;
+    --border-dark: rgba(255,255,255,0.1);
+    --text-primary: #f6f7f7;
+    --text-secondary: rgba(255,255,255,0.7);
+    --text-muted: rgba(255,255,255,0.45);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--surface-0);
+    color: var(--text-primary);
+    font-family: var(--font-primary);
+    font-size: 16px; font-weight: 400; line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 32px;
+    background: rgba(12,1,22,0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-dark);
+  }
+  .nav-brand { display: flex; align-items: center; text-decoration: none; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a { font-size: 14px; font-weight: 400; color: var(--text-secondary); text-decoration: none; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--text-primary); }
+  .nav-cta {
+    display: inline-block; background: var(--purple-50); color: var(--white);
+    padding: 8px 20px; border-radius: 16px; font-size: 14px; font-weight: 500;
+    text-decoration: none; transition: background 0.15s;
+  }
+  .nav-cta:hover { background: var(--purple-40); }
+
+  /* HERO */
+  .hero {
+    padding: 96px 32px 80px; text-align: center;
+    background: linear-gradient(180deg, rgba(114,14,236,0.2) 0%, transparent 100%);
+  }
+  .hero h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(44px, 2.75rem + 1.875vw, 68px); font-weight: 700; line-height: 1.1;
+    letter-spacing: -0.5px; color: var(--text-primary); margin-bottom: 16px;
+  }
+  .hero p { font-size: 18px; font-weight: 400; line-height: 1.5; color: var(--text-secondary); max-width: 600px; margin: 0 auto 32px; }
+  .hero-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-block; background: var(--purple-50); color: var(--white);
+    padding: calc(0.667em + 2px) calc(1.333em + 2px); border-radius: 16px; border: none;
+    font-family: var(--font-primary); font-size: 16px; font-weight: 500;
+    text-decoration: none; cursor: pointer; transition: background 0.15s;
+  }
+  .btn-primary:hover { background: var(--purple-40); }
+  .btn-ghost {
+    display: inline-block; background: transparent; color: var(--purple-30);
+    padding: calc(0.667em + 2px) calc(1.333em + 2px); border-radius: 16px;
+    border: 2px solid rgba(185,153,255,0.3); font-family: var(--font-primary);
+    font-size: 16px; font-weight: 500; text-decoration: none; cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-ghost:hover { background: rgba(114,14,236,0.15); border-color: var(--purple-30); }
+
+  /* SECTIONS */
+  .section { padding: 64px 32px; max-width: 1500px; margin: 0 auto; }
+  .section-title { font-size: 14px; font-weight: 500; color: var(--purple-30); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .section h2 { font-family: var(--font-heading); font-size: clamp(32px, 2rem + 0.313vw, 36px); font-weight: 700; line-height: 1.2; letter-spacing: -0.3px; margin-bottom: 32px; color: var(--text-primary); }
+
+  /* COLOR SWATCHES */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; margin-bottom: 48px; }
+  .swatch { border-radius: 16px; overflow: hidden; border: 1px solid var(--border-dark); }
+  .swatch-color { height: 80px; }
+  .swatch-info { padding: 10px 12px; background: var(--surface-1); }
+  .swatch-name { font-size: 12px; font-weight: 500; margin-bottom: 2px; color: var(--text-primary); }
+  .swatch-hex { font-size: 11px; color: var(--text-muted); }
+
+  /* TYPE SCALE */
+  .type-scale { margin-bottom: 48px; }
+  .type-row { padding: 16px 0; border-bottom: 1px solid var(--border-dark); display: flex; align-items: baseline; gap: 24px; }
+  .type-label { font-size: 11px; color: var(--text-muted); min-width: 120px; flex-shrink: 0; }
+  .type-sample { flex: 1; color: var(--text-primary); }
+
+  /* COMPONENT GRID */
+  .component-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 48px; }
+
+  /* CARDS */
+  .card {
+    background: var(--surface-1); border-radius: 16px;
+    border: 1px solid var(--border-dark); padding: 24px;
+    transition: border-color 0.25s ease-in-out, transform 0.25s ease-in-out;
+  }
+  .card:hover { border-color: rgba(255,255,255,0.2); transform: scale(1.023); }
+  .card h3 { font-family: var(--font-heading); font-size: 21px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.2px; color: var(--text-primary); }
+  .card p { font-size: 14px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 16px; }
+  .card-tag { display: inline-block; font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 9999px; }
+  .card-tag.green { background: rgba(115,174,57,0.2); color: var(--green-40); }
+  .card-tag.purple { background: rgba(114,14,236,0.2); color: var(--purple-30); }
+  .card-tag.orange { background: rgba(255,144,0,0.2); color: var(--orange-40); }
+
+  /* BUTTON SHOWCASE */
+  .button-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 24px; }
+
+  /* SHADOW SHOWCASE */
+  .shadow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-bottom: 48px; }
+  .shadow-box {
+    background: var(--surface-1); border-radius: 16px; padding: 24px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 120px; text-align: center; border: 1px solid var(--border-dark);
+  }
+  .shadow-box .label { font-size: 12px; font-weight: 500; color: var(--text-muted); margin-top: 8px; }
+
+  /* SPACING */
+  .spacing-row { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .spacing-bar { height: 24px; background: rgba(114,14,236,0.3); border-radius: 4px; }
+  .spacing-label { font-size: 12px; color: var(--text-muted); min-width: 60px; }
+
+  /* RADIUS */
+  .radius-grid { display: flex; flex-wrap: wrap; gap: 24px; margin-bottom: 48px; }
+  .radius-box {
+    width: 80px; height: 80px; background: var(--surface-2);
+    border: 2px solid rgba(185,153,255,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 500; color: var(--purple-30);
+  }
+
+  /* ALT SECTION */
+  .alt-section { background: var(--surface-1); padding: 64px 32px; }
+
+  /* BRIGHT SECTION */
+  .bright-section {
+    background: var(--purple-50); color: var(--white);
+    padding: 64px 32px; margin: 48px 0;
+  }
+  .bright-section h2 { color: var(--white); }
+  .bright-section p { color: rgba(255,255,255,0.85); }
+
+  /* NAV CIRCLE BUTTON */
+  .btn-circle {
+    width: 48px; height: 48px; border-radius: 100%;
+    background: rgba(255,255,255,0.1); color: var(--white);
+    border: 1px solid var(--border-dark); cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 18px; transition: background 0.15s;
+  }
+  .btn-circle:hover { background: rgba(255,255,255,0.2); }
+
+  /* PILL */
+  .pill {
+    display: inline-block; padding: 6px 16px; border-radius: 9999px;
+    font-size: 13px; font-weight: 500; background: var(--surface-2);
+    color: var(--text-secondary); border: 1px solid var(--border-dark);
+    transition: transform 0.15s;
+  }
+  .pill:hover { transform: scale(1.05); }
+
+  /* INPUT */
+  .input-demo {
+    padding: 10px 16px; border: 1px solid var(--border-dark); border-radius: 8px;
+    font-family: var(--font-primary); font-size: 16px; color: var(--text-primary);
+    background: var(--surface-1); outline: none; width: 100%; max-width: 360px;
+    transition: border-color 0.15s;
+  }
+  .input-demo:focus { border-color: var(--purple-40); outline: 2px solid var(--purple-40); outline-offset: 3px; }
+  .input-demo::placeholder { color: var(--text-muted); }
+  .input-label { font-size: 14px; font-weight: 500; color: var(--text-primary); margin-bottom: 6px; display: block; }
+
+  /* TABLE */
+  .demo-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+  .demo-table th { text-align: left; font-size: 12px; font-weight: 500; color: var(--text-muted); padding: 8px 12px; border-bottom: 3px solid var(--border-dark); }
+  .demo-table td { font-size: 14px; padding: 10px 12px; border-bottom: 1px solid var(--border-dark); color: var(--text-secondary); }
+  .demo-table tr:nth-child(even) { background: var(--surface-1); }
+
+  @media (max-width: 781px) {
+    .nav-links { display: none; }
+    .hero h1 { font-size: 36px; }
+    .section { padding: 40px 20px; }
+    .color-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <a href="#" class="nav-brand"><svg viewBox="0 0 1249 500" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:28px;width:auto;"><path fill-rule="evenodd" clip-rule="evenodd" d="M995.614 191.779C1011.27 191.779 1024.94 195.368 1036.61 202.546C1048.29 209.724 1057.35 219.801 1063.8 232.779C1070.26 245.757 1073.48 260.91 1073.48 278.238C1073.48 295.494 1070.26 310.574 1063.8 323.479C1057.35 336.385 1048.29 346.427 1036.61 353.604C1024.94 360.782 1011.27 364.371 995.614 364.371C979.954 364.371 966.287 360.782 954.614 353.604C942.941 346.427 933.878 336.385 927.426 323.479C920.973 310.574 917.747 295.494 917.747 278.238C917.747 260.91 920.973 245.757 927.426 232.779C933.878 219.801 942.941 209.724 954.614 202.546C966.287 195.368 979.954 191.779 995.614 191.779ZM995.724 218.968C985.501 218.968 977.018 221.687 970.275 227.124C963.605 232.562 958.639 239.776 955.376 248.767C952.186 257.684 950.591 267.472 950.591 278.13C950.591 288.86 952.186 298.684 955.376 307.602C958.639 316.519 963.605 323.661 970.275 329.026C977.018 334.391 985.501 337.074 995.724 337.074C1005.87 337.074 1014.28 334.391 1020.95 329.026C1027.62 323.661 1032.56 316.519 1035.75 307.602C1039.01 298.684 1040.64 288.86 1040.64 278.13C1040.64 267.472 1039.01 257.684 1035.75 248.767C1032.56 239.776 1027.62 232.562 1020.95 227.124C1014.28 221.686 1005.87 218.968 995.724 218.968Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M1170.95 191.779C1186.61 191.779 1200.28 195.368 1211.95 202.546C1223.63 209.724 1232.69 219.801 1239.14 232.779C1245.6 245.757 1248.82 260.91 1248.82 278.238C1248.82 295.494 1245.6 310.574 1239.14 323.479C1232.69 336.385 1223.63 346.427 1211.95 353.604C1200.28 360.782 1186.61 364.371 1170.95 364.371C1155.29 364.371 1141.63 360.782 1129.95 353.604C1118.28 346.427 1109.22 336.385 1102.77 323.479C1096.31 310.574 1093.09 295.494 1093.09 278.238C1093.09 260.91 1096.31 245.757 1102.77 232.779C1109.22 219.801 1118.28 209.724 1129.95 202.546C1141.63 195.368 1155.29 191.779 1170.95 191.779ZM1171.06 218.968C1160.84 218.968 1152.36 221.687 1145.62 227.124C1138.95 232.562 1133.98 239.776 1130.72 248.767C1127.53 257.684 1125.93 267.472 1125.93 278.13C1125.93 288.86 1127.53 298.684 1130.72 307.602C1133.98 316.519 1138.95 323.661 1145.62 329.026C1152.36 334.391 1160.84 337.074 1171.06 337.074C1181.21 337.074 1189.62 334.391 1196.29 329.026C1202.96 323.661 1207.89 316.519 1211.08 307.602C1214.35 298.684 1215.98 288.86 1215.98 278.13C1215.98 267.472 1214.35 257.684 1211.08 248.767C1207.89 239.776 1202.96 232.562 1196.29 227.124C1189.62 221.686 1181.21 218.968 1171.06 218.968Z" fill="white"/><path d="M714.702 310.757H716.769L761.901 138.273H796.92L842.053 310.865H844.119L887.402 138.273H922.856L860.976 361.001H827.153L780.28 194.173H778.54L731.668 361.001H697.736L635.964 138.273H671.31L714.702 310.757Z" fill="white"/><path d="M250 0C388.071 0 500 111.929 500 250C500 388.071 388.071 500 250 500C111.929 500 0 388.071 0 250C3.2987e-05 111.929 111.929 3.2995e-05 250 0ZM125.583 178.002C109.276 178.002 101.007 185.581 101.007 199.592C101.007 213.602 109.735 221.642 125.583 221.642H143.269V305.476C143.269 329.133 159.117 343.144 182.314 343.144C200.918 343.143 215.848 333.956 227.103 312.825L252.138 265.97V305.705C252.138 329.132 267.297 343.144 290.725 343.144C309.099 343.143 322.65 335.104 335.742 312.825L393.393 215.44C406.025 194.08 397.067 178.002 369.275 178.002C354.346 178.002 344.7 182.825 335.972 199.133L296.236 273.779V207.401C296.236 187.649 286.819 178.002 269.363 178.002C255.583 178.002 244.558 183.974 236.06 200.511L198.622 273.779V208.09C198.622 186.959 189.893 178.002 168.763 178.002H125.583Z" fill="white"/></svg></a>
+  <ul class="nav-links">
+    <li><a href="#">Features</a></li>
+    <li><a href="#">Pricing</a></li>
+    <li><a href="#">Extensions</a></li>
+    <li><a href="#">Docs</a></li>
+  </ul>
+  <a href="#" class="nav-cta">Get Started</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>The commerce platform built for growth</h1>
+  <p>Build exactly the store you want with flexible, open-source tools powered by WordPress.</p>
+  <div class="hero-buttons">
+    <button class="btn-primary">Start building</button>
+    <button class="btn-ghost">Explore extensions</button>
+  </div>
+</section>
+
+<!-- COLORS -->
+<section class="section">
+  <div class="section-title">Color Palette</div>
+  <h2>Purple Brand Scale</h2>
+  <div class="color-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#1f0342"></div><div class="swatch-info"><div class="swatch-name">Purple 100</div><div class="swatch-hex">#1f0342</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#6108ce"></div><div class="swatch-info"><div class="swatch-name">Purple 60</div><div class="swatch-hex">#6108ce</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#720eec"></div><div class="swatch-info"><div class="swatch-name">Purple 50</div><div class="swatch-hex">#720eec</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#873eff"></div><div class="swatch-info"><div class="swatch-name">Purple 40</div><div class="swatch-hex">#873eff</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#a77eff"></div><div class="swatch-info"><div class="swatch-name">Purple 30</div><div class="swatch-hex">#a77eff</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#b999ff"></div><div class="swatch-info"><div class="swatch-name">Purple 20</div><div class="swatch-hex">#b999ff</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#d1c1ff"></div><div class="swatch-info"><div class="swatch-name">Purple 10</div><div class="swatch-hex">#d1c1ff</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#e1d7ff"></div><div class="swatch-info"><div class="swatch-name">Purple 5</div><div class="swatch-hex">#e1d7ff</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#f2edff"></div><div class="swatch-info"><div class="swatch-name">Purple 0</div><div class="swatch-hex">#f2edff</div></div></div>
+  </div>
+
+  <h2>Neutral Scale</h2>
+  <div class="color-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#101517"></div><div class="swatch-info"><div class="swatch-name">Text Gray</div><div class="swatch-hex">#101517</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#1d2327"></div><div class="swatch-info"><div class="swatch-name">Gray 90</div><div class="swatch-hex">#1d2327</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#2C3338"></div><div class="swatch-info"><div class="swatch-name">Gray 80</div><div class="swatch-hex">#2C3338</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#50575E"></div><div class="swatch-info"><div class="swatch-name">Gray 60</div><div class="swatch-hex">#50575E</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#646970"></div><div class="swatch-info"><div class="swatch-name">Gray 50</div><div class="swatch-hex">#646970</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#787c82"></div><div class="swatch-info"><div class="swatch-name">Gray 40</div><div class="swatch-hex">#787c82</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#C3C4C7"></div><div class="swatch-info"><div class="swatch-name">Gray 10</div><div class="swatch-hex">#C3C4C7</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#dcdcde"></div><div class="swatch-info"><div class="swatch-name">Gray 5</div><div class="swatch-hex">#dcdcde</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#f6f7f7"></div><div class="swatch-info"><div class="swatch-name">Gray 0</div><div class="swatch-hex">#f6f7f7</div></div></div>
+  </div>
+
+  <h2>Accent Colors</h2>
+  <div class="color-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#73ae39"></div><div class="swatch-info"><div class="swatch-name">Green</div><div class="swatch-hex">#73ae39</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#06e782"></div><div class="swatch-info"><div class="swatch-name">Green 40</div><div class="swatch-hex">#06e782</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#ff9000"></div><div class="swatch-info"><div class="swatch-name">Orange 40</div><div class="swatch-hex">#ff9000</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#1AD0FD"></div><div class="swatch-info"><div class="swatch-name">Blue Vivid</div><div class="swatch-hex">#1AD0FD</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#fca8ff"></div><div class="swatch-info"><div class="swatch-name">Pink 20</div><div class="swatch-hex">#fca8ff</div></div></div>
+  </div>
+</section>
+
+<!-- TYPOGRAPHY -->
+<div class="alt-section">
+<section class="section">
+  <div class="section-title">Typography</div>
+  <h2>Type Scale</h2>
+  <div class="type-scale">
+    <div class="type-row">
+      <span class="type-label">Display Hero<br>clamp(44-68px) / 700</span>
+      <span class="type-sample" style="font-family:var(--font-heading);font-size:clamp(44px,2.75rem + 1.875vw,68px);font-weight:700;line-height:1.1;letter-spacing:-0.5px;">Commerce without limits</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Display Large<br>clamp(36-54px) / 700</span>
+      <span class="type-sample" style="font-family:var(--font-heading);font-size:clamp(36px,2.25rem + 1.406vw,54px);font-weight:700;line-height:1.15;letter-spacing:-0.4px;">Powerful flexibility</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Section Heading<br>clamp(32-36px) / 700</span>
+      <span class="type-sample" style="font-family:var(--font-heading);font-size:clamp(32px,2rem + 0.313vw,36px);font-weight:700;line-height:1.2;letter-spacing:-0.3px;">Built for every store</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Sub-heading<br>clamp(21-24px) / 600</span>
+      <span class="type-sample" style="font-family:var(--font-heading);font-size:clamp(21px,1.313rem + 0.234vw,24px);font-weight:600;line-height:1.3;letter-spacing:-0.2px;">Extensions and integrations</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Body Large<br>clamp(18-21px) / 400</span>
+      <span class="type-sample" style="font-size:clamp(18px,1.125rem + 0.234vw,21px);font-weight:400;line-height:1.5;">Customize every aspect of your store with hundreds of extensions.</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Body / 16px / 400</span>
+      <span class="type-sample" style="font-size:16px;font-weight:400;line-height:1.5;">WooCommerce is the open-source ecommerce platform for the long term.</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Body Small / 14px / 400</span>
+      <span class="type-sample" style="font-size:14px;font-weight:400;line-height:1.5;">Manage orders, customers, and products from one dashboard.</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Caption / 12px / 400</span>
+      <span class="type-sample" style="font-size:12px;font-weight:400;line-height:1.4;">Updated 3 days ago</span>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- BUTTONS -->
+<section class="section">
+  <div class="section-title">Components</div>
+  <h2>Buttons</h2>
+  <div class="button-row">
+    <button class="btn-primary">Primary Purple</button>
+    <button class="btn-ghost">Ghost / Outlined</button>
+    <button class="btn-circle">&rarr;</button>
+    <span class="pill">Filter Tag</span>
+  </div>
+</section>
+
+<!-- CARDS -->
+<div class="alt-section">
+<section class="section">
+  <h2>Cards</h2>
+  <div class="component-grid">
+    <div class="card">
+      <h3>Payments</h3>
+      <p>Accept credit cards, bank transfers, and popular payment methods with WooPayments.</p>
+      <span class="card-tag green">Built-in</span>
+    </div>
+    <div class="card">
+      <h3>Shipping</h3>
+      <p>Print shipping labels and offer real-time rates from major carriers worldwide.</p>
+      <span class="card-tag purple">Extension</span>
+    </div>
+    <div class="card">
+      <h3>Marketing</h3>
+      <p>Grow your audience with email campaigns, social media, and SEO tools.</p>
+      <span class="card-tag orange">Popular</span>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- INPUTS -->
+<section class="section">
+  <h2>Form Elements</h2>
+  <div style="max-width: 400px;">
+    <label class="input-label">Store name</label>
+    <input class="input-demo" type="text" placeholder="My Awesome Store" style="margin-bottom: 16px;">
+    <label class="input-label">Email address</label>
+    <input class="input-demo" type="email" placeholder="you@example.com" style="margin-bottom: 24px;">
+    <button class="btn-primary" style="width:100%;">Create store</button>
+  </div>
+</section>
+
+<!-- TABLE -->
+<div class="alt-section">
+<section class="section">
+  <h2>Data Table</h2>
+  <table class="demo-table">
+    <thead><tr><th>Extension</th><th>Category</th><th>Price</th><th>Rating</th></tr></thead>
+    <tbody>
+      <tr><td>WooPayments</td><td>Payments</td><td>Free</td><td>4.5</td></tr>
+      <tr><td>Stripe Gateway</td><td>Payments</td><td>Free</td><td>4.3</td></tr>
+      <tr><td>ShipStation</td><td>Shipping</td><td>$9/mo</td><td>4.6</td></tr>
+      <tr><td>Mailchimp</td><td>Marketing</td><td>Free</td><td>4.1</td></tr>
+    </tbody>
+  </table>
+</section>
+</div>
+
+<!-- SHADOWS -->
+<section class="section">
+  <h2>Elevation & Shadows</h2>
+  <div class="shadow-grid">
+    <div class="shadow-box" style="box-shadow: none;">
+      <span class="label">Flat (Level 0)</span>
+    </div>
+    <div class="shadow-box" style="box-shadow: var(--shadow-card);">
+      <span class="label">Card (Level 1)</span>
+    </div>
+    <div class="shadow-box" style="box-shadow: var(--shadow-card-hover);">
+      <span class="label">Card Hover (Level 2)</span>
+    </div>
+    <div class="shadow-box" style="box-shadow: var(--shadow-menu);">
+      <span class="label">Menu (Level 3)</span>
+    </div>
+    <div class="shadow-box" style="box-shadow: var(--shadow-natural);">
+      <span class="label">Natural (Level 4)</span>
+    </div>
+    <div class="shadow-box" style="box-shadow: var(--shadow-deep);">
+      <span class="label">Deep (Level 5)</span>
+    </div>
+  </div>
+</section>
+
+<!-- SPACING -->
+<div class="alt-section">
+<section class="section">
+  <h2>Spacing Scale</h2>
+  <div style="max-width: 600px;">
+    <div class="spacing-row"><span class="spacing-label">4px</span><div class="spacing-bar" style="width:4px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">8px</span><div class="spacing-bar" style="width:8px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">12px</span><div class="spacing-bar" style="width:12px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">16px</span><div class="spacing-bar" style="width:16px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">24px</span><div class="spacing-bar" style="width:24px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">32px</span><div class="spacing-bar" style="width:32px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">48px</span><div class="spacing-bar" style="width:48px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">64px</span><div class="spacing-bar" style="width:64px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">96px</span><div class="spacing-bar" style="width:96px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">128px</span><div class="spacing-bar" style="width:128px;"></div></div>
+  </div>
+</section>
+</div>
+
+<!-- BORDER RADIUS -->
+<section class="section">
+  <h2>Border Radius</h2>
+  <div class="radius-grid">
+    <div class="radius-box" style="border-radius:4px;">4px</div>
+    <div class="radius-box" style="border-radius:8px;">8px</div>
+    <div class="radius-box" style="border-radius:16px;">16px</div>
+    <div class="radius-box" style="border-radius:9999px;">pill</div>
+  </div>
+</section>
+
+<!-- BRIGHT ACCENT SECTION -->
+<div class="bright-section">
+  <div style="max-width:1500px; margin:0 auto;">
+    <div class="section-title" style="color: rgba(255,255,255,0.6);">Brand Accent</div>
+    <h2 style="font-size:clamp(36px,2.25rem + 1.406vw,54px);font-weight:400;line-height:1.15;letter-spacing:-0.4px;margin-bottom:16px;">Build without boundaries</h2>
+    <p style="font-size:18px; max-width:600px; margin-bottom:32px;">WooCommerce gives you full control over your store, your data, and your future.</p>
+    <div class="component-grid">
+      <div class="card" style="background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.2);">
+        <h3 style="color:#fff;">Open source</h3>
+        <p style="color:rgba(255,255,255,0.7);">Full access to the code. Customize everything to match your vision.</p>
+      </div>
+      <div class="card" style="background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.2);">
+        <h3 style="color:#fff;">WordPress powered</h3>
+        <p style="color:rgba(255,255,255,0.7);">Built on the platform that powers 40% of the web.</p>
+      </div>
+      <div class="card" style="background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.2);">
+        <h3 style="color:#fff;">Global commerce</h3>
+        <p style="color:rgba(255,255,255,0.7);">Sell in any currency, any language, to any country.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

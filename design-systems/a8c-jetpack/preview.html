@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Preview: Jetpack (Light)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-60: #007117;
+    --green-50: #008710;
+    --green-40: #069e08;
+    --green-30: #2fb41f;
+    --black: #000000;
+    --white: #ffffff;
+    --dark-gray: #32373c;
+    --very-dark: #313131;
+    --gray-70: #3c434a;
+    --gray-40: #787c82;
+    --gray-0: #f6f7f7;
+    --light-gray: #eee;
+    --cyan: #0693e3;
+    --purple: #9b51e0;
+    --red: #cf2e2e;
+    --orange: #ff6900;
+    --amber: #fcb900;
+    --shadow-natural: 6px 6px 9px rgba(0,0,0,0.2);
+    --shadow-deep: 12px 12px 50px rgba(0,0,0,0.4);
+    --shadow-sharp: 6px 6px 0px rgba(0,0,0,0.2);
+    --shadow-crisp: 6px 6px 0px rgb(0,0,0);
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: var(--font-primary);
+    font-size: 18px; font-weight: 400; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 32px;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--light-gray);
+  }
+  .nav-brand { display: flex; align-items: center; text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { font-size: 15px; font-weight: 400; color: var(--gray-70); text-decoration: none; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--green-50); }
+  .nav-cta {
+    display: inline-block; background: var(--dark-gray); color: var(--white);
+    padding: 8px 24px; border-radius: 9999px; font-size: 15px; font-weight: 500;
+    text-decoration: none; transition: background 0.15s;
+  }
+  .nav-cta:hover { background: var(--black); }
+
+  /* HERO */
+  .hero { padding: 96px 32px 80px; text-align: center; }
+  .hero h1 {
+    font-size: clamp(68px, 4.25rem + 1.25vw, 84px); font-weight: 700; line-height: 1.0;
+    letter-spacing: -0.5px; color: var(--black); margin-bottom: 20px;
+  }
+  .hero p { font-size: 18px; font-weight: 400; line-height: 1.6; color: var(--gray-70); max-width: 640px; margin: 0 auto 32px; }
+  .hero-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-dark {
+    display: inline-block; background: var(--dark-gray); color: var(--white);
+    padding: calc(0.667em + 2px) calc(1.333em + 2px); border-radius: 9999px; border: none;
+    font-family: var(--font-primary); font-size: 16px; font-weight: 500;
+    text-decoration: none; cursor: pointer; transition: background 0.15s;
+  }
+  .btn-dark:hover { background: var(--black); }
+  .btn-green {
+    display: inline-block; background: var(--green-50); color: var(--white);
+    padding: calc(0.667em + 2px) calc(1.333em + 2px); border-radius: 9999px; border: none;
+    font-family: var(--font-primary); font-size: 16px; font-weight: 500;
+    text-decoration: none; cursor: pointer; transition: background 0.15s;
+  }
+  .btn-green:hover { background: var(--green-40); }
+  .btn-outline {
+    display: inline-block; background: transparent; color: var(--black);
+    padding: 0.667em 1.333em; border-radius: 9999px;
+    border: 2px solid currentColor; font-family: var(--font-primary);
+    font-size: 16px; font-weight: 500; text-decoration: none; cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-outline:hover { background: var(--gray-0); }
+
+  /* SECTIONS */
+  .section { padding: 64px 32px; max-width: 1200px; margin: 0 auto; }
+  .section-title { font-size: 14px; font-weight: 600; color: var(--green-50); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .section h2 { font-size: clamp(28px, 1.75rem + 1.563vw, 48px); font-weight: 700; line-height: 1.1; letter-spacing: -0.3px; margin-bottom: 32px; }
+
+  /* COLOR SWATCHES */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; margin-bottom: 48px; }
+  .swatch { border-radius: 16px; overflow: hidden; border: 1px solid var(--light-gray); }
+  .swatch-color { height: 80px; }
+  .swatch-info { padding: 10px 12px; background: var(--white); }
+  .swatch-name { font-size: 12px; font-weight: 600; margin-bottom: 2px; }
+  .swatch-hex { font-size: 11px; color: var(--gray-40); }
+
+  /* TYPE SCALE */
+  .type-scale { margin-bottom: 48px; }
+  .type-row { padding: 16px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: baseline; gap: 24px; }
+  .type-label { font-size: 11px; color: var(--gray-40); min-width: 120px; flex-shrink: 0; }
+  .type-sample { flex: 1; }
+
+  /* COMPONENT GRID */
+  .component-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 48px; }
+
+  /* CARDS -- flat by default */
+  .card { background: var(--white); padding: 32px; }
+  .card h3 { font-size: 24px; font-weight: 600; margin-bottom: 8px; color: var(--black); }
+  .card p { font-size: 16px; color: var(--gray-70); line-height: 1.6; margin-bottom: 16px; }
+
+  /* ICON */
+  .card-icon {
+    width: 24px; height: 24px; margin-bottom: 12px;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--green-50);
+  }
+  .card-icon svg { width: 24px; height: 24px; fill: currentColor; }
+
+  /* BUTTON SHOWCASE */
+  .button-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 24px; }
+
+  /* SHADOW SHOWCASE */
+  .shadow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-bottom: 48px; }
+  .shadow-box {
+    background: var(--white); border-radius: 16px; padding: 24px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 120px; text-align: center;
+  }
+  .shadow-box .label { font-size: 12px; font-weight: 600; color: var(--gray-40); margin-top: 8px; }
+
+  /* SPACING */
+  .spacing-row { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .spacing-bar { height: 24px; background: rgba(0,135,16,0.15); border-radius: 4px; }
+  .spacing-label { font-size: 12px; color: var(--gray-40); min-width: 80px; }
+
+  /* RADIUS */
+  .radius-grid { display: flex; flex-wrap: wrap; gap: 24px; margin-bottom: 48px; }
+  .radius-box {
+    width: 80px; height: 80px; background: rgba(0,135,16,0.08);
+    border: 2px solid rgba(0,135,16,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 600; color: var(--green-50);
+  }
+
+  /* ALT SECTION */
+  .alt-section { background: var(--gray-0); padding: 64px 32px; }
+
+  /* DARK SECTION */
+  .dark-section { background: var(--very-dark); color: var(--white); padding: 64px 32px; margin: 48px 0; }
+  .dark-section h2 { color: var(--white); }
+  .dark-section p { color: rgba(255,255,255,0.7); }
+  .dark-section .card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); }
+  .dark-section .card h3 { color: var(--white); }
+  .dark-section .card p { color: rgba(255,255,255,0.6); }
+
+  /* TESTIMONIAL */
+  .testimonial { max-width: 880px; margin: 0 auto; padding: 48px 0; }
+  .testimonial-quote { font-size: 5rem; font-weight: 700; color: var(--green-40); line-height: 0.5; margin-bottom: 16px; }
+  .testimonial-text { font-size: clamp(25px, 1.563rem + 1.327vw, 42px); font-weight: 700; line-height: 1.15; color: var(--black); margin-bottom: 16px; }
+  .testimonial-attr { font-size: 18px; color: var(--gray-70); }
+
+  @media (max-width: 781px) {
+    .nav-links { display: none; }
+    .hero h1 { font-size: 48px; }
+    .section { padding: 40px 20px; }
+    .color-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <a href="#" class="nav-brand"><svg style="height:28px;width:auto;" viewBox="0 0 1742 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1169.05 191.779C1182.54 191.779 1194.57 195.187 1205.16 202.002C1215.75 208.817 1224.05 218.642 1230.06 231.475C1236.15 244.307 1239.2 259.751 1239.2 277.804C1239.2 295.857 1236.19 311.336 1230.17 324.241C1224.16 337.074 1215.89 346.97 1205.38 353.931C1194.87 360.818 1182.87 364.263 1169.38 364.263C1159.23 364.263 1150.93 362.559 1144.48 359.151C1138.1 355.744 1133.09 351.756 1129.47 347.188C1125.84 342.621 1123.05 338.56 1121.09 335.008H1119.14V423.642H1086.62V193.954H1118.38V221.034H1121.09C1122.98 217.554 1125.7 213.53 1129.25 208.962C1132.8 204.394 1137.73 200.407 1144.04 196.999C1150.35 193.519 1158.69 191.779 1169.05 191.779ZM1162.09 219.402C1152.67 219.402 1144.69 221.832 1138.17 226.689C1131.72 231.547 1126.82 238.326 1123.49 247.026C1120.15 255.727 1118.48 265.877 1118.48 277.478C1118.48 289.223 1120.19 299.518 1123.59 308.363C1127 317.209 1131.93 324.132 1138.39 329.135C1144.84 334.065 1152.74 336.53 1162.09 336.53C1171.81 336.53 1179.93 333.956 1186.45 328.809C1192.98 323.588 1197.91 316.519 1201.25 307.602C1204.65 298.684 1206.36 288.643 1206.36 277.478C1206.36 266.457 1204.69 256.56 1201.35 247.787C1198.09 239.015 1193.16 232.091 1186.56 227.016C1180.04 221.94 1171.88 219.402 1162.09 219.402Z" fill="black"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1332.68 191.779C1339.35 191.779 1346.42 192.577 1353.88 194.172C1361.42 195.694 1368.46 198.522 1374.98 202.654C1381.58 206.787 1386.98 212.697 1391.18 220.382C1395.39 227.995 1397.49 237.891 1397.49 250.071V361H1365.74V338.161H1364.43C1362.33 342.366 1359.17 346.499 1354.97 350.56C1350.76 354.62 1345.36 357.991 1338.77 360.674C1332.17 363.356 1324.27 364.697 1315.06 364.697C1304.47 364.697 1294.9 362.74 1286.35 358.825C1277.79 354.838 1271.01 349.073 1266.01 341.533C1261.08 333.993 1258.61 324.749 1258.61 313.801C1258.61 304.375 1260.43 296.618 1264.05 290.527C1267.68 284.437 1272.57 279.616 1278.73 276.063C1284.9 272.511 1291.78 269.828 1299.4 268.016C1307.01 266.203 1314.77 264.825 1322.67 263.883C1332.68 262.723 1340.8 261.781 1347.03 261.056C1353.27 260.258 1357.8 258.989 1360.62 257.249C1363.45 255.509 1364.87 252.682 1364.87 248.767V248.005C1364.87 238.507 1362.18 231.148 1356.82 225.928C1351.53 220.708 1343.62 218.098 1333.11 218.098C1322.16 218.098 1313.54 220.526 1307.23 225.384C1300.99 230.169 1296.68 235.498 1294.29 241.371L1263.73 234.411C1267.35 224.261 1272.64 216.067 1279.6 209.832C1286.64 203.524 1294.72 198.957 1303.86 196.13C1312.99 193.23 1322.6 191.779 1332.68 191.779ZM1364.98 279.217C1363.82 280.377 1361.57 281.464 1358.23 282.479C1354.97 283.422 1351.24 284.256 1347.03 284.981C1342.83 285.634 1338.73 286.25 1334.74 286.83C1330.75 287.338 1327.42 287.772 1324.74 288.135C1318.43 288.932 1312.66 290.274 1307.44 292.159C1302.3 294.044 1298.16 296.763 1295.05 300.315C1292 303.795 1290.48 308.435 1290.48 314.235C1290.48 322.283 1293.45 328.374 1299.4 332.507C1305.34 336.567 1312.92 338.597 1322.13 338.597C1331.12 338.597 1338.8 336.82 1345.18 333.268C1351.63 329.715 1356.53 325.075 1359.86 319.348C1363.27 313.547 1364.98 307.348 1364.98 300.75V279.217Z" fill="black"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M881.016 191.779C890.441 191.779 899.577 193.338 908.422 196.456C917.267 199.574 925.206 204.468 932.238 211.138C939.271 217.808 944.818 226.472 948.878 237.13C952.938 247.715 954.968 260.584 954.968 275.737V287.265H836.238C836.489 297.447 838.437 306.184 842.082 313.475C846.07 321.305 851.616 327.286 858.722 331.419C865.827 335.479 874.128 337.509 883.626 337.509C889.788 337.509 895.407 336.639 900.482 334.899C905.557 333.087 909.944 330.404 913.642 326.852C917.339 323.299 920.167 318.912 922.125 313.692L952.902 319.238C950.437 328.301 946.014 336.24 939.634 343.056C933.326 349.798 925.388 355.055 915.817 358.825C906.32 362.523 895.48 364.371 883.3 364.371C866.842 364.371 852.668 360.855 840.777 353.822C828.959 346.717 819.824 336.748 813.371 323.915C806.991 311.01 803.801 295.893 803.801 278.564C803.801 261.454 806.991 246.374 813.371 233.323C819.824 220.273 828.814 210.086 840.342 202.764C851.942 195.441 865.5 191.779 881.016 191.779ZM881.233 218.642C872.098 218.642 864.123 220.889 857.308 225.384C850.565 229.806 845.345 235.607 841.647 242.785C838.468 249.017 836.682 255.724 836.291 262.904H923.104C923.104 254.349 921.363 246.773 917.883 240.175C914.403 233.505 909.509 228.248 903.201 224.405C896.966 220.563 889.643 218.642 881.233 218.642Z" fill="black"/>
+<path d="M1501.65 191.779C1514.34 191.779 1525.65 194.136 1535.58 198.849C1545.52 203.489 1553.53 210.014 1559.62 218.424C1565.78 226.834 1569.44 236.659 1570.6 247.896H1538.96C1537.22 240.066 1533.23 233.323 1526.99 227.668C1520.83 222.013 1512.57 219.186 1502.2 219.186C1493.13 219.186 1485.2 221.578 1478.38 226.363C1471.64 231.076 1466.38 237.818 1462.61 246.591C1458.84 255.291 1456.96 265.587 1456.96 277.478C1456.96 289.658 1458.8 300.17 1462.5 309.016C1466.2 317.861 1471.42 324.713 1478.16 329.57C1484.98 334.428 1492.99 336.856 1502.2 336.856C1508.36 336.856 1513.94 335.733 1518.95 333.485C1524.02 331.165 1528.26 327.867 1531.67 323.589C1535.15 319.311 1537.58 314.163 1538.96 308.146H1570.6C1569.44 318.948 1565.93 328.591 1560.05 337.074C1554.18 345.557 1546.32 352.227 1536.46 357.085C1526.67 361.943 1515.17 364.371 1501.98 364.371C1485.81 364.371 1471.89 360.709 1460.22 353.387C1448.62 345.991 1439.7 335.805 1433.46 322.827C1427.23 309.849 1424.11 294.986 1424.11 278.238C1424.11 261.273 1427.3 246.301 1433.68 233.323C1440.06 220.273 1449.05 210.086 1460.65 202.764C1472.25 195.441 1485.92 191.779 1501.65 191.779Z" fill="black"/>
+<path d="M774.19 296.183C774.19 310.466 771.362 322.683 765.707 332.833C760.124 342.983 752.258 350.74 742.108 356.105C731.958 361.398 720.067 364.045 706.437 364.045C693.894 364.045 682.62 361.761 672.614 357.193C662.681 352.626 654.815 345.991 649.015 337.291C643.287 328.518 640.423 317.861 640.423 305.318H673.811C673.811 311.481 675.224 316.81 678.052 321.305C680.952 325.8 684.904 329.316 689.906 331.854C694.981 334.319 700.781 335.552 707.307 335.552C714.412 335.552 720.43 334.065 725.36 331.093C730.363 328.048 734.169 323.588 736.779 317.716C739.389 311.843 740.694 304.665 740.694 296.183V138.272H774.19V296.183Z" fill="black"/>
+<path d="M1025.58 193.955H1059.84V220.056H1025.58V311.952C1025.58 318.26 1026.52 323.009 1028.41 326.199C1030.29 329.317 1032.72 331.455 1035.69 332.615C1038.74 333.703 1042.04 334.247 1045.59 334.247C1048.2 334.247 1050.48 334.066 1052.44 333.703C1054.4 333.341 1055.92 333.051 1057.01 332.833L1062.88 359.695C1061 360.42 1058.31 361.145 1054.83 361.87C1051.35 362.668 1047 363.103 1041.78 363.176C1033.23 363.321 1025.25 361.798 1017.86 358.607C1010.46 355.417 1004.48 350.488 999.913 343.817C995.345 337.147 993.062 328.773 993.062 318.695V220.056H968.592V193.955H993.062V153.934H1025.58V193.955Z" fill="black"/>
+<path d="M1628.71 264.645H1631.54L1698.09 193.954H1737.03L1669.4 265.651L1741.59 361H1701.68L1644.86 285.578L1628.71 301.729V361H1596.19V138.272H1628.71V264.645Z" fill="black"/>
+<path d="M250 500C388.072 500 500 388.072 500 250C500 111.929 388.072 0 250 0C111.929 0 0 111.929 0 250C0 388.072 111.929 500 250 500Z" fill="#069E08"/>
+<path d="M259.494 218.688V399.999L352.812 218.688H259.494Z" fill="white"/>
+<path d="M240.507 281.309V99.999L147.189 281.309H240.507Z" fill="white"/>
+</svg></a>
+  <ul class="nav-links">
+    <li><a href="#">Features</a></li>
+    <li><a href="#">Pricing</a></li>
+    <li><a href="#">Support</a></li>
+    <li><a href="#">Blog</a></li>
+  </ul>
+  <a href="#" class="nav-cta">Get started</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Security, performance, and growth tools for WordPress</h1>
+  <p>Jetpack brings the power of WordPress.com to any WordPress site, with backup, security scanning, and performance tools.</p>
+  <div class="hero-buttons">
+    <button class="btn-dark">Get Jetpack</button>
+    <button class="btn-outline">See pricing</button>
+  </div>
+</section>
+
+<!-- COLORS -->
+<section class="section">
+  <div class="section-title">Color Palette</div>
+  <h2>Brand Greens</h2>
+  <div class="color-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#007117"></div><div class="swatch-info"><div class="swatch-name">Green 60</div><div class="swatch-hex">#007117</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#008710"></div><div class="swatch-info"><div class="swatch-name">Green 50</div><div class="swatch-hex">#008710</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#069e08"></div><div class="swatch-info"><div class="swatch-name">Green 40</div><div class="swatch-hex">#069e08</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#2fb41f"></div><div class="swatch-info"><div class="swatch-name">Green 30</div><div class="swatch-hex">#2fb41f</div></div></div>
+  </div>
+
+  <h2>Neutral Scale</h2>
+  <div class="color-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#000000"></div><div class="swatch-info"><div class="swatch-name">Black</div><div class="swatch-hex">#000000</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#313131"></div><div class="swatch-info"><div class="swatch-name">Very Dark</div><div class="swatch-hex">#313131</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#32373c"></div><div class="swatch-info"><div class="swatch-name">Dark Gray</div><div class="swatch-hex">#32373c</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#3c434a"></div><div class="swatch-info"><div class="swatch-name">Gray 70</div><div class="swatch-hex">#3c434a</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#787c82"></div><div class="swatch-info"><div class="swatch-name">Gray 40</div><div class="swatch-hex">#787c82</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#eeeeee"></div><div class="swatch-info"><div class="swatch-name">Light Gray</div><div class="swatch-hex">#eeeeee</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#f6f7f7"></div><div class="swatch-info"><div class="swatch-name">Gray 0</div><div class="swatch-hex">#f6f7f7</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#ffffff;border:1px solid #eee"></div><div class="swatch-info"><div class="swatch-name">White</div><div class="swatch-hex">#ffffff</div></div></div>
+  </div>
+
+  <h2>Accent Colors</h2>
+  <div class="color-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#0693e3"></div><div class="swatch-info"><div class="swatch-name">Cyan Blue</div><div class="swatch-hex">#0693e3</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#9b51e0"></div><div class="swatch-info"><div class="swatch-name">Purple</div><div class="swatch-hex">#9b51e0</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#cf2e2e"></div><div class="swatch-info"><div class="swatch-name">Red</div><div class="swatch-hex">#cf2e2e</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#ff6900"></div><div class="swatch-info"><div class="swatch-name">Orange</div><div class="swatch-hex">#ff6900</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#fcb900"></div><div class="swatch-info"><div class="swatch-name">Amber</div><div class="swatch-hex">#fcb900</div></div></div>
+  </div>
+</section>
+
+<!-- TYPOGRAPHY -->
+<div class="alt-section">
+<section class="section">
+  <div class="section-title">Typography</div>
+  <h2>Type Scale</h2>
+  <div class="type-scale">
+    <div class="type-row">
+      <span class="type-label">Display Hero<br>clamp(68-84px) / 700</span>
+      <span class="type-sample" style="font-size:clamp(48px,3rem + 1.25vw,68px);font-weight:700;line-height:1.0;letter-spacing:-0.5px;">Safer, faster WordPress</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Display Large<br>clamp(28-48px) / 700</span>
+      <span class="type-sample" style="font-size:clamp(28px,1.75rem + 1.563vw,48px);font-weight:700;line-height:1.1;letter-spacing:-0.3px;">Protection made simple</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Section Heading<br>clamp(25-42px) / 700</span>
+      <span class="type-sample" style="font-size:clamp(25px,1.563rem + 1.327vw,42px);font-weight:700;line-height:1.15;letter-spacing:-0.2px;">Real-time backups</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Sub-heading<br>24px / 600</span>
+      <span class="type-sample" style="font-size:24px;font-weight:600;line-height:1.3;">Site security scanning</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Body Large<br>clamp(14-20px) / 400</span>
+      <span class="type-sample" style="font-size:clamp(14px,0.875rem + 0.469vw,20px);font-weight:400;line-height:1.6;">Jetpack provides essential WordPress security and performance features that protect your site and help it grow.</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Body<br>18px / 400</span>
+      <span class="type-sample" style="font-size:18px;font-weight:400;line-height:1.6;">Automatic real-time backups with one-click restores, malware scanning, and spam protection.</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Body Small<br>15px / 400</span>
+      <span class="type-sample" style="font-size:15px;font-weight:400;line-height:1.5;">Trusted by millions of WordPress sites worldwide.</span>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- BUTTONS -->
+<section class="section">
+  <div class="section-title">Components</div>
+  <h2>Buttons</h2>
+  <div class="button-row">
+    <button class="btn-dark">Primary Dark</button>
+    <button class="btn-green">Primary Green</button>
+    <button class="btn-outline">Outline</button>
+  </div>
+  <div class="button-row" style="margin-top: 16px;">
+    <button class="btn-dark" style="font-size:14px; padding:6px 20px;">Small Dark</button>
+    <button class="btn-green" style="font-size:14px; padding:6px 20px;">Small Green</button>
+    <button class="btn-outline" style="font-size:14px; padding:6px 20px;">Small Outline</button>
+  </div>
+</section>
+
+<!-- FEATURE CARDS (flat) -->
+<div class="alt-section">
+<section class="section">
+  <h2>Feature Cards (flat by default)</h2>
+  <div class="component-grid">
+    <div class="card">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 6h2v2h-2V7zm0 4h2v6h-2v-6z"/></svg>
+      </div>
+      <h3>Security</h3>
+      <p>Real-time backups, malware scanning, and spam protection to keep your site safe.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M13 2.05v2.02c3.95.49 7 3.85 7 7.93 0 1.45-.39 2.81-1.06 3.99l1.73 1c.83-1.48 1.33-3.17 1.33-4.99 0-5.18-3.95-9.45-9-9.95zM12 19c-3.87 0-7-3.13-7-7 0-3.53 2.61-6.43 6-6.92V3.03c-4.06.5-7.18 3.91-7.18 8.05 0 4.49 3.64 8.13 8.13 8.13 1.82 0 3.51-.61 4.87-1.63l-1.46-1.46C14.38 16.97 13.24 19 12 19zm3.44-5.37l1.46-1.46-4.47-4.47-1.06 1.06 4.07 4.87z"/></svg>
+      </div>
+      <h3>Performance</h3>
+      <p>Speed up your site with a global CDN, lazy image loading, and downtime monitoring.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6h-6z"/></svg>
+      </div>
+      <h3>Growth</h3>
+      <p>Built-in stats, social sharing, SEO tools, and email marketing integrations.</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- TESTIMONIAL -->
+<section class="section">
+  <h2>Testimonial</h2>
+  <div class="testimonial">
+    <div class="testimonial-quote">&ldquo;</div>
+    <div class="testimonial-text">Jetpack is essential for any WordPress site. The peace of mind alone is worth it.</div>
+    <div class="testimonial-attr">&mdash; Site Administrator, Enterprise WordPress</div>
+  </div>
+</section>
+
+<!-- SHADOWS -->
+<div class="alt-section">
+<section class="section">
+  <h2>Elevation & Shadows</h2>
+  <div class="shadow-grid">
+    <div class="shadow-box" style="box-shadow: none; border: 1px solid var(--light-gray);">
+      <span class="label">Flat (Default)</span>
+    </div>
+    <div class="shadow-box" style="box-shadow: var(--shadow-natural);">
+      <span class="label">Natural</span>
+    </div>
+    <div class="shadow-box" style="box-shadow: var(--shadow-sharp);">
+      <span class="label">Sharp</span>
+    </div>
+    <div class="shadow-box" style="box-shadow: var(--shadow-crisp);">
+      <span class="label">Crisp</span>
+    </div>
+    <div class="shadow-box" style="box-shadow: var(--shadow-deep);">
+      <span class="label">Deep</span>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- SPACING -->
+<section class="section">
+  <h2>Spacing Scale (rem-based)</h2>
+  <div style="max-width: 600px;">
+    <div class="spacing-row"><span class="spacing-label">20: 0.44rem (7px)</span><div class="spacing-bar" style="width:7px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">30: 0.67rem (11px)</span><div class="spacing-bar" style="width:11px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">40: 1rem (16px)</span><div class="spacing-bar" style="width:16px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">50: 1.5rem (24px)</span><div class="spacing-bar" style="width:24px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">60: 2.25rem (36px)</span><div class="spacing-bar" style="width:36px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">70: 3.38rem (54px)</span><div class="spacing-bar" style="width:54px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">80: 5.06rem (81px)</span><div class="spacing-bar" style="width:81px;"></div></div>
+  </div>
+</section>
+
+<!-- BORDER RADIUS -->
+<div class="alt-section">
+<section class="section">
+  <h2>Border Radius</h2>
+  <div class="radius-grid">
+    <div class="radius-box" style="border-radius:0px;">0px</div>
+    <div class="radius-box" style="border-radius:1.25em;">1.25em</div>
+    <div class="radius-box" style="border-radius:2rem;">2rem</div>
+    <div class="radius-box" style="border-radius:9999px;">pill</div>
+  </div>
+</section>
+</div>
+
+<!-- DARK SECTION -->
+<div class="dark-section">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-title" style="color: var(--green-30);">Dark Theme</div>
+    <h2 style="font-size:clamp(28px,1.75rem + 1.563vw,48px);font-weight:700;line-height:1.1;letter-spacing:-0.3px;margin-bottom:16px;">Your site, always protected</h2>
+    <p style="font-size:18px; max-width:640px; margin-bottom:32px;">Real-time security, automated backups, and performance monitoring. Jetpack handles the essentials so you can focus on growing your site.</p>
+    <div class="component-grid">
+      <div class="card">
+        <h3>Backup</h3>
+        <p>Automatic real-time backups with one-click restores. Never lose your content.</p>
+      </div>
+      <div class="card">
+        <h3>Scan</h3>
+        <p>Automated malware scanning with one-click fixes for most known threats.</p>
+      </div>
+      <div class="card">
+        <h3>Anti-spam</h3>
+        <p>Powered by Akismet. Block spam comments and form submissions automatically.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

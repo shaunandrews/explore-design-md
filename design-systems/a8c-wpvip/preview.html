@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Preview: WordPress VIP (Light)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Aktiv Grotesk VF is the real brand font (commercial, requires license).
+       DM Sans is a free Google Fonts fallback with similar geometric proportions. */
+    --font-primary: 'Aktiv Grotesk VF', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    /* Aktiv Grotesk EX (extended) is for support/accent labels only. */
+    --font-extended: 'Aktiv Grotesk EX', 'DM Sans', sans-serif;
+    --font-mono: 'AkkuratMonoLLWeb-Regular', 'DM Mono', 'Courier New', monospace;
+
+    /* Primary */
+    --bg: #f5f2f1;
+    --text-primary: #13191e;
+    --brand-gold: #d8a45f;
+
+    /* Layer System */
+    --layer-1: #fcfafa;
+    --layer-4: #ffffff;
+    --layer-blur: #f5f2f1bf;
+
+    /* Gold Scale */
+    --accent-1: #dfc39e;
+    --gold-dark: #ba7920;
+    --gold-darker: #8c5407;
+    --link-default: #9a6014;
+    --link-hover: #7a4909;
+    --link-active: #522e03;
+
+    /* Warm Accents */
+    --salmon: #fbb7b4;
+    --coral: #ff8872;
+    --peach: #ffa378;
+    --orange: #fe9f5f;
+    --amber: #ffb84a;
+    --green: #6dd18b;
+
+    /* Neutral Text */
+    --text-secondary: #444140;
+    --helper: #6a6766;
+    --placeholder: #8f8c8b;
+    --disabled: #bfbcbb;
+    --inverse: #fbfbfb;
+
+    /* Borders */
+    --border-1: #13191e;
+    --border-2: #514e4d;
+    --border-3: #bfbcbb;
+    --border-4: #d7d4d3;
+    --border-accent: #ba7920;
+
+    /* Status */
+    --error-text: #bf2a23;
+    --error-bg: #ffdedb;
+    --warning-text: #985600;
+    --warning-bg: #ffe2c2;
+    --info-text: #007586;
+    --info-bg: #ddebf3;
+    --success-text: #007934;
+    --success-bg: #d7efdf;
+
+    /* Shadows */
+    --shadow-low: 0px 1px 1px rgba(0,0,0,0.15), 0px 1px 5px rgba(0,0,0,0.05);
+    --shadow-medium: 0px 1px 2px rgba(0,0,0,0.03), 0px 15px 30px rgba(0,0,0,0.07);
+    --shadow-high: 0px 2.767px 2.214px rgba(0,0,0,0.02), 0px 6.65px 5.32px rgba(0,0,0,0.03), 0px 12.522px 10.017px rgba(0,0,0,0.04), 0px 22.336px 17.869px rgba(0,0,0,0.04), 0px 41.778px 33.422px rgba(0,0,0,0.05), 0px 100px 80px rgba(0,0,0,0.07);
+
+    /* Dark */
+    --dark-bg: #13191e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--font-primary);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px clamp(1rem, 0.4rem + 3.01vw, 3.5rem);
+    background: var(--layer-blur);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-4);
+  }
+  .nav-brand { display: flex; align-items: center; text-decoration: none; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a {
+    font-size: 14px; font-weight: 400; color: var(--text-secondary);
+    text-decoration: none; transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--text-primary); }
+  .nav-cta {
+    display: inline-block; background: var(--text-primary); color: var(--layer-1);
+    padding: 8px 20px; border-radius: 999999px; font-size: 14px; font-weight: 500;
+    text-decoration: none; transition: background 0.15s;
+  }
+  .nav-cta:hover { background: var(--brand-gold); color: var(--text-primary); }
+
+  /* HERO */
+  .hero {
+    padding: clamp(3.5rem, 3.14rem + 1.81vw, 5rem) clamp(1rem, 0.4rem + 3.01vw, 3.5rem);
+    text-align: center;
+    background: linear-gradient(180deg, #fcfafa 0%, #f5f2f1 100%);
+  }
+  .hero h1 {
+    font-family: var(--font-primary);
+    font-size: clamp(2.125rem, 7.7vw, 6.4rem);
+    font-weight: 700; line-height: 1.0;
+    letter-spacing: -0.01em; color: var(--text-primary);
+    margin-bottom: clamp(1rem, 0.88rem + 0.6vw, 1.5rem);
+  }
+  .hero p {
+    font-size: clamp(1.14rem, 1.04rem + 0.47vw, 1.53rem);
+    font-weight: 400; line-height: 1.4; color: var(--text-secondary);
+    max-width: 600px; margin: 0 auto clamp(1.5rem, 1.38rem + 0.6vw, 2rem);
+  }
+  .hero-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  /* BUTTONS */
+  .btn-primary {
+    display: inline-block; background: var(--text-primary); color: var(--layer-1);
+    padding: clamp(0.50rem, 0.81rem + -0.30vw, 0.75rem) 1.50rem;
+    border-radius: 999999px; border: none;
+    font-family: var(--font-primary); font-size: clamp(1rem, 1.16rem + -0.15vw, 1.13rem);
+    font-weight: 500; text-decoration: none; cursor: pointer; transition: all 0.15s;
+  }
+  .btn-primary:hover { background: var(--brand-gold); color: var(--text-primary); }
+  .btn-primary:active { background: var(--gold-dark); color: var(--text-primary); }
+
+  .btn-display {
+    display: inline-block;
+    background: linear-gradient(55deg, #d8a45f 10%, #dfc39e 90%);
+    color: var(--text-primary);
+    padding: clamp(0.50rem, 0.81rem + -0.30vw, 0.75rem) 1.50rem;
+    border-radius: 999999px; border: none;
+    font-family: var(--font-primary); font-size: clamp(1rem, 1.16rem + -0.15vw, 1.13rem);
+    font-weight: 500; text-decoration: none; cursor: pointer; transition: all 0.15s;
+  }
+  .btn-display:hover { background: linear-gradient(55deg, #8c5407 10%, #c5832a 90%); }
+  .btn-display:active { background: #8c5407; color: #ffffff; }
+
+  .btn-secondary {
+    display: inline-block; background: transparent; color: var(--text-primary);
+    padding: clamp(0.50rem, 0.81rem + -0.30vw, 0.75rem) 1.50rem;
+    border-radius: 999999px; border: 1px solid var(--border-3);
+    font-family: var(--font-primary); font-size: clamp(1rem, 1.16rem + -0.15vw, 1.13rem);
+    font-weight: 500; text-decoration: none; cursor: pointer; transition: all 0.15s;
+  }
+  .btn-secondary:hover { background: var(--brand-gold); border-color: var(--brand-gold); }
+  .btn-secondary:active { background: var(--gold-dark); border-color: var(--gold-dark); }
+
+  .btn-tertiary {
+    display: inline-block; background: transparent; color: var(--text-primary);
+    padding: clamp(0.50rem, 0.81rem + -0.30vw, 0.75rem) 1.50rem;
+    border-radius: 999999px; border: none;
+    font-family: var(--font-primary); font-size: clamp(1rem, 1.16rem + -0.15vw, 1.13rem);
+    font-weight: 500; text-decoration: none; cursor: pointer; transition: all 0.15s;
+  }
+  .btn-tertiary:hover { background: #ebe9e8; }
+  .btn-tertiary:active { background: var(--disabled); }
+
+  .btn-disabled {
+    display: inline-block; background: #827f7e; color: var(--layer-1);
+    padding: clamp(0.50rem, 0.81rem + -0.30vw, 0.75rem) 1.50rem;
+    border-radius: 999999px; border: none;
+    font-family: var(--font-primary); font-size: clamp(1rem, 1.16rem + -0.15vw, 1.13rem);
+    font-weight: 500; cursor: not-allowed; opacity: 0.7;
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: clamp(2rem, 1.64rem + 1.81vw, 3.5rem) clamp(1rem, 0.4rem + 3.01vw, 3.5rem);
+    max-width: 1536px; margin: 0 auto;
+  }
+  .section-label {
+    font-family: var(--font-extended);
+    font-size: 12px; font-weight: 500; color: var(--brand-gold);
+    text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 8px;
+  }
+  .section h2 {
+    font-family: var(--font-primary);
+    font-size: clamp(1.38rem, 1.08rem + 1.52vw, 2.64rem);
+    font-weight: 500; line-height: 1.2;
+    letter-spacing: -0.01em; margin-bottom: clamp(1.5rem, 1.38rem + 0.6vw, 2rem);
+  }
+
+  /* COLOR SWATCHES */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; margin-bottom: 48px; }
+  .swatch { border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-low); }
+  .swatch-color { height: 80px; }
+  .swatch-info { padding: 10px 12px; background: var(--layer-4); }
+  .swatch-name { font-size: 12px; font-weight: 500; margin-bottom: 2px; }
+  .swatch-hex { font-size: 11px; color: var(--helper); }
+
+  /* TYPE SCALE */
+  .type-scale { margin-bottom: 48px; }
+  .type-row { padding: 16px 0; border-bottom: 1px solid var(--border-4); display: flex; align-items: baseline; gap: 24px; }
+  .type-label { font-size: 11px; color: var(--helper); min-width: 140px; flex-shrink: 0; }
+  .type-sample { flex: 1; }
+
+  /* COMPONENT GRID */
+  .component-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 48px; }
+
+  /* CARDS */
+  .card {
+    background: var(--layer-4); border-radius: 32px;
+    box-shadow: var(--shadow-medium); padding: 32px;
+    transition: box-shadow 0.25s ease-in-out, transform 0.25s ease-in-out;
+  }
+  .card:hover { box-shadow: var(--shadow-high); transform: translateY(-2px); }
+  .card h3 {
+    font-family: var(--font-primary);
+    font-size: clamp(1.14rem, 1.04rem + 0.47vw, 1.53rem);
+    font-weight: 500; margin-bottom: 8px; letter-spacing: -0.01em;
+  }
+  .card p { font-size: 16px; color: var(--text-secondary); line-height: 1.4; margin-bottom: 16px; }
+
+  /* TAGS */
+  .tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 400; padding: 6px 14px;
+    border-radius: 999999px; color: var(--text-primary);
+  }
+  .tag-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .tag-gray { background: #e3e0df; }
+  .tag-gray .tag-dot { background: #5e5b5a; }
+  .tag-blue { background: #cde6eb; }
+  .tag-blue .tag-dot { background: #006979; }
+  .tag-green { background: #c6ead0; }
+  .tag-green .tag-dot { background: #006d29; }
+  .tag-red { background: #ffd5ce; }
+  .tag-red .tag-dot { background: #ad221f; }
+  .tag-gold { background: #eae3da; }
+  .tag-gold .tag-dot { background: #8c5407; }
+  .tag-yellow { background: #ffd8a5; }
+  .tag-yellow .tag-dot { background: #894b00; }
+  .tag-orange { background: #ffd7bd; }
+  .tag-orange .tag-dot { background: #a53100; }
+  .tag-salmon { background: #fed6ce; }
+  .tag-salmon .tag-dot { background: #993c2b; }
+  .tag-pink { background: #ffd6d2; }
+  .tag-pink .tag-dot { background: #894755; }
+
+  /* BUTTON SHOWCASE */
+  .button-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 24px; }
+
+  /* SHADOW SHOWCASE */
+  .shadow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-bottom: 48px; }
+  .shadow-box {
+    background: var(--layer-4); border-radius: 16px; padding: 24px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 120px; text-align: center;
+  }
+  .shadow-box .label { font-size: 12px; font-weight: 500; color: var(--helper); margin-top: 8px; }
+
+  /* SPACING */
+  .spacing-row { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .spacing-bar { height: 24px; background: linear-gradient(55deg, #d8a45f 10%, #dfc39e 90%); border-radius: 4px; }
+  .spacing-label { font-size: 12px; color: var(--helper); min-width: 80px; }
+
+  /* RADIUS */
+  .radius-grid { display: flex; flex-wrap: wrap; gap: 24px; margin-bottom: 48px; }
+  .radius-box {
+    width: 80px; height: 80px; background: var(--layer-1); border: 2px solid var(--border-4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 500; color: var(--helper);
+  }
+
+  /* FORM ELEMENTS */
+  .input-demo {
+    padding: 10px 16px; border: 1px solid var(--border-3); border-radius: 8px;
+    font-family: var(--font-primary); font-size: 16px; color: var(--text-primary);
+    background: transparent; outline: none; width: 100%; max-width: 360px;
+    transition: border-color 0.15s;
+  }
+  .input-demo::placeholder { color: var(--placeholder); }
+  .input-demo:focus { border-color: #0F62FE; outline: 2px solid #0F62FE; outline-offset: 2px; }
+  .input-label { font-size: 14px; font-weight: 500; color: var(--text-primary); margin-bottom: 6px; display: block; }
+  .input-helper { font-size: 12px; color: var(--helper); letter-spacing: 0.03em; margin-top: 4px; margin-bottom: 16px; }
+
+  /* STATUS */
+  .status-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; }
+  .status-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 500;
+  }
+
+  /* COLORFUL GRADIENT SECTION */
+  .gradient-section {
+    background:
+      linear-gradient(145.9deg, #cde6eb 7.11%, transparent 90.25%),
+      linear-gradient(294.32deg, #d7efdf -14.26%, transparent 62.44%),
+      #ffefe5;
+    padding: clamp(3.5rem, 3.14rem + 1.81vw, 5rem) clamp(1rem, 0.4rem + 3.01vw, 3.5rem);
+  }
+
+  /* DARK BRAND SECTION */
+  .dark-section {
+    background: var(--dark-bg); color: var(--inverse);
+    padding: clamp(3.5rem, 3.14rem + 1.81vw, 5rem) clamp(1rem, 0.4rem + 3.01vw, 3.5rem);
+  }
+  .dark-section h2 { color: var(--inverse); }
+  .dark-section p { color: rgba(251,251,251,0.7); }
+  .dark-section .card {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: none;
+  }
+  .dark-section .card:hover { background: rgba(255,255,255,0.09); transform: none; }
+  .dark-section .card h3 { color: var(--inverse); }
+  .dark-section .card p { color: rgba(251,251,251,0.6); }
+
+  @media (max-width: 656px) {
+    .nav-links { display: none; }
+    .section { padding: 40px 20px; }
+    .color-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+    .type-row { flex-direction: column; gap: 8px; }
+    .type-label { min-width: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <a href="#" class="nav-brand"><svg viewBox="0 0 2678 500" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:28px;width:auto;"><circle cx="250.947" cy="250" r="250" fill="#C08C00"/><path fill-rule="evenodd" clip-rule="evenodd" d="M250.946 100C333.677 100 400.946 167.3 400.946 250C400.946 332.7 333.646 400 250.946 400C168.246 400 100.946 332.7 100.946 250C100.946 167.3 168.246 100 250.946 100ZM212.84 379.385C224.936 382.901 237.699 384.872 250.946 384.872H250.977C266.65 384.872 281.716 382.143 295.752 377.232C295.389 376.656 295.055 376.05 294.782 375.383L253.311 261.793L212.84 379.385ZM127.745 195.069C120.287 211.863 116.074 230.416 116.074 249.97C116.074 303.385 147.056 349.494 192.074 371.352L127.745 195.069ZM318.762 366.531V366.562L318.775 366.524C318.771 366.526 318.766 366.529 318.762 366.531ZM369.297 185.277C369.873 189.582 370.207 194.22 370.207 199.161C370.207 212.833 367.63 228.203 359.96 247.453L318.775 366.524C358.875 343.149 385.82 299.711 385.82 249.97C385.82 226.536 379.817 204.466 369.297 185.277ZM250.946 115.127C203.836 115.127 162.396 139.319 138.234 175.879C141.417 175.97 144.418 176.031 146.934 176.031C161.061 176.031 182.889 174.333 182.889 174.333C190.134 173.909 190.982 184.61 183.737 185.459C183.671 185.467 176.425 186.309 168.307 186.732L217.418 332.882L246.945 244.361L225.936 186.762C218.66 186.338 211.779 185.489 211.779 185.489C204.503 185.065 205.353 173.939 212.628 174.364C212.717 174.37 234.906 176.061 248.157 176.061C262.284 176.061 284.112 174.364 284.112 174.364C291.357 173.939 292.205 184.64 284.96 185.489C284.894 185.497 277.618 186.339 269.53 186.762H269.56V186.823L318.307 331.79L331.767 286.833C338.618 269.281 342.044 254.759 342.044 243.209C342.044 226.536 336.042 214.986 330.919 206.012C324.037 194.887 317.64 185.489 317.64 174.364C317.64 161.995 327.008 150.444 340.286 150.444C340.862 150.444 341.438 150.535 342.013 150.566C318.034 128.557 286.082 115.127 250.946 115.127Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M1008.61 191.779C1024.27 191.779 1037.94 195.368 1049.61 202.546C1061.29 209.724 1070.35 219.801 1076.8 232.779C1083.26 245.757 1086.48 260.91 1086.48 278.238C1086.48 295.494 1083.26 310.574 1076.8 323.479C1070.35 336.385 1061.29 346.427 1049.61 353.604C1037.94 360.782 1024.27 364.371 1008.61 364.371C992.954 364.371 979.287 360.782 967.614 353.604C955.941 346.427 946.878 336.385 940.426 323.479C933.973 310.574 930.747 295.494 930.747 278.238C930.747 260.91 933.973 245.757 940.426 232.779C946.878 219.801 955.941 209.724 967.614 202.546C979.287 195.368 992.954 191.779 1008.61 191.779ZM1008.72 218.968C998.501 218.968 990.018 221.687 983.275 227.124C976.605 232.562 971.639 239.776 968.376 248.767C965.186 257.684 963.591 267.472 963.591 278.13C963.591 288.86 965.186 298.684 968.376 307.602C971.639 316.519 976.605 323.661 983.275 329.026C990.018 334.391 998.501 337.074 1008.72 337.074C1018.87 337.074 1027.28 334.391 1033.95 329.026C1040.62 323.661 1045.56 316.519 1048.75 307.602C1052.01 298.684 1053.64 288.86 1053.64 278.13C1053.64 267.472 1052.01 257.684 1048.75 248.767C1045.56 239.776 1040.62 232.562 1033.95 227.124C1027.28 221.686 1018.87 218.968 1008.72 218.968Z" fill="black"/><path fill-rule="evenodd" clip-rule="evenodd" d="M1757.26 191.779C1766.68 191.779 1775.82 193.338 1784.66 196.456C1793.51 199.574 1801.45 204.468 1808.48 211.138C1815.51 217.808 1821.06 226.472 1825.12 237.13C1829.18 247.715 1831.21 260.584 1831.21 275.737V287.265H1712.48C1712.73 297.447 1714.68 306.184 1718.32 313.475C1722.31 321.305 1727.86 327.286 1734.96 331.419C1742.07 335.479 1750.37 337.509 1759.87 337.509C1766.03 337.509 1771.65 336.639 1776.72 334.899C1781.8 333.087 1786.19 330.404 1789.88 326.852C1793.58 323.299 1796.41 318.912 1798.37 313.692L1829.14 319.238C1826.68 328.301 1822.26 336.24 1815.88 343.056C1809.57 349.798 1801.63 355.055 1792.06 358.825C1782.56 362.523 1771.72 364.371 1759.54 364.371C1743.08 364.371 1728.91 360.855 1717.02 353.822C1705.2 346.717 1696.07 336.748 1689.61 323.915C1683.23 311.01 1680.04 295.893 1680.04 278.564C1680.04 261.454 1683.23 246.374 1689.61 233.323C1696.07 220.273 1705.06 210.086 1716.58 202.764C1728.18 195.441 1741.74 191.779 1757.26 191.779ZM1757.48 218.642C1748.34 218.642 1740.36 220.889 1733.55 225.384C1726.81 229.806 1721.59 235.607 1717.89 242.785C1714.71 249.017 1712.92 255.724 1712.53 262.904H1799.35C1799.35 254.349 1797.61 246.773 1794.12 240.175C1790.64 233.505 1785.75 228.248 1779.44 224.405C1773.21 220.563 1765.89 218.642 1757.48 218.642Z" fill="black"/><path d="M1920.09 191.779C1938.14 191.779 1952.35 195.694 1962.72 203.524C1973.09 211.282 1979.94 221.687 1983.28 234.737L1953.8 239.957C1952.57 236.187 1950.62 232.598 1947.93 229.19C1945.32 225.783 1941.77 222.991 1937.27 220.816C1932.78 218.641 1927.16 217.554 1920.42 217.554C1911.21 217.554 1903.52 219.62 1897.36 223.753C1891.2 227.813 1888.12 233.07 1888.12 239.522C1888.12 245.105 1890.18 249.6 1894.32 253.008C1898.45 256.415 1905.12 259.207 1914.33 261.382L1940.86 267.472C1956.23 271.024 1967.69 276.498 1975.23 283.894C1982.77 291.289 1986.54 300.895 1986.54 312.713C1986.54 322.718 1983.64 331.637 1977.84 339.467C1972.11 347.225 1964.1 353.315 1953.8 357.737C1943.58 362.16 1931.73 364.371 1918.24 364.371C1899.54 364.371 1884.27 360.383 1872.46 352.408C1860.64 344.361 1853.39 332.942 1850.71 318.151L1882.14 313.366C1884.09 321.559 1888.12 327.758 1894.21 331.963C1900.3 336.095 1908.24 338.161 1918.03 338.161C1928.68 338.161 1937.2 335.95 1943.58 331.527C1949.96 327.032 1953.15 321.558 1953.15 315.105C1953.15 309.885 1951.19 305.499 1947.28 301.946C1943.44 298.394 1937.53 295.711 1929.55 293.898L1901.28 287.7C1885.69 284.148 1874.16 278.492 1866.69 270.734C1859.3 262.977 1855.6 253.152 1855.6 241.262C1855.6 231.402 1858.36 222.774 1863.87 215.379C1869.38 207.984 1876.99 202.22 1886.7 198.087C1896.42 193.882 1907.55 191.779 1920.09 191.779Z" fill="black"/><path d="M2075.09 191.779C2093.15 191.779 2107.36 195.694 2117.73 203.524C2128.09 211.282 2134.95 221.687 2138.28 234.737L2108.81 239.957C2107.58 236.187 2105.62 232.598 2102.94 229.19C2100.33 225.783 2096.77 222.991 2092.28 220.816C2087.78 218.641 2082.16 217.554 2075.42 217.554C2066.21 217.554 2058.53 219.62 2052.37 223.753C2046.2 227.813 2043.12 233.07 2043.12 239.522C2043.12 245.105 2045.19 249.6 2049.32 253.008C2053.45 256.415 2060.12 259.207 2069.33 261.382L2095.87 267.472C2111.24 271.024 2122.69 276.498 2130.23 283.894C2137.77 291.289 2141.54 300.895 2141.54 312.713C2141.54 322.718 2138.64 331.637 2132.84 339.467C2127.12 347.224 2119.1 353.315 2108.81 357.737C2098.59 362.16 2086.73 364.371 2073.25 364.371C2054.54 364.371 2039.28 360.383 2027.46 352.408C2015.64 344.361 2008.39 332.942 2005.71 318.151L2037.14 313.366C2039.1 321.559 2043.12 327.758 2049.21 331.963C2055.3 336.095 2063.24 338.161 2073.03 338.161C2083.69 338.161 2092.21 335.95 2098.59 331.527C2104.97 327.032 2108.16 321.558 2108.16 315.105C2108.16 309.885 2106.2 305.499 2102.28 301.946C2098.44 298.394 2092.53 295.711 2084.56 293.898L2056.28 287.7C2040.69 284.148 2029.17 278.492 2021.7 270.734C2014.3 262.977 2010.6 253.152 2010.6 241.262C2010.6 231.402 2013.36 222.774 2018.87 215.379C2024.38 207.984 2031.99 202.22 2041.71 198.087C2051.42 193.882 2062.55 191.779 2075.09 191.779Z" fill="black"/><path fill-rule="evenodd" clip-rule="evenodd" d="M1361.25 361.001H1329.5V335.009H1326.78C1324.82 338.561 1321.99 342.622 1318.29 347.189C1314.67 351.757 1309.67 355.745 1303.29 359.152C1296.91 362.56 1288.64 364.264 1278.49 364.264C1265.01 364.264 1252.97 360.819 1242.38 353.932C1231.87 346.971 1223.61 337.075 1217.59 324.242C1211.64 311.337 1208.67 295.858 1208.67 277.805C1208.67 259.752 1211.68 244.308 1217.7 231.476C1223.79 218.643 1232.13 208.818 1242.71 202.003C1253.3 195.188 1265.3 191.78 1278.71 191.78C1289.08 191.78 1297.41 193.52 1303.72 197C1310.1 200.408 1315.03 204.395 1318.51 208.963C1322.06 213.531 1324.82 217.555 1326.78 221.035H1328.73V138.273H1361.25V361.001ZM1285.67 219.403C1275.88 219.403 1267.72 221.942 1261.2 227.017C1254.67 232.092 1249.74 239.015 1246.41 247.788C1243.15 256.561 1241.51 266.457 1241.51 277.478C1241.51 288.643 1243.18 298.685 1246.52 307.603C1249.85 316.52 1254.78 323.589 1261.31 328.81C1267.91 333.957 1276.03 336.531 1285.67 336.531C1295.02 336.531 1302.92 334.066 1309.38 329.136C1315.9 324.133 1320.83 317.209 1324.17 308.364C1327.57 299.519 1329.28 289.223 1329.28 277.478C1329.28 265.878 1327.61 255.727 1324.28 247.027C1320.94 238.327 1316.05 231.548 1309.59 226.69C1303.14 221.833 1295.17 219.403 1285.67 219.403Z" fill="black"/><path d="M727.702 310.757H729.769L774.901 138.273H809.92L855.053 310.865H857.119L900.402 138.273H935.856L873.976 361.001H840.153L793.28 194.173H791.54L744.668 361.001H710.736L648.964 138.273H684.31L727.702 310.757Z" fill="black"/><path fill-rule="evenodd" clip-rule="evenodd" d="M1480.48 138.273C1497.8 138.273 1512.16 141.428 1523.54 147.735C1534.92 154.043 1543.44 162.67 1549.1 173.618C1554.75 184.493 1557.58 196.747 1557.58 210.377C1557.58 224.08 1554.72 236.406 1548.99 247.354C1543.34 258.229 1534.78 266.856 1523.32 273.236C1511.94 279.544 1497.62 282.698 1480.37 282.698H1434.69V361.001H1401.09V138.273H1480.48ZM1434.69 254.205H1477.32C1488.27 254.205 1497.15 252.32 1503.97 248.55C1510.78 244.707 1515.78 239.486 1518.97 232.889C1522.16 226.291 1523.76 218.787 1523.76 210.377C1523.76 201.967 1522.16 194.499 1518.97 187.974C1515.78 181.448 1510.75 176.337 1503.86 172.64C1497.04 168.942 1488.05 167.093 1476.89 167.093H1434.69V254.205Z" fill="black"/><path d="M2324.04 319.675H2326.54L2388.53 138.273H2424.85L2344.7 361.001H2305.87L2225.72 138.273H2262.05L2324.04 319.675Z" fill="black"/><path d="M2481.43 361.001H2447.83V138.273H2481.43V361.001Z" fill="black"/><path fill-rule="evenodd" clip-rule="evenodd" d="M2600.57 138.273C2617.9 138.273 2632.26 141.428 2643.64 147.735C2655.02 154.043 2663.54 162.671 2669.2 173.618C2674.85 184.493 2677.68 196.747 2677.68 210.377C2677.68 224.08 2674.82 236.406 2669.09 247.354C2663.43 258.229 2654.88 266.856 2643.42 273.236C2632.04 279.544 2617.72 282.698 2600.46 282.698H2554.79V361.001H2521.18V138.273H2600.57ZM2554.79 254.205H2597.42C2608.37 254.205 2617.25 252.32 2624.06 248.55C2630.88 244.707 2635.88 239.486 2639.07 232.889C2642.26 226.291 2643.86 218.787 2643.86 210.377C2643.86 201.967 2642.26 194.499 2639.07 187.974C2635.88 181.448 2630.84 176.337 2623.96 172.64C2617.14 168.942 2608.15 167.093 2596.98 167.093H2554.79V254.205Z" fill="black"/><path d="M1189.17 191.453C1191.2 191.453 1193.6 191.526 1196.35 191.671C1199.18 191.816 1201.39 191.997 1202.99 192.215V223.318C1201.68 222.956 1199.36 222.557 1196.03 222.122C1192.69 221.615 1189.36 221.36 1186.02 221.36C1178.34 221.36 1171.48 222.991 1165.47 226.254C1159.52 229.444 1154.81 233.903 1151.33 239.631C1147.85 245.286 1146.11 251.739 1146.11 258.989V361H1113.59V193.954H1145.02V220.49H1146.76C1149.81 211.5 1155.17 204.431 1162.86 199.283C1170.61 194.063 1179.39 191.453 1189.17 191.453Z" fill="black"/><path d="M1660.76 191.453C1662.79 191.453 1665.19 191.526 1667.94 191.671C1670.77 191.816 1672.98 191.997 1674.58 192.215V223.318C1673.27 222.956 1670.95 222.557 1667.62 222.122C1664.28 221.615 1660.95 221.36 1657.61 221.36C1649.93 221.36 1643.07 222.991 1637.06 226.254C1631.11 229.444 1626.4 233.903 1622.92 239.631C1619.44 245.286 1617.7 251.739 1617.7 258.989V361H1585.18V193.954H1616.61V220.49H1618.35C1621.4 211.5 1626.76 204.431 1634.45 199.283C1642.2 194.063 1650.98 191.453 1660.76 191.453Z" fill="black"/></svg></a>
+  <ul class="nav-links">
+    <li><a href="#">Platform</a></li>
+    <li><a href="#">Solutions</a></li>
+    <li><a href="#">Resources</a></li>
+    <li><a href="#">Pricing</a></li>
+  </ul>
+  <a href="#" class="nav-cta">Get Started</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Enterprise content at scale</h1>
+  <p>The agile content platform for the world's largest brands. Build, launch, and grow with WordPress VIP.</p>
+  <div class="hero-buttons">
+    <button class="btn-primary">Talk to sales</button>
+    <button class="btn-display">See the platform</button>
+    <button class="btn-secondary">View case studies</button>
+  </div>
+</section>
+
+<!-- COLORS: GOLD SCALE -->
+<section class="section">
+  <div class="section-label">Color Palette</div>
+  <h2>Gold & Warm Accent Scale</h2>
+  <div class="color-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#dfc39e"></div><div class="swatch-info"><div class="swatch-name">Accent 1</div><div class="swatch-hex">#dfc39e</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#d8a45f"></div><div class="swatch-info"><div class="swatch-name">Brand Gold</div><div class="swatch-hex">#d8a45f</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#ba7920"></div><div class="swatch-info"><div class="swatch-name">Gold Dark</div><div class="swatch-hex">#ba7920</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#8c5407"></div><div class="swatch-info"><div class="swatch-name">Gold Darker</div><div class="swatch-hex">#8c5407</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#9a6014"></div><div class="swatch-info"><div class="swatch-name">Link Default</div><div class="swatch-hex">#9a6014</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#7a4909"></div><div class="swatch-info"><div class="swatch-name">Link Hover</div><div class="swatch-hex">#7a4909</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#522e03"></div><div class="swatch-info"><div class="swatch-name">Link Active</div><div class="swatch-hex">#522e03</div></div></div>
+  </div>
+
+  <h2>Neutral Scale</h2>
+  <div class="color-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#13191e"></div><div class="swatch-info"><div class="swatch-name">Text Primary</div><div class="swatch-hex">#13191e</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#444140"></div><div class="swatch-info"><div class="swatch-name">Text Secondary</div><div class="swatch-hex">#444140</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#6a6766"></div><div class="swatch-info"><div class="swatch-name">Helper</div><div class="swatch-hex">#6a6766</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#8f8c8b"></div><div class="swatch-info"><div class="swatch-name">Placeholder</div><div class="swatch-hex">#8f8c8b</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#bfbcbb"></div><div class="swatch-info"><div class="swatch-name">Disabled</div><div class="swatch-hex">#bfbcbb</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#d7d4d3"></div><div class="swatch-info"><div class="swatch-name">Border 4</div><div class="swatch-hex">#d7d4d3</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#f5f2f1"></div><div class="swatch-info"><div class="swatch-name">Background</div><div class="swatch-hex">#f5f2f1</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#fcfafa"></div><div class="swatch-info"><div class="swatch-name">Layer 1</div><div class="swatch-hex">#fcfafa</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#ffffff; border: 1px solid #d7d4d3"></div><div class="swatch-info"><div class="swatch-name">Layer 4</div><div class="swatch-hex">#ffffff</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#fbfbfb"></div><div class="swatch-info"><div class="swatch-name">Inverse</div><div class="swatch-hex">#fbfbfb</div></div></div>
+  </div>
+
+  <h2>Warm Accent Colors</h2>
+  <div class="color-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#fbb7b4"></div><div class="swatch-info"><div class="swatch-name">Salmon</div><div class="swatch-hex">#fbb7b4</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#ff8872"></div><div class="swatch-info"><div class="swatch-name">Coral</div><div class="swatch-hex">#ff8872</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#ffa378"></div><div class="swatch-info"><div class="swatch-name">Peach</div><div class="swatch-hex">#ffa378</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#fe9f5f"></div><div class="swatch-info"><div class="swatch-name">Orange</div><div class="swatch-hex">#fe9f5f</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#ffb84a"></div><div class="swatch-info"><div class="swatch-name">Amber</div><div class="swatch-hex">#ffb84a</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#6dd18b"></div><div class="swatch-info"><div class="swatch-name">Green</div><div class="swatch-hex">#6dd18b</div></div></div>
+  </div>
+
+  <h2>Tag Colors (9 Variants)</h2>
+  <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 48px;">
+    <span class="tag tag-gray"><span class="tag-dot"></span>Gray</span>
+    <span class="tag tag-blue"><span class="tag-dot"></span>Blue</span>
+    <span class="tag tag-green"><span class="tag-dot"></span>Green</span>
+    <span class="tag tag-red"><span class="tag-dot"></span>Red</span>
+    <span class="tag tag-gold"><span class="tag-dot"></span>Gold</span>
+    <span class="tag tag-yellow"><span class="tag-dot"></span>Yellow</span>
+    <span class="tag tag-orange"><span class="tag-dot"></span>Orange</span>
+    <span class="tag tag-salmon"><span class="tag-dot"></span>Salmon</span>
+    <span class="tag tag-pink"><span class="tag-dot"></span>Pink</span>
+  </div>
+
+  <h2>Status Colors</h2>
+  <div class="status-row">
+    <span class="status-badge" style="background:#ffdedb; color:#bf2a23;">Error</span>
+    <span class="status-badge" style="background:#ffe2c2; color:#985600;">Warning</span>
+    <span class="status-badge" style="background:#ddebf3; color:#007586;">Info</span>
+    <span class="status-badge" style="background:#d7efdf; color:#007934;">Success</span>
+  </div>
+</section>
+
+<!-- TYPOGRAPHY -->
+<section class="section" style="background: linear-gradient(180deg, #fcfafa 0%, #f5f2f1 100%); padding: clamp(2rem, 1.64rem + 1.81vw, 3.5rem) clamp(1rem, 0.4rem + 3.01vw, 3.5rem);">
+  <div class="section-label">Typography</div>
+  <h2>Type Scale</h2>
+  <div class="type-scale">
+    <div class="type-row">
+      <span class="type-label">Display Hero<br>clamp(2.125-6.4rem) / 700</span>
+      <span class="type-sample" style="font-size:clamp(2.125rem, 7.7vw, 6.4rem);font-weight:700;line-height:1.0;letter-spacing:-0.01em;">Enterprise scale</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">H1<br>clamp(1.57-3.81rem) / 700</span>
+      <span class="type-sample" style="font-size:clamp(1.57rem, 1.04rem + 2.69vw, 3.81rem);font-weight:700;line-height:1.0;letter-spacing:-0.01em;">Content platform</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">H2<br>clamp(1.38-2.64rem) / 500</span>
+      <span class="type-sample" style="font-size:clamp(1.38rem, 1.08rem + 1.52vw, 2.64rem);font-weight:500;line-height:1.2;letter-spacing:-0.01em;">Build with confidence</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">H3<br>clamp(1.30-2.20rem) / 500</span>
+      <span class="type-sample" style="font-size:clamp(1.30rem, 1.08rem + 1.09vw, 2.20rem);font-weight:500;line-height:1.2;letter-spacing:-0.01em;">Security and performance</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">H4<br>clamp(1.14-1.53rem) / 500</span>
+      <span class="type-sample" style="font-size:clamp(1.14rem, 1.04rem + 0.47vw, 1.53rem);font-weight:500;line-height:1.3;">Trusted by leading brands</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Paragraph 1<br>clamp(1.14-1.53rem) / 400</span>
+      <span class="type-sample" style="font-size:clamp(1.14rem, 1.04rem + 0.47vw, 1.53rem);font-weight:400;line-height:1.4;">WordPress VIP provides enterprise content management with unmatched performance, security, and scalability.</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Body 3<br>18px / 400</span>
+      <span class="type-sample" style="font-size:18px;font-weight:400;line-height:1.4;">The agile content platform trusted by the world's largest brands for content creation and delivery at scale.</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Body 2<br>16px / 400</span>
+      <span class="type-sample" style="font-size:16px;font-weight:400;line-height:1.4;">Deploy with confidence knowing your content is backed by enterprise-grade infrastructure.</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Body 1<br>14px / 400</span>
+      <span class="type-sample" style="font-size:14px;font-weight:400;line-height:1.4;">Manage content workflows, approvals, and publishing across teams and regions.</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Support Text 2<br>16px / 500 (Extended)</span>
+      <span class="type-sample" style="font-family:var(--font-extended);font-size:16px;font-weight:500;line-height:1.4;">ENTERPRISE PLATFORM</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Support Text 1<br>12px / 500 (Extended)</span>
+      <span class="type-sample" style="font-family:var(--font-extended);font-size:12px;font-weight:500;line-height:1.4;">CASE STUDY</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Caption<br>12px / 400 / loose</span>
+      <span class="type-sample" style="font-size:12px;font-weight:400;line-height:1.4;letter-spacing:0.03em;">Updated 2 days ago &middot; Enterprise plan</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Code<br>14px / Mono</span>
+      <span class="type-sample" style="font-family:var(--font-mono);font-size:14px;font-weight:400;line-height:1.4;">wp vip deploy --production</span>
+    </div>
+  </div>
+</section>
+
+<!-- BUTTONS -->
+<section class="section">
+  <div class="section-label">Components</div>
+  <h2>Buttons</h2>
+  <div class="button-row">
+    <button class="btn-primary">Primary</button>
+    <button class="btn-display">Display Gradient</button>
+    <button class="btn-secondary">Secondary</button>
+    <button class="btn-tertiary">Tertiary</button>
+    <button class="btn-disabled" disabled>Disabled</button>
+  </div>
+</section>
+
+<!-- CARDS -->
+<section class="gradient-section">
+  <div style="max-width: 1536px; margin: 0 auto;">
+    <div class="section-label" style="color: var(--gold-darker);">Cards</div>
+    <h2>Content Cards on Colorful Gradient</h2>
+    <div class="component-grid">
+      <div class="card">
+        <h3>Content Management</h3>
+        <p>Streamlined workflows for enterprise teams with approval chains, scheduling, and multi-site management.</p>
+        <span class="tag tag-blue"><span class="tag-dot"></span>Platform</span>
+      </div>
+      <div class="card">
+        <h3>Performance</h3>
+        <p>Global edge caching, auto-scaling infrastructure, and sub-second response times at any traffic volume.</p>
+        <span class="tag tag-green"><span class="tag-dot"></span>Infrastructure</span>
+      </div>
+      <div class="card">
+        <h3>Security</h3>
+        <p>SOC 2 compliant, automated security scanning, and dedicated support from WordPress experts.</p>
+        <span class="tag tag-gold"><span class="tag-dot"></span>Enterprise</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM ELEMENTS -->
+<section class="section">
+  <h2>Form Elements</h2>
+  <div style="max-width: 400px;">
+    <label class="input-label">Organization name</label>
+    <input class="input-demo" type="text" placeholder="Acme Corporation">
+    <div class="input-helper">The name of your organization on WordPress VIP.</div>
+    <label class="input-label">Work email</label>
+    <input class="input-demo" type="email" placeholder="you@company.com">
+    <div class="input-helper">We'll use this to set up your account.</div>
+    <div style="margin-top: 8px;">
+      <button class="btn-primary" style="width:100%;">Request a demo</button>
+    </div>
+  </div>
+</section>
+
+<!-- SHADOWS -->
+<section class="section" style="background: linear-gradient(180deg, #fcfafa 0%, #f5f2f1 100%); padding: clamp(2rem, 1.64rem + 1.81vw, 3.5rem) clamp(1rem, 0.4rem + 3.01vw, 3.5rem);">
+  <h2>Elevation & Shadows</h2>
+  <div class="shadow-grid">
+    <div class="shadow-box" style="box-shadow: none; border: 1px solid var(--border-4);">
+      <span class="label">Flat (Level 0)</span>
+    </div>
+    <div class="shadow-box" style="box-shadow: var(--shadow-low);">
+      <span class="label">Low (Level 1)</span>
+    </div>
+    <div class="shadow-box" style="box-shadow: var(--shadow-medium);">
+      <span class="label">Medium (Level 2)</span>
+    </div>
+    <div class="shadow-box" style="box-shadow: var(--shadow-high);">
+      <span class="label">High (Level 3)</span>
+    </div>
+  </div>
+</section>
+
+<!-- SPACING -->
+<section class="section">
+  <h2>Spacing Scale (Static)</h2>
+  <div style="max-width: 700px;">
+    <div class="spacing-row"><span class="spacing-label">4px (X-Small)</span><div class="spacing-bar" style="width:4px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">8px (Small)</span><div class="spacing-bar" style="width:8px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">12px (Medium)</span><div class="spacing-bar" style="width:12px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">16px (Large)</span><div class="spacing-bar" style="width:16px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">24px (X-Large)</span><div class="spacing-bar" style="width:24px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">32px (XX-Large)</span><div class="spacing-bar" style="width:32px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">56px (XXX-Large)</span><div class="spacing-bar" style="width:56px;"></div></div>
+  </div>
+  <h2 style="margin-top: 48px;">Spacing Scale (Responsive)</h2>
+  <div style="max-width: 700px;">
+    <div class="spacing-row"><span class="spacing-label">X-Small</span><div class="spacing-bar" style="width:clamp(0.75rem, 0.69rem + 0.30vw, 1rem);"></div></div>
+    <div class="spacing-row"><span class="spacing-label">Small</span><div class="spacing-bar" style="width:clamp(1rem, 0.88rem + 0.60vw, 1.5rem);"></div></div>
+    <div class="spacing-row"><span class="spacing-label">Medium</span><div class="spacing-bar" style="width:clamp(1.5rem, 1.38rem + 0.60vw, 2rem);"></div></div>
+    <div class="spacing-row"><span class="spacing-label">Large</span><div class="spacing-bar" style="width:clamp(2rem, 1.64rem + 1.81vw, 3.5rem);"></div></div>
+    <div class="spacing-row"><span class="spacing-label">X-Large</span><div class="spacing-bar" style="width:clamp(3.5rem, 3.14rem + 1.81vw, 5rem);"></div></div>
+    <div class="spacing-row"><span class="spacing-label">XX-Large</span><div class="spacing-bar" style="width:clamp(5rem, 4.52rem + 2.41vw, 7rem);"></div></div>
+    <div class="spacing-row"><span class="spacing-label">XXX-Large</span><div class="spacing-bar" style="width:clamp(7rem, 6.28rem + 3.61vw, 10rem);"></div></div>
+  </div>
+</section>
+
+<!-- BORDER RADIUS -->
+<section class="section" style="background: linear-gradient(180deg, #fcfafa 0%, #f5f2f1 100%); padding: clamp(2rem, 1.64rem + 1.81vw, 3.5rem) clamp(1rem, 0.4rem + 3.01vw, 3.5rem);">
+  <h2>Border Radius</h2>
+  <div class="radius-grid">
+    <div class="radius-box" style="border-radius:4px;">4px</div>
+    <div class="radius-box" style="border-radius:8px;">8px</div>
+    <div class="radius-box" style="border-radius:16px;">16px</div>
+    <div class="radius-box" style="border-radius:32px;">32px</div>
+    <div class="radius-box" style="border-radius:40px;">40px</div>
+    <div class="radius-box" style="border-radius:56px;">56px</div>
+    <div class="radius-box" style="border-radius:999999px;">pill</div>
+  </div>
+</section>
+
+<!-- DARK BRAND SECTION -->
+<div class="dark-section">
+  <div style="max-width: 1536px; margin: 0 auto;">
+    <div class="section-label" style="color: var(--brand-gold);">Dark Theme</div>
+    <h2 style="font-size:clamp(1.57rem, 1.04rem + 2.69vw, 3.81rem);font-weight:700;line-height:1.0;letter-spacing:-0.01em;margin-bottom:16px;">Built for the world's biggest brands</h2>
+    <p style="font-size:clamp(1.14rem, 1.04rem + 0.47vw, 1.53rem); max-width:600px; margin-bottom:32px;">WordPress VIP powers content for enterprises that demand performance, security, and agility at global scale.</p>
+    <div style="margin-bottom: 32px;">
+      <button class="btn-display">Explore the platform</button>
+      <button class="btn-tertiary" style="color: var(--inverse);">Read case studies</button>
+    </div>
+    <div class="component-grid">
+      <div class="card">
+        <h3>99.99% Uptime SLA</h3>
+        <p>Enterprise-grade infrastructure with global edge caching and auto-scaling.</p>
+      </div>
+      <div class="card">
+        <h3>SOC 2 Certified</h3>
+        <p>Security-first architecture with automated scanning and compliance controls.</p>
+      </div>
+      <div class="card">
+        <h3>24/7 Expert Support</h3>
+        <p>Dedicated WordPress experts available around the clock for your team.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

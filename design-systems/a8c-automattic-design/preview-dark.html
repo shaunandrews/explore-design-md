@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Preview: Automattic Design (Dark)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --surface-0: #0a0c0e;
+    --surface-1: #141719;
+    --surface-2: #1e2225;
+    --surface-3: #282d31;
+    --medium-blue: #4a9eff;
+    --medium-blue-80: rgba(74, 158, 255, 0.8);
+    --soft-blue: #72b3ff;
+    --vibrant-blue: #5fa3ff;
+    --active-blue: #3d8ee8;
+    --text-primary: #f0f0f0;
+    --text-secondary: #9da2a8;
+    --text-muted: #6b7075;
+    --border: rgba(255, 255, 255, 0.1);
+    --border-strong: rgba(255, 255, 255, 0.18);
+    --tag-bg: rgba(255, 255, 255, 0.1);
+    --tag-hover: rgba(255, 255, 255, 0.15);
+    --shadow-natural: 6px 6px 9px rgba(0,0,0,0.4);
+    --shadow-deep: 12px 12px 50px rgba(0,0,0,0.6);
+    --shadow-sharp: 6px 6px 0px rgba(0,0,0,0.4);
+    --shadow-crisp: 6px 6px 0px rgb(0,0,0);
+    --font-heading: 'Source Serif 4', Georgia, serif;
+    --font-display: 'Knockout', Impact, 'Arial Black', sans-serif;
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+    --content-width: 770px;
+    --wide-width: 1340px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--surface-0);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: clamp(16px, 1rem + 0.4vw, 20px);
+    font-weight: 400; line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px clamp(16px, 3vw, 50px);
+    background: rgba(10, 12, 14, 0.9);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-brand { font-size: 16px; font-weight: 600; color: var(--text-primary); text-decoration: none; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a { font-size: clamp(14px, 0.875rem + 0.2vw, 16px); font-weight: 400; color: var(--text-secondary); text-decoration: none; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--vibrant-blue); text-decoration: underline; }
+  .nav-links a:focus-visible { outline: 2px solid var(--medium-blue); outline-offset: 3px; }
+
+  /* HERO */
+  .hero { padding: clamp(64px, 5vw, 96px) clamp(16px, 3vw, 50px); max-width: var(--wide-width); margin: 0 auto; }
+  .hero h1 { font-size: clamp(54px, 3.375rem + 2.5vw, 80px); font-weight: 400; line-height: 1.0; color: var(--text-primary); margin-bottom: 24px; font-family: var(--font-heading); }
+  .hero p { font-size: clamp(18px, 1.125rem + 0.4vw, 22px); font-weight: 400; line-height: 1.5; color: var(--text-secondary); max-width: var(--content-width); margin-bottom: 32px; }
+  .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* BUTTONS */
+  .btn-blue { display: inline-block; background: var(--medium-blue-80); color: var(--surface-0); padding: 16px 32px; border-radius: 80px; border: none; font-family: var(--font-body); font-size: clamp(14px, 0.875rem + 0.2vw, 16px); font-weight: 500; line-height: 1; cursor: pointer; transition: background-color 0.3s ease; }
+  .btn-blue:hover { background: var(--soft-blue); }
+  .btn-blue:active { background: var(--active-blue); }
+  .btn-blue:focus-visible { outline: 2px solid var(--medium-blue); outline-offset: 3px; }
+  .btn-outline { display: inline-block; background: transparent; color: var(--text-primary); padding: calc(0.667em) calc(1.333em); border-radius: 80px; border: 2px solid var(--border-strong); font-family: var(--font-body); font-size: clamp(14px, 0.875rem + 0.2vw, 16px); font-weight: 500; line-height: 1; cursor: pointer; transition: border-color 0.3s ease, color 0.3s ease; }
+  .btn-outline:hover { border-color: var(--text-primary); }
+  .btn-outline:focus-visible { outline: 2px solid var(--medium-blue); outline-offset: 3px; }
+
+  /* SECTIONS */
+  .section { padding: clamp(40px, 3vw, 48px) clamp(16px, 3vw, 50px); max-width: var(--wide-width); margin: 0 auto; }
+  .section-narrow { max-width: var(--content-width); margin: 0 auto; }
+  .section-label { font-size: 12px; font-weight: 600; color: var(--medium-blue); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .section h2 { font-size: clamp(20px, 1.25rem + 1.2vw, 32px); font-weight: 500; line-height: 1.0; margin-bottom: 32px; font-family: var(--font-heading); color: var(--text-primary); }
+
+  /* COLOR SWATCHES */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; margin-bottom: 48px; }
+  .swatch { border-radius: 4px; overflow: hidden; border: 1px solid var(--border); }
+  .swatch-color { height: 80px; }
+  .swatch-info { padding: 10px 12px; background: var(--surface-1); }
+  .swatch-name { font-size: 12px; font-weight: 600; margin-bottom: 2px; color: var(--text-primary); }
+  .swatch-hex { font-size: 11px; color: var(--text-muted); }
+
+  /* TYPE SCALE */
+  .type-scale { margin-bottom: 48px; }
+  .type-row { padding: 16px 0; border-bottom: 1px solid var(--border); display: flex; align-items: baseline; gap: 24px; }
+  .type-label { font-size: 11px; color: var(--text-muted); min-width: 160px; flex-shrink: 0; }
+
+  /* CARDS */
+  .card { background: var(--surface-1); border: 1px solid var(--border); padding: 32px; }
+  .card h3 { font-size: clamp(16px, 1rem + 1vw, 26px); font-weight: 600; margin-bottom: 8px; color: var(--text-primary); font-family: var(--font-heading); }
+  .card p { font-size: 16px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px; }
+
+  /* TAGS */
+  .tag { display: inline-block; background: var(--tag-bg); color: var(--text-primary); font-size: 12px; padding: 4px 8px; border-radius: 2px; white-space: nowrap; text-decoration: none; transition: background-color 0.15s; }
+  .tag:hover { background: var(--tag-hover); }
+
+  /* QUOTE */
+  .quote { border-left: 4px solid var(--soft-blue); padding-left: 16px; font-family: var(--font-heading); font-size: clamp(16px, 1rem + 1vw, 26px); line-height: 1.2; color: var(--text-primary); margin: clamp(48px, 4vw, 64px) 0; }
+
+  /* SEPARATOR */
+  .separator { border: none; border-top: 2px solid var(--border); margin: clamp(40px, 3vw, 48px) 0; }
+
+  .button-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 24px; }
+
+  /* SHADOW SHOWCASE */
+  .shadow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-bottom: 48px; }
+  .shadow-box { background: var(--surface-1); border-radius: 4px; padding: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 120px; text-align: center; border: 1px solid var(--border); }
+  .shadow-box .label { font-size: 12px; font-weight: 600; color: var(--text-muted); margin-top: 8px; }
+
+  /* SPACING */
+  .spacing-row { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .spacing-bar { height: 24px; background: rgba(74, 158, 255, 0.2); border-radius: 2px; }
+  .spacing-label { font-size: 12px; color: var(--text-muted); min-width: 140px; }
+
+  /* RADIUS */
+  .radius-grid { display: flex; flex-wrap: wrap; gap: 24px; margin-bottom: 48px; }
+  .radius-box { width: 80px; height: 80px; background: rgba(74, 158, 255, 0.1); border: 2px solid rgba(74, 158, 255, 0.3); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: var(--medium-blue); }
+
+  /* ALT SECTION */
+  .alt-section { background: var(--surface-1); padding: clamp(40px, 3vw, 48px) clamp(16px, 3vw, 50px); }
+
+  /* POST LINKS */
+  .post-link { display: block; padding: 24px 0; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit; transition: all 0.3s ease; cursor: pointer; }
+  .post-link:hover { background: var(--surface-1); padding-left: 16px; }
+  .post-link h4 { font-family: var(--font-heading); font-weight: 400; font-size: clamp(20px, 1.25rem + 1.2vw, 32px); line-height: 1.2; color: var(--text-primary); margin-bottom: 4px; }
+  .post-link .meta { font-size: 14px; color: var(--text-muted); }
+
+  @media (prefers-reduced-motion: reduce) { .btn-blue, .btn-outline, .post-link { transition: none; } }
+  @media (max-width: 781px) { .nav-links { display: none; } .section { padding: 32px 20px; } .color-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); } }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Main navigation">
+  <a href="#" class="nav-brand" aria-label="Automattic Design home">Automattic Design</a>
+  <ul class="nav-links" role="list">
+    <li><a href="#">Snaps</a></li>
+    <li><a href="#">About Us</a></li>
+    <li><a href="#">Blog</a></li>
+  </ul>
+</nav>
+
+<section class="hero" aria-labelledby="hero-heading">
+  <h1 id="hero-heading">Designing a better web</h1>
+  <p>A fully distributed team making the web a better place. We design the products and experiences behind WordPress.com, Jetpack, WooCommerce, Tumblr, and more.</p>
+  <div class="hero-buttons">
+    <button class="btn-blue" type="button">Explore our work</button>
+    <button class="btn-outline" type="button">About us</button>
+  </div>
+</section>
+
+<hr class="separator">
+
+<section class="section" aria-labelledby="colors-heading">
+  <div class="section-label">Color Palette</div>
+  <h2 id="colors-heading">Primary</h2>
+  <div class="color-grid" role="list">
+    <div class="swatch" role="listitem"><div class="swatch-color" style="background:#000000"></div><div class="swatch-info"><div class="swatch-name">Black</div><div class="swatch-hex">#000000</div></div></div>
+    <div class="swatch" role="listitem"><div class="swatch-color" style="background:#ffffff"></div><div class="swatch-info"><div class="swatch-name">White</div><div class="swatch-hex">#ffffff</div></div></div>
+    <div class="swatch" role="listitem"><div class="swatch-color" style="background:#0387ff"></div><div class="swatch-info"><div class="swatch-name">Medium Blue</div><div class="swatch-hex">#0387ff</div></div></div>
+    <div class="swatch" role="listitem"><div class="swatch-color" style="background:#0387ffcc"></div><div class="swatch-info"><div class="swatch-name">Medium Blue 80%</div><div class="swatch-hex">#0387ffcc</div></div></div>
+    <div class="swatch" role="listitem"><div class="swatch-color" style="background:#72b3ff"></div><div class="swatch-info"><div class="swatch-name">Soft Blue</div><div class="swatch-hex">#72b3ff</div></div></div>
+    <div class="swatch" role="listitem"><div class="swatch-color" style="background:#0240e4"></div><div class="swatch-info"><div class="swatch-name">Vibrant Blue</div><div class="swatch-hex">#0240e4</div></div></div>
+  </div>
+
+  <h2>Neutral Scale</h2>
+  <div class="color-grid" role="list">
+    <div class="swatch" role="listitem"><div class="swatch-color" style="background:#101517"></div><div class="swatch-info"><div class="swatch-name">Accent 2</div><div class="swatch-hex">#101517</div></div></div>
+    <div class="swatch" role="listitem"><div class="swatch-color" style="background:#1D2327"></div><div class="swatch-info"><div class="swatch-name">Accent 3</div><div class="swatch-hex">#1D2327</div></div></div>
+    <div class="swatch" role="listitem"><div class="swatch-color" style="background:#646970"></div><div class="swatch-info"><div class="swatch-name">Typography 2</div><div class="swatch-hex">#646970</div></div></div>
+    <div class="swatch" role="listitem"><div class="swatch-color" style="background:#a7aaad"></div><div class="swatch-info"><div class="swatch-name">Accent</div><div class="swatch-hex">#a7aaad</div></div></div>
+    <div class="swatch" role="listitem"><div class="swatch-color" style="background:#c3c4c7"></div><div class="swatch-info"><div class="swatch-name">Background 4</div><div class="swatch-hex">#c3c4c7</div></div></div>
+    <div class="swatch" role="listitem"><div class="swatch-color" style="background:#dcdcde"></div><div class="swatch-info"><div class="swatch-name">Background 2</div><div class="swatch-hex">#dcdcde</div></div></div>
+    <div class="swatch" role="listitem"><div class="swatch-color" style="background:#f6f7f7"></div><div class="swatch-info"><div class="swatch-name">Background 3</div><div class="swatch-hex">#f6f7f7</div></div></div>
+  </div>
+</section>
+
+<div class="alt-section">
+<section class="section" aria-labelledby="type-heading">
+  <div class="section-label">Typography</div>
+  <h2 id="type-heading">Type Scale</h2>
+  <div class="type-scale">
+    <div class="type-row">
+      <span class="type-label">Display 2.5<br>clamp(54–80px) / 400<br>Source Serif 4</span>
+      <span style="font-size:clamp(40px,2.5rem+2vw,60px);font-weight:400;line-height:1.0;font-family:var(--font-heading);">Designing a better web</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Display Impact<br>Knockout 600</span>
+      <span style="font-size:clamp(32px,2rem+2vw,48px);font-weight:600;line-height:1.0;font-family:var(--font-display);letter-spacing:-0.5px;">AUTOMATTIC DESIGN</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Heading 1<br>clamp(24–48px) / 400</span>
+      <span style="font-size:clamp(24px,1.5rem+2.4vw,48px);font-weight:400;line-height:1.2;font-family:var(--font-heading);">We're steadfast explorers</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Heading 2<br>clamp(20–32px) / 500</span>
+      <span style="font-size:clamp(20px,1.25rem+1.2vw,32px);font-weight:500;line-height:1.0;font-family:var(--font-heading);">A fully distributed team</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Paragraph<br>clamp(16–20px) / 400</span>
+      <span style="font-size:clamp(16px,1rem+0.4vw,20px);font-weight:400;line-height:1.5;color:var(--text-secondary);">A fully distributed team making the web a better place.</span>
+    </div>
+  </div>
+</section>
+</div>
+
+<section class="section" aria-labelledby="buttons-heading">
+  <div class="section-label">Components</div>
+  <h2 id="buttons-heading">Buttons</h2>
+  <div class="button-row">
+    <button class="btn-blue" type="button">Primary Blue 80%</button>
+    <button class="btn-outline" type="button">Outline</button>
+  </div>
+
+  <h2>Tags</h2>
+  <div class="button-row">
+    <a href="#" class="tag">Design</a>
+    <a href="#" class="tag">WordPress</a>
+    <a href="#" class="tag">Remote Work</a>
+    <a href="#" class="tag">Brand</a>
+  </div>
+
+  <h2>Quote Block</h2>
+  <div class="section-narrow">
+    <blockquote class="quote">Design is not just what it looks like and feels like. Design is how it works.</blockquote>
+  </div>
+
+  <h2>Post Links</h2>
+  <div class="section-narrow">
+    <a href="#" class="post-link"><h4>Rethinking our approach to distributed design</h4><span class="meta">March 2026 &middot; 8 min read</span></a>
+    <a href="#" class="post-link"><h4>Building design systems at scale</h4><span class="meta">February 2026 &middot; 12 min read</span></a>
+  </div>
+</section>
+
+<div class="alt-section">
+<section class="section" aria-labelledby="shadows-heading">
+  <h2 id="shadows-heading">Elevation (Defined but Rarely Used)</h2>
+  <div class="shadow-grid">
+    <div class="shadow-box" style="box-shadow: none;"><span class="label">Flat (Default)</span></div>
+    <div class="shadow-box" style="box-shadow: var(--shadow-natural);"><span class="label">Natural</span></div>
+    <div class="shadow-box" style="box-shadow: var(--shadow-sharp);"><span class="label">Sharp</span></div>
+    <div class="shadow-box" style="box-shadow: var(--shadow-crisp);"><span class="label">Crisp</span></div>
+  </div>
+</section>
+</div>
+
+<section class="section" aria-labelledby="spacing-heading">
+  <h2 id="spacing-heading">Spacing Scale</h2>
+  <div style="max-width: 600px;">
+    <div class="spacing-row"><span class="spacing-label">10: 4px</span><div class="spacing-bar" style="width:4px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">20: 8px</span><div class="spacing-bar" style="width:8px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">30: 12px</span><div class="spacing-bar" style="width:12px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">40: 16px</span><div class="spacing-bar" style="width:16px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">50: 24px</span><div class="spacing-bar" style="width:24px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">60: 32px</span><div class="spacing-bar" style="width:32px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">70: clamp(40–48px)</span><div class="spacing-bar" style="width:48px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">80: clamp(48–64px)</span><div class="spacing-bar" style="width:64px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">90: clamp(64–96px)</span><div class="spacing-bar" style="width:96px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">100: clamp(96–128px)</span><div class="spacing-bar" style="width:128px;"></div></div>
+  </div>
+</section>
+
+<div class="alt-section">
+<section class="section" aria-labelledby="radius-heading">
+  <h2 id="radius-heading">Border Radius</h2>
+  <div class="radius-grid">
+    <div class="radius-box" style="border-radius:2px;">2px</div>
+    <div class="radius-box" style="border-radius:4px;">4px</div>
+    <div class="radius-box" style="border-radius:80px;">80px</div>
+    <div class="radius-box" style="border-radius:250px;">250px</div>
+  </div>
+</section>
+</div>
+
+</body>
+</html>

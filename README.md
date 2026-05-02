@@ -7,6 +7,7 @@ Start here:
 - [Research brief](docs/design-md-research.md)
 - [Presentation outline](docs/presentation-outline.md)
 - [Methodology](docs/methodology.md)
+- [A8C DESIGN.md sources](docs/a8c-design-md-sources.md)
 
 ## What This Builds
 
@@ -33,6 +34,9 @@ npm run run -- --agent claude --screen 01-analytics-dashboard --design rich-syst
 # Run a dry matrix to verify combinations.
 npm run matrix -- --agents claude,codex --screens all --designs all --mcp both --dry-run
 
+# Refresh imported Automattic brand DESIGN.md packs from a local clone.
+npm run import-a8c-design-md -- --source /private/tmp/A8c-design-md
+
 # After generated runs exist:
 npm run screenshot
 npm run evaluate
@@ -40,3 +44,5 @@ npm run viewer
 ```
 
 Claude runs require `ANTHROPIC_API_KEY` in the environment or `/tmp/geode-claude-key`, matching the pattern from the Geode experiment. Codex runs use a scoped `CODEX_HOME` inside the generated workspace and symlink `~/.codex/auth.json`.
+
+Imported Automattic brand packs use the `a8c-*` prefix, for example `a8c-woocommerce`, `a8c-jetpack`, `a8c-wordpress-com`, and `a8c-wpvip`.

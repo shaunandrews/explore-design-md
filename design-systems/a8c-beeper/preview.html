@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Preview: Beeper (Light Catalog)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Haskoy is Beeper's real typeface (custom variable woff2). DM Sans is a free geometric sans fallback for previews. -->
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Haskoy is the actual Beeper font (loaded via @font-face woff2 on the live site).
+       DM Sans is a Google Fonts geometric sans fallback for previews without the custom font file. */
+    --font-primary: 'Haskoy', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --gradient-start: #6953f2;
+    --gradient-end: #0c52f9;
+    --brand-gradient: linear-gradient(225deg, #6953f2, #0c52f9);
+    --bg-black: #000000;
+    --text-white: #ffffff;
+    --catalog-bg: #f8f9fa;
+    --catalog-text: #1a1a1a;
+    --catalog-muted: #6b7280;
+    --catalog-border: #e5e7eb;
+    --catalog-card-bg: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--catalog-bg);
+    color: var(--catalog-text);
+    font-family: var(--font-primary);
+    font-size: 16px; font-weight: 400; line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 32px;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--catalog-border);
+  }
+  .nav-brand { display: flex; align-items: center; text-decoration: none; }
+  .nav-links { display: flex; gap: 24px; list-style: none; align-items: center; }
+  .nav-links a { font-size: 14px; font-weight: 400; color: var(--catalog-muted); text-decoration: none; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--catalog-text); }
+  .badge {
+    display: inline-block; background: var(--catalog-bg); border: 1px solid var(--catalog-border);
+    padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 500; color: var(--catalog-muted);
+  }
+
+  /* HERO — shows ACTUAL Beeper dark aesthetic */
+  .hero {
+    background: var(--bg-black); padding: 80px 32px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .hero-stars {
+    position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+    opacity: 0.25; pointer-events: none;
+  }
+  .hero h1 {
+    font-family: var(--font-primary);
+    font-size: 48px; font-weight: 600; line-height: 115%;
+    letter-spacing: -0.75px;
+    background: var(--brand-gradient);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px; max-width: 768px; margin-left: auto; margin-right: auto;
+  }
+  .hero p {
+    font-size: 16px; font-weight: 400; line-height: 1.6;
+    color: rgba(255,255,255,0.8); max-width: 560px; margin: 0 auto 32px;
+  }
+  .hero-cta {
+    display: inline-block; color: var(--text-white); font-size: 15px; font-weight: 500;
+    text-decoration: none; padding: 12px 28px; border-radius: 16px;
+    background: var(--brand-gradient); transition: opacity 0.2s;
+  }
+  .hero-cta:hover { opacity: 0.9; }
+  .hero-icons {
+    display: flex; gap: 16px; justify-content: center; margin-top: 32px;
+  }
+  .hero-icons svg { width: 28px; height: 28px; }
+  .hero-badge {
+    display: inline-block; border: 1px solid rgba(255,255,255,0.2);
+    padding: 4px 14px; border-radius: 16px; font-size: 12px; font-weight: 500;
+    color: rgba(255,255,255,0.6); margin-bottom: 20px;
+  }
+
+  /* VIDEO CONTAINER (inside hero) */
+  .video-container {
+    max-width: 640px; margin: 40px auto 0; border-radius: 16px;
+    border: 2px solid var(--text-white); overflow: hidden;
+    aspect-ratio: 16/9; background: #111;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .video-container span { color: rgba(255,255,255,0.4); font-size: 14px; }
+
+  /* CATALOG SECTIONS */
+  .section { padding: 64px 32px; max-width: 960px; margin: 0 auto; }
+  .section-title {
+    font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--catalog-muted); margin-bottom: 32px;
+  }
+
+  /* COLOR SWATCHES */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
+  .color-card {
+    background: var(--catalog-card-bg); border-radius: 12px; overflow: hidden;
+    border: 1px solid var(--catalog-border);
+  }
+  .color-swatch { height: 80px; }
+  .color-swatch.gradient { background: var(--brand-gradient); }
+  .color-info { padding: 12px 14px; }
+  .color-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+  .color-value { font-size: 12px; color: var(--catalog-muted); font-family: 'SF Mono', 'Fira Code', monospace; }
+
+  /* TYPE SCALE */
+  .type-row {
+    display: flex; align-items: baseline; gap: 24px; padding: 20px 0;
+    border-bottom: 1px solid var(--catalog-border);
+  }
+  .type-row:last-child { border-bottom: none; }
+  .type-meta { min-width: 200px; flex-shrink: 0; }
+  .type-label { font-size: 12px; font-weight: 600; color: var(--catalog-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .type-specs { font-size: 11px; color: var(--catalog-muted); margin-top: 2px; font-family: 'SF Mono', 'Fira Code', monospace; }
+  .type-sample { flex: 1; }
+  .type-sample.display-hero {
+    font-size: 48px; font-weight: 600; line-height: 115%; letter-spacing: -0.75px;
+    background: var(--brand-gradient);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .type-sample.display-mobile {
+    font-size: 30px; font-weight: 600; line-height: 115%; letter-spacing: -0.75px;
+  }
+  .type-sample.section-heading {
+    font-size: 36px; font-weight: 600; line-height: 115%; letter-spacing: -0.75px;
+  }
+  .type-sample.body-large { font-size: 16px; font-weight: 400; line-height: 1.6; }
+  .type-sample.body-small { font-size: 14px; font-weight: 400; line-height: 1.5; color: var(--catalog-muted); }
+  .type-sample.cta-text { font-size: 15px; font-weight: 600; }
+
+  /* COMPONENTS */
+  .component-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+  .component-card {
+    background: var(--catalog-card-bg); border-radius: 12px; padding: 24px;
+    border: 1px solid var(--catalog-border);
+  }
+  .component-label { font-size: 11px; font-weight: 600; color: var(--catalog-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+
+  /* Dark component previews */
+  .dark-preview {
+    background: var(--bg-black); border-radius: 16px; padding: 32px; text-align: center;
+  }
+  .dark-preview h3 {
+    font-size: 24px; font-weight: 600; line-height: 115%; letter-spacing: -0.75px;
+    background: var(--brand-gradient);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+  .dark-preview p { font-size: 14px; color: rgba(255,255,255,0.8); }
+  .dark-preview .btn-gradient {
+    display: inline-block; margin-top: 16px; padding: 10px 24px; border-radius: 16px;
+    background: var(--brand-gradient); color: var(--text-white);
+    font-size: 14px; font-weight: 500; text-decoration: none;
+  }
+
+  /* Messaging icons row */
+  .icon-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; align-items: center; }
+  .icon-row .icon-item {
+    width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: white;
+  }
+
+  /* Chat bubbles */
+  .bubble-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .bubble {
+    background: #1a1a2e; border-radius: 16px; padding: 10px 18px;
+    font-size: 13px; color: rgba(255,255,255,0.85); max-width: 200px;
+  }
+  .bubble.sent { background: var(--gradient-start); color: white; margin-left: auto; }
+
+  /* Spacing preview */
+  .spacing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; }
+  .spacing-item { text-align: center; }
+  .spacing-bar {
+    height: 8px; background: var(--brand-gradient); border-radius: 4px; margin-bottom: 8px;
+  }
+  .spacing-label { font-size: 11px; font-weight: 600; color: var(--catalog-muted); }
+  .spacing-value { font-size: 11px; color: var(--catalog-muted); font-family: 'SF Mono', 'Fira Code', monospace; }
+
+  /* Radius preview */
+  .radius-row { display: flex; gap: 24px; align-items: end; flex-wrap: wrap; }
+  .radius-item { text-align: center; }
+  .radius-box {
+    width: 64px; height: 64px; background: var(--brand-gradient); margin: 0 auto 8px;
+  }
+  .radius-label { font-size: 11px; color: var(--catalog-muted); font-family: 'SF Mono', 'Fira Code', monospace; }
+
+  /* Opacity scale */
+  .opacity-row { display: flex; gap: 24px; flex-wrap: wrap; }
+  .opacity-item { text-align: center; }
+  .opacity-box {
+    width: 80px; height: 48px; background: var(--bg-black); border-radius: 8px; margin-bottom: 8px;
+    display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600;
+  }
+  .opacity-label { font-size: 11px; color: var(--catalog-muted); }
+
+  /* Decorative SVGs preview */
+  .svg-preview { display: flex; gap: 40px; align-items: center; justify-content: center; flex-wrap: wrap; }
+  .svg-item { text-align: center; }
+  .svg-item svg { display: block; margin: 0 auto 8px; }
+  .svg-item-label { font-size: 11px; color: var(--catalog-muted); }
+
+  /* Footer */
+  .footer {
+    padding: 48px 32px; text-align: center;
+    border-top: 1px solid var(--catalog-border);
+    color: var(--catalog-muted); font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#" class="nav-brand"><svg style="height:28px;width:auto;" viewBox="0 0 1624 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1266.25 191.779C1279.74 191.779 1291.77 195.187 1302.36 202.002C1312.94 208.817 1321.24 218.642 1327.26 231.475C1333.35 244.308 1336.4 259.751 1336.4 277.804C1336.4 295.857 1333.39 311.336 1327.37 324.241C1321.35 337.074 1313.09 346.97 1302.58 353.931C1292.06 360.818 1280.06 364.263 1266.58 364.263C1256.43 364.263 1248.13 362.559 1241.67 359.151C1235.29 355.744 1230.29 351.756 1226.67 347.188C1223.04 342.621 1220.25 338.56 1218.29 335.008H1216.33V423.642H1183.82V193.954H1215.57V221.034H1218.29C1220.18 217.554 1222.9 213.53 1226.45 208.963C1230 204.395 1234.93 200.408 1241.24 197C1247.55 193.52 1255.88 191.779 1266.25 191.779ZM1259.29 219.402C1249.87 219.402 1241.89 221.832 1235.37 226.689C1228.91 231.547 1224.02 238.326 1220.68 247.026C1217.35 255.727 1215.68 265.877 1215.68 277.478C1215.68 289.223 1217.39 299.518 1220.79 308.363C1224.2 317.209 1229.13 324.132 1235.58 329.135C1242.04 334.065 1249.94 336.53 1259.29 336.53C1269.01 336.53 1277.13 333.956 1283.65 328.809C1290.18 323.588 1295.11 316.519 1298.44 307.602C1301.85 298.684 1303.55 288.643 1303.55 277.478C1303.55 266.457 1301.89 256.56 1298.55 247.787C1295.29 239.015 1290.36 232.091 1283.76 227.016C1277.24 221.94 1269.08 219.402 1259.29 219.402Z" fill="black"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M912.418 191.779C921.843 191.779 930.979 193.338 939.824 196.456C948.669 199.574 956.608 204.468 963.641 211.138C970.673 217.808 976.22 226.472 980.28 237.13C984.34 247.715 986.37 260.584 986.37 275.737V287.265H867.641C867.892 297.447 869.839 306.184 873.484 313.475C877.472 321.305 883.019 327.286 890.124 331.419C897.229 335.479 905.531 337.509 915.028 337.509C921.191 337.509 926.81 336.639 931.885 334.899C936.96 333.087 941.346 330.404 945.044 326.852C948.742 323.299 951.57 318.913 953.527 313.692L984.305 319.238C981.84 328.301 977.416 336.24 971.036 343.056C964.729 349.798 956.79 355.055 947.22 358.825C937.722 362.523 926.882 364.371 914.702 364.371C898.244 364.371 884.07 360.855 872.18 353.822C860.362 346.717 851.226 336.748 844.773 323.915C838.393 311.01 835.203 295.893 835.203 278.564C835.203 261.454 838.393 246.374 844.773 233.323C851.226 220.273 860.216 210.086 871.744 202.764C883.344 195.441 896.903 191.779 912.418 191.779ZM912.636 218.642C903.501 218.642 895.525 220.889 888.71 225.384C881.967 229.806 876.747 235.607 873.05 242.785C869.87 249.017 868.084 255.724 867.693 262.904H954.506C954.506 254.349 952.765 246.773 949.285 240.175C945.805 233.505 940.911 228.248 934.604 224.405C928.368 220.563 921.046 218.642 912.636 218.642Z" fill="black"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1082.97 191.779C1092.4 191.779 1101.53 193.338 1110.38 196.456C1119.22 199.574 1127.16 204.468 1134.2 211.138C1141.23 217.808 1146.77 226.472 1150.83 237.13C1154.9 247.715 1156.92 260.584 1156.92 275.737V287.265H1038.2C1038.45 297.447 1040.39 306.184 1044.04 313.475C1048.03 321.305 1053.57 327.286 1060.68 331.419C1067.78 335.479 1076.09 337.509 1085.58 337.509C1091.75 337.509 1097.36 336.639 1102.44 334.899C1107.51 333.087 1111.9 330.404 1115.6 326.852C1119.3 323.299 1122.12 318.913 1124.08 313.692L1154.86 319.238C1152.39 328.301 1147.97 336.24 1141.59 343.056C1135.28 349.798 1127.34 355.055 1117.77 358.825C1108.28 362.523 1097.44 364.371 1085.26 364.371C1068.8 364.371 1054.62 360.855 1042.73 353.822C1030.92 346.717 1021.78 336.748 1015.33 323.915C1008.95 311.01 1005.76 295.893 1005.76 278.564C1005.76 261.454 1008.95 246.374 1015.33 233.323C1021.78 220.273 1030.77 210.086 1042.3 202.764C1053.9 195.441 1067.46 191.779 1082.97 191.779ZM1083.19 218.642C1074.06 218.642 1066.08 220.889 1059.26 225.384C1052.52 229.806 1047.3 235.607 1043.6 242.785C1040.42 249.017 1038.64 255.724 1038.25 262.904H1125.06C1125.06 254.349 1123.32 246.773 1119.84 240.175C1116.36 233.505 1111.47 228.248 1105.16 224.405C1098.92 220.563 1091.6 218.642 1083.19 218.642Z" fill="black"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1433.35 191.779C1442.78 191.779 1451.91 193.339 1460.76 196.456C1469.61 199.574 1477.54 204.467 1484.58 211.138C1491.61 217.808 1497.16 226.472 1501.22 237.13C1505.28 247.715 1507.31 260.584 1507.31 275.737V287.265H1388.58C1388.83 297.447 1390.78 306.184 1394.42 313.475C1398.41 321.305 1403.95 327.286 1411.06 331.419C1418.16 335.479 1426.47 337.509 1435.96 337.509C1442.13 337.509 1447.75 336.639 1452.82 334.899C1457.9 333.087 1462.28 330.404 1465.98 326.852C1469.68 323.299 1472.51 318.912 1474.46 313.692L1505.24 319.238C1502.78 328.301 1498.35 336.24 1491.97 343.056C1485.66 349.798 1477.73 355.055 1468.16 358.825C1458.66 362.523 1447.82 364.371 1435.64 364.371C1419.18 364.371 1405.01 360.855 1393.12 353.822C1381.3 346.717 1372.16 336.748 1365.71 323.915C1359.33 311.01 1356.14 295.893 1356.14 278.564C1356.14 261.454 1359.33 246.374 1365.71 233.323C1372.16 220.273 1381.15 210.086 1392.68 202.764C1404.28 195.441 1417.84 191.779 1433.35 191.779ZM1433.57 218.642C1424.44 218.642 1416.46 220.889 1409.65 225.384C1402.9 229.806 1397.68 235.607 1393.99 242.785C1390.81 249.017 1389.02 255.724 1388.63 262.904H1475.44C1475.44 254.349 1473.7 246.773 1470.22 240.175C1466.74 233.505 1461.85 228.248 1455.54 224.405C1449.3 220.563 1441.98 218.642 1433.57 218.642Z" fill="black"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M735.691 138.272C751.497 138.272 764.583 140.882 774.951 146.103C785.319 151.25 793.077 158.247 798.225 167.093C803.372 175.865 805.946 185.762 805.946 196.782C805.946 206.062 804.242 213.892 800.835 220.272C797.427 226.58 792.859 231.655 787.132 235.498C781.477 239.268 775.241 242.024 768.426 243.764V245.938C775.821 246.301 783.036 248.694 790.068 253.116C797.173 257.466 803.045 263.665 807.686 271.713C812.326 279.761 814.646 289.549 814.646 301.077C814.646 312.46 811.964 322.682 806.599 331.745C801.306 340.735 793.113 347.877 782.021 353.17C770.928 358.39 756.753 361 739.497 361H654.126V138.272H735.691ZM687.73 332.181H736.235C752.331 332.181 763.858 329.062 770.818 322.827C777.779 316.592 781.259 308.798 781.259 299.445C781.259 292.413 779.482 285.96 775.93 280.087C772.377 274.214 767.302 269.539 760.704 266.059C754.179 262.579 746.422 260.838 737.432 260.838H687.73V332.181ZM687.73 234.628H732.755C740.295 234.628 747.074 233.178 753.092 230.278C759.182 227.378 764.003 223.318 767.556 218.098C771.181 212.805 772.993 206.57 772.993 199.393C772.993 190.185 769.767 182.463 763.314 176.228C756.862 169.992 746.965 166.875 733.625 166.875H687.73V234.628Z" fill="black"/>
+<path d="M1609.78 191.453C1611.81 191.453 1614.21 191.526 1616.96 191.671C1619.79 191.816 1622 191.997 1623.59 192.215V223.318C1622.29 222.956 1619.97 222.557 1616.63 222.122C1613.3 221.615 1609.96 221.36 1606.63 221.36C1598.94 221.36 1592.09 222.991 1586.07 226.254C1580.13 229.444 1575.42 233.903 1571.94 239.631C1568.46 245.286 1566.72 251.739 1566.72 258.989V361H1534.2V193.954H1565.63V220.49H1567.37C1570.41 211.5 1575.78 204.431 1583.46 199.283C1591.22 194.063 1599.99 191.453 1609.78 191.453Z" fill="black"/>
+<circle cx="250" cy="250" r="250" fill="#2D53F7"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M139 189.031C139 145.673 173.687 110 217.528 110H282.472C325.842 110 361 145.285 361 189.031C360.949 212.591 350.746 232.886 336.549 246.384L321.671 261.339C343.338 274.09 360.821 294.095 360.821 321.222C360.821 361.843 328.173 391 287.901 391H178.176V257.497C154.983 243.846 139 218.313 139 189.031ZM217.528 131.953C185.794 131.953 160.765 157.679 160.765 189.031C160.765 220.383 185.794 246.109 217.528 246.109H244.566L229.527 322.808L321.262 230.759C331.771 220.88 339.235 205.936 339.235 189.031C339.235 157.199 313.39 131.61 282.472 131.953H217.528Z" fill="white"/>
+</svg></a>
+  <ul class="nav-links">
+    <li><a href="#colors">Colors</a></li>
+    <li><a href="#typography">Typography</a></li>
+    <li><a href="#components">Components</a></li>
+    <li><span class="badge">Light Catalog</span></li>
+  </ul>
+</nav>
+
+<!-- HERO — Actual Beeper dark aesthetic -->
+<section class="hero">
+  <svg class="hero-stars" width="120" height="120" viewBox="0 0 120 120" fill="none">
+    <path d="M60 0L65 50L120 60L65 70L60 120L55 70L0 60L55 50Z" fill="white" opacity="0.3"/>
+  </svg>
+  <div class="hero-badge">Design System Preview</div>
+  <h1>All your chats in one app</h1>
+  <p>Beeper is a universal chat app. Send and receive messages on 15 chat networks from one app.</p>
+  <a href="#" class="hero-cta">Download for free</a>
+  <div class="hero-icons">
+    <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#25d366"/><path d="M14 6.5a7.5 7.5 0 00-6.5 11.2l-1 3.3 3.4-1a7.5 7.5 0 104.1-13.5z" fill="white"/></svg>
+    <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#3a76f0"/><circle cx="14" cy="14" r="6" fill="white"/></svg>
+    <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#0088cc"/><path d="M7 14l3 1.5 1.5 4L20 9l-11 4z" fill="white"/></svg>
+    <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#5865f2"/><path d="M10 12a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm8 0a1.5 1.5 0 110 3 1.5 1.5 0 010-3z" fill="white"/></svg>
+    <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#4a154b"/><rect x="9" y="12" width="4" height="4" rx="1" fill="white"/><rect x="15" y="12" width="4" height="4" rx="1" fill="white"/></svg>
+    <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#0084ff"/><path d="M14 7a7 7 0 00-6 10.5L7 21l3.5-1A7 7 0 1014 7z" fill="white"/></svg>
+  </div>
+  <div class="video-container">
+    <span>Video embed (rounded-2xl, border-2 border-white)</span>
+  </div>
+</section>
+
+<!-- COLOR PALETTE -->
+<section class="section" id="colors">
+  <div class="section-title">Color Palette</div>
+  <div class="color-grid">
+    <div class="color-card">
+      <div class="color-swatch gradient"></div>
+      <div class="color-info">
+        <div class="color-name">Brand Gradient</div>
+        <div class="color-value">225deg, #6953f2 &rarr; #0c52f9</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#6953f2;"></div>
+      <div class="color-info">
+        <div class="color-name">Gradient Start (Purple)</div>
+        <div class="color-value">#6953f2</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#0c52f9;"></div>
+      <div class="color-info">
+        <div class="color-name">Gradient End (Blue)</div>
+        <div class="color-value">#0c52f9</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#000000;"></div>
+      <div class="color-info">
+        <div class="color-name">Background (Black)</div>
+        <div class="color-value">#000000</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#ffffff; border-bottom: 1px solid #e5e7eb;"></div>
+      <div class="color-info">
+        <div class="color-name">Primary Text (White)</div>
+        <div class="color-value">#ffffff</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:rgba(255,255,255,0.8); border-bottom: 1px solid #e5e7eb;"></div>
+      <div class="color-info">
+        <div class="color-name">Secondary Text (80%)</div>
+        <div class="color-value">rgba(255,255,255, 0.8)</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:rgba(255,255,255,0.6); border-bottom: 1px solid #e5e7eb;"></div>
+      <div class="color-info">
+        <div class="color-name">Tertiary Text (60%)</div>
+        <div class="color-value">rgba(255,255,255, 0.6)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top: 48px;">Messaging Platform Colors (icon-only)</div>
+  <div class="color-grid">
+    <div class="color-card">
+      <div class="color-swatch" style="background:#25d366;"></div>
+      <div class="color-info"><div class="color-name">WhatsApp</div><div class="color-value">#25d366</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#0088cc;"></div>
+      <div class="color-info"><div class="color-name">Telegram</div><div class="color-value">#0088cc</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#3a76f0;"></div>
+      <div class="color-info"><div class="color-name">Signal</div><div class="color-value">#3a76f0</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#5865f2;"></div>
+      <div class="color-info"><div class="color-name">Discord</div><div class="color-value">#5865f2</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#4a154b;"></div>
+      <div class="color-info"><div class="color-name">Slack</div><div class="color-value">#4a154b</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#0084ff;"></div>
+      <div class="color-info"><div class="color-name">Messenger</div><div class="color-value">#0084ff</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#0a66c2;"></div>
+      <div class="color-info"><div class="color-name">LinkedIn</div><div class="color-value">#0a66c2</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#1a73e8;"></div>
+      <div class="color-info"><div class="color-name">Google Messages</div><div class="color-value">#1a73e8</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TYPOGRAPHY -->
+<section class="section" id="typography">
+  <div class="section-title">Typography Scale (Haskoy / DM Sans fallback)</div>
+  <div class="type-row">
+    <div class="type-meta">
+      <div class="type-label">Display Hero</div>
+      <div class="type-specs">48px / 600 / 115% / -0.75px</div>
+    </div>
+    <div class="type-sample display-hero">All your chats</div>
+  </div>
+  <div class="type-row">
+    <div class="type-meta">
+      <div class="type-label">Display Mobile</div>
+      <div class="type-specs">30px / 600 / 115% / -0.75px</div>
+    </div>
+    <div class="type-sample display-mobile">All your chats in one app</div>
+  </div>
+  <div class="type-row">
+    <div class="type-meta">
+      <div class="type-label">Section Heading</div>
+      <div class="type-specs">30-48px / 600 / 115% / -0.75px</div>
+    </div>
+    <div class="type-sample section-heading">One inbox for every chat</div>
+  </div>
+  <div class="type-row">
+    <div class="type-meta">
+      <div class="type-label">Body Large</div>
+      <div class="type-specs">16px / 400 / 1.6</div>
+    </div>
+    <div class="type-sample body-large">Beeper is a universal chat app. Send and receive messages to friends on 15 different chat networks, all from one app.</div>
+  </div>
+  <div class="type-row">
+    <div class="type-meta">
+      <div class="type-label">Body Small</div>
+      <div class="type-specs">14px / 400 / 1.5</div>
+    </div>
+    <div class="type-sample body-small">Connect your existing accounts. Your messages stay on the original network.</div>
+  </div>
+  <div class="type-row">
+    <div class="type-meta">
+      <div class="type-label">Button / CTA</div>
+      <div class="type-specs">14-16px / 500-600 / 1.0</div>
+    </div>
+    <div class="type-sample cta-text">Download for free</div>
+  </div>
+</section>
+
+<!-- COMPONENTS -->
+<section class="section" id="components">
+  <div class="section-title">Components</div>
+  <div class="component-grid">
+
+    <div class="component-card">
+      <div class="component-label">Gradient Text Heading</div>
+      <div class="dark-preview">
+        <h3>One inbox for every chat network</h3>
+        <p>background-clip: text with brand gradient</p>
+      </div>
+    </div>
+
+    <div class="component-card">
+      <div class="component-label">Primary CTA</div>
+      <div class="dark-preview">
+        <a href="#" class="btn-gradient">Download for free</a>
+        <p style="margin-top: 12px; font-size: 12px; color: rgba(255,255,255,0.5);">rounded-2xl, gradient bg</p>
+      </div>
+    </div>
+
+    <div class="component-card">
+      <div class="component-label">Messaging Platform Icons (28px)</div>
+      <div class="dark-preview">
+        <div class="icon-row">
+          <div class="icon-item" style="background:#25d366;">W</div>
+          <div class="icon-item" style="background:#3a76f0;">S</div>
+          <div class="icon-item" style="background:#0088cc;">T</div>
+          <div class="icon-item" style="background:#5865f2;">D</div>
+          <div class="icon-item" style="background:#4a154b;">Sl</div>
+          <div class="icon-item" style="background:#0084ff;">M</div>
+          <div class="icon-item" style="background:#0a66c2;">L</div>
+          <div class="icon-item" style="background:#1a73e8;">G</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="component-card">
+      <div class="component-label">Chat Bubble Illustrations</div>
+      <div class="dark-preview">
+        <div class="bubble-row">
+          <div class="bubble">Hey, are you coming tonight?</div>
+          <div class="bubble sent">On my way!</div>
+        </div>
+        <p style="margin-top: 12px; font-size: 12px; color: rgba(255,255,255,0.5);">12 numbered bubble illustrations on live site</p>
+      </div>
+    </div>
+
+    <div class="component-card">
+      <div class="component-label">Video Container</div>
+      <div class="dark-preview">
+        <div style="border: 2px solid white; border-radius: 16px; padding: 32px; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center;">
+          <span style="color: rgba(255,255,255,0.4); font-size: 13px;">rounded-2xl + border-2 border-white</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="component-card">
+      <div class="component-label">Decorative Illustrations</div>
+      <div class="dark-preview">
+        <div class="svg-preview">
+          <div class="svg-item">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+              <path d="M20 0L22 16L40 20L22 24L20 40L18 24L0 20L18 16Z" fill="white" opacity="0.6"/>
+            </svg>
+            <div class="svg-item-label" style="color: rgba(255,255,255,0.5);">Star</div>
+          </div>
+          <div class="svg-item">
+            <svg width="60" height="32" viewBox="0 0 60 32" fill="none">
+              <ellipse cx="20" cy="22" rx="18" ry="10" fill="white" opacity="0.15"/>
+              <ellipse cx="36" cy="18" rx="14" ry="10" fill="white" opacity="0.15"/>
+              <ellipse cx="44" cy="22" rx="12" ry="8" fill="white" opacity="0.15"/>
+            </svg>
+            <div class="svg-item-label" style="color: rgba(255,255,255,0.5);">Cloud</div>
+          </div>
+          <div class="svg-item">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+              <circle cx="18" cy="18" r="16" stroke="white" stroke-width="2" opacity="0.5"/>
+              <circle cx="12" cy="15" r="2" fill="white" opacity="0.6"/>
+              <circle cx="24" cy="15" r="2" fill="white" opacity="0.6"/>
+              <path d="M11 22c2 3 5 5 7 5s5-2 7-5" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+            </svg>
+            <div class="svg-item-label" style="color: rgba(255,255,255,0.5);">Smile</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SPACING -->
+<section class="section">
+  <div class="section-title">Spacing Scale (Tailwind)</div>
+  <div class="spacing-grid">
+    <div class="spacing-item">
+      <div class="spacing-bar" style="width: 16px;"></div>
+      <div class="spacing-label">4</div>
+      <div class="spacing-value">16px</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar" style="width: 32px;"></div>
+      <div class="spacing-label">8</div>
+      <div class="spacing-value">32px</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar" style="width: 64px;"></div>
+      <div class="spacing-label">16</div>
+      <div class="spacing-value">64px (py-16)</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar" style="width: 80px;"></div>
+      <div class="spacing-label">20</div>
+      <div class="spacing-value">80px (py-20)</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar" style="width: 100%;"></div>
+      <div class="spacing-label">32</div>
+      <div class="spacing-value">128px (pb-32)</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar" style="width: 100%;"></div>
+      <div class="spacing-label">40</div>
+      <div class="spacing-value">160px (pb-40)</div>
+    </div>
+  </div>
+</section>
+
+<!-- BORDER RADIUS -->
+<section class="section">
+  <div class="section-title">Border Radius</div>
+  <div class="radius-row">
+    <div class="radius-item">
+      <div class="radius-box" style="border-radius: 4px;"></div>
+      <div class="radius-label">4px</div>
+    </div>
+    <div class="radius-item">
+      <div class="radius-box" style="border-radius: 8px;"></div>
+      <div class="radius-label">8px</div>
+    </div>
+    <div class="radius-item">
+      <div class="radius-box" style="border-radius: 16px;"></div>
+      <div class="radius-label">16px (rounded-2xl)</div>
+    </div>
+  </div>
+</section>
+
+<!-- TEXT OPACITY HIERARCHY -->
+<section class="section">
+  <div class="section-title">Text Hierarchy (opacity on black)</div>
+  <div class="opacity-row">
+    <div class="opacity-item">
+      <div class="opacity-box"><span style="color: rgba(255,255,255,1.0);">Aa</span></div>
+      <div class="opacity-label">100% -- Headings</div>
+    </div>
+    <div class="opacity-item">
+      <div class="opacity-box"><span style="color: rgba(255,255,255,0.8);">Aa</span></div>
+      <div class="opacity-label">80% -- Body</div>
+    </div>
+    <div class="opacity-item">
+      <div class="opacity-box"><span style="color: rgba(255,255,255,0.6);">Aa</span></div>
+      <div class="opacity-label">60% -- Tertiary</div>
+    </div>
+  </div>
+</section>
+
+<!-- ELEVATION -->
+<section class="section">
+  <div class="section-title">Depth & Elevation</div>
+  <div class="component-grid">
+    <div class="component-card">
+      <div class="component-label">Level 0 -- Flat (Default)</div>
+      <div class="dark-preview">
+        <div style="border-radius: 16px; padding: 24px;">
+          <p style="color: rgba(255,255,255,0.6); font-size: 13px;">No shadow, no border. Everything by default.</p>
+        </div>
+      </div>
+    </div>
+    <div class="component-card">
+      <div class="component-label">Level 1 -- Outlined</div>
+      <div class="dark-preview">
+        <div style="border: 2px solid white; border-radius: 16px; padding: 24px;">
+          <p style="color: rgba(255,255,255,0.6); font-size: 13px;">2px solid white. Hero video, featured elements.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>Beeper Design System Preview -- Light Catalog Mode</p>
+  <p style="margin-top: 4px;">Font: <strong>Haskoy</strong> (custom, shown as DM Sans fallback) | Background: <strong>#000000</strong> | Gradient: <strong>#6953f2 &rarr; #0c52f9</strong></p>
+  <p style="margin-top: 8px;">&copy; Automattic Inc.</p>
+</footer>
+
+</body>
+</html>

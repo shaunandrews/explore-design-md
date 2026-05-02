@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Preview: Beeper (Dark — The Real Beeper)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Haskoy is Beeper's real typeface (custom variable woff2). DM Sans is a free geometric sans fallback for previews. -->
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Haskoy is the actual Beeper font (loaded via @font-face woff2 on the live site).
+       DM Sans is a Google Fonts geometric sans fallback for previews without the custom font file. */
+    --font-primary: 'Haskoy', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --gradient-start: #6953f2;
+    --gradient-end: #0c52f9;
+    --brand-gradient: linear-gradient(225deg, #6953f2, #0c52f9);
+    --bg: #000000;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255,255,255,0.8);
+    --text-tertiary: rgba(255,255,255,0.6);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--font-primary);
+    font-size: 16px; font-weight: 400; line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV — sticky, dark, transparent feel */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 32px; height: 64px;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(16px);
+  }
+  .nav-brand { display: flex; align-items: center; text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+  .nav-links a {
+    font-size: 14px; font-weight: 400; color: var(--text-secondary); text-decoration: none;
+    transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--text-primary); }
+  .nav-cta {
+    font-size: 14px; font-weight: 500; color: var(--text-primary);
+    text-decoration: none; transition: opacity 0.15s;
+  }
+  .nav-cta:hover { opacity: 0.8; }
+
+  /* GRADIENT TEXT UTILITY */
+  .gradient-text {
+    background: var(--brand-gradient);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 100px 32px 80px; text-align: center;
+    position: relative; overflow: hidden;
+    max-width: 768px; margin: 0 auto;
+  }
+  .hero h1 {
+    font-size: 48px; font-weight: 600; line-height: 115%;
+    letter-spacing: -0.75px; margin-bottom: 20px;
+  }
+  .hero p {
+    font-size: 16px; font-weight: 400; line-height: 1.6;
+    color: var(--text-secondary); max-width: 560px; margin: 0 auto 36px;
+  }
+  .hero-cta {
+    display: inline-block; color: var(--text-primary); font-size: 15px; font-weight: 500;
+    text-decoration: none; padding: 12px 32px; border-radius: 16px;
+    background: var(--brand-gradient); transition: opacity 0.2s;
+  }
+  .hero-cta:hover { opacity: 0.9; }
+
+  /* MESSAGING ICONS ROW */
+  .icon-strip {
+    display: flex; gap: 16px; justify-content: center; align-items: center;
+    padding: 40px 32px;
+  }
+  .icon-strip svg { width: 28px; height: 28px; flex-shrink: 0; }
+
+  /* VIDEO HERO */
+  .video-section {
+    max-width: 768px; margin: 0 auto; padding: 0 32px 80px;
+  }
+  .video-frame {
+    border: 2px solid var(--text-primary); border-radius: 16px; overflow: hidden;
+    aspect-ratio: 16/9; background: #0a0a0a;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .video-frame span { color: var(--text-tertiary); font-size: 14px; }
+
+  /* DECORATIVE STARS */
+  .deco-star {
+    position: absolute; pointer-events: none; opacity: 0.2;
+  }
+
+  /* SECTION — content floats on black */
+  .section {
+    padding: 80px 32px; max-width: 768px; margin: 0 auto;
+    text-align: center;
+  }
+  .section-wide { max-width: 1024px; }
+  .section h2 {
+    font-size: 48px; font-weight: 600; line-height: 115%;
+    letter-spacing: -0.75px; margin-bottom: 16px;
+  }
+  .section p.subtitle {
+    font-size: 16px; font-weight: 400; line-height: 1.6;
+    color: var(--text-secondary); max-width: 560px; margin: 0 auto;
+  }
+
+  /* FEATURE GRID */
+  .feature-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
+    text-align: left; margin-top: 64px;
+  }
+  .feature-item h3 {
+    font-size: 20px; font-weight: 600; line-height: 115%;
+    letter-spacing: -0.5px; margin-bottom: 8px;
+  }
+  .feature-item p {
+    font-size: 14px; font-weight: 400; line-height: 1.5;
+    color: var(--text-secondary);
+  }
+  .feature-icon {
+    width: 40px; height: 40px; margin-bottom: 16px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.06);
+  }
+  .feature-icon svg { width: 20px; height: 20px; }
+
+  /* CHAT BUBBLES SECTION */
+  .bubbles-section {
+    padding: 80px 32px; max-width: 768px; margin: 0 auto;
+    position: relative;
+  }
+  .bubbles-section h2 {
+    font-size: 48px; font-weight: 600; line-height: 115%;
+    letter-spacing: -0.75px; margin-bottom: 16px; text-align: center;
+  }
+  .bubbles-section p.subtitle {
+    font-size: 16px; line-height: 1.6; color: var(--text-secondary);
+    text-align: center; max-width: 480px; margin: 0 auto 48px;
+  }
+  .bubble-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    max-width: 520px; margin: 0 auto;
+  }
+  .bubble {
+    padding: 14px 20px; border-radius: 16px; font-size: 14px; line-height: 1.4;
+  }
+  .bubble.received {
+    background: #1a1a2e; color: var(--text-secondary);
+    grid-column: 1; justify-self: start; max-width: 240px;
+  }
+  .bubble.sent {
+    background: var(--gradient-start); color: white;
+    grid-column: 2; justify-self: end; max-width: 240px;
+  }
+  .bubble .platform-tag {
+    display: inline-block; font-size: 10px; font-weight: 600; opacity: 0.6;
+    margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  /* PLATFORMS SECTION */
+  .platforms {
+    padding: 80px 32px; text-align: center;
+  }
+  .platforms h2 {
+    font-size: 48px; font-weight: 600; line-height: 115%;
+    letter-spacing: -0.75px; margin-bottom: 16px;
+  }
+  .platforms p {
+    font-size: 16px; line-height: 1.6; color: var(--text-secondary);
+    max-width: 480px; margin: 0 auto 48px;
+  }
+  .platform-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 32px;
+    max-width: 600px; margin: 0 auto;
+  }
+  .platform-item {
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+  }
+  .platform-item svg { width: 28px; height: 28px; }
+  .platform-item span { font-size: 12px; color: var(--text-tertiary); }
+
+  /* CTA SECTION */
+  .cta-section {
+    padding: 120px 32px; text-align: center;
+    position: relative;
+  }
+  .cta-section h2 {
+    font-size: 48px; font-weight: 600; line-height: 115%;
+    letter-spacing: -0.75px; margin-bottom: 16px;
+  }
+  .cta-section p {
+    font-size: 16px; line-height: 1.6; color: var(--text-secondary);
+    max-width: 480px; margin: 0 auto 36px;
+  }
+
+  /* DECORATIVE ELEMENTS */
+  .deco-smile {
+    position: absolute; bottom: -20px; right: 40px;
+    opacity: 0.15; transform: translate(20px, 10px);
+  }
+  .deco-cloud {
+    position: absolute; top: 40px; left: -20px;
+    opacity: 0.1; pointer-events: none;
+  }
+
+  /* FOOTER */
+  .footer {
+    padding: 64px 32px 40px; max-width: 768px; margin: 0 auto;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
+    margin-bottom: 48px;
+  }
+  .footer-col h4 {
+    font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--text-tertiary); margin-bottom: 16px;
+  }
+  .footer-col a {
+    display: block; font-size: 14px; font-weight: 400; color: var(--text-secondary);
+    text-decoration: none; margin-bottom: 10px; transition: color 0.15s;
+  }
+  .footer-col a:hover { color: var(--text-primary); }
+  .footer-bottom {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-bottom p { font-size: 13px; color: var(--text-tertiary); }
+  .footer-social { display: flex; gap: 16px; }
+  .footer-social a { color: var(--text-tertiary); transition: color 0.15s; }
+  .footer-social a:hover { color: var(--text-primary); }
+  .footer-social svg { width: 18px; height: 18px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 767px) {
+    .hero h1, .section h2, .bubbles-section h2, .platforms h2, .cta-section h2 {
+      font-size: 30px;
+    }
+    .feature-grid { grid-template-columns: 1fr; gap: 32px; }
+    .hero { padding: 64px 24px 48px; }
+    .section, .bubbles-section, .platforms, .cta-section { padding: 64px 24px; }
+    .bubble-grid { grid-template-columns: 1fr; }
+    .bubble.sent { grid-column: 1; justify-self: end; }
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#" class="nav-brand"><svg style="height:28px;width:auto;" viewBox="0 0 1624 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1266.25 191.779C1279.74 191.779 1291.77 195.187 1302.36 202.002C1312.94 208.817 1321.24 218.642 1327.26 231.475C1333.35 244.308 1336.4 259.751 1336.4 277.804C1336.4 295.857 1333.39 311.336 1327.37 324.241C1321.35 337.074 1313.09 346.97 1302.58 353.931C1292.06 360.818 1280.06 364.263 1266.58 364.263C1256.43 364.263 1248.13 362.559 1241.67 359.151C1235.29 355.744 1230.29 351.756 1226.67 347.188C1223.04 342.621 1220.25 338.56 1218.29 335.008H1216.33V423.642H1183.82V193.954H1215.57V221.034H1218.29C1220.18 217.554 1222.9 213.53 1226.45 208.963C1230 204.395 1234.93 200.408 1241.24 197C1247.55 193.52 1255.88 191.779 1266.25 191.779ZM1259.29 219.402C1249.87 219.402 1241.89 221.832 1235.37 226.689C1228.91 231.547 1224.02 238.326 1220.68 247.026C1217.35 255.727 1215.68 265.877 1215.68 277.478C1215.68 289.223 1217.39 299.518 1220.79 308.363C1224.2 317.209 1229.13 324.132 1235.58 329.135C1242.04 334.065 1249.94 336.53 1259.29 336.53C1269.01 336.53 1277.13 333.956 1283.65 328.809C1290.18 323.588 1295.11 316.519 1298.44 307.602C1301.85 298.684 1303.55 288.643 1303.55 277.478C1303.55 266.457 1301.89 256.56 1298.55 247.787C1295.29 239.015 1290.36 232.091 1283.76 227.016C1277.24 221.94 1269.08 219.402 1259.29 219.402Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M912.418 191.779C921.843 191.779 930.979 193.338 939.824 196.456C948.669 199.574 956.608 204.468 963.641 211.138C970.673 217.808 976.22 226.472 980.28 237.13C984.34 247.715 986.37 260.584 986.37 275.737V287.265H867.641C867.892 297.447 869.839 306.184 873.484 313.475C877.472 321.305 883.019 327.286 890.124 331.419C897.229 335.479 905.531 337.509 915.028 337.509C921.191 337.509 926.81 336.639 931.885 334.899C936.96 333.087 941.346 330.404 945.044 326.852C948.742 323.299 951.57 318.913 953.527 313.692L984.305 319.238C981.84 328.301 977.416 336.24 971.036 343.056C964.729 349.798 956.79 355.055 947.22 358.825C937.722 362.523 926.882 364.371 914.702 364.371C898.244 364.371 884.07 360.855 872.18 353.822C860.362 346.717 851.226 336.748 844.773 323.915C838.393 311.01 835.203 295.893 835.203 278.564C835.203 261.454 838.393 246.374 844.773 233.323C851.226 220.273 860.216 210.086 871.744 202.764C883.344 195.441 896.903 191.779 912.418 191.779ZM912.636 218.642C903.501 218.642 895.525 220.889 888.71 225.384C881.967 229.806 876.747 235.607 873.05 242.785C869.87 249.017 868.084 255.724 867.693 262.904H954.506C954.506 254.349 952.765 246.773 949.285 240.175C945.805 233.505 940.911 228.248 934.604 224.405C928.368 220.563 921.046 218.642 912.636 218.642Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1082.97 191.779C1092.4 191.779 1101.53 193.338 1110.38 196.456C1119.22 199.574 1127.16 204.468 1134.2 211.138C1141.23 217.808 1146.77 226.472 1150.83 237.13C1154.9 247.715 1156.92 260.584 1156.92 275.737V287.265H1038.2C1038.45 297.447 1040.39 306.184 1044.04 313.475C1048.03 321.305 1053.57 327.286 1060.68 331.419C1067.78 335.479 1076.09 337.509 1085.58 337.509C1091.75 337.509 1097.36 336.639 1102.44 334.899C1107.51 333.087 1111.9 330.404 1115.6 326.852C1119.3 323.299 1122.12 318.913 1124.08 313.692L1154.86 319.238C1152.39 328.301 1147.97 336.24 1141.59 343.056C1135.28 349.798 1127.34 355.055 1117.77 358.825C1108.28 362.523 1097.44 364.371 1085.26 364.371C1068.8 364.371 1054.62 360.855 1042.73 353.822C1030.92 346.717 1021.78 336.748 1015.33 323.915C1008.95 311.01 1005.76 295.893 1005.76 278.564C1005.76 261.454 1008.95 246.374 1015.33 233.323C1021.78 220.273 1030.77 210.086 1042.3 202.764C1053.9 195.441 1067.46 191.779 1082.97 191.779ZM1083.19 218.642C1074.06 218.642 1066.08 220.889 1059.26 225.384C1052.52 229.806 1047.3 235.607 1043.6 242.785C1040.42 249.017 1038.64 255.724 1038.25 262.904H1125.06C1125.06 254.349 1123.32 246.773 1119.84 240.175C1116.36 233.505 1111.47 228.248 1105.16 224.405C1098.92 220.563 1091.6 218.642 1083.19 218.642Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1433.35 191.779C1442.78 191.779 1451.91 193.339 1460.76 196.456C1469.61 199.574 1477.54 204.467 1484.58 211.138C1491.61 217.808 1497.16 226.472 1501.22 237.13C1505.28 247.715 1507.31 260.584 1507.31 275.737V287.265H1388.58C1388.83 297.447 1390.78 306.184 1394.42 313.475C1398.41 321.305 1403.95 327.286 1411.06 331.419C1418.16 335.479 1426.47 337.509 1435.96 337.509C1442.13 337.509 1447.75 336.639 1452.82 334.899C1457.9 333.087 1462.28 330.404 1465.98 326.852C1469.68 323.299 1472.51 318.912 1474.46 313.692L1505.24 319.238C1502.78 328.301 1498.35 336.24 1491.97 343.056C1485.66 349.798 1477.73 355.055 1468.16 358.825C1458.66 362.523 1447.82 364.371 1435.64 364.371C1419.18 364.371 1405.01 360.855 1393.12 353.822C1381.3 346.717 1372.16 336.748 1365.71 323.915C1359.33 311.01 1356.14 295.893 1356.14 278.564C1356.14 261.454 1359.33 246.374 1365.71 233.323C1372.16 220.273 1381.15 210.086 1392.68 202.764C1404.28 195.441 1417.84 191.779 1433.35 191.779ZM1433.57 218.642C1424.44 218.642 1416.46 220.889 1409.65 225.384C1402.9 229.806 1397.68 235.607 1393.99 242.785C1390.81 249.017 1389.02 255.724 1388.63 262.904H1475.44C1475.44 254.349 1473.7 246.773 1470.22 240.175C1466.74 233.505 1461.85 228.248 1455.54 224.405C1449.3 220.563 1441.98 218.642 1433.57 218.642Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M735.691 138.272C751.497 138.272 764.583 140.882 774.951 146.103C785.319 151.25 793.077 158.247 798.225 167.093C803.372 175.865 805.946 185.762 805.946 196.782C805.946 206.062 804.242 213.892 800.835 220.272C797.427 226.58 792.859 231.655 787.132 235.498C781.477 239.268 775.241 242.024 768.426 243.764V245.938C775.821 246.301 783.036 248.694 790.068 253.116C797.173 257.466 803.045 263.665 807.686 271.713C812.326 279.761 814.646 289.549 814.646 301.077C814.646 312.46 811.964 322.682 806.599 331.745C801.306 340.735 793.113 347.877 782.021 353.17C770.928 358.39 756.753 361 739.497 361H654.126V138.272H735.691ZM687.73 332.181H736.235C752.331 332.181 763.858 329.062 770.818 322.827C777.779 316.592 781.259 308.798 781.259 299.445C781.259 292.413 779.482 285.96 775.93 280.087C772.377 274.214 767.302 269.539 760.704 266.059C754.179 262.579 746.422 260.838 737.432 260.838H687.73V332.181ZM687.73 234.628H732.755C740.295 234.628 747.074 233.178 753.092 230.278C759.182 227.378 764.003 223.318 767.556 218.098C771.181 212.805 772.993 206.57 772.993 199.393C772.993 190.185 769.767 182.463 763.314 176.228C756.862 169.992 746.965 166.875 733.625 166.875H687.73V234.628Z" fill="white"/>
+<path d="M1609.78 191.453C1611.81 191.453 1614.21 191.526 1616.96 191.671C1619.79 191.816 1622 191.997 1623.59 192.215V223.318C1622.29 222.956 1619.97 222.557 1616.63 222.122C1613.3 221.615 1609.96 221.36 1606.63 221.36C1598.94 221.36 1592.09 222.991 1586.07 226.254C1580.13 229.444 1575.42 233.903 1571.94 239.631C1568.46 245.286 1566.72 251.739 1566.72 258.989V361H1534.2V193.954H1565.63V220.49H1567.37C1570.41 211.5 1575.78 204.431 1583.46 199.283C1591.22 194.063 1599.99 191.453 1609.78 191.453Z" fill="white"/>
+<path d="M250 0C388.071 0 500 111.929 500 250C500 388.071 388.071 500 250 500C111.929 500 0 388.071 0 250C8.24675e-06 111.929 111.929 8.24875e-06 250 0ZM217.526 109.997C173.685 109.997 138.998 145.671 138.998 189.028C138.998 218.31 154.981 243.842 178.174 257.494V390.997H287.899C328.171 390.997 360.818 361.839 360.818 321.219C360.818 294.092 343.336 274.087 321.669 261.336L336.547 246.381C350.745 232.883 360.947 212.588 360.998 189.028C360.998 145.283 325.84 109.997 282.47 109.997H217.526ZM282.47 131.95C313.388 131.607 339.233 157.196 339.233 189.028C339.233 205.934 331.768 220.877 321.26 230.756L229.525 322.806L244.563 246.106H217.526C185.792 246.106 160.763 220.38 160.763 189.028C160.763 157.676 185.792 131.95 217.526 131.95H282.47Z" fill="white"/>
+</svg></a>
+  <ul class="nav-links">
+    <li><a href="#">Features</a></li>
+    <li><a href="#">Download</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="#" class="nav-cta">Download for free</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="position: relative;">
+  <!-- Decorative star -->
+  <svg class="deco-star" style="top: 10px; right: 40px;" width="48" height="48" viewBox="0 0 48 48" fill="none">
+    <path d="M24 0L26 20L48 24L26 28L24 48L22 28L0 24L22 20Z" fill="white"/>
+  </svg>
+  <svg class="deco-star" style="top: 60px; left: 20px;" width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path d="M12 0L13 10L24 12L13 14L12 24L11 14L0 12L11 10Z" fill="white"/>
+  </svg>
+  <h1 class="gradient-text">All your chats in one app</h1>
+  <p>Send and receive messages on 15 different chat networks, all from a single beautiful app.</p>
+  <a href="#" class="hero-cta">Download for free</a>
+</section>
+
+<!-- MESSAGING ICON STRIP -->
+<div class="icon-strip">
+  <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#25d366"/><path d="M14 6.5a7.5 7.5 0 00-6.5 11.2l-1 3.3 3.4-1a7.5 7.5 0 104.1-13.5z" fill="white"/></svg>
+  <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#3a76f0"/><circle cx="14" cy="14" r="6" fill="white"/></svg>
+  <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#0088cc"/><path d="M7 14l3 1.5 1.5 4L20 9l-11 4z" fill="white"/></svg>
+  <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#5865f2"/><path d="M10 12a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm8 0a1.5 1.5 0 110 3 1.5 1.5 0 010-3z" fill="white"/></svg>
+  <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#4a154b"/><rect x="9" y="12" width="4" height="4" rx="1" fill="white"/><rect x="15" y="12" width="4" height="4" rx="1" fill="white"/></svg>
+  <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#0084ff"/><path d="M14 7a7 7 0 00-6 10.5L7 21l3.5-1A7 7 0 1014 7z" fill="white"/></svg>
+  <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#0a66c2"/><rect x="10" y="10" width="8" height="8" rx="1" fill="white"/></svg>
+  <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#1a73e8"/><circle cx="14" cy="14" r="5" fill="white"/></svg>
+</div>
+
+<!-- VIDEO SECTION -->
+<section class="video-section">
+  <div class="video-frame">
+    <span>Cloudflare Stream video embed</span>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section section-wide" style="position: relative;">
+  <svg class="deco-cloud" width="120" height="60" viewBox="0 0 120 60" fill="none">
+    <ellipse cx="40" cy="40" rx="36" ry="18" fill="white" opacity="0.5"/>
+    <ellipse cx="72" cy="34" rx="28" ry="18" fill="white" opacity="0.5"/>
+    <ellipse cx="88" cy="40" rx="24" ry="14" fill="white" opacity="0.5"/>
+  </svg>
+  <h2 class="gradient-text">Why Beeper?</h2>
+  <p class="subtitle">One app to rule them all. No more switching between messaging apps.</p>
+  <div class="feature-grid">
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="16" height="16" rx="3" stroke="white" stroke-width="1.5"/><path d="M6 10h8M10 6v8" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <h3>Unified Inbox</h3>
+      <p>All your messages from every chat network in a single, searchable inbox. No more app-switching.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="white" stroke-width="1.5"/><path d="M10 6v4l3 2" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <h3>End-to-End Encrypted</h3>
+      <p>Your messages stay private. Beeper uses the same encryption as the networks you connect.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg viewBox="0 0 20 20" fill="none"><path d="M3 7l7-4 7 4v6l-7 4-7-4V7z" stroke="white" stroke-width="1.5"/></svg>
+      </div>
+      <h3>Cross-Platform</h3>
+      <p>Available on macOS, Windows, Linux, iOS, and Android. Your chats follow you everywhere.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg viewBox="0 0 20 20" fill="none"><path d="M4 14l4-4 3 3 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3>15 Networks</h3>
+      <p>WhatsApp, Signal, Telegram, Discord, Slack, iMessage, and many more -- all in one place.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg viewBox="0 0 20 20" fill="none"><rect x="3" y="5" width="14" height="10" rx="2" stroke="white" stroke-width="1.5"/><path d="M7 12h6" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <h3>Rich Media</h3>
+      <p>Send photos, videos, files, reactions, and replies. Full-featured messaging in every network.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="white" stroke-width="1.5"/><path d="M7 10l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3>Free Forever</h3>
+      <p>Beeper is free. No subscription, no ads. Just a better way to chat.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CHAT BUBBLES -->
+<section class="bubbles-section">
+  <h2 class="gradient-text">Every conversation,<br>one place</h2>
+  <p class="subtitle">Messages from all your networks appear together in one beautiful timeline.</p>
+  <div class="bubble-grid">
+    <div class="bubble received">
+      <div class="platform-tag">WhatsApp</div>
+      Hey! Are we still on for dinner tonight?
+    </div>
+    <div class="bubble sent">
+      Yes! 7pm works great
+    </div>
+    <div class="bubble received">
+      <div class="platform-tag">Signal</div>
+      Can you review the doc I sent?
+    </div>
+    <div class="bubble sent">
+      Done, left some comments
+    </div>
+    <div class="bubble received">
+      <div class="platform-tag">Telegram</div>
+      Check out this link!
+    </div>
+    <div class="bubble sent">
+      Awesome, thanks for sharing
+    </div>
+    <div class="bubble received">
+      <div class="platform-tag">Discord</div>
+      Game night tomorrow?
+    </div>
+    <div class="bubble sent">
+      Count me in
+    </div>
+  </div>
+</section>
+
+<!-- ALL PLATFORMS -->
+<section class="platforms">
+  <h2 class="gradient-text">All your networks</h2>
+  <p>Connect your existing accounts. Your messages stay on the original network.</p>
+  <div class="platform-grid">
+    <div class="platform-item">
+      <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#25d366"/><path d="M14 6.5a7.5 7.5 0 00-6.5 11.2l-1 3.3 3.4-1a7.5 7.5 0 104.1-13.5z" fill="white"/></svg>
+      <span>WhatsApp</span>
+    </div>
+    <div class="platform-item">
+      <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#3a76f0"/><circle cx="14" cy="14" r="6" fill="white"/></svg>
+      <span>Signal</span>
+    </div>
+    <div class="platform-item">
+      <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#0088cc"/><path d="M7 14l3 1.5 1.5 4L20 9l-11 4z" fill="white"/></svg>
+      <span>Telegram</span>
+    </div>
+    <div class="platform-item">
+      <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#5865f2"/><path d="M10 12a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm8 0a1.5 1.5 0 110 3 1.5 1.5 0 010-3z" fill="white"/></svg>
+      <span>Discord</span>
+    </div>
+    <div class="platform-item">
+      <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#4a154b"/><rect x="9" y="12" width="4" height="4" rx="1" fill="white"/><rect x="15" y="12" width="4" height="4" rx="1" fill="white"/></svg>
+      <span>Slack</span>
+    </div>
+    <div class="platform-item">
+      <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#0084ff"/><path d="M14 7a7 7 0 00-6 10.5L7 21l3.5-1A7 7 0 1014 7z" fill="white"/></svg>
+      <span>Messenger</span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" style="position: relative;">
+  <svg class="deco-smile" width="80" height="80" viewBox="0 0 80 80" fill="none">
+    <circle cx="40" cy="40" r="36" stroke="white" stroke-width="2.5"/>
+    <circle cx="28" cy="33" r="4" fill="white"/>
+    <circle cx="52" cy="33" r="4" fill="white"/>
+    <path d="M24 48c5 7 12 11 16 11s11-4 16-11" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+  </svg>
+  <svg class="deco-star" style="top: 30px; left: 60px;" width="36" height="36" viewBox="0 0 36 36" fill="none">
+    <path d="M18 0L20 15L36 18L20 21L18 36L16 21L0 18L16 15Z" fill="white"/>
+  </svg>
+  <h2 class="gradient-text">Try Beeper today</h2>
+  <p>Free to download. No account required for some networks. Get started in seconds.</p>
+  <a href="#" class="hero-cta">Download for free</a>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About</a>
+      <a href="#">Blog</a>
+      <a href="#">Careers</a>
+    </div>
+    <div class="footer-col">
+      <h4>App</h4>
+      <a href="#">Download</a>
+      <a href="#">Features</a>
+      <a href="#">Networks</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Security</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; Automattic Inc.</p>
+    <div class="footer-social">
+      <!-- X / Twitter -->
+      <a href="#">
+        <svg viewBox="0 0 18 18" fill="none"><path d="M13.5 2h2.4L10.7 8.1 17 16h-4.7l-3.7-4.8L4.5 16H2.1l5.5-6.3L1.5 2h4.8l3.3 4.4L13.5 2z" fill="currentColor"/></svg>
+      </a>
+      <!-- LinkedIn -->
+      <a href="#">
+        <svg viewBox="0 0 18 18" fill="none"><rect x="2" y="6" width="3" height="10" rx="0.5" fill="currentColor"/><circle cx="3.5" cy="3.5" r="1.8" fill="currentColor"/><path d="M7 6h3v1.4s1-1.7 3.2-1.7c2.2 0 3.3 1.4 3.3 4V16h-3v-5.5c0-1.5-.7-2.2-1.8-2.2S9.5 9.5 9.5 11V16H7V6z" fill="currentColor"/></svg>
+      </a>
+      <!-- GitHub -->
+      <a href="#">
+        <svg viewBox="0 0 18 18" fill="none"><path d="M9 1.5a7.5 7.5 0 00-2.37 14.6c.37.07.5-.16.5-.36v-1.3c-2.1.46-2.53-1-2.53-1a2 2 0 00-.84-1.1c-.68-.47.05-.46.05-.46a1.57 1.57 0 011.15.77 1.6 1.6 0 002.18.62 1.6 1.6 0 01.47-1c-1.66-.19-3.41-.83-3.41-3.7a2.9 2.9 0 01.77-2 2.7 2.7 0 01.07-1.97s.63-.2 2.06.77a7.1 7.1 0 013.75 0c1.43-.97 2.06-.77 2.06-.77a2.7 2.7 0 01.07 1.97 2.9 2.9 0 01.77 2c0 2.88-1.75 3.51-3.42 3.69a1.78 1.78 0 01.51 1.38v2.06c0 .2.13.44.51.36A7.5 7.5 0 009 1.5z" fill="currentColor"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

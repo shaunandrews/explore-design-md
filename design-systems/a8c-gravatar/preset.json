@@ -1,0 +1,22 @@
+{
+  "name": "Gravatar DESIGN.md",
+  "description": "Imported from Automattic/A8c-design-md design-md/gravatar.",
+  "includeDesignMd": true,
+  "dependencies": {},
+  "devDependencies": {},
+  "mcpServers": {
+    "designmd": {
+      "command": "npx",
+      "args": [
+        "designmd-mcp"
+      ]
+    }
+  },
+  "source": {
+    "repository": "github.a8c.com/Automattic/A8c-design-md",
+    "ref": "trunk",
+    "commit": "dcc47f5",
+    "path": "design-md/gravatar",
+    "url": "https://github.a8c.com/Automattic/A8c-design-md/tree/trunk/design-md/gravatar"
+  }
+}

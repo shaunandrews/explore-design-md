@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Preview: Pocket Casts (Dark)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #F43E37;
+    --red-dark: #D93025;
+    --red-light: #FF6B61;
+    --red-bg: rgba(244,62,55,0.15);
+    --plus-gold: #FFD740;
+    --podcast-blue: #3D7FFF;
+    --success-green: #4CAF50;
+    /* Dark surface scale */
+    --surface-0: #121212;
+    --surface-1: #1A1A1A;
+    --surface-2: #222222;
+    --surface-3: #2A2A2A;
+    --border-dark: rgba(255,255,255,0.1);
+    --border-dark-strong: rgba(255,255,255,0.15);
+    --text-primary: #FFFFFF;
+    --text-secondary: rgba(255,255,255,0.7);
+    --text-muted: rgba(255,255,255,0.5);
+    --shadow-card: 0px 2px 8px rgba(0,0,0,0.3);
+    --shadow-card-hover: 0px 4px 16px rgba(0,0,0,0.4);
+    --shadow-elevated: 0px 8px 32px rgba(0,0,0,0.4);
+    --shadow-deep: 0px 16px 48px rgba(0,0,0,0.5);
+    /* DM Sans is a free Google Font -- no license issues */
+    --font-primary: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--surface-0);
+    color: var(--text-primary);
+    font-family: var(--font-primary);
+    font-size: 16px; font-weight: 400; line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 32px; height: 64px;
+    background: rgba(18,18,18,0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-dark);
+  }
+  .nav-brand { display: flex; align-items: center; text-decoration: none; }
+  .nav-brand svg { height: 28px; width: auto; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a { font-size: 15px; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--text-primary); }
+  .nav-cta {
+    display: inline-block; background: var(--red); color: #FFFFFF;
+    padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600;
+    text-decoration: none; transition: background 0.15s; border: none; cursor: pointer;
+  }
+  .nav-cta:hover { background: var(--red-light); }
+
+  /* HERO */
+  .hero {
+    padding: 96px 32px 80px; text-align: center;
+    background: var(--surface-1);
+  }
+  .hero h1 {
+    font-size: 56px; font-weight: 700; line-height: 1.1;
+    letter-spacing: -0.5px; color: var(--text-primary); margin-bottom: 16px;
+  }
+  .hero p { font-size: 18px; font-weight: 400; line-height: 1.6; color: var(--text-secondary); max-width: 600px; margin: 0 auto 32px; }
+  .hero-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-block; background: var(--red); color: #FFFFFF;
+    padding: 12px 24px; border-radius: 8px; border: none;
+    font-family: var(--font-primary); font-size: 16px; font-weight: 600;
+    text-decoration: none; cursor: pointer; transition: background 0.15s;
+  }
+  .btn-primary:hover { background: var(--red-light); }
+  .btn-ghost {
+    display: inline-block; background: transparent; color: var(--text-primary);
+    padding: 12px 24px; border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.2); font-family: var(--font-primary);
+    font-size: 16px; font-weight: 600; text-decoration: none; cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.3); }
+  .btn-dark {
+    display: inline-block; background: var(--surface-3); color: var(--text-primary);
+    padding: 12px 24px; border-radius: 8px; border: 1px solid var(--border-dark);
+    font-family: var(--font-primary); font-size: 16px; font-weight: 600;
+    text-decoration: none; cursor: pointer; transition: background 0.15s;
+  }
+  .btn-dark:hover { background: #333333; }
+
+  /* SECTIONS */
+  .section { padding: 64px 32px; max-width: 1200px; margin: 0 auto; }
+  .section-title { font-size: 11px; font-weight: 500; color: var(--red-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .section h2 { font-size: 36px; font-weight: 700; line-height: 1.2; letter-spacing: -0.3px; margin-bottom: 32px; color: var(--text-primary); }
+
+  /* COLOR SWATCHES */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; margin-bottom: 48px; }
+  .swatch { border-radius: 12px; overflow: hidden; border: 1px solid var(--border-dark); }
+  .swatch-color { height: 80px; }
+  .swatch-info { padding: 10px 12px; background: var(--surface-2); }
+  .swatch-name { font-size: 12px; font-weight: 500; margin-bottom: 2px; color: var(--text-primary); }
+  .swatch-hex { font-size: 11px; color: var(--text-muted); }
+
+  /* TYPE SCALE */
+  .type-scale { margin-bottom: 48px; }
+  .type-row { padding: 16px 0; border-bottom: 1px solid var(--border-dark); display: flex; align-items: baseline; gap: 24px; }
+  .type-label { font-size: 11px; color: var(--text-muted); min-width: 120px; flex-shrink: 0; }
+  .type-sample { flex: 1; color: var(--text-primary); }
+
+  /* COMPONENT GRID */
+  .component-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 48px; }
+
+  /* CARDS */
+  .card {
+    background: var(--surface-2); border-radius: 12px;
+    border: 1px solid var(--border-dark); padding: 24px;
+    transition: background 0.25s ease-in-out, transform 0.25s ease-in-out;
+  }
+  .card:hover { background: var(--surface-3); transform: translateY(-2px); }
+  .card h3 { font-size: 24px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.2px; color: var(--text-primary); }
+  .card p { font-size: 14px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 16px; }
+  .card-tag { display: inline-block; font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 9999px; }
+  .card-tag.red { background: var(--red-bg); color: var(--red-light); }
+  .card-tag.gold { background: rgba(255,215,64,0.2); color: var(--plus-gold); }
+  .card-tag.green { background: rgba(76,175,80,0.2); color: #66BB6A; }
+
+  /* FEATURE CARD (no shadow, background contrast) */
+  .feature-card {
+    background: var(--surface-2); border-radius: 16px; padding: 32px;
+    transition: background 0.2s;
+  }
+  .feature-card:hover { background: var(--surface-3); }
+  .feature-card h3 { font-size: 24px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.2px; color: var(--text-primary); }
+  .feature-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
+  .feature-card .icon { font-size: 28px; margin-bottom: 16px; }
+
+  /* BUTTON SHOWCASE */
+  .button-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 24px; }
+
+  /* SHADOW SHOWCASE */
+  .shadow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-bottom: 48px; }
+  .shadow-box {
+    background: var(--surface-2); border-radius: 12px; padding: 24px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 120px; text-align: center; border: 1px solid var(--border-dark);
+  }
+  .shadow-box .label { font-size: 12px; font-weight: 500; color: var(--text-muted); margin-top: 8px; }
+
+  /* SPACING */
+  .spacing-row { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .spacing-bar { height: 24px; background: var(--red-bg); border-radius: 4px; border: 1px solid rgba(244,62,55,0.3); }
+  .spacing-label { font-size: 12px; color: var(--text-muted); min-width: 60px; }
+
+  /* RADIUS */
+  .radius-grid { display: flex; flex-wrap: wrap; gap: 24px; margin-bottom: 48px; }
+  .radius-box {
+    width: 80px; height: 80px; background: var(--surface-2);
+    border: 2px solid var(--red);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 500; color: var(--red-light);
+  }
+
+  /* ALT SECTION */
+  .alt-section { background: var(--surface-1); padding: 64px 32px; }
+
+  /* RED ACCENT SECTION */
+  .red-section {
+    background: var(--red); color: #FFFFFF;
+    padding: 64px 32px; margin: 48px 0;
+  }
+  .red-section h2 { color: #FFFFFF; }
+  .red-section p { color: rgba(255,255,255,0.85); }
+
+  /* INPUT */
+  .input-demo {
+    padding: 10px 16px; border: 1px solid var(--border-dark); border-radius: 8px;
+    font-family: var(--font-primary); font-size: 16px; color: var(--text-primary);
+    background: var(--surface-2); outline: none; width: 100%; max-width: 360px;
+    transition: border-color 0.15s;
+  }
+  .input-demo:focus { border-color: var(--red); outline: 2px solid rgba(244,62,55,0.2); outline-offset: 1px; }
+  .input-demo::placeholder { color: var(--text-muted); }
+  .input-label { font-size: 14px; font-weight: 500; color: var(--text-primary); margin-bottom: 6px; display: block; }
+
+  /* TABLE */
+  .demo-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+  .demo-table th { text-align: left; font-size: 12px; font-weight: 500; color: var(--text-muted); padding: 8px 12px; border-bottom: 2px solid var(--border-dark-strong); }
+  .demo-table td { font-size: 14px; padding: 10px 12px; border-bottom: 1px solid var(--border-dark); color: var(--text-secondary); }
+  .demo-table tr:nth-child(even) { background: var(--surface-1); }
+
+  @media (max-width: 781px) {
+    .nav-links { display: none; }
+    .hero h1 { font-size: 36px; }
+    .section { padding: 40px 20px; }
+    .color-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <a href="#" class="nav-brand">
+    <svg viewBox="0 0 2445 500" style="height:28px;width:auto;" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1959.87 191.779C1966.54 191.779 1973.61 192.577 1981.07 194.172C1988.61 195.694 1995.65 198.522 2002.17 202.654C2008.77 206.787 2014.17 212.697 2018.38 220.382C2022.58 227.995 2024.68 237.891 2024.68 250.071V361H1992.93V338.161H1991.62C1989.52 342.366 1986.37 346.499 1982.16 350.56C1977.96 354.62 1972.55 357.991 1965.96 360.674C1959.36 363.356 1951.46 364.697 1942.25 364.697C1931.66 364.697 1922.09 362.74 1913.54 358.825C1904.98 354.838 1898.2 349.073 1893.2 341.533C1888.27 333.993 1885.8 324.749 1885.8 313.801C1885.8 304.375 1887.62 296.618 1891.24 290.527C1894.87 284.437 1899.76 279.616 1905.92 276.063C1912.09 272.511 1918.97 269.828 1926.59 268.016C1934.2 266.203 1941.96 264.825 1949.86 263.883C1959.87 262.723 1967.99 261.781 1974.22 261.056C1980.46 260.258 1984.99 258.989 1987.82 257.249C1990.64 255.509 1992.06 252.682 1992.06 248.767V248.005C1992.06 238.507 1989.37 231.148 1984.01 225.928C1978.72 220.708 1970.81 218.098 1960.3 218.098C1949.35 218.098 1940.73 220.526 1934.42 225.384C1928.18 230.169 1923.87 235.498 1921.48 241.371L1890.92 234.411C1894.54 224.261 1899.83 216.067 1906.79 209.832C1913.83 203.524 1921.91 198.957 1931.05 196.13C1940.18 193.23 1949.79 191.779 1959.87 191.779ZM1992.17 279.217C1991.01 280.377 1988.76 281.464 1985.42 282.479C1982.16 283.422 1978.43 284.256 1974.22 284.981C1970.02 285.634 1965.92 286.25 1961.93 286.83C1957.94 287.338 1954.61 287.772 1951.93 288.135C1945.62 288.932 1939.85 290.274 1934.63 292.159C1929.49 294.044 1925.35 296.763 1922.24 300.315C1919.19 303.795 1917.67 308.435 1917.67 314.235C1917.67 322.283 1920.64 328.374 1926.59 332.507C1932.53 336.567 1940.11 338.597 1949.32 338.597C1958.31 338.597 1965.99 336.82 1972.37 333.268C1978.83 329.715 1983.72 325.075 1987.05 319.348C1990.46 313.547 1992.17 307.348 1992.17 300.75V279.217Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M906.491 191.779C922.152 191.779 935.818 195.368 947.491 202.546C959.164 209.724 968.227 219.801 974.68 232.779C981.132 245.757 984.358 260.91 984.358 278.238C984.358 295.494 981.132 310.574 974.68 323.479C968.227 336.385 959.164 346.427 947.491 353.604C935.818 360.782 922.152 364.371 906.491 364.371C890.831 364.371 877.164 360.782 865.491 353.604C853.818 346.427 844.755 336.385 838.303 323.479C831.85 310.574 828.624 295.494 828.624 278.238C828.624 260.91 831.85 245.757 838.303 232.779C844.755 219.801 853.818 209.724 865.491 202.546C877.164 195.368 890.831 191.779 906.491 191.779ZM906.6 218.968C896.377 218.968 887.894 221.686 881.151 227.124C874.481 232.562 869.515 239.776 866.252 248.767C863.062 257.684 861.467 267.472 861.467 278.13C861.467 288.86 863.062 298.684 866.252 307.602C869.515 316.519 874.481 323.661 881.151 329.026C887.894 334.392 896.377 337.074 906.6 337.074C916.75 337.074 925.161 334.392 931.831 329.026C938.501 323.661 943.431 316.519 946.621 307.602C949.884 298.684 951.515 288.86 951.515 278.13C951.515 267.472 949.884 257.684 946.621 248.767C943.431 239.776 938.501 232.562 931.831 227.124C925.161 221.686 916.75 218.968 906.6 218.968Z" fill="white"/>
+<path d="M1081.5 191.779C1094.19 191.779 1105.5 194.136 1115.44 198.849C1125.37 203.489 1133.38 210.014 1139.47 218.424C1145.63 226.834 1149.3 236.659 1150.46 247.896H1118.81C1117.07 240.066 1113.08 233.323 1106.84 227.668C1100.68 222.013 1092.42 219.186 1082.05 219.186C1072.99 219.186 1065.05 221.578 1058.23 226.363C1051.49 231.076 1046.23 237.818 1042.46 246.591C1038.69 255.291 1036.81 265.587 1036.81 277.478C1036.81 289.658 1038.66 300.17 1042.35 309.016C1046.05 317.861 1051.27 324.713 1058.01 329.57C1064.83 334.428 1072.84 336.856 1082.05 336.856C1088.21 336.856 1093.79 335.733 1098.8 333.485C1103.87 331.165 1108.11 327.867 1111.52 323.589C1115 319.311 1117.43 314.163 1118.81 308.146H1150.46C1149.3 318.948 1145.78 328.591 1139.91 337.074C1134.03 345.557 1126.17 352.227 1116.31 357.085C1106.52 361.943 1095.03 364.371 1081.83 364.371C1065.66 364.371 1051.74 360.709 1040.07 353.387C1028.47 345.991 1019.55 335.805 1013.32 322.827C1007.08 309.849 1003.96 294.986 1003.96 278.238C1003.96 261.273 1007.15 246.301 1013.53 233.323C1019.91 220.273 1028.9 210.086 1040.5 202.764C1052.11 195.441 1065.77 191.779 1081.5 191.779Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1400.16 191.779C1409.58 191.779 1418.72 193.338 1427.56 196.456C1436.41 199.574 1444.35 204.468 1451.38 211.138C1458.41 217.808 1463.96 226.472 1468.02 237.13C1472.08 247.715 1474.11 260.584 1474.11 275.737V287.265H1355.38C1355.63 297.447 1357.58 306.184 1361.22 313.475C1365.21 321.305 1370.76 327.286 1377.86 331.419C1384.97 335.479 1393.27 337.509 1402.77 337.509C1408.93 337.509 1414.55 336.639 1419.62 334.899C1424.7 333.087 1429.09 330.404 1432.78 326.852C1436.48 323.299 1439.31 318.912 1441.27 313.692L1472.04 319.238C1469.58 328.301 1465.16 336.24 1458.78 343.056C1452.47 349.798 1444.53 355.055 1434.96 358.825C1425.46 362.523 1414.62 364.371 1402.44 364.371C1385.98 364.371 1371.81 360.855 1359.92 353.822C1348.1 346.717 1338.97 336.748 1332.51 323.915C1326.13 311.01 1322.94 295.893 1322.94 278.564C1322.94 261.454 1326.13 246.374 1332.51 233.323C1338.97 220.273 1347.96 210.086 1359.48 202.764C1371.08 195.441 1384.64 191.779 1400.16 191.779ZM1400.38 218.642C1391.24 218.642 1383.26 220.889 1376.45 225.384C1369.71 229.806 1364.49 235.607 1360.79 242.785C1357.61 249.017 1355.82 255.724 1355.43 262.904H1442.25C1442.25 254.349 1440.51 246.772 1437.03 240.175C1433.55 233.505 1428.65 228.248 1422.34 224.405C1416.11 220.563 1408.79 218.642 1400.38 218.642Z" fill="white"/>
+<path d="M2120.8 191.779C2138.85 191.779 2153.06 195.694 2163.43 203.524C2173.8 211.282 2180.65 221.687 2183.98 234.737L2154.51 239.957C2153.28 236.187 2151.32 232.598 2148.64 229.19C2146.03 225.783 2142.47 222.991 2137.98 220.816C2133.48 218.641 2127.87 217.554 2121.12 217.554C2111.92 217.554 2104.23 219.62 2098.07 223.753C2091.9 227.813 2088.82 233.07 2088.82 239.522C2088.82 245.105 2090.89 249.6 2095.02 253.008C2099.15 256.415 2105.82 259.207 2115.03 261.382L2141.57 267.472C2156.94 271.024 2168.39 276.498 2175.93 283.894C2183.47 291.289 2187.24 300.895 2187.25 312.713C2187.25 322.718 2184.35 331.637 2178.54 339.467C2172.82 347.225 2164.81 353.315 2154.51 357.737C2144.29 362.16 2132.43 364.371 2118.95 364.371C2100.24 364.371 2084.98 360.383 2073.16 352.408C2061.34 344.361 2054.09 332.942 2051.41 318.151L2082.84 313.366C2084.8 321.559 2088.82 327.758 2094.91 331.963C2101 336.095 2108.94 338.161 2118.73 338.161C2129.39 338.161 2137.91 335.95 2144.29 331.527C2150.67 327.032 2153.86 321.558 2153.86 315.105C2153.86 309.885 2151.9 305.499 2147.98 301.946C2144.14 298.394 2138.23 295.711 2130.26 293.898L2101.98 287.7C2086.39 284.148 2074.87 278.492 2067.4 270.734C2060 262.977 2056.31 253.152 2056.31 241.262C2056.31 231.402 2059.06 222.774 2064.57 215.379C2070.08 207.984 2077.69 202.22 2087.41 198.087C2097.12 193.882 2108.25 191.779 2120.8 191.779Z" fill="white"/>
+<path d="M2377.87 191.779C2395.92 191.779 2410.13 195.694 2420.5 203.524C2430.87 211.282 2437.72 221.687 2441.05 234.737L2411.58 239.957C2410.35 236.187 2408.39 232.598 2405.71 229.19C2403.1 225.783 2399.55 222.991 2395.05 220.816C2390.56 218.641 2384.94 217.554 2378.19 217.554C2368.99 217.554 2361.3 219.62 2355.14 223.753C2348.97 227.813 2345.89 233.07 2345.89 239.522C2345.89 245.105 2347.96 249.6 2352.09 253.008C2356.23 256.415 2362.9 259.207 2372.1 261.382L2398.64 267.472C2414.01 271.024 2425.46 276.498 2433 283.894C2440.55 291.289 2444.32 300.895 2444.32 312.713C2444.32 322.718 2441.42 331.637 2435.62 339.467C2429.89 347.224 2421.88 353.315 2411.58 357.737C2401.36 362.16 2389.5 364.371 2376.02 364.371C2357.31 364.371 2342.05 360.383 2330.23 352.408C2318.42 344.361 2311.17 332.942 2308.48 318.151L2339.91 313.366C2341.87 321.559 2345.89 327.758 2351.98 331.963C2358.07 336.095 2366.01 338.161 2375.8 338.161C2386.46 338.161 2394.98 335.95 2401.36 331.527C2407.74 327.032 2410.93 321.558 2410.93 315.105C2410.93 309.885 2408.97 305.499 2405.06 301.946C2401.21 298.394 2395.3 295.711 2387.33 293.898L2359.05 287.7C2343.46 284.148 2331.94 278.492 2324.47 270.734C2317.07 262.977 2313.38 253.152 2313.38 241.262C2313.38 231.402 2316.13 222.774 2321.64 215.379C2327.15 207.984 2334.76 202.22 2344.48 198.087C2354.19 193.882 2365.32 191.779 2377.87 191.779Z" fill="white"/>
+<path d="M1773.22 135.228C1785.03 135.228 1796.05 136.931 1806.28 140.339C1816.57 143.674 1825.82 148.605 1834.01 155.13C1842.2 161.583 1848.98 169.485 1854.35 178.838C1859.71 188.118 1863.34 198.739 1865.22 210.702H1831.29C1829.98 203.452 1827.56 197.072 1824 191.562C1820.45 186.051 1816.1 181.375 1810.95 177.532C1805.81 173.69 1800.04 170.79 1793.66 168.832C1787.35 166.875 1780.65 165.896 1773.54 165.896C1760.71 165.896 1749.22 169.123 1739.07 175.575C1728.99 182.028 1721.01 191.49 1715.14 203.96C1709.34 216.43 1706.44 231.656 1706.44 249.637C1706.44 267.762 1709.34 283.06 1715.14 295.53C1721.01 308.001 1729.03 317.426 1739.18 323.807C1749.33 330.187 1760.75 333.377 1773.43 333.377C1780.47 333.377 1787.14 332.434 1793.44 330.549C1799.82 328.591 1805.59 325.727 1810.74 321.957C1815.88 318.187 1820.23 313.583 1823.79 308.146C1827.41 302.635 1829.91 296.328 1831.29 289.223L1865.22 289.331C1863.41 300.279 1859.89 310.357 1854.67 319.564C1849.52 328.7 1842.89 336.603 1834.77 343.273C1826.72 349.871 1817.51 354.982 1807.15 358.607C1796.78 362.232 1785.47 364.045 1773.22 364.045C1753.93 364.045 1736.75 359.477 1721.67 350.342C1706.59 341.134 1694.7 327.975 1686 310.864C1677.37 293.754 1673.05 273.345 1673.05 249.637C1673.05 225.856 1677.4 205.446 1686.1 188.408C1694.8 171.298 1706.69 158.174 1721.78 149.039C1736.86 139.831 1754 135.228 1773.22 135.228Z" fill="white"/>
+<path d="M1544.72 193.955H1578.98V220.056H1544.72V311.952C1544.72 318.26 1545.66 323.009 1547.55 326.199C1549.43 329.317 1551.86 331.455 1554.83 332.615C1557.88 333.703 1561.18 334.247 1564.73 334.247C1567.34 334.247 1569.62 334.066 1571.58 333.703C1573.54 333.341 1575.06 333.051 1576.15 332.833L1582.02 359.695C1580.14 360.42 1577.45 361.145 1573.97 361.87C1570.49 362.668 1566.14 363.103 1560.92 363.176C1552.37 363.321 1544.39 361.797 1537 358.607C1529.6 355.417 1523.62 350.488 1519.05 343.817C1514.49 337.147 1512.2 328.773 1512.2 318.695V220.056H1487.73V193.955H1512.2V153.934H1544.72V193.955Z" fill="white"/>
+<path d="M2257.53 193.955H2291.79V220.056H2257.53V311.952C2257.53 318.26 2258.47 323.009 2260.36 326.199C2262.24 329.317 2264.67 331.455 2267.64 332.615C2270.69 333.703 2273.99 334.247 2277.54 334.247C2280.15 334.247 2282.43 334.066 2284.39 333.703C2286.35 333.341 2287.87 333.051 2288.96 332.833L2294.83 359.695C2292.95 360.42 2290.26 361.145 2286.78 361.87C2283.3 362.668 2278.95 363.103 2273.73 363.176C2265.18 363.321 2257.2 361.798 2249.81 358.607C2242.41 355.417 2236.43 350.488 2231.86 343.817C2227.3 337.147 2225.01 328.773 2225.01 318.695V220.056H2200.54V193.955H2225.01V153.934H2257.53V193.955Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M733.517 138.272C750.845 138.272 765.2 141.427 776.583 147.734C787.966 154.042 796.484 162.67 802.14 173.617C807.795 184.493 810.623 196.746 810.623 210.376C810.623 224.079 807.759 236.405 802.031 247.353C796.376 258.228 787.821 266.855 776.365 273.235C764.982 279.543 750.664 282.697 733.408 282.697H687.731V361H654.126V138.272H733.517ZM687.731 254.204H730.362C741.31 254.204 750.193 252.319 757.008 248.549C763.823 244.706 768.826 239.485 772.016 232.888C775.206 226.29 776.801 218.786 776.801 210.376C776.801 201.966 775.206 194.498 772.016 187.973C768.826 181.447 763.786 176.336 756.898 172.639C750.083 168.941 741.093 167.092 729.928 167.092H687.731V254.204Z" fill="white"/>
+<path d="M1208.56 264.645H1211.39L1277.94 193.954H1316.88L1249.25 265.651L1321.44 361H1281.53L1224.71 285.578L1208.56 301.729V361H1176.04V138.272H1208.56V264.645Z" fill="white"/>
+<path d="M250 0C388.074 0 500 111.926 500 250C500 388.074 388.074 500 250 500C111.926 500 0 388.074 0 250C3.09239e-05 111.926 111.926 3.09314e-05 250 0ZM250 100C167.157 100 100 167.157 100 250C100 332.843 167.157 400 250 400V362.5C187.868 362.5 137.5 312.132 137.5 250C137.5 187.868 187.868 137.5 250 137.5C312.132 137.5 362.5 187.868 362.5 250H400C400 167.157 332.843 100 250 100ZM250 160C200.294 160 160 200.294 160 250C160 299.706 200.294 340 250 340V307.272C218.369 307.272 192.728 281.631 192.728 250C192.728 218.369 218.369 192.728 250 192.728C281.631 192.728 307.272 218.369 307.272 250H340C340 200.294 299.706 160 250 160Z" fill="white"/>
+</svg>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">Features</a></li>
+    <li><a href="#">Pricing</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="#">Support</a></li>
+  </ul>
+  <button class="nav-cta">Start Listening</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Love your podcasts</h1>
+  <p>The podcast app you'll actually enjoy using. Powerful, beautiful, and free across every device and platform.</p>
+  <div class="hero-buttons">
+    <button class="btn-primary">Start Listening</button>
+    <button class="btn-ghost">Learn More</button>
+  </div>
+</section>
+
+<!-- COLORS -->
+<section class="section">
+  <div class="section-title">Color Palette</div>
+  <h2>Brand Colors</h2>
+  <div class="color-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#F43E37"></div><div class="swatch-info"><div class="swatch-name">Red</div><div class="swatch-hex">#F43E37</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#D93025"></div><div class="swatch-info"><div class="swatch-name">Red Dark</div><div class="swatch-hex">#D93025</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#FF6B61"></div><div class="swatch-info"><div class="swatch-name">Red Light</div><div class="swatch-hex">#FF6B61</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#FFD740"></div><div class="swatch-info"><div class="swatch-name">Plus Gold</div><div class="swatch-hex">#FFD740</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#3D7FFF"></div><div class="swatch-info"><div class="swatch-name">Blue</div><div class="swatch-hex">#3D7FFF</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#4CAF50"></div><div class="swatch-info"><div class="swatch-name">Success</div><div class="swatch-hex">#4CAF50</div></div></div>
+  </div>
+
+  <h2>Dark Surface Scale</h2>
+  <div class="color-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#121212"></div><div class="swatch-info"><div class="swatch-name">Deep Dark</div><div class="swatch-hex">#121212</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#1A1A1A"></div><div class="swatch-info"><div class="swatch-name">Dark BG</div><div class="swatch-hex">#1A1A1A</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#222222"></div><div class="swatch-info"><div class="swatch-name">Dark Card</div><div class="swatch-hex">#222222</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#2A2A2A"></div><div class="swatch-info"><div class="swatch-name">Dark Elevated</div><div class="swatch-hex">#2A2A2A</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:rgba(255,255,255,0.7)"></div><div class="swatch-info"><div class="swatch-name">Text Secondary</div><div class="swatch-hex">rgba(255,255,255,0.7)</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:rgba(255,255,255,0.5)"></div><div class="swatch-info"><div class="swatch-name">Text Muted</div><div class="swatch-hex">rgba(255,255,255,0.5)</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:rgba(255,255,255,0.15)"></div><div class="swatch-info"><div class="swatch-name">Border Strong</div><div class="swatch-hex">rgba(255,255,255,0.15)</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:rgba(255,255,255,0.1)"></div><div class="swatch-info"><div class="swatch-name">Border</div><div class="swatch-hex">rgba(255,255,255,0.1)</div></div></div>
+  </div>
+</section>
+
+<!-- TYPOGRAPHY -->
+<div class="alt-section">
+<section class="section">
+  <div class="section-title">Typography</div>
+  <h2>Type Scale</h2>
+  <div class="type-scale">
+    <div class="type-row">
+      <span class="type-label">Display Hero<br>56px / 700</span>
+      <span class="type-sample" style="font-size:56px;font-weight:700;line-height:1.1;letter-spacing:-0.5px;">Love your podcasts</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Display Large<br>48px / 700</span>
+      <span class="type-sample" style="font-size:48px;font-weight:700;line-height:1.15;letter-spacing:-0.4px;">Listen anywhere</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Section Heading<br>36px / 700</span>
+      <span class="type-sample" style="font-size:36px;font-weight:700;line-height:1.2;letter-spacing:-0.3px;">Powerful features</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Sub-heading<br>24px / 600</span>
+      <span class="type-sample" style="font-size:24px;font-weight:600;line-height:1.3;letter-spacing:-0.2px;">Cross-platform sync</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Body Large<br>18px / 400</span>
+      <span class="type-sample" style="font-size:18px;font-weight:400;line-height:1.6;">Discover new shows, organize your queue, and enjoy your favorites with smart tools built for podcast lovers.</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Body<br>16px / 400</span>
+      <span class="type-sample" style="font-size:16px;font-weight:400;line-height:1.5;">Pocket Casts is the world's most powerful podcast platform, created by listeners, for listeners.</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Body Small<br>14px / 400</span>
+      <span class="type-sample" style="font-size:14px;font-weight:400;line-height:1.5;">Available on iOS, Android, and the web. Sync everywhere.</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Caption<br>13px / 400</span>
+      <span class="type-sample" style="font-size:13px;font-weight:400;line-height:1.4;">Updated 2 hours ago &middot; 45 min</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Micro<br>11px / 500 uppercase</span>
+      <span class="type-sample" style="font-size:11px;font-weight:500;line-height:1.2;letter-spacing:0.5px;text-transform:uppercase;">Now playing</span>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- BUTTONS -->
+<section class="section">
+  <div class="section-title">Components</div>
+  <h2>Buttons</h2>
+  <div class="button-row">
+    <button class="btn-primary">Primary Red</button>
+    <button class="btn-dark">Surface Button</button>
+    <button class="btn-ghost">Ghost / Outlined</button>
+  </div>
+  <div class="button-row" style="margin-top: 16px;">
+    <button class="btn-primary" style="font-size:14px; padding: 8px 16px;">Small Primary</button>
+    <button class="btn-dark" style="font-size:14px; padding: 8px 16px;">Small Surface</button>
+    <button class="btn-ghost" style="font-size:14px; padding: 8px 16px;">Small Ghost</button>
+  </div>
+</section>
+
+<!-- CARDS -->
+<div class="alt-section">
+<section class="section">
+  <h2>Cards</h2>
+  <div class="component-grid">
+    <div class="card">
+      <h3>Up Next</h3>
+      <p>Your queue, your way. Drag, drop, and reorder episodes. Smart features like auto-add keep it fresh.</p>
+      <span class="card-tag red">Core Feature</span>
+    </div>
+    <div class="card">
+      <h3>Discover</h3>
+      <p>Find your next favorite show with curated collections, trending charts, and personalized recommendations.</p>
+      <span class="card-tag green">Free</span>
+    </div>
+    <div class="card">
+      <h3>Pocket Casts Plus</h3>
+      <p>Unlock cloud storage, desktop apps, custom themes, and extra app icons with a subscription.</p>
+      <span class="card-tag gold">Premium</span>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- FEATURE CARDS -->
+<section class="section">
+  <h2>Feature Cards (No Shadow)</h2>
+  <div class="component-grid">
+    <div class="feature-card">
+      <div class="icon">&#127911;</div>
+      <h3>Smart Playback</h3>
+      <p>Trim silence, variable speed, volume boost -- customize how every episode sounds.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">&#9729;&#65039;</div>
+      <h3>Cloud Sync</h3>
+      <p>Start listening on your phone, continue on the web. Everything stays in sync.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">&#128270;</div>
+      <h3>Search & Filter</h3>
+      <p>Find episodes by topic, filter by duration, and search within your subscriptions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INPUTS -->
+<div class="alt-section">
+<section class="section">
+  <h2>Form Elements</h2>
+  <div style="max-width: 400px;">
+    <label class="input-label">Email address</label>
+    <input class="input-demo" type="email" placeholder="you@example.com" style="margin-bottom: 16px;">
+    <label class="input-label">Password</label>
+    <input class="input-demo" type="password" placeholder="Enter your password" style="margin-bottom: 24px;">
+    <button class="btn-primary" style="width:100%;">Sign In</button>
+  </div>
+</section>
+</div>
+
+<!-- TABLE -->
+<section class="section">
+  <h2>Data Table</h2>
+  <table class="demo-table">
+    <thead><tr><th>Feature</th><th>Free</th><th>Plus</th><th>Platform</th></tr></thead>
+    <tbody>
+      <tr><td>Up Next Queue</td><td>Yes</td><td>Yes</td><td>All</td></tr>
+      <tr><td>Variable Speed</td><td>Yes</td><td>Yes</td><td>All</td></tr>
+      <tr><td>Cloud Storage</td><td>--</td><td>10 GB</td><td>All</td></tr>
+      <tr><td>Desktop Apps</td><td>--</td><td>Yes</td><td>Mac, Windows</td></tr>
+      <tr><td>Custom Themes</td><td>--</td><td>Yes</td><td>All</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- SHADOWS -->
+<div class="alt-section">
+<section class="section">
+  <h2>Elevation & Shadows</h2>
+  <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 14px;">On dark backgrounds, Pocket Casts favors color-step elevation over shadows. These shadow levels are shown for reference.</p>
+  <div class="shadow-grid">
+    <div class="shadow-box" style="box-shadow: none;">
+      <span class="label">Flat (Level 0)</span>
+    </div>
+    <div class="shadow-box" style="box-shadow: var(--shadow-card);">
+      <span class="label">Card (Level 1)</span>
+    </div>
+    <div class="shadow-box" style="box-shadow: var(--shadow-card-hover);">
+      <span class="label">Hover (Level 2)</span>
+    </div>
+    <div class="shadow-box" style="box-shadow: var(--shadow-elevated);">
+      <span class="label">Elevated (Level 3)</span>
+    </div>
+    <div class="shadow-box" style="box-shadow: var(--shadow-deep);">
+      <span class="label">Deep (Level 4)</span>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- SPACING -->
+<section class="section">
+  <h2>Spacing Scale</h2>
+  <div style="max-width: 600px;">
+    <div class="spacing-row"><span class="spacing-label">4px</span><div class="spacing-bar" style="width:4px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">8px</span><div class="spacing-bar" style="width:8px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">12px</span><div class="spacing-bar" style="width:12px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">16px</span><div class="spacing-bar" style="width:16px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">24px</span><div class="spacing-bar" style="width:24px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">32px</span><div class="spacing-bar" style="width:32px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">48px</span><div class="spacing-bar" style="width:48px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">64px</span><div class="spacing-bar" style="width:64px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">96px</span><div class="spacing-bar" style="width:96px;"></div></div>
+    <div class="spacing-row"><span class="spacing-label">128px</span><div class="spacing-bar" style="width:128px;"></div></div>
+  </div>
+</section>
+
+<!-- BORDER RADIUS -->
+<div class="alt-section">
+<section class="section">
+  <h2>Border Radius</h2>
+  <div class="radius-grid">
+    <div class="radius-box" style="border-radius:4px;">4px</div>
+    <div class="radius-box" style="border-radius:8px;">8px</div>
+    <div class="radius-box" style="border-radius:12px;">12px</div>
+    <div class="radius-box" style="border-radius:16px;">16px</div>
+    <div class="radius-box" style="border-radius:9999px;">pill</div>
+  </div>
+</section>
+</div>
+
+<!-- RED ACCENT SECTION -->
+<div class="red-section">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-title" style="color: rgba(255,255,255,0.6);">Brand Accent</div>
+    <h2 style="font-size:48px;font-weight:700;line-height:1.15;letter-spacing:-0.4px;margin-bottom:16px;">Listen in the dark</h2>
+    <p style="font-size:18px; max-width:600px; margin-bottom:32px;">Pocket Casts' dark theme isn't an afterthought -- it's a first-class experience. Elevation through color, not shadow.</p>
+    <div class="component-grid">
+      <div class="card" style="background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.2);">
+        <h3 style="color:#fff;">Dark surfaces</h3>
+        <p style="color:rgba(255,255,255,0.7);">Cards use #222222 on #1A1A1A -- background steps replace shadows for elevation.</p>
+      </div>
+      <div class="card" style="background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.2);">
+        <h3 style="color:#fff;">Subtle borders</h3>
+        <p style="color:rgba(255,255,255,0.7);">Borders at rgba(255,255,255,0.1) provide structure without visual noise.</p>
+      </div>
+      <div class="card" style="background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.2);">
+        <h3 style="color:#fff;">Red accents</h3>
+        <p style="color:rgba(255,255,255,0.7);">The brand red pops even more on dark surfaces. Reserved for CTAs and active states.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

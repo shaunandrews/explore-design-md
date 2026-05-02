@@ -7,6 +7,7 @@
     "prepare-run": "node harness/prepare-run.js",
     "run": "node harness/run.js",
     "matrix": "node harness/matrix.js",
+    "import-a8c-design-md": "node harness/import-a8c-design-md.js",
     "screenshot": "node harness/screenshot.js",
     "evaluate": "node harness/evaluate.js",
     "viewer": "node harness/viewer.js",

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Preview: Cloudup (Dark)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Inter+Tight:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --salmon: #ff775a;
+    --salmon-dark: #7a2e1a;
+    --lime: #c0ff59;
+    --lime-dark: #2a3d12;
+    --bright-blue: #5acdff;
+    --blue-dark: #153a4d;
+    --black: #000000;
+    --white: #ffffff;
+    --surface: #1a1a1a;
+    --surface-raised: #242424;
+    --surface-elevated: #2e2e2e;
+    --text-primary: #f0f0f0;
+    --text-secondary: rgba(255,255,255,0.65);
+    --border-dark: rgba(255,255,255,0.15);
+    --shadow-subtle: 0px 1px 2px rgba(0,0,0,0.3);
+    --font-body: 'Inter', sans-serif;
+    --font-title: 'Inter Tight', sans-serif;
+    --spacing-10: 1rem;
+    --spacing-20: min(1.5rem, 2vw);
+    --spacing-30: min(2.5rem, 3vw);
+    --spacing-40: min(4rem, 5vw);
+    --spacing-50: min(6.5rem, 8vw);
+    --spacing-60: min(10.5rem, 13vw);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #121212;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: clamp(15.75px, 0.984rem + 0.86vw, 24px);
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 32px; height: 72px;
+    background: var(--salmon-dark);
+  }
+  .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-primary); }
+  .nav-brand-name { font-family: var(--font-title); font-size: clamp(26px, 1.624rem + 1.877vw, 44px); font-weight: 700; }
+  .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+  .nav-links a { font-size: 15px; font-weight: 500; color: var(--text-primary); text-decoration: none; }
+  .nav-cta {
+    display: inline-block; background: var(--white); color: var(--black);
+    padding: 8px 24px; border-radius: 8px; font-size: 15px; font-weight: 500;
+    text-decoration: none; border: none; cursor: pointer;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--salmon-dark);
+    padding: 80px 32px 96px;
+    text-align: center;
+  }
+  .hero h1 {
+    font-family: var(--font-body);
+    font-size: clamp(2.5rem, 2.5rem + 1.283vw, 3.27rem);
+    font-weight: 700; line-height: 1.1;
+    color: var(--salmon); margin-bottom: 20px;
+  }
+  .hero p {
+    font-size: clamp(15.75px, 0.984rem + 0.86vw, 24px);
+    font-weight: 400; line-height: 1.5;
+    color: var(--text-primary); max-width: 640px; margin: 0 auto 32px;
+  }
+  .hero-form {
+    display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    max-width: 700px; margin: 0 auto;
+  }
+  .input-large {
+    height: 72px; padding: 24px 32px;
+    background: var(--surface-raised); border: 1px solid var(--border-dark); border-radius: 8px;
+    font-family: var(--font-body); font-size: 24px; font-weight: 500;
+    color: var(--text-primary);
+    box-shadow: var(--shadow-subtle);
+    max-width: 450px; flex: 1; min-width: 200px;
+  }
+  .input-large::placeholder { color: var(--text-secondary); }
+  .btn-primary {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 72px; padding: 24px 32px;
+    background: var(--salmon); color: var(--black);
+    border: none; border-radius: 8px;
+    font-family: var(--font-body); font-size: 24px; font-weight: 500;
+    cursor: pointer; box-shadow: var(--shadow-subtle);
+    text-decoration: none; white-space: nowrap;
+  }
+  .btn-secondary {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 72px; padding: 24px 32px;
+    background: var(--surface-raised); color: var(--salmon);
+    border: 1px solid var(--salmon); border-radius: 8px;
+    font-family: var(--font-body); font-size: 24px; font-weight: 500;
+    cursor: pointer; box-shadow: var(--shadow-subtle);
+    text-decoration: none; white-space: nowrap;
+  }
+
+  /* SECTIONS */
+  .section { padding: 64px 32px; max-width: 1200px; margin: 0 auto; }
+  .section-label { font-size: 14px; font-weight: 700; color: var(--salmon); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .section h2 {
+    font-family: var(--font-body);
+    font-size: clamp(1.85rem, 1.85rem + 1.083vw, 2.5rem);
+    font-weight: 700; line-height: 1.2; margin-bottom: 32px;
+    color: var(--text-primary);
+  }
+
+  /* FULL-WIDTH COLORED SECTIONS */
+  .full-section { padding: 80px 32px; }
+  .full-section .inner { max-width: 1200px; margin: 0 auto; }
+
+  /* COLOR SWATCHES */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; margin-bottom: 48px; }
+  .swatch { border-radius: 16px; overflow: hidden; border: 1px solid var(--border-dark); }
+  .swatch-color { height: 80px; }
+  .swatch-info { padding: 10px 12px; background: var(--surface-raised); }
+  .swatch-name { font-size: 12px; font-weight: 600; margin-bottom: 2px; color: var(--text-primary); }
+  .swatch-hex { font-size: 11px; color: var(--text-secondary); }
+
+  /* TYPE SCALE */
+  .type-scale { margin-bottom: 48px; }
+  .type-row { padding: 16px 0; border-bottom: 1px solid var(--border-dark); display: flex; align-items: baseline; gap: 24px; }
+  .type-label { font-size: 11px; color: var(--text-secondary); min-width: 140px; flex-shrink: 0; }
+  .type-sample { flex: 1; color: var(--text-primary); }
+
+  /* BUTTON SHOWCASE */
+  .button-row { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-bottom: 24px; }
+
+  /* INPUT SHOWCASE */
+  .input-showcase { margin-bottom: 48px; }
+
+  /* FEATURE CARDS */
+  .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .feature-card h3 {
+    font-family: var(--font-body);
+    font-size: clamp(1.39rem, 1.39rem + 0.767vw, 1.85rem);
+    font-weight: 700; line-height: 1.3; margin-bottom: 12px;
+  }
+  .feature-card p { font-size: clamp(15.75px, 0.984rem + 0.86vw, 24px); line-height: 1.5; }
+  .feature-icon { font-size: 2rem; margin-bottom: 12px; }
+
+  /* SPACING */
+  .spacing-row { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .spacing-bar { height: 24px; background: rgba(255,119,90,0.3); border-radius: 4px; }
+  .spacing-label { font-size: 12px; color: var(--text-secondary); min-width: 100px; }
+
+  /* FOOTER */
+  .footer {
+    background: var(--black); color: var(--white); padding: 64px 32px;
+    border-top: 1px solid var(--border-dark);
+  }
+  .footer .inner { max-width: 1200px; margin: 0 auto; }
+  .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-top: 40px; }
+  .footer h4 { font-size: 14px; font-weight: 700; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
+  .footer a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; display: block; margin-bottom: 8px; }
+  .footer a:hover { color: var(--white); }
+  .footer-bottom { margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.15); font-size: 0.9rem; color: rgba(255,255,255,0.5); }
+
+  @media (max-width: 700px) {
+    .nav-links { display: none; }
+    .hero-form { flex-direction: column; align-items: center; }
+    .input-large { max-width: 100%; width: 100%; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .section { padding: 40px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <a href="#" class="nav-brand">
+    <svg style="height:28px;width:auto;" viewBox="0 0 1791 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1720.79 191.779C1734.28 191.779 1746.32 195.187 1756.9 202.002C1767.49 208.817 1775.79 218.642 1781.81 231.475C1787.9 244.307 1790.94 259.751 1790.94 277.804C1790.94 295.857 1787.93 311.336 1781.91 324.241C1775.9 337.074 1767.63 346.97 1757.12 353.931C1746.61 360.818 1734.61 364.263 1721.12 364.263C1710.97 364.263 1702.67 362.559 1696.22 359.151C1689.84 355.744 1684.83 351.756 1681.21 347.188C1677.58 342.621 1674.79 338.56 1672.83 335.008H1670.88V423.643H1638.36V193.955H1670.12V221.034H1672.83C1674.72 217.554 1677.44 213.531 1680.99 208.963C1684.54 204.395 1689.47 200.408 1695.78 197C1702.09 193.52 1710.43 191.779 1720.79 191.779ZM1713.83 219.403C1704.41 219.403 1696.43 221.832 1689.91 226.689C1683.46 231.547 1678.56 238.326 1675.23 247.026C1671.89 255.727 1670.22 265.877 1670.22 277.478C1670.22 289.223 1671.93 299.518 1675.34 308.363C1678.74 317.209 1683.67 324.133 1690.13 329.136C1696.58 334.066 1704.48 336.53 1713.83 336.53C1723.55 336.53 1731.67 333.956 1738.2 328.809C1744.72 323.589 1749.65 316.52 1752.99 307.603C1756.39 298.685 1758.1 288.643 1758.1 277.478C1758.1 266.457 1756.43 256.561 1753.09 247.788C1749.83 239.015 1744.9 232.091 1738.3 227.016C1731.78 221.941 1723.62 219.403 1713.83 219.403Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1004.97 191.779C1020.63 191.779 1034.3 195.368 1045.97 202.546C1057.64 209.724 1066.71 219.801 1073.16 232.779C1079.61 245.757 1082.84 260.91 1082.84 278.238C1082.84 295.494 1079.61 310.575 1073.16 323.48C1066.71 336.386 1057.64 346.427 1045.97 353.604C1034.3 360.782 1020.63 364.371 1004.97 364.371C989.309 364.371 975.643 360.782 963.97 353.604C952.297 346.427 943.234 336.386 936.781 323.48C930.329 310.575 927.103 295.494 927.103 278.238C927.103 260.91 930.329 245.757 936.781 232.779C943.234 219.802 952.297 209.724 963.97 202.546C975.643 195.368 989.309 191.779 1004.97 191.779ZM1005.08 218.968C994.855 218.968 986.373 221.686 979.63 227.124C972.96 232.562 967.993 239.776 964.73 248.767C961.54 257.684 959.945 267.472 959.945 278.13C959.945 288.86 961.54 298.685 964.73 307.603C967.993 316.52 972.96 323.661 979.63 329.026C986.373 334.391 994.855 337.074 1005.08 337.074C1015.23 337.074 1023.64 334.392 1030.31 329.026C1036.98 323.661 1041.91 316.52 1045.1 307.603C1048.36 298.685 1049.99 288.86 1049.99 278.13C1049.99 267.472 1048.36 257.684 1045.1 248.767C1041.91 239.776 1036.98 232.562 1030.31 227.124C1023.64 221.686 1015.23 218.968 1005.08 218.968Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1428.19 361H1396.43V335.008H1393.71C1391.76 338.56 1388.93 342.621 1385.23 347.188C1381.61 351.756 1376.6 355.744 1370.22 359.151C1363.84 362.559 1355.58 364.263 1345.43 364.263C1331.94 364.263 1319.91 360.818 1309.32 353.931C1298.81 346.97 1290.54 337.074 1284.53 324.241C1278.58 311.336 1275.61 295.857 1275.61 277.804C1275.61 259.751 1278.62 244.307 1284.63 231.475C1290.72 218.642 1299.06 208.817 1309.65 202.002C1320.23 195.187 1332.23 191.779 1345.64 191.779C1356.01 191.779 1364.35 193.52 1370.66 197C1377.04 200.408 1381.97 204.395 1385.45 208.963C1389 213.53 1391.76 217.554 1393.71 221.034H1395.67V138.272H1428.19V361ZM1352.6 219.403C1342.82 219.403 1334.66 221.941 1328.14 227.016C1321.61 232.091 1316.68 239.014 1313.34 247.787C1310.08 256.56 1308.45 266.457 1308.45 277.478C1308.45 288.643 1310.12 298.684 1313.45 307.602C1316.79 316.519 1321.72 323.588 1328.24 328.809C1334.84 333.956 1342.96 336.53 1352.6 336.53C1361.96 336.53 1369.86 334.065 1376.31 329.135C1382.84 324.132 1387.77 317.208 1391.1 308.363C1394.51 299.518 1396.21 289.223 1396.21 277.478C1396.21 265.877 1394.55 255.727 1391.21 247.026C1387.88 238.326 1382.98 231.547 1376.53 226.689C1370.08 221.832 1362.1 219.403 1352.6 219.403Z" fill="white"/>
+<path d="M747.11 135.228C758.928 135.228 769.949 136.931 780.172 140.339C790.467 143.674 799.712 148.605 807.904 155.13C816.097 161.583 822.876 169.485 828.241 178.838C833.606 188.118 837.231 198.74 839.116 210.702H805.186C803.88 203.452 801.451 197.072 797.898 191.562C794.346 186.052 789.996 181.375 784.849 177.532C779.701 173.69 773.937 170.79 767.557 168.832C761.249 166.875 754.543 165.897 747.438 165.896C734.605 165.896 723.112 169.122 712.962 175.575C702.884 182.028 694.909 191.49 689.036 203.96C683.236 216.43 680.336 231.656 680.336 249.637C680.336 267.762 683.236 283.06 689.036 295.53C694.909 308.001 702.921 317.426 713.071 323.807C723.221 330.187 734.64 333.377 747.328 333.377C754.361 333.377 761.031 332.434 767.339 330.549C773.719 328.591 779.483 325.727 784.631 321.957C789.778 318.187 794.129 313.583 797.682 308.146C801.307 302.635 803.808 296.328 805.186 289.223L839.116 289.331C837.304 300.279 833.787 310.357 828.567 319.564C823.42 328.7 816.785 336.603 808.665 343.273C800.617 349.871 791.41 354.982 781.042 358.607C770.674 362.233 759.363 364.045 747.11 364.045C727.825 364.045 710.642 359.477 695.562 350.342C680.481 341.134 668.591 327.975 659.891 310.864C651.263 293.754 646.948 273.345 646.948 249.637C646.948 225.856 651.299 205.446 659.999 188.408C668.699 171.298 680.59 158.174 695.67 149.039C710.75 139.831 727.897 135.228 747.11 135.228Z" fill="white"/>
+<path d="M1142.46 296.292C1142.46 307.675 1145.62 316.738 1151.92 323.48C1158.23 330.223 1166.43 333.594 1176.5 333.594C1182.59 333.594 1188.65 332.071 1194.67 329.026C1200.76 325.981 1205.79 321.378 1209.78 315.215C1213.84 309.052 1215.84 301.221 1215.76 291.724V193.955H1248.39V361H1216.42V332.071H1214.68C1210.83 340.989 1204.67 348.421 1196.19 354.366C1187.78 360.239 1177.3 363.175 1164.76 363.175C1154.03 363.175 1144.53 360.819 1136.26 356.106C1128.07 351.321 1121.62 344.252 1116.91 334.899C1112.27 325.547 1109.95 313.982 1109.95 300.207V193.955H1142.46V296.292Z" fill="white"/>
+<path d="M1497.93 296.292C1497.93 307.675 1501.08 316.738 1507.39 323.48C1513.7 330.223 1521.89 333.594 1531.97 333.594C1538.06 333.594 1544.11 332.071 1550.13 329.026C1556.22 325.981 1561.26 321.377 1565.25 315.215C1569.31 309.052 1571.3 301.221 1571.23 291.724V193.955H1603.85V361H1571.88V332.071H1570.14C1566.3 340.989 1560.14 348.421 1551.65 354.366C1543.24 360.239 1532.77 363.175 1520.22 363.175C1509.49 363.175 1500 360.819 1491.73 356.106C1483.54 351.321 1477.08 344.252 1472.37 334.899C1467.73 325.547 1465.41 313.982 1465.41 300.207V193.955H1497.93V296.292Z" fill="white"/>
+<path d="M900.048 361H867.53V138.272H900.048V361Z" fill="white"/>
+<path d="M250 0C388.071 0 500 111.929 500 250C500 388.071 388.071 500 250 500C111.929 500 0 388.071 0 250C0 111.929 111.929 0 250 0ZM249.465 100.592C166.945 100.592 100.063 167.487 100.062 249.994C100.062 332.501 166.958 399.396 249.465 399.396C331.972 399.396 398.867 332.501 398.867 249.994C398.867 167.487 331.985 100.592 249.465 100.592ZM249.192 127.446C305.896 127.446 353.601 165.957 367.579 218.252C367.034 218.926 366.503 219.601 365.997 220.301C357.413 232.113 343.928 239.388 329.327 239.388H326.812C312.211 239.388 298.726 232.126 290.142 220.301C280.481 206.984 264.48 198.568 246.573 199.476C221.249 200.746 200.516 221.053 198.739 246.338C196.665 275.928 220.043 300.564 249.192 300.564C266.088 300.564 281.039 292.278 290.232 279.545C298.752 267.745 312.263 260.588 326.812 260.588H329.34C343.888 260.588 357.4 267.745 365.919 279.545C366.451 280.284 367.008 281.01 367.592 281.724C353.601 334.018 305.908 372.529 249.205 372.529L249.192 372.543C181.506 372.543 126.645 317.68 126.645 249.994C126.645 182.308 181.506 127.446 249.192 127.446Z" fill="white"/>
+</svg>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">Features</a></li>
+    <li><a href="#">Pricing</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+  <a href="#" class="nav-cta">Sign in</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Drag, drop, stream.</h1>
+  <p>Share anything instantly. Cloudup streams your files, links, music, and videos in real time -- no upload wait.</p>
+  <div class="hero-form">
+    <input type="email" class="input-large" placeholder="Email address">
+    <button class="btn-primary">Get notified</button>
+  </div>
+</section>
+
+<!-- COLORS -->
+<section class="section">
+  <div class="section-label">Color Palette</div>
+  <h2>Brand Colors</h2>
+  <div class="color-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#ff775a"></div><div class="swatch-info"><div class="swatch-name">Salmon</div><div class="swatch-hex">#ff775a</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#c0ff59"></div><div class="swatch-info"><div class="swatch-name">Lime</div><div class="swatch-hex">#c0ff59</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#5acdff"></div><div class="swatch-info"><div class="swatch-name">Bright Blue</div><div class="swatch-hex">#5acdff</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#000000"></div><div class="swatch-info"><div class="swatch-name">Black</div><div class="swatch-hex">#000000</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#ffffff"></div><div class="swatch-info"><div class="swatch-name">White</div><div class="swatch-hex">#ffffff</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#F9F9F9"></div><div class="swatch-info"><div class="swatch-name">Off-white</div><div class="swatch-hex">#F9F9F9</div></div></div>
+  </div>
+
+  <h2>Dark Theme Surfaces</h2>
+  <div class="color-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#121212"></div><div class="swatch-info"><div class="swatch-name">Background</div><div class="swatch-hex">#121212</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#1a1a1a"></div><div class="swatch-info"><div class="swatch-name">Surface</div><div class="swatch-hex">#1a1a1a</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#242424"></div><div class="swatch-info"><div class="swatch-name">Surface Raised</div><div class="swatch-hex">#242424</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#2e2e2e"></div><div class="swatch-info"><div class="swatch-name">Surface Elevated</div><div class="swatch-hex">#2e2e2e</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#7a2e1a"></div><div class="swatch-info"><div class="swatch-name">Salmon Dark</div><div class="swatch-hex">#7a2e1a</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#2a3d12"></div><div class="swatch-info"><div class="swatch-name">Lime Dark</div><div class="swatch-hex">#2a3d12</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#153a4d"></div><div class="swatch-info"><div class="swatch-name">Blue Dark</div><div class="swatch-hex">#153a4d</div></div></div>
+  </div>
+</section>
+
+<!-- TYPOGRAPHY -->
+<div style="background:var(--surface); padding: 64px 0;">
+<section class="section" style="padding-top:0;padding-bottom:0;">
+  <div class="section-label">Typography</div>
+  <h2>Type Scale</h2>
+  <div class="type-scale">
+    <div class="type-row">
+      <span class="type-label">Site Title<br>Inter Tight 700<br>clamp(26-44px)</span>
+      <span class="type-sample" style="font-family:'Inter Tight',sans-serif;font-size:clamp(26px, 1.624rem + 1.877vw, 44px);font-weight:700;">Cloudup</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">H1 (Hero)<br>Inter 700<br>clamp(2.5-3.27rem)</span>
+      <span class="type-sample" style="font-size:clamp(2.5rem, 2.5rem + 1.283vw, 3.27rem);font-weight:700;line-height:1.1;color:var(--salmon);">Drag, drop, stream.</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">H2 (Section)<br>Inter 700<br>clamp(1.85-2.5rem)</span>
+      <span class="type-sample" style="font-size:clamp(1.85rem, 1.85rem + 1.083vw, 2.5rem);font-weight:700;line-height:1.2;">Share anything.</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">H3 (Feature)<br>Inter 700<br>clamp(1.39-1.85rem)</span>
+      <span class="type-sample" style="font-size:clamp(1.39rem, 1.39rem + 0.767vw, 1.85rem);font-weight:700;line-height:1.3;">Stream your files</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Body / Subtitle<br>Inter 400<br>clamp(15.75-24px)</span>
+      <span class="type-sample" style="font-size:clamp(15.75px, 0.984rem + 0.86vw, 24px);font-weight:400;line-height:1.5;">Cloudup streams your files, links, music, and videos in real time so your audience sees them instantly.</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Button / Input<br>Inter 500<br>24px</span>
+      <span class="type-sample" style="font-size:24px;font-weight:500;line-height:24px;">Get notified</span>
+    </div>
+    <div class="type-row">
+      <span class="type-label">Small<br>Inter 400<br>0.9rem</span>
+      <span class="type-sample" style="font-size:0.9rem;font-weight:400;line-height:1.5;">An Automattic joint</span>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- BUTTONS -->
+<section class="section">
+  <div class="section-label">Components</div>
+  <h2>Buttons</h2>
+  <div class="button-row">
+    <button class="btn-primary">Primary (Salmon)</button>
+    <button class="btn-secondary">Secondary (Outline)</button>
+  </div>
+  <div class="button-row" style="margin-top:16px;">
+    <button class="nav-cta" style="display:inline-block;background:var(--white);color:var(--black);padding:8px 24px;border-radius:8px;font-size:15px;font-weight:500;border:none;cursor:pointer;">Nav Sign-in</button>
+  </div>
+</section>
+
+<!-- INPUTS -->
+<div style="background:var(--surface); padding: 64px 0;">
+<section class="section" style="padding-top:0;padding-bottom:0;">
+  <div class="section-label">Inputs</div>
+  <h2>Oversized Input</h2>
+  <div class="input-showcase">
+    <input type="email" class="input-large" placeholder="Email address" style="width:100%;max-width:450px;display:block;margin-bottom:16px;">
+    <p style="font-size:12px;color:var(--text-secondary);">72px height &middot; 8px radius &middot; dark surface background &middot; Inter 24px &middot; max-width 450px</p>
+  </div>
+</section>
+</div>
+
+<!-- FEATURE CARDS ON LIME DARK -->
+<div class="full-section" style="background:var(--lime-dark);">
+  <div class="inner">
+    <div class="section-label" style="color:var(--lime);">Features</div>
+    <h2 style="color:var(--lime);">Share anything.</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon" style="color:var(--lime);">&#9752;</div>
+        <h3>Stream files</h3>
+        <p>Drop any file and Cloudup starts streaming it instantly. No waiting for uploads to finish.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="color:var(--lime);">&#10042;</div>
+        <h3>Simple links</h3>
+        <p>Every upload gets a clean, shareable link. Send it anywhere -- email, chat, or social.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="color:var(--lime);">&#9201;</div>
+        <h3>Real-time</h3>
+        <p>Recipients see your content appear in real time. Music plays, videos stream, images load instantly.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SPACING -->
+<section class="section">
+  <div class="section-label">Layout</div>
+  <h2>Spacing Scale</h2>
+  <div class="spacing-row"><span class="spacing-label">spacing-10</span><div class="spacing-bar" style="width:16px;"></div><span style="font-size:11px;color:var(--text-secondary);">1rem</span></div>
+  <div class="spacing-row"><span class="spacing-label">spacing-20</span><div class="spacing-bar" style="width:24px;"></div><span style="font-size:11px;color:var(--text-secondary);">min(1.5rem, 2vw)</span></div>
+  <div class="spacing-row"><span class="spacing-label">spacing-30</span><div class="spacing-bar" style="width:40px;"></div><span style="font-size:11px;color:var(--text-secondary);">min(2.5rem, 3vw)</span></div>
+  <div class="spacing-row"><span class="spacing-label">spacing-40</span><div class="spacing-bar" style="width:64px;"></div><span style="font-size:11px;color:var(--text-secondary);">min(4rem, 5vw)</span></div>
+  <div class="spacing-row"><span class="spacing-label">spacing-50</span><div class="spacing-bar" style="width:104px;"></div><span style="font-size:11px;color:var(--text-secondary);">min(6.5rem, 8vw)</span></div>
+  <div class="spacing-row"><span class="spacing-label">spacing-60</span><div class="spacing-bar" style="width:168px;"></div><span style="font-size:11px;color:var(--text-secondary);">min(10.5rem, 13vw)</span></div>
+</section>
+
+<!-- MORE FEATURES ON DARK SURFACE -->
+<div class="full-section" style="background:var(--surface);">
+  <div class="inner">
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon" style="color:var(--bright-blue);">&#9733;</div>
+        <h3>Beautiful previews</h3>
+        <p>Images, audio, video, code, documents -- everything gets a rich, visual preview automatically.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="color:var(--bright-blue);">&#10003;</div>
+        <h3>Collections</h3>
+        <p>Group related files into streams. Organize by project, topic, or whatever works for your team.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="color:var(--bright-blue);">&#128274;</div>
+        <h3>Private by default</h3>
+        <p>Your content is private until you share it. Control who sees what with simple link permissions.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRICING ON BLUE DARK -->
+<div class="full-section" style="background:var(--blue-dark);">
+  <div class="inner" style="text-align:center;">
+    <div class="section-label" style="color:var(--bright-blue);">Pricing</div>
+    <h2 style="color:var(--bright-blue);">Simple, transparent pricing.</h2>
+    <p style="max-width:600px;margin:0 auto 40px;">Start free with 200MB. Upgrade when you need more space, more streams, and more sharing power.</p>
+    <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;">
+      <div style="background:var(--surface-raised);border-radius:16px;padding:40px;min-width:240px;text-align:center;border:1px solid var(--border-dark);">
+        <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:8px;">Free</h3>
+        <div style="font-size:2.5rem;font-weight:700;margin-bottom:8px;">$0</div>
+        <p style="font-size:0.9rem;color:var(--text-secondary);">200MB storage<br>10 streams</p>
+      </div>
+      <div style="background:var(--salmon);color:var(--black);border-radius:16px;padding:40px;min-width:240px;text-align:center;">
+        <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:8px;">Pro</h3>
+        <div style="font-size:2.5rem;font-weight:700;margin-bottom:8px;">$5</div>
+        <p style="font-size:0.9rem;color:rgba(0,0,0,0.6);">Unlimited storage<br>Unlimited streams</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<div class="full-section" style="background:var(--surface);text-align:center;">
+  <div class="inner">
+    <h2>Ready to share?</h2>
+    <p style="max-width:500px;margin:0 auto 32px;">Join thousands of people who use Cloudup to share files, links, and media instantly.</p>
+    <div class="hero-form" style="justify-content:center;">
+      <input type="email" class="input-large" placeholder="Email address">
+      <button class="btn-primary">Get notified</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="inner">
+    <svg style="height:28px;width:auto;" viewBox="0 0 1791 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1720.79 191.779C1734.28 191.779 1746.32 195.187 1756.9 202.002C1767.49 208.817 1775.79 218.642 1781.81 231.475C1787.9 244.307 1790.94 259.751 1790.94 277.804C1790.94 295.857 1787.93 311.336 1781.91 324.241C1775.9 337.074 1767.63 346.97 1757.12 353.931C1746.61 360.818 1734.61 364.263 1721.12 364.263C1710.97 364.263 1702.67 362.559 1696.22 359.151C1689.84 355.744 1684.83 351.756 1681.21 347.188C1677.58 342.621 1674.79 338.56 1672.83 335.008H1670.88V423.643H1638.36V193.955H1670.12V221.034H1672.83C1674.72 217.554 1677.44 213.531 1680.99 208.963C1684.54 204.395 1689.47 200.408 1695.78 197C1702.09 193.52 1710.43 191.779 1720.79 191.779ZM1713.83 219.403C1704.41 219.403 1696.43 221.832 1689.91 226.689C1683.46 231.547 1678.56 238.326 1675.23 247.026C1671.89 255.727 1670.22 265.877 1670.22 277.478C1670.22 289.223 1671.93 299.518 1675.34 308.363C1678.74 317.209 1683.67 324.133 1690.13 329.136C1696.58 334.066 1704.48 336.53 1713.83 336.53C1723.55 336.53 1731.67 333.956 1738.2 328.809C1744.72 323.589 1749.65 316.52 1752.99 307.603C1756.39 298.685 1758.1 288.643 1758.1 277.478C1758.1 266.457 1756.43 256.561 1753.09 247.788C1749.83 239.015 1744.9 232.091 1738.3 227.016C1731.78 221.941 1723.62 219.403 1713.83 219.403Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1004.97 191.779C1020.63 191.779 1034.3 195.368 1045.97 202.546C1057.64 209.724 1066.71 219.801 1073.16 232.779C1079.61 245.757 1082.84 260.91 1082.84 278.238C1082.84 295.494 1079.61 310.575 1073.16 323.48C1066.71 336.386 1057.64 346.427 1045.97 353.604C1034.3 360.782 1020.63 364.371 1004.97 364.371C989.309 364.371 975.643 360.782 963.97 353.604C952.297 346.427 943.234 336.386 936.781 323.48C930.329 310.575 927.103 295.494 927.103 278.238C927.103 260.91 930.329 245.757 936.781 232.779C943.234 219.802 952.297 209.724 963.97 202.546C975.643 195.368 989.309 191.779 1004.97 191.779ZM1005.08 218.968C994.855 218.968 986.373 221.686 979.63 227.124C972.96 232.562 967.993 239.776 964.73 248.767C961.54 257.684 959.945 267.472 959.945 278.13C959.945 288.86 961.54 298.685 964.73 307.603C967.993 316.52 972.96 323.661 979.63 329.026C986.373 334.391 994.855 337.074 1005.08 337.074C1015.23 337.074 1023.64 334.392 1030.31 329.026C1036.98 323.661 1041.91 316.52 1045.1 307.603C1048.36 298.685 1049.99 288.86 1049.99 278.13C1049.99 267.472 1048.36 257.684 1045.1 248.767C1041.91 239.776 1036.98 232.562 1030.31 227.124C1023.64 221.686 1015.23 218.968 1005.08 218.968Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1428.19 361H1396.43V335.008H1393.71C1391.76 338.56 1388.93 342.621 1385.23 347.188C1381.61 351.756 1376.6 355.744 1370.22 359.151C1363.84 362.559 1355.58 364.263 1345.43 364.263C1331.94 364.263 1319.91 360.818 1309.32 353.931C1298.81 346.97 1290.54 337.074 1284.53 324.241C1278.58 311.336 1275.61 295.857 1275.61 277.804C1275.61 259.751 1278.62 244.307 1284.63 231.475C1290.72 218.642 1299.06 208.817 1309.65 202.002C1320.23 195.187 1332.23 191.779 1345.64 191.779C1356.01 191.779 1364.35 193.52 1370.66 197C1377.04 200.408 1381.97 204.395 1385.45 208.963C1389 213.53 1391.76 217.554 1393.71 221.034H1395.67V138.272H1428.19V361ZM1352.6 219.403C1342.82 219.403 1334.66 221.941 1328.14 227.016C1321.61 232.091 1316.68 239.014 1313.34 247.787C1310.08 256.56 1308.45 266.457 1308.45 277.478C1308.45 288.643 1310.12 298.684 1313.45 307.602C1316.79 316.519 1321.72 323.588 1328.24 328.809C1334.84 333.956 1342.96 336.53 1352.6 336.53C1361.96 336.53 1369.86 334.065 1376.31 329.135C1382.84 324.132 1387.77 317.208 1391.1 308.363C1394.51 299.518 1396.21 289.223 1396.21 277.478C1396.21 265.877 1394.55 255.727 1391.21 247.026C1387.88 238.326 1382.98 231.547 1376.53 226.689C1370.08 221.832 1362.1 219.403 1352.6 219.403Z" fill="white"/>
+<path d="M747.11 135.228C758.928 135.228 769.949 136.931 780.172 140.339C790.467 143.674 799.712 148.605 807.904 155.13C816.097 161.583 822.876 169.485 828.241 178.838C833.606 188.118 837.231 198.74 839.116 210.702H805.186C803.88 203.452 801.451 197.072 797.898 191.562C794.346 186.052 789.996 181.375 784.849 177.532C779.701 173.69 773.937 170.79 767.557 168.832C761.249 166.875 754.543 165.897 747.438 165.896C734.605 165.896 723.112 169.122 712.962 175.575C702.884 182.028 694.909 191.49 689.036 203.96C683.236 216.43 680.336 231.656 680.336 249.637C680.336 267.762 683.236 283.06 689.036 295.53C694.909 308.001 702.921 317.426 713.071 323.807C723.221 330.187 734.64 333.377 747.328 333.377C754.361 333.377 761.031 332.434 767.339 330.549C773.719 328.591 779.483 325.727 784.631 321.957C789.778 318.187 794.129 313.583 797.682 308.146C801.307 302.635 803.808 296.328 805.186 289.223L839.116 289.331C837.304 300.279 833.787 310.357 828.567 319.564C823.42 328.7 816.785 336.603 808.665 343.273C800.617 349.871 791.41 354.982 781.042 358.607C770.674 362.233 759.363 364.045 747.11 364.045C727.825 364.045 710.642 359.477 695.562 350.342C680.481 341.134 668.591 327.975 659.891 310.864C651.263 293.754 646.948 273.345 646.948 249.637C646.948 225.856 651.299 205.446 659.999 188.408C668.699 171.298 680.59 158.174 695.67 149.039C710.75 139.831 727.897 135.228 747.11 135.228Z" fill="white"/>
+<path d="M1142.46 296.292C1142.46 307.675 1145.62 316.738 1151.92 323.48C1158.23 330.223 1166.43 333.594 1176.5 333.594C1182.59 333.594 1188.65 332.071 1194.67 329.026C1200.76 325.981 1205.79 321.378 1209.78 315.215C1213.84 309.052 1215.84 301.221 1215.76 291.724V193.955H1248.39V361H1216.42V332.071H1214.68C1210.83 340.989 1204.67 348.421 1196.19 354.366C1187.78 360.239 1177.3 363.175 1164.76 363.175C1154.03 363.175 1144.53 360.819 1136.26 356.106C1128.07 351.321 1121.62 344.252 1116.91 334.899C1112.27 325.547 1109.95 313.982 1109.95 300.207V193.955H1142.46V296.292Z" fill="white"/>
+<path d="M1497.93 296.292C1497.93 307.675 1501.08 316.738 1507.39 323.48C1513.7 330.223 1521.89 333.594 1531.97 333.594C1538.06 333.594 1544.11 332.071 1550.13 329.026C1556.22 325.981 1561.26 321.377 1565.25 315.215C1569.31 309.052 1571.3 301.221 1571.23 291.724V193.955H1603.85V361H1571.88V332.071H1570.14C1566.3 340.989 1560.14 348.421 1551.65 354.366C1543.24 360.239 1532.77 363.175 1520.22 363.175C1509.49 363.175 1500 360.819 1491.73 356.106C1483.54 351.321 1477.08 344.252 1472.37 334.899C1467.73 325.547 1465.41 313.982 1465.41 300.207V193.955H1497.93V296.292Z" fill="white"/>
+<path d="M900.048 361H867.53V138.272H900.048V361Z" fill="white"/>
+<path d="M250 0C388.071 0 500 111.929 500 250C500 388.071 388.071 500 250 500C111.929 500 0 388.071 0 250C0 111.929 111.929 0 250 0ZM249.465 100.592C166.945 100.592 100.063 167.487 100.062 249.994C100.062 332.501 166.958 399.396 249.465 399.396C331.972 399.396 398.867 332.501 398.867 249.994C398.867 167.487 331.985 100.592 249.465 100.592ZM249.192 127.446C305.896 127.446 353.601 165.957 367.579 218.252C367.034 218.926 366.503 219.601 365.997 220.301C357.413 232.113 343.928 239.388 329.327 239.388H326.812C312.211 239.388 298.726 232.126 290.142 220.301C280.481 206.984 264.48 198.568 246.573 199.476C221.249 200.746 200.516 221.053 198.739 246.338C196.665 275.928 220.043 300.564 249.192 300.564C266.088 300.564 281.039 292.278 290.232 279.545C298.752 267.745 312.263 260.588 326.812 260.588H329.34C343.888 260.588 357.4 267.745 365.919 279.545C366.451 280.284 367.008 281.01 367.592 281.724C353.601 334.018 305.908 372.529 249.205 372.529L249.192 372.543C181.506 372.543 126.645 317.68 126.645 249.994C126.645 182.308 181.506 127.446 249.192 127.446Z" fill="white"/>
+</svg>
+    <div class="footer-grid">
+      <div>
+        <h4>Policy</h4>
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+      <div>
+        <h4>About</h4>
+        <a href="#">Blog</a>
+        <a href="#">About Us</a>
+        <a href="#">Press</a>
+      </div>
+      <div>
+        <h4>Dev</h4>
+        <a href="#">API</a>
+        <a href="#">Documentation</a>
+        <a href="#">Open Source</a>
+      </div>
+      <div>
+        <h4>Social</h4>
+        <a href="#">Twitter</a>
+        <a href="#">Facebook</a>
+      </div>
+    </div>
+    <div class="footer-bottom">An Automattic joint</div>
+  </div>
+</footer>
+
+</body>
+</html>

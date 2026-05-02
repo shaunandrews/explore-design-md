@@ -1,0 +1,22 @@
+{
+  "name": "Cloudup DESIGN.md",
+  "description": "Imported from Automattic/A8c-design-md design-md/cloudup.",
+  "includeDesignMd": true,
+  "dependencies": {},
+  "devDependencies": {},
+  "mcpServers": {
+    "designmd": {
+      "command": "npx",
+      "args": [
+        "designmd-mcp"
+      ]
+    }
+  },
+  "source": {
+    "repository": "github.a8c.com/Automattic/A8c-design-md",
+    "ref": "trunk",
+    "commit": "dcc47f5",
+    "path": "design-md/cloudup",
+    "url": "https://github.a8c.com/Automattic/A8c-design-md/tree/trunk/design-md/cloudup"
+  }
+}

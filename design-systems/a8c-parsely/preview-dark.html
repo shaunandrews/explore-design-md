@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Preview: Parse.ly (Dark)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Verlag (Hoefler&Co) is the correct display/heading font for Parse.ly. Rubik is a free Google Fonts fallback with a similar geometric sans-serif character. */
+    --font-heading: 'Verlag', 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+
+    --teal: #2cb67d;
+    --teal-hover: #3dd68e;
+    --teal-active: #24a06d;
+    --teal-pale: rgba(44,182,125,0.12);
+
+    --navy-900: #0a1628;
+    --navy-800: #0f2137;
+    --navy-700: #162d4a;
+    --navy-600: #1e3a5f;
+
+    --text-primary: #e8edf2;
+    --text-secondary: rgba(255,255,255,0.7);
+    --text-tertiary: rgba(255,255,255,0.45);
+    --border: rgba(255,255,255,0.12);
+    --border-light: rgba(255,255,255,0.08);
+    --surface: #0f2137;
+    --surface-raised: #162d4a;
+    --white: #ffffff;
+
+    --purple: #9b8afb;
+    --coral: #ff8a8a;
+    --amber: #ffc05c;
+    --blue: #6cb4ff;
+    --link: #6cb4ff;
+
+    --shadow-subtle: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+    --shadow-standard: 0 4px 12px rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.2);
+    --shadow-elevated: 0 10px 25px rgba(0,0,0,0.4), 0 4px 10px rgba(0,0,0,0.25);
+    --shadow-deep: 0 20px 40px rgba(0,0,0,0.5), 0 8px 16px rgba(0,0,0,0.3);
+    --shadow-cta: 0 2px 8px rgba(44,182,125,0.4);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--navy-900);
+    color: var(--text-secondary);
+    font-family: var(--font-body);
+    font-size: 16px; font-weight: 400; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 32px; height: 72px;
+    background: rgba(10,22,40,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-brand { display: flex; align-items: center; text-decoration: none; }
+  .nav-brand svg { height: 28px; width: auto; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { font-size: 15px; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--text-primary); }
+  .nav-cta {
+    display: inline-block; background: var(--teal); color: var(--navy-900);
+    padding: 10px 24px; border-radius: 8px; font-size: 15px; font-weight: 600;
+    text-decoration: none; transition: background 0.15s; letter-spacing: 0.2px;
+    box-shadow: var(--shadow-cta);
+  }
+  .nav-cta:hover { background: var(--teal-hover); }
+
+  /* HERO */
+  .hero {
+    padding: 96px 32px 80px; text-align: center;
+    background: var(--navy-900);
+  }
+  .hero-overline {
+    font-size: 12px; font-weight: 700; color: var(--teal);
+    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: var(--font-heading);
+    font-size: 56px; font-weight: 700; line-height: 1.1;
+    letter-spacing: -0.5px; color: var(--text-primary); margin-bottom: 20px;
+    max-width: 800px; margin-left: auto; margin-right: auto;
+  }
+  .hero p { font-size: 18px; font-weight: 400; line-height: 1.6; color: var(--text-secondary); max-width: 600px; margin: 0 auto 36px; }
+  .hero-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-block; background: var(--teal); color: var(--navy-900);
+    padding: 12px 28px; border-radius: 8px; border: none;
+    font-family: var(--font-body); font-size: 15px; font-weight: 600;
+    text-decoration: none; cursor: pointer; transition: background 0.15s;
+    letter-spacing: 0.2px; box-shadow: var(--shadow-cta);
+  }
+  .btn-primary:hover { background: var(--teal-hover); }
+  .btn-outline {
+    display: inline-block; background: transparent; color: var(--teal);
+    padding: 12px 28px; border-radius: 8px;
+    border: 2px solid var(--teal); font-family: var(--font-body);
+    font-size: 15px; font-weight: 600; text-decoration: none; cursor: pointer;
+    transition: all 0.15s; letter-spacing: 0.2px;
+  }
+  .btn-outline:hover { background: var(--teal-pale); }
+  .btn-ghost {
+    display: inline-block; background: transparent; color: var(--text-primary);
+    padding: 12px 28px; border-radius: 8px;
+    border: 1px solid var(--border); font-family: var(--font-body);
+    font-size: 15px; font-weight: 600; text-decoration: none; cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.2); }
+  .btn-light {
+    display: inline-block; background: var(--text-primary); color: var(--navy-900);
+    padding: 12px 28px; border-radius: 8px; border: none;
+    font-family: var(--font-body); font-size: 15px; font-weight: 600;
+    text-decoration: none; cursor: pointer; transition: background 0.15s;
+    letter-spacing: 0.2px;
+  }
+  .btn-light:hover { background: var(--white); }
+
+  /* SECTIONS */
+  .section { padding: 64px 32px; max-width: 1200px; margin: 0 auto; }
+  .section-overline { font-size: 12px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+  .section h2 { font-family: var(--font-heading); font-size: 36px; font-weight: 700; line-height: 1.2; letter-spacing: -0.3px; color: var(--text-primary); margin-bottom: 32px; }
+
+  /* COLOR SWATCHES */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; margin-bottom: 48px; }
+  .swatch { border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-subtle); border: 1px solid var(--border); }
+  .swatch-color { height: 80px; }
+  .swatch-info { padding: 10px 12px; background: var(--surface); }
+  .swatch-name { font-size: 12px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+  .swatch-hex { font-size: 11px; color: var(--text-tertiary); font-family: var(--font-mono); }
+
+  /* TYPE SCALE */
+  .type-scale { margin-bottom: 48px; }
+  .type-row { padding: 16px 0; border-bottom: 1px solid var(--border); display: flex; align-items: baseline; gap: 24px; }
+  .type-label { font-size: 11px; color: var(--text-tertiary); min-width: 140px; flex-shrink: 0; font-family: var(--font-mono); }
+  .type-sample { flex: 1; }
+
+  /* COMPONENT GRID */
+  .component-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 48px; }
+
+  /* CARDS */
+  .card {
+    background: var(--surface); border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-subtle); padding: 32px;
+    transition: box-shadow 0.25s ease, border-color 0.2s ease;
+  }
+  .card:hover { box-shadow: var(--shadow-elevated); border-color: rgba(255,255,255,0.2); }
+  .card-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--teal-pale); display: flex; align-items: center;
+    justify-content: center; margin-bottom: 16px; font-size: 22px; color: var(--teal);
+  }
+  .card h3 { font-family: var(--font-heading); font-size: 22px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; letter-spacing: -0.15px; }
+  .card p { font-size: 16px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px; }
+  .card-tag { display: inline-block; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card-tag.teal { background: var(--teal-pale); color: var(--teal); }
+  .card-tag.purple { background: rgba(155,138,251,0.15); color: var(--purple); }
+  .card-tag.coral { background: rgba(255,138,138,0.15); color: var(--coral); }
+
+  /* BUTTON SHOWCASE */
+  .button-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 24px; }
+
+  /* SHADOW SHOWCASE */
+  .shadow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-bottom: 48px; }
+  .shadow-box {
+    background: var(--surface); border-radius: 12px; padding: 24px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 120px; text-align: center; border: 1px solid var(--border);
+  }
+  .shadow-box .label { font-size: 12px; font-weight: 500; color: var(--text-tertiary); margin-top: 8px; }
+
+  /* SPACING */
+  .spacing-row { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .spacing-bar { height: 24px; background: var(--teal-pale); border-radius: 4px; border-left: 3px solid var(--teal); }
+  .spacing-label { font-size: 12px; color: var(--text-tertiary); min-width: 60px; font-family: var(--font-mono); }
+
+  /* RADIUS */
+  .radius-grid { display: flex; flex-wrap: wrap; gap: 24px; margin-bottom: 48px; }
+  .radius-box {
+    width: 80px; height: 80px; background: var(--teal-pale); border: 2px solid var(--teal);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 600; color: var(--teal); font-family: var(--font-mono);
+  }
+
+  /* ALT SECTION */
+  .alt-section { background: var(--surface); padding: 64px 32px; }
+
+  /* FORM ELEMENTS */
+  .input-demo {
+    padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px;
+    font-family: var(--font-body); font-size: 16px; color: var(--text-primary);
+    outline: none; width: 100%; max-width: 360px; transition: border-color 0.15s;
+    background: var(--navy-800);
+  }
+  .input-demo:focus { border-color: var(--teal); outline: 2px solid rgba(44,182,125,0.25); outline-offset: 2px; }
+  .input-label { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 6px; display: block; }
+
+  /* TABLE */
+  .demo-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+  .demo-table th { text-align: left; font-size: 12px; font-weight: 700; color: var(--text-tertiary); padding: 10px 16px; border-bottom: 2px solid var(--border); text-transform: uppercase; letter-spacing: 0.5px; }
+  .demo-table td { font-size: 14px; padding: 12px 16px; border-bottom: 1px solid var(--border-light); color: var(--text-primary); }
+  .demo-table tr:hover { background: rgba(255,255,255,0.03); }
+  .demo-table .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+  /* STAT BLOCK */
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 32px; margin-bottom: 48px; }
+  .stat-block { text-align: center; }
+  .stat-number { font-family: var(--font-heading); font-size: 48px; font-weight: 700; color: var(--teal); line-height: 1.1; margin-bottom: 4px; }
+  .stat-label { font-size: 14px; font-weight: 500; color: var(--text-tertiary); }
+
+  /* BRAND SECTION (lighter dark for contrast) */
+  .brand-section {
+    background: var(--navy-700); padding: 80px 32px;
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero h1 { font-size: 36px; }
+    .section { padding: 48px 20px; }
+    .color-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+    .stat-number { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <a href="#" class="nav-brand">
+    <svg viewBox="0 0 1724 500" style="height:28px;width:auto;" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1644.37 323.588H1646.11L1688.42 193.954H1723.33L1654.48 383.294C1651.29 391.994 1647.23 399.353 1642.3 405.371C1637.37 411.461 1631.5 416.029 1624.69 419.074C1617.87 422.119 1609.97 423.642 1600.98 423.642C1596.12 423.642 1591.7 423.243 1587.71 422.445C1583.72 421.72 1580.75 420.923 1578.79 420.053L1586.62 393.408C1592.57 395.003 1597.86 395.692 1602.5 395.475C1607.14 395.257 1611.24 393.516 1614.79 390.254C1618.41 386.991 1621.6 381.663 1624.36 374.268L1628.38 363.175L1567.26 193.954H1602.06L1644.37 323.588Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M902.957 191.779C909.627 191.779 916.696 192.577 924.164 194.172C931.704 195.694 938.737 198.522 945.262 202.654C951.859 206.787 957.261 212.697 961.466 220.382C965.671 227.995 967.773 237.891 967.773 250.071V361H936.018V338.161H934.713C932.61 342.366 929.456 346.499 925.251 350.56C921.046 354.62 915.645 357.991 909.047 360.674C902.449 363.356 894.547 364.697 885.339 364.697C874.754 364.697 865.183 362.74 856.628 358.825C848.073 354.838 841.294 349.073 836.291 341.533C831.361 333.993 828.896 324.749 828.896 313.801C828.896 304.375 830.708 296.618 834.333 290.527C837.958 284.437 842.852 279.616 849.015 276.063C855.177 272.511 862.065 269.828 869.678 268.016C877.29 266.203 885.048 264.825 892.951 263.883C902.956 262.723 911.077 261.781 917.312 261.056C923.547 260.258 928.079 258.989 930.906 257.249C933.734 255.509 935.147 252.682 935.147 248.767V248.005C935.147 238.507 932.465 231.148 927.1 225.928C921.807 220.708 913.904 218.098 903.392 218.098C892.444 218.098 883.816 220.526 877.509 225.384C871.274 230.169 866.959 235.498 864.566 241.371L834.007 234.411C837.632 224.261 842.925 216.067 849.885 209.832C856.917 203.524 865.002 198.957 874.137 196.13C883.272 193.23 892.879 191.779 902.957 191.779ZM935.257 279.217C934.097 280.377 931.849 281.464 928.514 282.479C925.251 283.422 921.518 284.256 917.312 284.981C913.108 285.634 909.011 286.25 905.023 286.83C901.036 287.338 897.7 287.772 895.018 288.135C888.71 288.932 882.946 290.274 877.726 292.159C872.578 294.044 868.446 296.763 865.328 300.315C862.283 303.795 860.761 308.435 860.761 314.235C860.761 322.283 863.733 328.374 869.678 332.507C875.623 336.567 883.2 338.597 892.407 338.597C901.397 338.597 909.083 336.82 915.463 333.268C921.916 329.715 926.81 325.075 930.146 319.348C933.553 313.547 935.257 307.348 935.257 300.75V279.217Z" fill="white"/>
+<path d="M1172.24 191.779C1190.29 191.779 1204.5 195.694 1214.87 203.524C1225.23 211.282 1232.09 221.687 1235.42 234.737L1205.95 239.957C1204.72 236.187 1202.76 232.598 1200.08 229.19C1197.47 225.783 1193.91 222.991 1189.42 220.816C1184.92 218.641 1179.3 217.554 1172.56 217.554C1163.35 217.554 1155.67 219.62 1149.5 223.753C1143.34 227.813 1140.26 233.07 1140.26 239.522C1140.26 245.105 1142.33 249.6 1146.46 253.008C1150.59 256.415 1157.26 259.207 1166.47 261.382L1193.01 267.472C1208.38 271.024 1219.83 276.498 1227.37 283.894C1234.91 291.289 1238.68 300.895 1238.68 312.713C1238.68 322.718 1235.78 331.637 1229.98 339.467C1224.26 347.225 1216.24 353.315 1205.95 357.737C1195.73 362.16 1183.87 364.371 1170.39 364.371C1151.68 364.371 1136.42 360.383 1124.6 352.408C1112.78 344.361 1105.53 332.942 1102.85 318.151L1134.28 313.366C1136.24 321.559 1140.26 327.758 1146.35 331.963C1152.44 336.095 1160.38 338.161 1170.17 338.161C1180.83 338.161 1189.35 335.95 1195.73 331.527C1202.11 327.032 1205.3 321.558 1205.3 315.105C1205.3 309.885 1203.34 305.499 1199.42 301.946C1195.58 298.394 1189.67 295.711 1181.7 293.898L1153.42 287.7C1137.83 284.148 1126.3 278.492 1118.84 270.734C1111.44 262.977 1107.74 253.152 1107.74 241.262C1107.74 231.402 1110.5 222.774 1116.01 215.379C1121.52 207.984 1129.13 202.22 1138.85 198.087C1148.56 193.882 1159.69 191.779 1172.24 191.779Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1334.96 191.779C1344.38 191.779 1353.52 193.338 1362.37 196.456C1371.21 199.574 1379.15 204.468 1386.18 211.138C1393.22 217.808 1398.76 226.472 1402.82 237.13C1406.88 247.715 1408.91 260.584 1408.91 275.737V287.265H1290.18C1290.43 297.447 1292.38 306.184 1296.03 313.475C1300.01 321.305 1305.56 327.286 1312.67 331.419C1319.77 335.479 1328.07 337.509 1337.57 337.509C1343.73 337.509 1349.35 336.639 1354.43 334.899C1359.5 333.087 1363.89 330.404 1367.58 326.852C1371.28 323.299 1374.11 318.912 1376.07 313.692L1406.85 319.238C1404.38 328.301 1399.96 336.24 1393.58 343.056C1387.27 349.798 1379.33 355.055 1369.76 358.825C1360.26 362.523 1349.42 364.371 1337.24 364.371C1320.79 364.371 1306.61 360.855 1294.72 353.822C1282.9 346.717 1273.77 336.748 1267.31 323.915C1260.93 311.01 1257.74 295.893 1257.74 278.564C1257.74 261.454 1260.93 246.374 1267.31 233.323C1273.77 220.273 1282.76 210.086 1294.29 202.764C1305.89 195.441 1319.44 191.779 1334.96 191.779ZM1335.18 218.642C1326.04 218.642 1318.07 220.889 1311.25 225.384C1304.51 229.806 1299.29 235.607 1295.59 242.785C1292.41 249.017 1290.62 255.724 1290.23 262.904H1377.05C1377.05 254.349 1375.31 246.772 1371.83 240.175C1368.35 233.505 1363.45 228.248 1357.14 224.405C1350.91 220.563 1343.59 218.642 1335.18 218.642Z" fill="white"/>
+<path d="M1457.23 319.674C1463.17 319.674 1468.28 321.812 1472.56 326.09C1476.84 330.295 1478.98 335.37 1478.98 341.315C1478.98 345.303 1477.96 348.965 1475.93 352.3C1473.98 355.562 1471.37 358.172 1468.1 360.13C1464.84 362.087 1461.22 363.066 1457.23 363.066C1451.28 363.066 1446.17 360.964 1441.89 356.759C1437.62 352.481 1435.48 347.333 1435.48 341.315C1435.48 335.37 1437.62 330.295 1441.89 326.09C1446.17 321.812 1451.28 319.674 1457.23 319.674Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M733.517 138.272C750.845 138.272 765.2 141.427 776.583 147.734C787.966 154.042 796.484 162.67 802.14 173.617C807.795 184.493 810.623 196.746 810.623 210.376C810.623 224.079 807.759 236.405 802.031 247.353C796.376 258.228 787.821 266.855 776.365 273.235C764.982 279.543 750.664 282.697 733.408 282.697H687.731V361H654.126V138.272H733.517ZM687.731 254.204H730.362C741.31 254.204 750.193 252.319 757.008 248.549C763.823 244.706 768.826 239.485 772.016 232.888C775.206 226.29 776.801 218.786 776.801 210.376C776.801 201.966 775.206 194.498 772.016 187.973C768.826 181.447 763.786 176.336 756.898 172.639C750.083 168.941 741.093 167.092 729.928 167.092H687.731V254.204Z" fill="white"/>
+<path d="M1077.48 191.453C1079.51 191.453 1081.9 191.526 1084.66 191.671C1087.49 191.816 1089.7 191.997 1091.29 192.215V223.318C1089.99 222.956 1087.67 222.557 1084.33 222.122C1081 221.615 1077.66 221.36 1074.33 221.36C1066.64 221.36 1059.79 222.991 1053.77 226.254C1047.83 229.444 1043.11 233.903 1039.63 239.631C1036.15 245.286 1034.42 251.739 1034.42 258.989V361H1001.9V193.954H1033.33V220.49H1035.07C1038.11 211.5 1043.48 204.431 1051.16 199.283C1058.92 194.063 1067.69 191.453 1077.48 191.453Z" fill="white"/>
+<path d="M1545.86 361H1513.35V138.272H1545.86V361Z" fill="white"/>
+<path d="M250 0C388.071 0 500 111.929 500 250C500 388.071 388.071 500 250 500C111.929 500 0 388.071 0 250C0 111.929 111.929 0 250 0ZM249.805 342.577C244.223 342.577 238.765 344.231 234.124 347.331C229.483 350.431 225.866 354.837 223.729 359.992C221.593 365.147 221.034 370.819 222.123 376.291C223.212 381.763 225.9 386.79 229.848 390.735C233.795 394.681 238.824 397.368 244.299 398.456C249.774 399.545 255.449 398.986 260.606 396.851C265.763 394.715 270.171 391.1 273.272 386.461C276.374 381.822 278.029 376.367 278.029 370.787C278.029 363.305 275.056 356.13 269.763 350.84C264.47 345.549 257.29 342.577 249.805 342.577ZM346.506 285.095C346.443 285.099 337.17 285.719 330.757 286.844C325.896 287.819 321.106 289.119 316.419 290.736C315.616 291.072 314.888 291.565 314.277 292.185C313.667 292.805 313.185 293.54 312.862 294.348L305.863 316.577C305.412 318.044 303.661 317.988 303.604 316.577L302.476 300.724C302.476 299.2 301.403 298.749 300.161 299.708C295.952 302.996 292.161 306.785 288.872 310.992C283.718 318.598 280.377 327.284 279.106 336.382V338.751C283.589 342.801 287.171 347.746 289.621 353.266C292.071 358.786 293.335 364.759 293.331 370.798C293.319 372.685 293.187 374.57 292.937 376.44C299.491 378.659 306.237 380.264 313.088 381.236C322.27 382.574 331.638 381.782 340.466 378.923C345.465 376.949 350.204 374.372 354.578 371.25C355.82 370.291 355.707 369.162 354.239 368.711L339.28 363.068C337.87 362.617 338.265 360.925 339.789 360.868L363.103 360.304C363.973 360.229 364.819 359.975 365.586 359.558C366.353 359.14 367.026 358.568 367.562 357.878C370.346 353.819 372.854 349.577 375.069 345.183C377.94 339.557 381.147 330.623 381.166 330.57C381.618 329.103 380.77 328.313 379.303 328.877L359.941 333.222C358.417 333.786 357.514 332.432 358.812 331.529L380.714 316.014C382.43 314.481 383.817 312.615 384.787 310.529C385.758 308.444 386.292 306.182 386.359 303.883C386.924 299.2 387.432 292.599 387.432 292.599L387.318 292.157C387.29 291.525 387.075 290.912 386.698 290.398C386.261 289.796 385.618 289.375 384.892 289.214C384.892 289.214 378.23 287.803 373.602 287.126C371.357 286.568 369.023 286.475 366.741 286.854C364.46 287.232 362.28 288.073 360.336 289.326L339.45 306.253C338.208 307.268 337.193 306.253 338.096 304.729L347.635 287.295C348.594 286.054 348.086 285.038 346.506 285.095ZM152.877 284.804C151.297 284.804 150.789 285.763 151.691 287.004L161.288 304.438C162.191 305.736 161.288 306.977 159.934 305.962L139.047 289.035C137.1 287.765 134.913 286.91 132.621 286.521C130.329 286.133 127.982 286.221 125.726 286.778C121.11 287.51 114.475 288.915 114.436 288.923C113.709 289.084 113.066 289.505 112.629 290.107C112.175 290.683 111.954 291.408 112.008 292.139C112.01 292.169 112.517 298.919 113.08 303.423C113.147 305.722 113.683 307.984 114.653 310.069C115.624 312.155 117.009 314.021 118.726 315.554L140.458 331.069C141.813 331.972 140.853 333.326 139.386 332.762L120.023 328.417C118.556 327.853 117.71 328.418 118.161 330.11C118.188 330.183 121.39 338.935 124.201 344.723C126.592 349.276 129.309 353.65 132.33 357.812C132.868 358.487 133.533 359.049 134.289 359.465C135.045 359.881 135.875 360.144 136.732 360.238L160.103 360.803C161.627 360.803 162.022 362.552 160.61 363.003L145.651 368.646C144.184 369.097 144.071 370.225 145.312 371.185C149.687 374.307 154.426 376.883 159.425 378.857C168.252 381.718 177.62 382.51 186.803 381.171C193.637 380.207 200.366 378.601 206.898 376.375C206.648 374.505 206.516 372.62 206.504 370.733C206.525 364.693 207.805 358.722 210.264 353.204C212.723 347.686 216.306 342.741 220.785 338.686L220.555 338.158C220.541 337.579 220.489 337.008 220.277 336.373C219.015 327.203 215.675 318.442 210.512 310.758C207.224 306.55 203.432 302.76 199.222 299.474C197.98 298.514 196.907 298.966 196.851 300.489L195.778 316.343C195.778 317.866 193.972 317.923 193.521 316.343L186.521 294.057C186.198 293.249 185.717 292.513 185.106 291.894C184.496 291.274 183.768 290.782 182.965 290.446C178.278 288.829 173.487 287.528 168.626 286.553C162.191 285.424 152.877 284.804 152.877 284.804ZM249.86 101.996C248.565 101.996 247.31 102.442 246.305 103.257C246.305 103.257 237.441 110.196 231.684 115.218C225.926 120.239 220.395 126.107 220.395 126.107C218.358 128.161 217.152 130.893 217.007 133.78L218.306 175.137C218.306 177.619 216.386 177.676 215.539 175.137L204.983 149.07C204.25 146.757 202.331 146.419 200.807 148.394C195.757 154.532 191.171 161.038 187.089 167.858C183.375 174.724 180.168 181.852 177.493 189.186C177.13 190.487 177.052 191.852 177.267 193.187C177.481 194.521 177.982 195.793 178.734 196.915L200.411 225.803C201.935 227.777 201.484 230.373 199.339 229.019L176.759 216.719C174.67 215.365 172.92 216.268 172.977 218.694C173.155 226.677 174.447 234.596 176.815 242.222C182.151 256.018 190.683 268.353 201.71 278.218C216.213 293.18 227.964 310.579 236.426 329.617C245.031 326.835 254.295 326.835 262.9 329.617C271.334 310.635 283.005 293.262 297.391 278.274C307.488 269.228 315.533 258.128 320.986 245.72C324.084 237.05 325.817 227.951 326.123 218.75L326.118 218.471C326.023 216.214 324.475 215.407 322.397 216.719L299.818 229.019C297.73 230.373 297.278 227.777 298.802 225.803L320.365 197.028C321.155 195.902 321.682 194.612 321.906 193.255C322.131 191.898 322.048 190.507 321.664 189.186C318.842 181.43 315.465 173.888 311.56 166.617C307.62 160.23 303.244 154.122 298.463 148.337C296.939 146.419 295.076 146.757 294.286 149.07L283.729 175.419C282.939 177.732 280.964 177.676 281.021 175.419L282.263 134.062C282.24 131.126 281.111 128.305 279.102 126.163C279.102 126.163 272.835 119.844 267.812 115.218C262.802 110.604 253.47 103.299 253.417 103.257C252.411 102.441 251.155 101.996 249.86 101.996Z" fill="white"/>
+</svg>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">Products</a></li>
+    <li><a href="#">Solutions</a></li>
+    <li><a href="#">Resources</a></li>
+    <li><a href="#">Pricing</a></li>
+  </ul>
+  <a href="#" class="nav-cta">Get a Demo</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-overline">Content Analytics Platform</div>
+  <h1>Understand what content drives value</h1>
+  <p>Parse.ly gives content teams the clarity to create content that delivers measurable business results.</p>
+  <div class="hero-buttons">
+    <button class="btn-primary">Get a Demo</button>
+    <button class="btn-outline">See How It Works</button>
+  </div>
+</section>
+
+<!-- COLORS -->
+<section class="section">
+  <div class="section-overline">Color Palette</div>
+  <h2>Brand Colors (Dark Surface)</h2>
+  <div class="color-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#2cb67d"></div><div class="swatch-info"><div class="swatch-name">Teal (Primary)</div><div class="swatch-hex">#2cb67d</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#3dd68e"></div><div class="swatch-info"><div class="swatch-name">Teal Hover</div><div class="swatch-hex">#3dd68e</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#24a06d"></div><div class="swatch-info"><div class="swatch-name">Teal Active</div><div class="swatch-hex">#24a06d</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:rgba(44,182,125,0.12)"></div><div class="swatch-info"><div class="swatch-name">Teal Pale (dark)</div><div class="swatch-hex">rgba(44,182,125,0.12)</div></div></div>
+  </div>
+
+  <h2>Surface Scale</h2>
+  <div class="color-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#0a1628"></div><div class="swatch-info"><div class="swatch-name">Navy 900 (bg)</div><div class="swatch-hex">#0a1628</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#0f2137"></div><div class="swatch-info"><div class="swatch-name">Navy 800 (card)</div><div class="swatch-hex">#0f2137</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#162d4a"></div><div class="swatch-info"><div class="swatch-name">Navy 700 (raised)</div><div class="swatch-hex">#162d4a</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#1e3a5f"></div><div class="swatch-info"><div class="swatch-name">Navy 600</div><div class="swatch-hex">#1e3a5f</div></div></div>
+  </div>
+
+  <h2>Text & Border</h2>
+  <div class="color-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#e8edf2"></div><div class="swatch-info"><div class="swatch-name">Text Primary</div><div class="swatch-hex">#e8edf2</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:rgba(255,255,255,0.7)"></div><div class="swatch-info"><div class="swatch-name">Text Secondary</div><div class="swatch-hex">rgba(255,255,255,0.7)</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:rgba(255,255,255,0.45)"></div><div class="swatch-info"><div class="swatch-name">Text Tertiary</div><div class="swatch-hex">rgba(255,255,255,0.45)</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2)"></div><div class="swatch-info"><div class="swatch-name">Border</div><div class="swatch-hex">rgba(255,255,255,0.12)</div></div></div>
+  </div>
+
+  <h2>Data Accents (Dark-Adjusted)</h2>
+  <div class="color-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#9b8afb"></div><div class="swatch-info"><div class="swatch-name">Purple</div><div class="swatch-hex">#9b8afb</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#ff8a8a"></div><div class="swatch-info"><div class="swatch-name">Coral</div><div class="swatch-hex">#ff8a8a</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#ffc05c"></div><div class="swatch-info"><div class="swatch-name">Amber</div><div class="swatch-hex">#ffc05c</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#6cb4ff"></div><div class="swatch-info"><div class="swatch-name">Blue</div><div class="swatch-hex">#6cb4ff</div></div></div>
+  </div>
+</section>
+
+<!-- TYPOGRAPHY -->
+<section class="alt-section">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-overline">Typography</div>
+    <h2>Type Scale</h2>
+    <div class="type-scale">
+      <div class="type-row">
+        <span class="type-label">Display Hero<br>56px / 700</span>
+        <span class="type-sample" style="font-family:var(--font-heading);font-size:56px;font-weight:700;line-height:1.1;letter-spacing:-0.5px;color:var(--text-primary);">Content clarity</span>
+      </div>
+      <div class="type-row">
+        <span class="type-label">Display Large<br>48px / 700</span>
+        <span class="type-sample" style="font-family:var(--font-heading);font-size:48px;font-weight:700;line-height:1.15;letter-spacing:-0.4px;color:var(--text-primary);">Analytics power</span>
+      </div>
+      <div class="type-row">
+        <span class="type-label">Section Heading<br>36px / 700</span>
+        <span class="type-sample" style="font-family:var(--font-heading);font-size:36px;font-weight:700;line-height:1.2;letter-spacing:-0.3px;color:var(--text-primary);">Understand your audience</span>
+      </div>
+      <div class="type-row">
+        <span class="type-label">Sub-heading Lg<br>28px / 600</span>
+        <span class="type-sample" style="font-family:var(--font-heading);font-size:28px;font-weight:600;line-height:1.25;letter-spacing:-0.2px;color:var(--text-primary);">Real-time dashboards</span>
+      </div>
+      <div class="type-row">
+        <span class="type-label">Body Large<br>18px / 400</span>
+        <span class="type-sample" style="font-size:18px;font-weight:400;line-height:1.6;">Parse.ly gives content teams the data they need to understand what resonates.</span>
+      </div>
+      <div class="type-row">
+        <span class="type-label">Body<br>16px / 400</span>
+        <span class="type-sample" style="font-size:16px;font-weight:400;line-height:1.6;">Track pageviews, engaged time, and conversion metrics across all your content.</span>
+      </div>
+      <div class="type-row">
+        <span class="type-label">Overline<br>12px / 700 / UC</span>
+        <span class="type-sample" style="font-size:12px;font-weight:700;line-height:1.2;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);">Content Analytics</span>
+      </div>
+      <div class="type-row">
+        <span class="type-label">Code<br>14px / mono</span>
+        <span class="type-sample" style="font-family:var(--font-mono);font-size:14px;font-weight:400;line-height:1.5;color:var(--teal);background:rgba(44,182,125,0.08);padding:4px 8px;border-radius:4px;">PARSELY_SITE_ID = "example.com"</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="section">
+  <div class="section-overline">Social Proof</div>
+  <h2>Stat Blocks</h2>
+  <div class="stat-grid">
+    <div class="stat-block">
+      <div class="stat-number">300+</div>
+      <div class="stat-label">Enterprise customers</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-number">10B+</div>
+      <div class="stat-label">Pageviews analyzed monthly</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-number">40%</div>
+      <div class="stat-label">Avg. engagement increase</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-number">99.9%</div>
+      <div class="stat-label">Platform uptime</div>
+    </div>
+  </div>
+</section>
+
+<!-- BUTTONS -->
+<section class="section" style="border-top: 1px solid var(--border);">
+  <div class="section-overline">Components</div>
+  <h2>Buttons</h2>
+  <div class="button-row">
+    <button class="btn-primary">Primary Teal</button>
+    <button class="btn-outline">Outlined</button>
+    <button class="btn-light">Light</button>
+    <button class="btn-ghost">Ghost</button>
+  </div>
+  <div class="button-row" style="margin-top: 8px;">
+    <button class="btn-primary" style="font-size:13px; padding:8px 20px;">Small Primary</button>
+    <button class="btn-outline" style="font-size:13px; padding:8px 20px;">Small Outlined</button>
+  </div>
+</section>
+
+<!-- CARDS -->
+<section class="alt-section">
+  <div style="max-width:1200px; margin:0 auto;">
+    <h2 style="font-family:var(--font-heading); color:var(--text-primary);">Cards</h2>
+    <div class="component-grid">
+      <div class="card">
+        <div class="card-icon">&#9776;</div>
+        <h3>Real-Time Dashboard</h3>
+        <p>See what content is performing right now with live pageview and engagement data.</p>
+        <span class="card-tag teal">Analytics</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#128200;</div>
+        <h3>Content API</h3>
+        <p>Programmatic access to your content performance data for custom integrations.</p>
+        <span class="card-tag purple">Developer</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#9881;</div>
+        <h3>Smart Recommendations</h3>
+        <p>AI-powered content suggestions that keep readers engaged and on-site longer.</p>
+        <span class="card-tag coral">AI-Powered</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INPUTS -->
+<section class="section">
+  <h2>Form Elements</h2>
+  <div style="max-width: 400px;">
+    <label class="input-label">Work email</label>
+    <input class="input-demo" type="email" placeholder="you@company.com" style="margin-bottom: 16px;">
+    <label class="input-label">Company website</label>
+    <input class="input-demo" type="url" placeholder="https://example.com" style="margin-bottom: 24px;">
+    <button class="btn-primary" style="width:100%;">Request a Demo</button>
+  </div>
+</section>
+
+<!-- TABLE -->
+<section class="alt-section">
+  <div style="max-width:1200px; margin:0 auto;">
+    <h2 style="font-family:var(--font-heading); color:var(--text-primary);">Data Table</h2>
+    <table class="demo-table">
+      <thead><tr><th>Page Title</th><th>Views</th><th>Avg. Time</th><th>Social Refs</th></tr></thead>
+      <tbody>
+        <tr><td>Breaking: Market Update Q4</td><td class="num">124,500</td><td class="num">3:42</td><td class="num">8,200</td></tr>
+        <tr><td>Guide to Content Strategy</td><td class="num">89,200</td><td class="num">5:18</td><td class="num">4,100</td></tr>
+        <tr><td>Top 10 Analytics Tools</td><td class="num">67,800</td><td class="num">4:05</td><td class="num">6,500</td></tr>
+        <tr><td>How AI is Changing Media</td><td class="num">45,300</td><td class="num">6:12</td><td class="num">3,800</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SHADOWS -->
+<section class="section">
+  <h2>Elevation & Shadows</h2>
+  <div class="shadow-grid">
+    <div class="shadow-box" style="box-shadow: none;">
+      <span class="label">Flat (Level 0)</span>
+    </div>
+    <div class="shadow-box" style="box-shadow: var(--shadow-subtle);">
+      <span class="label">Subtle (Level 1)</span>
+    </div>
+    <div class="shadow-box" style="box-shadow: var(--shadow-standard);">
+      <span class="label">Standard (Level 2)</span>
+    </div>
+    <div class="shadow-box" style="box-shadow: var(--shadow-elevated);">
+      <span class="label">Elevated (Level 3)</span>
+    </div>
+    <div class="shadow-box" style="box-shadow: var(--shadow-deep);">
+      <span class="label">Deep (Level 4)</span>
+    </div>
+    <div class="shadow-box" style="box-shadow: var(--shadow-cta); border: 2px solid var(--teal);">
+      <span class="label">CTA Glow</span>
+    </div>
+  </div>
+</section>
+
+<!-- SPACING -->
+<section class="alt-section">
+  <div style="max-width:1200px; margin:0 auto;">
+    <h2 style="font-family:var(--font-heading); color:var(--text-primary);">Spacing Scale</h2>
+    <div style="max-width: 600px;">
+      <div class="spacing-row"><span class="spacing-label">4px</span><div class="spacing-bar" style="width:4px;"></div></div>
+      <div class="spacing-row"><span class="spacing-label">8px</span><div class="spacing-bar" style="width:8px;"></div></div>
+      <div class="spacing-row"><span class="spacing-label">12px</span><div class="spacing-bar" style="width:12px;"></div></div>
+      <div class="spacing-row"><span class="spacing-label">16px</span><div class="spacing-bar" style="width:16px;"></div></div>
+      <div class="spacing-row"><span class="spacing-label">24px</span><div class="spacing-bar" style="width:24px;"></div></div>
+      <div class="spacing-row"><span class="spacing-label">32px</span><div class="spacing-bar" style="width:32px;"></div></div>
+      <div class="spacing-row"><span class="spacing-label">48px</span><div class="spacing-bar" style="width:48px;"></div></div>
+      <div class="spacing-row"><span class="spacing-label">64px</span><div class="spacing-bar" style="width:64px;"></div></div>
+      <div class="spacing-row"><span class="spacing-label">80px</span><div class="spacing-bar" style="width:80px;"></div></div>
+      <div class="spacing-row"><span class="spacing-label">96px</span><div class="spacing-bar" style="width:96px;"></div></div>
+      <div class="spacing-row"><span class="spacing-label">128px</span><div class="spacing-bar" style="width:128px;"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BORDER RADIUS -->
+<section class="section">
+  <h2>Border Radius</h2>
+  <div class="radius-grid">
+    <div class="radius-box" style="border-radius:4px;">4px</div>
+    <div class="radius-box" style="border-radius:8px;">8px</div>
+    <div class="radius-box" style="border-radius:12px;">12px</div>
+    <div class="radius-box" style="border-radius:16px;">16px</div>
+    <div class="radius-box" style="border-radius:24px;">24px</div>
+    <div class="radius-box" style="border-radius:9999px;">pill</div>
+  </div>
+</section>
+
+<!-- BRAND SECTION -->
+<div class="brand-section">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-overline">Brand Section</div>
+    <h2 style="font-family:var(--font-heading);font-size:48px;font-weight:700;line-height:1.15;letter-spacing:-0.4px;margin-bottom:16px;color:var(--text-primary);">See your content perform</h2>
+    <p style="font-size:18px; max-width:600px; margin-bottom:32px; color:var(--text-secondary);">Parse.ly's real-time dashboard gives you instant visibility into what your audience cares about.</p>
+    <div class="component-grid">
+      <div class="card">
+        <div class="card-icon">&#128202;</div>
+        <h3>Audience Insights</h3>
+        <p>Understand who your readers are and what drives them to engage.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#9889;</div>
+        <h3>Real-Time Data</h3>
+        <p>Track content performance as it happens. No delays, no sampling.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#128640;</div>
+        <h3>Actionable Reports</h3>
+        <p>Turn data into decisions with automated reports and recommendations.</p>
+      </div>
+    </div>
+    <div style="margin-top:32px;">
+      <button class="btn-primary">Start Free Trial</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
