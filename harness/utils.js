@@ -51,7 +51,9 @@ export async function readJson(filePath, fallback = null) {
 
 export async function writeJson(filePath, data) {
   await ensureDir(path.dirname(filePath));
-  await fsp.writeFile(filePath, `${JSON.stringify(data, null, 2)}\n`);
+  const tempPath = `${filePath}.${process.pid}.${crypto.randomBytes(6).toString('hex')}.tmp`;
+  await fsp.writeFile(tempPath, `${JSON.stringify(data, null, 2)}\n`);
+  await fsp.rename(tempPath, filePath);
 }
 
 export async function ensureDir(dirPath) {
@@ -161,18 +163,53 @@ export function renderCodexConfig(mcpServers = {}, projectDirs = []) {
 
 export async function updateManifest(runId, patch) {
   const manifestPath = path.join(rootDir, 'results', 'manifest.json');
-  const manifest = await readJson(manifestPath, []);
-  const index = manifest.findIndex((entry) => entry.runId === runId);
+  await withLock(`${manifestPath}.lock`, async () => {
+    const manifest = await readJson(manifestPath, []);
+    const index = manifest.findIndex((entry) => entry.runId === runId);
 
-  if (index === -1) {
-    manifest.push({ runId, ...patch });
-  } else {
-    manifest[index] = { ...manifest[index], ...patch };
-  }
+    if (index === -1) {
+      manifest.push({ runId, ...patch });
+    } else {
+      manifest[index] = { ...manifest[index], ...patch };
+    }
 
-  await writeJson(manifestPath, manifest.sort((a, b) => a.runId.localeCompare(b.runId)));
+    await writeJson(manifestPath, manifest.sort((a, b) => a.runId.localeCompare(b.runId)));
+  });
 }
 
 export async function loadManifest() {
   return readJson(path.join(rootDir, 'results', 'manifest.json'), []);
+}
+
+async function withLock(lockPath, callback) {
+  const startedAt = Date.now();
+
+  while (true) {
+    try {
+      await fsp.mkdir(lockPath);
+      break;
+    } catch (error) {
+      if (error.code !== 'EEXIST') {
+        throw error;
+      }
+
+      if (Date.now() - startedAt > 30000) {
+        throw new Error(`Timed out waiting for lock: ${lockPath}`);
+      }
+
+      await sleep(50);
+    }
+  }
+
+  try {
+    return await callback();
+  } finally {
+    await fsp.rm(lockPath, { recursive: true, force: true });
+  }
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
 }
