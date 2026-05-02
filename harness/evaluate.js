@@ -10,7 +10,10 @@ async function evaluateRun(run) {
   const designPath = path.join(workspaceDir, 'DESIGN.md');
   const targetSource = fs.existsSync(targetPath) ? await fsp.readFile(targetPath, 'utf8') : '';
   const designSource = fs.existsSync(designPath) ? await fsp.readFile(designPath, 'utf8') : '';
-  const screenshotsDir = path.join(rootDir, 'results', 'screenshots', run.runId);
+  const screenshotPaths =
+    Array.isArray(run.screenshots) && run.screenshots.length > 0
+      ? run.screenshots
+      : ['desktop'].map((name) => `results/screenshots/${run.runId}/${name}.png`);
 
   const build = spawnSync('npm', ['run', 'build'], {
     cwd: workspaceDir,
@@ -34,12 +37,11 @@ async function evaluateRun(run) {
     (hex) => !designHexes.some((designHex) => designHex.toLowerCase() === hex.toLowerCase())
   );
 
-  const screenshots = ['desktop', 'tablet', 'mobile']
-    .map((name) => ({
-      name,
-      path: path.join(screenshotsDir, `${name}.png`),
-      exists: fs.existsSync(path.join(screenshotsDir, `${name}.png`)),
-    }));
+  const screenshots = screenshotPaths.map((screenshotPath) => ({
+    name: getViewportName(screenshotPath),
+    path: screenshotPath,
+    exists: fs.existsSync(path.join(rootDir, screenshotPath)),
+  }));
 
   const evaluation = {
     runId: run.runId,
@@ -82,6 +84,10 @@ async function evaluateRun(run) {
     evaluation: `results/evaluations/${run.runId}.json`,
     updatedAt: new Date().toISOString(),
   });
+}
+
+function getViewportName(screenshotPath) {
+  return ['desktop', 'tablet', 'mobile'].find((name) => screenshotPath.includes(name)) || path.basename(screenshotPath);
 }
 
 async function main() {

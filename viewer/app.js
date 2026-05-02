@@ -37,15 +37,24 @@ function renderRun(run) {
   const article = document.createElement('article');
   article.className = 'run-card';
 
-  const screenshots = ['desktop', 'tablet', 'mobile'];
+  const screenshots =
+    Array.isArray(run.screenshots) && run.screenshots.length > 0
+      ? sortScreenshots(run.screenshots)
+      : ['desktop'].map((name) => `results/screenshots/${run.runId}/${name}.png`);
   const screenshotHtml = screenshots
     .map(
-      (name) => `
+      (screenshotPath) => {
+        const name = getViewportName(screenshotPath);
+        const fileName = screenshotPath.split('/').pop();
+
+        return `
         <div class="shot">
-          <strong>${name}</strong>
-          <img src="/results/screenshots/${run.runId}/${name}.png" alt="${run.runId} ${name} screenshot" loading="lazy" />
+          <strong>${run.design} · ${name}</strong>
+          <a class="shot-file" href="/${screenshotPath}">${fileName}</a>
+          <img src="/${screenshotPath}" alt="${run.design} ${name} screenshot for ${run.runId}" loading="lazy" />
         </div>
-      `
+      `;
+      }
     )
     .join('');
 
@@ -73,6 +82,15 @@ function renderRun(run) {
   `;
 
   return article;
+}
+
+function sortScreenshots(paths) {
+  const order = { desktop: 0, tablet: 1, mobile: 2 };
+  return [...paths].sort((a, b) => order[getViewportName(a)] - order[getViewportName(b)]);
+}
+
+function getViewportName(screenshotPath) {
+  return ['desktop', 'tablet', 'mobile'].find((name) => screenshotPath.includes(name)) || 'screenshot';
 }
 
 async function render() {
@@ -103,4 +121,3 @@ for (const select of Object.values(filters)) {
 document.querySelector('#refresh').addEventListener('click', render);
 
 render();
-

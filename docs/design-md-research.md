@@ -105,7 +105,7 @@ Controls:
 - Same app stack and starter files.
 - Same prompt text.
 - Fresh workspace per run.
-- Same viewport screenshots: mobile, tablet, desktop.
+- Same viewport screenshot: desktop at 1440x1000.
 - Same build and lint commands.
 - Record timestamp, agent, model, prompt hash, `DESIGN.md` hash, elapsed time, token/cost if available, and manual interventions.
 
@@ -124,7 +124,7 @@ Evaluation rubric:
 - Token adherence: colors, type, radius, spacing, component values.
 - Rationale adherence: mood, density, hierarchy, and do/don't rules.
 - Product quality: information architecture, content clarity, realistic states.
-- Responsiveness: no overlap, readable at mobile and desktop.
+- Layout quality: no overlap, readable at the desktop benchmark size.
 - Accessibility: contrast, focus states, target sizes.
 - Editability/maintainability: component structure, CSS variables, sensible naming.
 - Brand risk: any stale logo, unsupported asset, mismatched template, or overgeneralized style.
@@ -160,7 +160,7 @@ explore-design-md/
 Implementation recommendation:
 
 - Use a Vite/React app for generated interfaces and a separate comparison viewer.
-- Use Playwright for screenshots and responsive checks.
+- Use Playwright for screenshots and rendered-output checks.
 - Use the Google `@google/design.md` CLI for lint/diff/export.
 - Keep each run isolated by copying a starter app into `runs/<run-id>/workspace`.
 - The harness should support `codex` and `claude` as adapters, but store the same metadata schema for both.
@@ -183,4 +183,3 @@ Internal A8C:
 - Pixels & Points: "Experimenting with AI-generated ad layouts in Figma" (2026-04-10)
 - Radical Updates: "Branded Visual Toolkit: Presentations + Data Viz | Update 1" (2026-04-28)
 - Slack threads in `#brand-creative-guild`, `#vip-design`, `#vip-marketing`, `#vip-public-sector-events`, `#rsm-woo-welcome-mat`, `#studio-code`, and `#ai-news` from 2026-04-28 through 2026-04-30.
-

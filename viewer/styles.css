@@ -112,7 +112,7 @@ label {
 .shots {
   display: grid;
   gap: 12px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   padding: 16px;
 }
 
@@ -125,6 +125,15 @@ label {
 .shot strong {
   display: block;
   font-size: 12px;
+  padding: 8px;
+}
+
+.shot-file {
+  border-top: 1px solid #ece7dd;
+  color: #5f675f;
+  display: block;
+  font-size: 12px;
+  overflow-wrap: anywhere;
   padding: 8px;
 }
 
@@ -161,4 +170,3 @@ label {
     grid-template-columns: 1fr;
   }
 }
-

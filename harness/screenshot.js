@@ -7,8 +7,6 @@ import { ensureDir, loadManifest, parseArgs, rootDir, updateManifest } from './u
 
 const viewports = {
   desktop: { width: 1440, height: 1000 },
-  tablet: { width: 900, height: 1100 },
-  mobile: { width: 390, height: 900 },
 };
 
 async function waitForServer(url, timeoutMs = 30000) {
@@ -51,28 +49,53 @@ async function captureRun(run) {
   const baseUrl = `http://127.0.0.1:${port}`;
   const pageUrl = `${baseUrl}/#/${run.screenRoute}`;
   const screenshotDir = path.join(rootDir, 'results', 'screenshots', run.runId);
+  const namedScreenshotDir = path.join(
+    rootDir,
+    'results',
+    'screenshots',
+    'by-design',
+    safeSegment(run.design),
+    safeSegment(run.screen),
+    `${safeSegment(run.agent)}__mcp-${safeSegment(run.mcp)}__${run.runId}`
+  );
 
   try {
     await waitForServer(baseUrl);
     await ensureDir(screenshotDir);
+    await ensureDir(namedScreenshotDir);
 
     const browser = await chromium.launch();
     const page = await browser.newPage();
+    const screenshots = [];
+    const canonicalScreenshots = [];
 
     for (const [name, viewport] of Object.entries(viewports)) {
       await page.setViewportSize(viewport);
       await page.goto(pageUrl, { waitUntil: 'domcontentloaded' });
       await page.waitForTimeout(500);
+      const canonicalPath = path.join(screenshotDir, `${name}.png`);
+      const namedPath = path.join(
+        namedScreenshotDir,
+        `${safeSegment(run.screen)}__${safeSegment(run.design)}__${safeSegment(run.agent)}__mcp-${safeSegment(run.mcp)}__${name}.png`
+      );
+
       await page.screenshot({
-        path: path.join(screenshotDir, `${name}.png`),
+        path: canonicalPath,
         fullPage: true,
       });
+      await fsp.copyFile(canonicalPath, namedPath);
+
+      screenshots.push(path.relative(rootDir, namedPath));
+      canonicalScreenshots.push(path.relative(rootDir, canonicalPath));
     }
 
     await browser.close();
     await updateManifest(run.runId, {
       status: 'screenshotted',
-      screenshots: Object.keys(viewports).map((name) => `results/screenshots/${run.runId}/${name}.png`),
+      screenshots,
+      canonicalScreenshots,
+      screenshotDir: path.relative(rootDir, namedScreenshotDir),
+      canonicalScreenshotDir: path.relative(rootDir, screenshotDir),
       screenshotAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     });
@@ -83,6 +106,14 @@ async function captureRun(run) {
       server.kill('SIGTERM');
     }
   }
+}
+
+function safeSegment(value) {
+  return String(value || 'unknown')
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9._-]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 }
 
 async function main() {

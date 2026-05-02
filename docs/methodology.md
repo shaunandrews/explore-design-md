@@ -35,7 +35,7 @@ Reusable presentation artifacts live under `results/`:
 
 - `results/manifest.json`
 - `results/transcripts/<run-id>.txt`
-- `results/screenshots/<run-id>/{desktop,tablet,mobile}.png`
+- `results/screenshots/by-design/<design>/<screen>/<agent>__mcp-<mode>__<run-id>/<screen>__<design>__<agent>__mcp-<mode>__desktop.png`
 - `results/evaluations/<run-id>.json`
 
 ## MCP Behavior
@@ -67,4 +67,3 @@ Codex runs use:
 - `--add-dir <workspace>`
 
 The goal is to keep user/global agent state from leaking into the experiment.
-
