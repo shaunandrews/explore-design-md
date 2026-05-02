@@ -1,0 +1,21 @@
+{
+  "name": "WordPress Design System MCP",
+  "description": "Makes the WordPress Design System MCP and WordPress UI packages available alongside any selected DESIGN.md pack.",
+  "mcpServers": {
+    "wpds": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@wordpress/design-system-mcp"
+      ]
+    }
+  },
+  "mcpDependencies": {
+    "@wordpress/components": "latest",
+    "@wordpress/dataviews": "latest",
+    "@wordpress/icons": "latest",
+    "@wordpress/theme": "^0.12.0",
+    "@wordpress/ui": "^0.12.0"
+  },
+  "installBeforeAgent": true
+}

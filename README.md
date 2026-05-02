@@ -37,6 +37,9 @@ npm run matrix -- --agents claude,codex --screens all --designs all --mcp both -
 # Run selected combinations in parallel.
 npm run matrix -- --agent codex --screen 01-analytics-dashboard --designs a8c-wordpress-com,a8c-tumblr,a8c-jetpack --mcp off --concurrency 3
 
+# Run any DESIGN.md with the WordPress Design System MCP/profile attached.
+npm run run -- --agent codex --screen 05-domains-list --design airbnb --mcp-profile wpds
+
 # Refresh imported Automattic brand DESIGN.md packs from a local clone.
 npm run import-a8c-design-md -- --source /private/tmp/A8c-design-md
 
@@ -53,3 +56,5 @@ Imported Automattic brand packs use the `a8c-*` prefix, for example `a8c-woocomm
 Named screenshots are written flat under `results/screenshots/by-design/` so Finder/browser comparisons do not require drilling through run folders.
 
 The `a8c-wordpress-com` MCP-on condition uses the WordPress Design System MCP plus `@wordpress/ui`, `@wordpress/components`, and `@wordpress/dataviews` so list-heavy screens can exercise real collection primitives.
+
+Use `--mcp-profile wpds` to attach that same WPDS MCP/package profile to any design system, for example Airbnb, Claude, Tumblr, Beeper, or Gravatar.

@@ -25,7 +25,8 @@ export async function prepareRun(options) {
   const agent = options.agent || 'claude';
   const screen = options.screen;
   const design = options.design;
-  const mcp = options.mcp || 'off';
+  const mcpProfile = options.mcpProfile || '';
+  const mcp = mcpProfile ? 'on' : options.mcp || 'off';
   const model = options.model || (agent === 'claude' ? 'claude-opus-4-7' : 'default');
 
   if (!screen || !design) {
@@ -55,18 +56,29 @@ export async function prepareRun(options) {
   const screenPrompt = await fsp.readFile(screenPath, 'utf8');
   const designDir = path.join(rootDir, 'design-systems', design);
   const preset = await readJson(path.join(designDir, 'preset.json'), {});
+  const profileDir = mcpProfile ? path.join(rootDir, 'mcp-profiles', mcpProfile) : '';
+  const mcpProfilePreset = mcpProfile ? await readJson(path.join(profileDir, 'profile.json')) : {};
   const designMd = preset.includeDesignMd === false ? '' : await readIfExists(path.join(designDir, 'DESIGN.md'));
   const agentsAddendum = await readIfExists(path.join(designDir, 'agents-addendum.md'));
   const mcpAgentsAddendum = mcp === 'on' ? await readIfExists(path.join(designDir, 'mcp-agents-addendum.md')) : '';
+  const profileAgentsAddendum =
+    mcp === 'on' && mcpProfile ? await readIfExists(path.join(profileDir, 'agents-addendum.md')) : '';
   const baseAgent = await fsp.readFile(path.join(rootDir, 'agents', 'base-agent.md'), 'utf8');
-  const mcpServers = mcp === 'on' ? preset.mcpServers || {} : {};
+  const mcpServers =
+    mcp === 'on'
+      ? {
+          ...(preset.mcpServers || {}),
+          ...(mcpProfilePreset.mcpServers || {}),
+        }
+      : {};
+  const mcpLabel = buildMcpLabel(mcp, mcpProfile);
   const runId = [
     utcStamp(),
     agent,
     screen,
     design,
-    `mcp-${mcp}`,
-    compactHash(`${screenPrompt}\n${designMd}\n${JSON.stringify(mcpServers)}`),
+    mcpLabel,
+    compactHash(`${screenPrompt}\n${designMd}\n${mcpProfile}\n${JSON.stringify(mcpServers)}`),
   ].join('__');
 
   const runDir = path.join(rootDir, 'runs', runId);
@@ -77,7 +89,7 @@ export async function prepareRun(options) {
 
   const workspacePackagePath = path.join(workspaceDir, 'package.json');
   const workspacePackage = await readJson(workspacePackagePath);
-  const packagePreset = buildPackagePreset(preset, mcp === 'on');
+  const packagePreset = buildPackagePreset(preset, mcp === 'on', mcpProfilePreset);
   await writeJson(workspacePackagePath, mergePackageJson(workspacePackage, packagePreset));
 
   const screenRoute = stripNumericPrefix(screen);
@@ -86,7 +98,7 @@ export async function prepareRun(options) {
 
   const mcpNote =
     mcp === 'on' && Object.keys(mcpServers).length > 0
-      ? `MCP enabled for this run: ${Object.keys(mcpServers).join(', ')}.`
+      ? `MCP enabled for this run: ${Object.keys(mcpServers).join(', ')}${mcpProfile ? ` (profile: ${mcpProfile})` : ''}.`
       : 'No design-system MCP is enabled for this run.';
 
   const composedAgents = [
@@ -102,6 +114,7 @@ export async function prepareRun(options) {
     `- ${mcpNote}`,
     agentsAddendum.trim(),
     mcpAgentsAddendum.trim(),
+    profileAgentsAddendum.trim(),
   ]
     .filter(Boolean)
     .join('\n');
@@ -144,8 +157,10 @@ export async function prepareRun(options) {
     design,
     designName: preset.name || design,
     mcp,
+    mcpProfile: mcpProfile || null,
+    mcpLabel,
     mcpServers: Object.keys(mcpServers),
-    installBeforeAgent: Boolean(preset.installBeforeAgent),
+    installBeforeAgent: Boolean(preset.installBeforeAgent || mcpProfilePreset.installBeforeAgent),
     createdAt: new Date().toISOString(),
     paths: {
       runDir,
@@ -177,7 +192,7 @@ export async function prepareRun(options) {
   return { ...metadata, fullPrompt };
 }
 
-function buildPackagePreset(preset, includeMcpPackages) {
+function buildPackagePreset(preset, includeMcpPackages, profile = {}) {
   if (!includeMcpPackages) {
     return preset;
   }
@@ -187,12 +202,24 @@ function buildPackagePreset(preset, includeMcpPackages) {
     dependencies: {
       ...(preset.dependencies || {}),
       ...(preset.mcpDependencies || {}),
+      ...(profile.dependencies || {}),
+      ...(profile.mcpDependencies || {}),
     },
     devDependencies: {
       ...(preset.devDependencies || {}),
       ...(preset.mcpDevDependencies || {}),
+      ...(profile.devDependencies || {}),
+      ...(profile.mcpDevDependencies || {}),
     },
   };
+}
+
+function buildMcpLabel(mcp, profile) {
+  if (mcp !== 'on') {
+    return 'mcp-off';
+  }
+
+  return profile ? `mcp-on-${profile}` : 'mcp-on';
 }
 
 async function listDirectoriesOrFiles(dirPath) {

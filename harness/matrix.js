@@ -70,6 +70,10 @@ function buildJobs({ agents, screens, designs, mcps, args }) {
             runArgs.push('--model', args.model);
           }
 
+          if (args.mcpProfile) {
+            runArgs.push('--mcp-profile', args.mcpProfile);
+          }
+
           if (args.dryRun) {
             runArgs.push('--dry-run');
           }

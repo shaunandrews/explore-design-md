@@ -103,7 +103,7 @@ async function captureRun(run) {
           safeSegment(run.screen),
           safeSegment(run.design),
           safeSegment(run.agent),
-          `mcp-${safeSegment(run.mcp)}`,
+          safeSegment(run.mcpLabel || `mcp-${run.mcp}`),
           name,
           shortRunLabel(run.runId),
         ].join('__') + '.png'
