@@ -57,6 +57,7 @@ export async function prepareRun(options) {
   const preset = await readJson(path.join(designDir, 'preset.json'), {});
   const designMd = preset.includeDesignMd === false ? '' : await readIfExists(path.join(designDir, 'DESIGN.md'));
   const agentsAddendum = await readIfExists(path.join(designDir, 'agents-addendum.md'));
+  const mcpAgentsAddendum = mcp === 'on' ? await readIfExists(path.join(designDir, 'mcp-agents-addendum.md')) : '';
   const baseAgent = await fsp.readFile(path.join(rootDir, 'agents', 'base-agent.md'), 'utf8');
   const mcpServers = mcp === 'on' ? preset.mcpServers || {} : {};
   const runId = [
@@ -76,7 +77,8 @@ export async function prepareRun(options) {
 
   const workspacePackagePath = path.join(workspaceDir, 'package.json');
   const workspacePackage = await readJson(workspacePackagePath);
-  await writeJson(workspacePackagePath, mergePackageJson(workspacePackage, preset));
+  const packagePreset = buildPackagePreset(preset, mcp === 'on');
+  await writeJson(workspacePackagePath, mergePackageJson(workspacePackage, packagePreset));
 
   const screenRoute = stripNumericPrefix(screen);
   const targetComponent = `${pascalCase(screen)}.jsx`;
@@ -99,6 +101,7 @@ export async function prepareRun(options) {
     `- Design system: ${preset.name || design}`,
     `- ${mcpNote}`,
     agentsAddendum.trim(),
+    mcpAgentsAddendum.trim(),
   ]
     .filter(Boolean)
     .join('\n');
@@ -171,6 +174,24 @@ export async function prepareRun(options) {
   });
 
   return { ...metadata, fullPrompt };
+}
+
+function buildPackagePreset(preset, includeMcpPackages) {
+  if (!includeMcpPackages) {
+    return preset;
+  }
+
+  return {
+    ...preset,
+    dependencies: {
+      ...(preset.dependencies || {}),
+      ...(preset.mcpDependencies || {}),
+    },
+    devDependencies: {
+      ...(preset.devDependencies || {}),
+      ...(preset.mcpDevDependencies || {}),
+    },
+  };
 }
 
 async function listDirectoriesOrFiles(dirPath) {

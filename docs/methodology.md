@@ -35,7 +35,7 @@ Reusable presentation artifacts live under `results/`:
 
 - `results/manifest.json`
 - `results/transcripts/<run-id>.txt`
-- `results/screenshots/by-design/<design>/<screen>/<agent>__mcp-<mode>__<run-id>/<screen>__<design>__<agent>__mcp-<mode>__desktop.png`
+- `results/screenshots/by-design/<screen>__<design>__<agent>__mcp-<mode>__desktop__<short-run-id>.png`
 - `results/evaluations/<run-id>.json`
 
 ## MCP Behavior
@@ -48,6 +48,8 @@ Reusable presentation artifacts live under `results/`:
 - `.codex/config.toml` for Codex.
 
 The included starter packs use the DESIGNmd MCP server (`npx designmd-mcp`) when MCP is enabled. Per DESIGNmd's docs, search/browse work without an API key; downloading and account actions require one.
+
+Design packs can also define MCP-only package additions via `mcpDependencies` and `mcpDevDependencies`. For example, `a8c-wordpress-com` wires the WordPress Design System MCP (`npx -y @wordpress/design-system-mcp`) and installs `@wordpress/theme` plus `@wordpress/ui` only when `--mcp on` is used.
 
 ## Agent Isolation
 

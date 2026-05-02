@@ -49,15 +49,7 @@ async function captureRun(run) {
   const baseUrl = `http://127.0.0.1:${port}`;
   const pageUrl = `${baseUrl}/#/${run.screenRoute}`;
   const screenshotDir = path.join(rootDir, 'results', 'screenshots', run.runId);
-  const namedScreenshotDir = path.join(
-    rootDir,
-    'results',
-    'screenshots',
-    'by-design',
-    safeSegment(run.design),
-    safeSegment(run.screen),
-    `${safeSegment(run.agent)}__mcp-${safeSegment(run.mcp)}__${run.runId}`
-  );
+  const namedScreenshotDir = path.join(rootDir, 'results', 'screenshots', 'by-design');
 
   try {
     await waitForServer(baseUrl);
@@ -76,7 +68,14 @@ async function captureRun(run) {
       const canonicalPath = path.join(screenshotDir, `${name}.png`);
       const namedPath = path.join(
         namedScreenshotDir,
-        `${safeSegment(run.screen)}__${safeSegment(run.design)}__${safeSegment(run.agent)}__mcp-${safeSegment(run.mcp)}__${name}.png`
+        [
+          safeSegment(run.screen),
+          safeSegment(run.design),
+          safeSegment(run.agent),
+          `mcp-${safeSegment(run.mcp)}`,
+          name,
+          shortRunLabel(run.runId),
+        ].join('__') + '.png'
       );
 
       await page.screenshot({
@@ -114,6 +113,11 @@ function safeSegment(value) {
     .toLowerCase()
     .replace(/[^a-z0-9._-]+/g, '-')
     .replace(/^-+|-+$/g, '');
+}
+
+function shortRunLabel(runId) {
+  const parts = String(runId || '').split('__');
+  return [parts[0], parts.at(-1)].filter(Boolean).map(safeSegment).join('-') || 'unknown-run';
 }
 
 async function main() {

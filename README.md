@@ -49,3 +49,5 @@ npm run viewer
 Claude runs require `ANTHROPIC_API_KEY` in the environment or `/tmp/geode-claude-key`, matching the pattern from the Geode experiment. Codex runs use a scoped `CODEX_HOME` inside the generated workspace and symlink `~/.codex/auth.json`.
 
 Imported Automattic brand packs use the `a8c-*` prefix, for example `a8c-woocommerce`, `a8c-jetpack`, `a8c-wordpress-com`, and `a8c-wpvip`.
+
+Named screenshots are written flat under `results/screenshots/by-design/` so Finder/browser comparisons do not require drilling through run folders.

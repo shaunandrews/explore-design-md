@@ -5,12 +5,17 @@
   "dependencies": {},
   "devDependencies": {},
   "mcpServers": {
-    "designmd": {
+    "wpds": {
       "command": "npx",
       "args": [
-        "designmd-mcp"
+        "-y",
+        "@wordpress/design-system-mcp"
       ]
     }
+  },
+  "mcpDependencies": {
+    "@wordpress/theme": "^0.12.0",
+    "@wordpress/ui": "^0.12.0"
   },
   "source": {
     "repository": "github.a8c.com/Automattic/A8c-design-md",
