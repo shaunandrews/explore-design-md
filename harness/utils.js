@@ -165,12 +165,13 @@ export async function updateManifest(runId, patch) {
   const manifestPath = path.join(rootDir, 'results', 'manifest.json');
   await withLock(`${manifestPath}.lock`, async () => {
     const manifest = await readJson(manifestPath, []);
+    const runMetadata = await readJson(path.join(rootDir, 'runs', runId, 'run.json'), {});
     const index = manifest.findIndex((entry) => entry.runId === runId);
 
     if (index === -1) {
-      manifest.push({ runId, ...patch });
+      manifest.push({ ...runMetadata, runId, ...patch });
     } else {
-      manifest[index] = { ...manifest[index], ...patch };
+      manifest[index] = { ...runMetadata, ...manifest[index], ...patch };
     }
 
     await writeJson(manifestPath, manifest.sort((a, b) => a.runId.localeCompare(b.runId)));
