@@ -3,6 +3,7 @@ version: alpha
 name: Signal Desk
 description: "A calm product analytics design system for focused product teams."
 colors:
+  primary: "#174A34"
   ink: "#18201B"
   inkMuted: "#5F675F"
   canvas: "#F5F2EA"
@@ -58,18 +59,14 @@ rounded:
   sm: "4px"
   md: "8px"
   lg: "12px"
-elevation:
-  card: "0 1px 2px rgba(24, 32, 27, 0.08)"
-  raised: "0 8px 24px rgba(24, 32, 27, 0.12)"
 components:
   page:
     backgroundColor: "{colors.canvas}"
     textColor: "{colors.ink}"
   card:
     backgroundColor: "{colors.surface}"
-    borderColor: "{colors.border}"
     rounded: "{rounded.md}"
-    shadow: "{elevation.card}"
+    padding: "{spacing.5}"
   buttonPrimary:
     backgroundColor: "{colors.brand}"
     textColor: "{colors.brandText}"
@@ -114,4 +111,3 @@ Buttons are rectangular with 8px radius. Cards use a 1px border and light shadow
 - Don't use gradients, decorative blobs, glassmorphism, or oversized marketing hero layouts.
 - Don't invent a different palette per section.
 - Don't bury important actions in low-contrast controls.
-

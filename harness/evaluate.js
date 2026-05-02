@@ -19,7 +19,7 @@ async function evaluateRun(run) {
 
   const lint =
     designSource.length > 0
-      ? spawnSync('npx', ['@google/design.md', 'lint', 'DESIGN.md'], {
+      ? spawnSync('npx', ['design.md', 'lint', 'DESIGN.md'], {
           cwd: workspaceDir,
           encoding: 'utf8',
         })
@@ -105,4 +105,3 @@ main().catch((error) => {
   console.error(error.stack || error.message);
   process.exit(1);
 });
-

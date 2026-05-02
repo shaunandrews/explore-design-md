@@ -3,6 +3,7 @@ version: alpha
 name: Signal Desk Template-Aware
 description: "Signal Desk visual primitives plus artifact-specific templates."
 colors:
+  primary: "#174A34"
   ink: "#18201B"
   inkMuted: "#5F675F"
   canvas: "#F5F2EA"
@@ -58,17 +59,14 @@ rounded:
   sm: "4px"
   md: "8px"
   lg: "12px"
-elevation:
-  card: "0 1px 2px rgba(24, 32, 27, 0.08)"
 components:
   page:
     backgroundColor: "{colors.canvas}"
     textColor: "{colors.ink}"
   card:
     backgroundColor: "{colors.surface}"
-    borderColor: "{colors.border}"
     rounded: "{rounded.md}"
-    shadow: "{elevation.card}"
+    padding: "{spacing.5}"
   buttonPrimary:
     backgroundColor: "{colors.brand}"
     textColor: "{colors.brandText}"
@@ -128,4 +126,3 @@ Settings screens should feel stable and conservative. Do not use dashboard cards
 - Do use realistic product language.
 - Don't use a deck, ad, or landing-page layout for app screens.
 - Don't invent one-off components when standard controls work.
-

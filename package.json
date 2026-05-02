@@ -13,10 +13,10 @@
     "check": "node --check harness/*.js"
   },
   "devDependencies": {
+    "@google/design.md": "^0.1.1",
     "playwright": "^1.52.0"
   },
   "engines": {
     "node": ">=20"
   }
 }
-
