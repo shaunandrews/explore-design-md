@@ -6,9 +6,8 @@ runs/
 **/node_modules/
 
 # Keep result directories, but generated artifacts can be large.
+results/manifest.json
 results/screenshots/*
 results/transcripts/*
 results/evaluations/*
 !results/**/.gitkeep
-!results/manifest.json
-
