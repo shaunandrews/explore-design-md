@@ -127,6 +127,7 @@ async function runCodex(metadata, transcriptPath) {
       env: {
         ...process.env,
         CODEX_HOME: codexHome,
+        GIT_CEILING_DIRECTORIES: metadata.paths.runDir,
       },
     }
   );
@@ -194,4 +195,3 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     process.exit(1);
   });
 }
-

@@ -1,5 +1,4 @@
 import fsp from 'node:fs/promises';
-import { spawnSync } from 'node:child_process';
 import os from 'node:os';
 import path from 'node:path';
 import {
@@ -120,7 +119,6 @@ export async function prepareRun(options) {
     path.join(workspaceDir, '.gitignore'),
     ['.codex/', 'node_modules/', 'dist/', 'package-lock.json', ''].join('\n')
   );
-  initializeWorkspaceGit(workspaceDir);
 
   const promptHeader = [
     'Before doing anything else, read AGENTS.md and DESIGN.md if it exists.',
@@ -173,35 +171,6 @@ export async function prepareRun(options) {
   });
 
   return { ...metadata, fullPrompt };
-}
-
-function initializeWorkspaceGit(workspaceDir) {
-  runGit(['init', '--quiet'], workspaceDir);
-  runGit(['add', '.'], workspaceDir);
-  runGit(
-    [
-      '-c',
-      'user.name=explore-design-md',
-      '-c',
-      'user.email=explore-design-md@example.invalid',
-      'commit',
-      '--quiet',
-      '-m',
-      'Baseline generated workspace',
-    ],
-    workspaceDir
-  );
-}
-
-function runGit(args, cwd) {
-  const result = spawnSync('git', args, {
-    cwd,
-    encoding: 'utf8',
-  });
-
-  if (result.status !== 0) {
-    throw new Error(`git ${args.join(' ')} failed: ${result.stderr || result.stdout}`);
-  }
 }
 
 async function listDirectoriesOrFiles(dirPath) {
