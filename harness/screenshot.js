@@ -58,13 +58,44 @@ async function captureRun(run) {
 
     const browser = await chromium.launch();
     const page = await browser.newPage();
+    const pageErrors = [];
+    const consoleErrors = [];
+    page.on('pageerror', (error) => {
+      pageErrors.push(error.stack || error.message);
+    });
+    page.on('console', (message) => {
+      if (message.type() === 'error') {
+        consoleErrors.push(message.text());
+      }
+    });
     const screenshots = [];
     const canonicalScreenshots = [];
 
     for (const [name, viewport] of Object.entries(viewports)) {
+      const pageErrorStart = pageErrors.length;
+      const consoleErrorStart = consoleErrors.length;
       await page.setViewportSize(viewport);
       await page.goto(pageUrl, { waitUntil: 'domcontentloaded' });
       await page.waitForTimeout(500);
+
+      const newPageErrors = pageErrors.slice(pageErrorStart);
+      const newConsoleErrors = consoleErrors.slice(consoleErrorStart);
+      if (newPageErrors.length > 0) {
+        throw new Error(
+          [`Runtime error while screenshotting ${run.runId} (${name}):`, ...newPageErrors].join('\n')
+        );
+      }
+      if (newConsoleErrors.length > 0) {
+        throw new Error(
+          [`Console error while screenshotting ${run.runId} (${name}):`, ...newConsoleErrors].join('\n')
+        );
+      }
+
+      const bodyText = await page.locator('body').innerText().catch(() => '');
+      if (!bodyText.trim()) {
+        throw new Error(`Rendered page is empty while screenshotting ${run.runId} (${name}).`);
+      }
+
       const canonicalPath = path.join(screenshotDir, `${name}.png`);
       const namedPath = path.join(
         namedScreenshotDir,

@@ -24,6 +24,7 @@ Build a single screen component at `src/screens/DomainsList.jsx`.
   - Renewal checklist.
   - Compact DNS guidance with a support/contact affordance.
 - Prefer `@wordpress/dataviews` for the list/table/grid surface when available. Use `@wordpress/ui` first for supporting UI, and `@wordpress/components` only to fill gaps.
+- If you customize `@wordpress/dataviews` field sorting, verify the package's sort callback signature before using it. Prefer `getValue` with the built-in sort behavior unless a custom sort is clearly required.
 - Responsive behavior:
   - Desktop: domains collection and secondary panel should sit side by side.
   - Mobile: filters, rows, and actions stack cleanly with no overlap.
