@@ -1,6 +1,8 @@
 import AnalyticsDashboard from './screens/AnalyticsDashboard.jsx';
+import DomainsList from './screens/DomainsList.jsx';
 import OnboardingFlow from './screens/OnboardingFlow.jsx';
 import SettingsPanel from './screens/SettingsPanel.jsx';
+import SitesList from './screens/SitesList.jsx';
 
 const routes = {
   'analytics-dashboard': {
@@ -14,6 +16,14 @@ const routes = {
   'settings-panel': {
     label: 'Settings Panel',
     component: SettingsPanel,
+  },
+  'sites-list': {
+    label: 'Sites List',
+    component: SitesList,
+  },
+  'domains-list': {
+    label: 'Domains List',
+    component: DomainsList,
   },
 };
 
@@ -44,4 +54,3 @@ export default function App() {
     </div>
   );
 }
-

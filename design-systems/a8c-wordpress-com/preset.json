@@ -14,9 +14,13 @@
     }
   },
   "mcpDependencies": {
+    "@wordpress/components": "latest",
+    "@wordpress/dataviews": "latest",
+    "@wordpress/icons": "latest",
     "@wordpress/theme": "^0.12.0",
     "@wordpress/ui": "^0.12.0"
   },
+  "installBeforeAgent": true,
   "source": {
     "repository": "github.a8c.com/Automattic/A8c-design-md",
     "ref": "trunk",

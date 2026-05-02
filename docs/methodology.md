@@ -49,7 +49,9 @@ Reusable presentation artifacts live under `results/`:
 
 The included starter packs use the DESIGNmd MCP server (`npx designmd-mcp`) when MCP is enabled. Per DESIGNmd's docs, search/browse work without an API key; downloading and account actions require one.
 
-Design packs can also define MCP-only package additions via `mcpDependencies` and `mcpDevDependencies`. For example, `a8c-wordpress-com` wires the WordPress Design System MCP (`npx -y @wordpress/design-system-mcp`) and installs `@wordpress/theme` plus `@wordpress/ui` only when `--mcp on` is used.
+Design packs can also define MCP-only package additions via `mcpDependencies` and `mcpDevDependencies`. For example, `a8c-wordpress-com` wires the WordPress Design System MCP (`npx -y @wordpress/design-system-mcp`) and installs `@wordpress/theme`, `@wordpress/ui`, `@wordpress/components`, `@wordpress/dataviews`, and `@wordpress/icons` only when `--mcp on` is used.
+
+Packs that set `installBeforeAgent: true` run `npm install` before the agent starts, so the agent can inspect package exports and docs locally. The harness still runs `npm install` again after the agent in case the generated code adds dependencies.
 
 ## Agent Isolation
 

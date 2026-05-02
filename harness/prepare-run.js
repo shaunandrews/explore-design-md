@@ -145,6 +145,7 @@ export async function prepareRun(options) {
     designName: preset.name || design,
     mcp,
     mcpServers: Object.keys(mcpServers),
+    installBeforeAgent: Boolean(preset.installBeforeAgent),
     createdAt: new Date().toISOString(),
     paths: {
       runDir,

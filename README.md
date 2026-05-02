@@ -13,7 +13,7 @@ Start here:
 
 This repo can spin up isolated agent workspaces for a matrix of:
 
-- Screen prompt: dashboard, onboarding, settings.
+- Screen prompt: dashboard, onboarding, settings, sites list, domains list.
 - `DESIGN.md` pack: no design file, minimal tokens, rich system, rich system plus templates, flawed/stale system.
 - Agent: Claude Code or Codex.
 - MCP: off or on.
@@ -51,3 +51,5 @@ Claude runs require `ANTHROPIC_API_KEY` in the environment or `/tmp/geode-claude
 Imported Automattic brand packs use the `a8c-*` prefix, for example `a8c-woocommerce`, `a8c-jetpack`, `a8c-wordpress-com`, and `a8c-wpvip`.
 
 Named screenshots are written flat under `results/screenshots/by-design/` so Finder/browser comparisons do not require drilling through run folders.
+
+The `a8c-wordpress-com` MCP-on condition uses the WordPress Design System MCP plus `@wordpress/ui`, `@wordpress/components`, and `@wordpress/dataviews` so list-heavy screens can exercise real collection primitives.

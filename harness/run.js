@@ -27,6 +27,20 @@ export async function runExperiment(options) {
     updatedAt: new Date().toISOString(),
   });
 
+  let preInstallResult = null;
+  if (metadata.installBeforeAgent) {
+    await append(transcriptPath, '\n=== Pre-agent: npm install ===\n');
+    preInstallResult = await runCommand('npm', ['install', '--silent'], {
+      cwd: metadata.paths.workspaceDir,
+      transcriptPath,
+      env: process.env,
+    });
+    await updateManifest(metadata.runId, {
+      preNpmInstallExitCode: preInstallResult.code,
+      updatedAt: new Date().toISOString(),
+    });
+  }
+
   const agentResult =
     metadata.agent === 'claude'
       ? await runClaude(metadata, transcriptPath)
@@ -45,6 +59,7 @@ export async function runExperiment(options) {
   await updateManifest(metadata.runId, {
     status,
     agentExitCode: agentResult.code,
+    preNpmInstallExitCode: preInstallResult?.code ?? null,
     npmInstallExitCode: installResult.code,
     finishedAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
