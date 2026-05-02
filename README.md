@@ -34,6 +34,9 @@ npm run run -- --agent claude --screen 01-analytics-dashboard --design rich-syst
 # Run a dry matrix to verify combinations.
 npm run matrix -- --agents claude,codex --screens all --designs all --mcp both --dry-run
 
+# Run selected combinations in parallel.
+npm run matrix -- --agent codex --screen 01-analytics-dashboard --designs a8c-wordpress-com,a8c-tumblr,a8c-jetpack --mcp off --concurrency 3
+
 # Refresh imported Automattic brand DESIGN.md packs from a local clone.
 npm run import-a8c-design-md -- --source /private/tmp/A8c-design-md
 
