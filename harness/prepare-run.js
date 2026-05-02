@@ -111,7 +111,10 @@ export async function prepareRun(options) {
 
   await fsp.writeFile(path.join(workspaceDir, '.mcp.json'), `${renderClaudeMcpConfig(mcpServers)}\n`);
   await ensureDir(path.join(workspaceDir, '.codex'));
-  await fsp.writeFile(path.join(workspaceDir, '.codex', 'config.toml'), renderCodexConfig(mcpServers));
+  await fsp.writeFile(
+    path.join(workspaceDir, '.codex', 'config.toml'),
+    renderCodexConfig(mcpServers, [rootDir, workspaceDir])
+  );
 
   const promptHeader = [
     'Before doing anything else, read AGENTS.md and DESIGN.md if it exists.',
@@ -187,4 +190,3 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     process.exit(1);
   });
 }
-
