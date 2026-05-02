@@ -1,0 +1,14 @@
+{
+  "name": "Signal Rich System",
+  "description": "A richer DESIGN.md with tokens, rationale, and guardrails. DESIGNmd MCP can be enabled for supporting lookup.",
+  "includeDesignMd": true,
+  "dependencies": {},
+  "devDependencies": {},
+  "mcpServers": {
+    "designmd": {
+      "command": "npx",
+      "args": ["designmd-mcp"]
+    }
+  }
+}
+

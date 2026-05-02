@@ -1,0 +1,14 @@
+{
+  "name": "Flawed/Stale System",
+  "description": "Intentionally contradictory context used to demonstrate risk from stale or mismatched DESIGN.md input.",
+  "includeDesignMd": true,
+  "dependencies": {},
+  "devDependencies": {},
+  "mcpServers": {
+    "designmd": {
+      "command": "npx",
+      "args": ["designmd-mcp"]
+    }
+  }
+}
+

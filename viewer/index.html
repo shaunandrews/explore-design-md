@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DESIGN.md Runs</title>
+    <link rel="stylesheet" href="/viewer/styles.css" />
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>DESIGN.md Runs</h1>
+        <p>Compare generated screens by prompt, design-system file, agent, and MCP setting.</p>
+      </div>
+      <button id="refresh" type="button">Refresh</button>
+    </header>
+
+    <main>
+      <aside>
+        <label>
+          Screen
+          <select id="screen-filter"></select>
+        </label>
+        <label>
+          Design
+          <select id="design-filter"></select>
+        </label>
+        <label>
+          Agent
+          <select id="agent-filter"></select>
+        </label>
+        <label>
+          MCP
+          <select id="mcp-filter"></select>
+        </label>
+      </aside>
+      <section id="runs"></section>
+    </main>
+
+    <script type="module" src="/viewer/app.js"></script>
+  </body>
+</html>
+

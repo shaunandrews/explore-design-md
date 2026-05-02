@@ -1,0 +1,9 @@
+{
+  "name": "Baseline: no DESIGN.md",
+  "description": "No design-system context. Used to see what the agent invents from the product prompt alone.",
+  "includeDesignMd": false,
+  "dependencies": {},
+  "devDependencies": {},
+  "mcpServers": {}
+}
+

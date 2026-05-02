@@ -1,0 +1,14 @@
+{
+  "name": "Signal Rich System + Screen Templates",
+  "description": "The rich system plus screen-specific layout rules for dashboards, onboarding, and settings.",
+  "includeDesignMd": true,
+  "dependencies": {},
+  "devDependencies": {},
+  "mcpServers": {
+    "designmd": {
+      "command": "npx",
+      "args": ["designmd-mcp"]
+    }
+  }
+}
+

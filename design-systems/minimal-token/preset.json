@@ -1,0 +1,14 @@
+{
+  "name": "Minimal Token System",
+  "description": "A small token-only DESIGN.md with the DESIGNmd MCP available when --mcp on is used.",
+  "includeDesignMd": true,
+  "dependencies": {},
+  "devDependencies": {},
+  "mcpServers": {
+    "designmd": {
+      "command": "npx",
+      "args": ["designmd-mcp"]
+    }
+  }
+}
+

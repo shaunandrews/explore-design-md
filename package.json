@@ -1,0 +1,22 @@
+{
+  "name": "explore-design-md",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "prepare-run": "node harness/prepare-run.js",
+    "run": "node harness/run.js",
+    "matrix": "node harness/matrix.js",
+    "screenshot": "node harness/screenshot.js",
+    "evaluate": "node harness/evaluate.js",
+    "viewer": "node harness/viewer.js",
+    "check": "node --check harness/*.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.52.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
+
