@@ -1,0 +1,17 @@
+{
+  "name": "Airbnb DESIGN.md",
+  "description": "Airbnb-inspired consumer marketplace design system provided for the DESIGN.md comparison harness.",
+  "includeDesignMd": true,
+  "dependencies": {},
+  "devDependencies": {},
+  "mcpServers": {
+    "designmd": {
+      "command": "npx",
+      "args": ["designmd-mcp"]
+    }
+  },
+  "source": {
+    "type": "user-provided",
+    "capturedAt": "2026-05-02"
+  }
+}
