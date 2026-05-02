@@ -2,6 +2,10 @@
 
 This is a controlled `DESIGN.md` experiment workspace. Your job is to build one requested screen while following the local project conventions exactly.
 
+## Benchmark automation
+
+This run is a pre-approved benchmark generation. Do not invoke interactive planning, brainstorming, approval-gate, or spec-writing skills. Do not ask the user clarifying questions. The screen prompt, this `AGENTS.md`, and `DESIGN.md` are the complete approved brief. Implement the requested screen directly.
+
 ## Context order
 
 1. Read this `AGENTS.md`.
@@ -26,4 +30,3 @@ This is a controlled `DESIGN.md` experiment workspace. Your job is to build one 
 3. `src/screens/<TargetScreen>.css` — optional, only if you prefer a colocated stylesheet.
 
 Do not modify `src/main.jsx`, `src/App.jsx`, `src/index.css`, `index.html`, or unrelated screen files.
-
