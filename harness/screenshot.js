@@ -40,6 +40,7 @@ async function captureRun(run) {
   const port = 4300 + Math.floor(Math.random() * 1000);
   const server = spawn('npm', ['run', 'dev', '--', '--host', '127.0.0.1', '--port', String(port)], {
     cwd: workspaceDir,
+    detached: true,
     stdio: ['ignore', 'pipe', 'pipe'],
   });
 
@@ -76,7 +77,11 @@ async function captureRun(run) {
       updatedAt: new Date().toISOString(),
     });
   } finally {
-    server.kill('SIGTERM');
+    try {
+      process.kill(-server.pid, 'SIGTERM');
+    } catch {
+      server.kill('SIGTERM');
+    }
   }
 }
 
