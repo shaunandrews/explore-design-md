@@ -1,4 +1,5 @@
 import crypto from 'node:crypto';
+import fs from 'node:fs';
 import fsp from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
@@ -60,8 +61,6 @@ export async function prepareRun(options) {
   const profileDir = mcpProfile ? path.join(rootDir, 'mcp-profiles', mcpProfile) : '';
   const mcpProfilePreset = mcpProfile ? await readJson(path.join(profileDir, 'profile.json')) : {};
   const designMd = preset.includeDesignMd === false ? '' : await readIfExists(path.join(designDir, 'DESIGN.md'));
-  const agentsAddendum = await readIfExists(path.join(designDir, 'agents-addendum.md'));
-  const mcpAgentsAddendum = mcp === 'on' ? await readIfExists(path.join(designDir, 'mcp-agents-addendum.md')) : '';
   const profileAgentsAddendum =
     mcp === 'on' && mcpProfile ? await readIfExists(path.join(profileDir, 'agents-addendum.md')) : '';
   const baseAgent = await fsp.readFile(path.join(rootDir, 'agents', 'base-agent.md'), 'utf8');
@@ -99,24 +98,10 @@ export async function prepareRun(options) {
   const targetComponent = `${pascalCase(screen)}.jsx`;
   const targetFile = `src/screens/${targetComponent}`;
 
-  const mcpNote =
-    mcp === 'on' && Object.keys(mcpServers).length > 0
-      ? `MCP enabled for this run: ${Object.keys(mcpServers).join(', ')}${mcpProfile ? ` (profile: ${mcpProfile})` : ''}.`
-      : 'No design-system MCP is enabled for this run.';
-
   const composedAgents = [
     baseAgent.trim(),
     '',
-    '## Run-specific context',
-    '',
-    `- Agent: ${agent}`,
-    `- Model: ${model}`,
-    `- Screen prompt: ${screen}`,
-    `- Target file: ${targetFile}`,
-    `- Design system: ${preset.name || design}`,
-    `- ${mcpNote}`,
-    agentsAddendum.trim(),
-    mcpAgentsAddendum.trim(),
+    `Target file for this run: ${targetFile}`,
     profileAgentsAddendum.trim(),
   ]
     .filter(Boolean)
@@ -126,6 +111,14 @@ export async function prepareRun(options) {
 
   if (designMd) {
     await fsp.writeFile(path.join(workspaceDir, 'DESIGN.md'), designMd);
+  }
+
+  const researchSrc = path.join(designDir, 'research');
+  let hasResearch = false;
+  if (fs.existsSync(researchSrc)) {
+    const researchDest = path.join(workspaceDir, 'research');
+    await fsp.cp(researchSrc, researchDest, { recursive: true });
+    hasResearch = true;
   }
 
   await fsp.writeFile(path.join(workspaceDir, '.mcp.json'), `${renderClaudeMcpConfig(mcpServers)}\n`);
@@ -139,8 +132,15 @@ export async function prepareRun(options) {
     ['.codex/', 'node_modules/', 'dist/', 'package-lock.json', ''].join('\n')
   );
 
+  const researchInstruction = hasResearch
+    ? [
+        '',
+        'Before writing any code, read every file under `research/`. Use the `Read` tool on the image files (`research/*.png`, `research/*.jpg`) so you actually see them — do not skip the images. The visual references and design-direction are how you know whether what you are about to build looks right.',
+      ].join('\n')
+    : '';
+
   const promptHeader = [
-    'Before doing anything else, read AGENTS.md and DESIGN.md if it exists.',
+    'Before doing anything else, read AGENTS.md and DESIGN.md if it exists.' + researchInstruction,
     'Follow those files exactly, then complete the task below.',
     '',
     `Target file: ${targetFile}`,
