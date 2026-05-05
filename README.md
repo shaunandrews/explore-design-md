@@ -37,7 +37,10 @@ npm run matrix -- --agents claude,codex --screens all --designs all --mcp both -
 # Run selected combinations in parallel.
 npm run matrix -- --agent codex --screen 01-analytics-dashboard --designs a8c-wordpress-com,a8c-tumblr,a8c-jetpack --mcp off --concurrency 3
 
-# Run any DESIGN.md with the WordPress Design System MCP/profile attached.
+# Run the plain WordPress admin DESIGN.md with the WordPress Design System MCP.
+npm run run -- --agent codex --screen 05-domains-list --design wordpress --mcp on
+
+# Run any other DESIGN.md with the WordPress Design System MCP/profile attached.
 npm run run -- --agent codex --screen 05-domains-list --design airbnb --mcp-profile wpds
 
 # Refresh imported Automattic brand DESIGN.md packs from a local clone.
@@ -51,10 +54,10 @@ npm run viewer
 
 Claude runs require `ANTHROPIC_API_KEY` in the environment or `/tmp/geode-claude-key`, matching the pattern from the Geode experiment. Codex runs use a scoped `CODEX_HOME` inside the generated workspace and symlink `~/.codex/auth.json`.
 
-Imported Automattic brand packs use the `a8c-*` prefix, for example `a8c-woocommerce`, `a8c-jetpack`, `a8c-wordpress-com`, and `a8c-wpvip`.
+Imported Automattic brand packs use the `a8c-*` prefix, for example `a8c-woocommerce`, `a8c-jetpack`, `a8c-wordpress-com`, and `a8c-wpvip`. The plain open-source WordPress admin/block-editor system is `wordpress`.
 
 Named screenshots are written flat under `results/screenshots/by-design/` so Finder/browser comparisons do not require drilling through run folders.
 
-The `a8c-wordpress-com` MCP-on condition uses the WordPress Design System MCP plus `@wordpress/ui`, `@wordpress/components`, and `@wordpress/dataviews` so list-heavy screens can exercise real collection primitives.
+The `wordpress` MCP-on condition uses the WordPress Design System MCP plus `@wordpress/ui`, `@wordpress/components`, and `@wordpress/dataviews` so list-heavy screens can exercise real WordPress admin collection primitives.
 
 Use `--mcp-profile wpds` to attach that same WPDS MCP/package profile to any design system, for example Airbnb, Claude, Tumblr, Beeper, or Gravatar.

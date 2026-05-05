@@ -1,598 +1,328 @@
----
-version: alpha
-name: WordPress Admin
-description: WordPress wp-admin and block-editor admin chrome design system for AI coding agents. Use these tokens and guidelines when generating WordPress admin screens, plugin settings pages, network admin pages, dashboard widgets, list tables, media/admin flows, notices, metaboxes, block editor sidebars, editor toolbars, inspector panels, SlotFill UI, and other WordPress back-office surfaces that should feel native to WordPress core. This file intentionally excludes front-end theme styling and theme.json-driven presentation.
-colors:
-  primary: "#3858E9"
-  primary-darker-10: "#2145E6"
-  primary-darker-20: "#183AD6"
-  admin-theme-fallback: "#3858E9"
-  link: "#2271B1"
-  link-hover: "#135E96"
-  link-focus-dark: "#043959"
-  text-primary: "#1E1E1E"
-  text-heading: "#1D2327"
-  text-body: "#3C434A"
-  text-secondary: "#50575E"
-  text-muted: "#646970"
-  text-tertiary: "#757575"
-  text-disabled: "#A7AAAD"
-  background-page: "#F0F0F1"
-  background-surface: "#FFFFFF"
-  background-subtle: "#F6F7F7"
-  background-selected: "#F0F6FC"
-  background-warning-row: "#FCF9E8"
-  background-disabled: "#F6F7F7"
-  border-strong: "#8C8F94"
-  border: "#C3C4C7"
-  border-subtle: "#DCDCDE"
-  border-input: "#8C8F94"
-  focus: "#3858E9"
-  focus-light: "#DCDCDE"
-  success: "#008A20"
-  success-alt: "#00A32A"
-  success-background: "#EDFAEF"
-  warning: "#996800"
-  warning-alt: "#DAB000"
-  warning-background: "#FCF9E8"
-  error: "#D63638"
-  error-dark: "#B32D2E"
-  error-background: "#FCF0F1"
-  info: "#72AEE6"
-  info-background: "#F0F6FC"
-  notification: "#D63638"
-  destructive: "#B32D2E"
-  editor-canvas: "#FFFFFF"
-  editor-chrome: "#FFFFFF"
-  editor-sidebar: "#FFFFFF"
-  editor-sidebar-border: "#E0E0E0"
-  editor-toolbar-border: "#1E1E1E"
-  editor-selected-block: "#3858E9"
-  editor-inserter-hover: "#F0F0F0"
-  synced-pattern: "#7A00DF"
-typography:
-  body:
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif"
-    fontSize: 13px
-    fontWeight: 400
-    lineHeight: 1.4
-  body-large:
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif"
-    fontSize: 15px
-    fontWeight: 400
-    lineHeight: 1.6
-  page-title:
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif"
-    fontSize: 23px
-    fontWeight: 400
-    lineHeight: 1.3
-  section-title:
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif"
-    fontSize: 18px
-    fontWeight: 600
-    lineHeight: 1.4
-  panel-title:
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif"
-    fontSize: 13px
-    fontWeight: 600
-    lineHeight: 1.4
-  table-title:
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif"
-    fontSize: 14px
-    fontWeight: 600
-    lineHeight: 1.4
-  button:
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif"
-    fontSize: 13px
-    fontWeight: 400
-    lineHeight: 2.15384615
-  editor-control:
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif"
-    fontSize: 13px
-    fontWeight: 400
-    lineHeight: 1.4
-  editor-label:
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif"
-    fontSize: 11px
-    fontWeight: 500
-    lineHeight: 1.4
-  small:
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif"
-    fontSize: 12px
-    fontWeight: 400
-    lineHeight: 1.5
-  code:
-    fontFamily: "Consolas, Monaco, monospace"
-    fontSize: 13px
-    fontWeight: 400
-    lineHeight: 1.5
-rounded:
-  none: 0px
-  xs: 1px
-  sm: 2px
-  md: 4px
-  lg: 8px
-  xl: 12px
-  full: 9999px
-spacing:
-  xxs: 2px
-  xs: 4px
-  sm: 8px
-  md: 12px
-  lg: 16px
-  xl: 24px
-  xxl: 32px
-  admin-gutter: 20px
-  table-cell-x: 10px
-  table-cell-y: 8px
-  editor-sidebar-width: 280px
-  admin-menu-width: 160px
-  admin-menu-folded-width: 36px
-components:
-  admin-page:
-    backgroundColor: "{colors.background-page}"
-    textColor: "{colors.text-body}"
-    typography: "{typography.body}"
-    padding: "20px"
-  admin-surface:
-    backgroundColor: "{colors.background-surface}"
-    textColor: "{colors.text-body}"
-    rounded: "{rounded.none}"
-    padding: "16px"
-    borderColor: "{colors.border}"
-  admin-card:
-    backgroundColor: "{colors.background-surface}"
-    textColor: "{colors.text-body}"
-    rounded: "{rounded.lg}"
-    padding: "16px"
-    borderColor: "{colors.border-subtle}"
-  metabox:
-    backgroundColor: "{colors.background-surface}"
-    textColor: "{colors.text-body}"
-    rounded: "{rounded.none}"
-    padding: "12px"
-    borderColor: "{colors.border}"
-  button-primary:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.background-surface}"
-    typography: "{typography.button}"
-    rounded: "{rounded.sm}"
-    padding: "0 12px"
-    height: "32px"
-    borderColor: "{colors.primary}"
-  button-primary-hover:
-    backgroundColor: "{colors.primary-darker-10}"
-    textColor: "{colors.background-surface}"
-    borderColor: "{colors.primary-darker-10}"
-  button-primary-modern:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.background-surface}"
-    typography: "{typography.button}"
-    rounded: "{rounded.sm}"
-    padding: "0 12px"
-    height: "40px"
-    borderColor: "{colors.primary}"
-  button-secondary:
-    backgroundColor: "{colors.background-surface}"
-    textColor: "{colors.link}"
-    typography: "{typography.button}"
-    rounded: "{rounded.sm}"
-    padding: "0 12px"
-    height: "32px"
-    borderColor: "{colors.link}"
-  button-tertiary:
-    backgroundColor: "transparent"
-    textColor: "{colors.link}"
-    typography: "{typography.button}"
-    rounded: "{rounded.sm}"
-    padding: "6px 8px"
-  button-destructive:
-    backgroundColor: "transparent"
-    textColor: "{colors.destructive}"
-    typography: "{typography.button}"
-    rounded: "{rounded.sm}"
-    padding: "6px 8px"
-  input:
-    backgroundColor: "{colors.background-surface}"
-    textColor: "{colors.text-primary}"
-    rounded: "{rounded.sm}"
-    padding: "0 8px"
-    height: "32px"
-    borderColor: "{colors.border-input}"
-  input-modern:
-    backgroundColor: "{colors.background-surface}"
-    textColor: "{colors.text-primary}"
-    rounded: "{rounded.sm}"
-    padding: "0 8px"
-    height: "40px"
-    borderColor: "{colors.border-input}"
-  list-table:
-    backgroundColor: "{colors.background-surface}"
-    textColor: "{colors.text-body}"
-    rounded: "{rounded.none}"
-    padding: "8px 10px"
-    borderColor: "{colors.border}"
-  notice-info:
-    backgroundColor: "{colors.background-surface}"
-    textColor: "{colors.text-primary}"
-    padding: "8px 12px"
-    borderColor: "{colors.info}"
-  notice-success:
-    backgroundColor: "{colors.background-surface}"
-    textColor: "{colors.text-primary}"
-    padding: "8px 12px"
-    borderColor: "{colors.success-alt}"
-  notice-warning:
-    backgroundColor: "{colors.background-surface}"
-    textColor: "{colors.text-primary}"
-    padding: "8px 12px"
-    borderColor: "{colors.warning-alt}"
-  notice-error:
-    backgroundColor: "{colors.background-surface}"
-    textColor: "{colors.text-primary}"
-    padding: "8px 12px"
-    borderColor: "{colors.error}"
-  editor-top-toolbar:
-    backgroundColor: "{colors.editor-chrome}"
-    textColor: "{colors.text-primary}"
-    height: "60px"
-    borderColor: "{colors.editor-sidebar-border}"
-  editor-sidebar-panel:
-    backgroundColor: "{colors.editor-sidebar}"
-    textColor: "{colors.text-primary}"
-    rounded: "{rounded.none}"
-    padding: "16px"
-    borderColor: "{colors.editor-sidebar-border}"
-  editor-block-toolbar:
-    backgroundColor: "{colors.background-surface}"
-    textColor: "{colors.text-primary}"
-    rounded: "{rounded.sm}"
-    padding: "0"
-    borderColor: "{colors.editor-toolbar-border}"
-  editor-selected-block:
-    backgroundColor: "{colors.editor-canvas}"
-    textColor: "{colors.text-primary}"
-    borderColor: "{colors.editor-selected-block}"
-  popover:
-    backgroundColor: "{colors.background-surface}"
-    textColor: "{colors.text-primary}"
-    rounded: "{rounded.sm}"
-    padding: "8px"
-    borderColor: "{colors.border-subtle}"
----
+# Design System: WordPress.com
 
-# WordPress Admin Design System
+## 1. Visual Theme & Atmosphere
 
-## Overview
+WordPress.com's marketing site is a confident, approachable powerhouse — it pairs bold blue CTAs with generous whitespace and warm charcoal tones. The design says "we're the platform that powers 43% of the web" without being intimidating.
 
-WordPress admin UI is a dense, utilitarian, accessible, backwards-compatible product environment. It should feel calm, editorial, and native to WordPress rather than like a bespoke SaaS dashboard. The default posture is compact neutral surfaces, clear hierarchy, visible focus states, blue interaction color, conservative status color, and predictable controls.
+The typographic identity is built on a serif + sans-serif pairing: **Recoleta** (a warm, rounded serif) for headlines gives the brand an editorial, almost magazine-like personality, while **Inter** handles body text with clean geometric neutrality. This pairing is what separates WordPress.com from the developer-tool aesthetic — it feels like a publishing platform, not a code editor. **Space Mono** in green (`#8DC716`) appears for "code personality" moments, bridging the editorial brand with WordPress's developer roots.
 
-This document covers WordPress admin areas only:
+The hero sections are massive — 100px Recoleta on desktop — but the rounded pill buttons and soft shadows keep everything friendly. Shadows appear on interaction, not at rest: the signature move is a blue-tinted hover glow (`rgba(30, 45, 255, 0.2)`) that subtly reinforces the brand color when users engage. Navigation uses a frosted glass effect (`backdrop-filter: blur(60px)`) that feels modern without competing with content.
 
-- Classic `wp-admin` screens: Dashboard, Posts, Pages, Media, Comments, Appearance, Plugins, Users, Tools, Settings, Network Admin, and plugin-defined admin pages.
-- Admin framework surfaces: `.wrap` pages, metaboxes, list tables, screen options, help tabs, admin notices, modals, media frames, cards, widgets, forms, and settings sections.
-- Block editor admin UI: editor chrome, top toolbar, block toolbar, inserter, list view, inspector/sidebar panels, publishing panels, SlotFills, popovers, notices, and reusable `@wordpress/components` UI used in admin contexts.
+**Key Characteristics:**
+- Recoleta serif headlines + Inter sans-serif body — editorial warmth meets geometric clarity
+- Vibrant blue accent (`#3858e9`) on white canvas — the signature
+- Pill-shaped buttons (`9999px` radius) as the dominant interactive pattern
+- Warm charcoal (`#1d2327`) for dark sections, never pure black
+- Green accent (`#8DC716`) in Space Mono for code-personality moments
+- Hero type that scales 50px → 100px with tight letter-spacing (-3px)
+- Blue-tinted hover glow on interactive cards — shadows are emotional, not structural
+- Frosted glass navigation with `backdrop-filter: blur(60px)`
+- Pattern overlays (dots, dashes) on dark and light feature blocks
+- `prefers-reduced-motion` respected — transitions disabled, hover scales removed
 
-This document explicitly excludes front-end theme styling. Do not use it to prescribe site typography, block content appearance on the front end, `theme.json` palettes, global styles, or theme-controlled layout. In the editor, this file governs the admin interface around editing, not the visitor-facing design of the content being edited.
+## 2. Color Palette & Roles
 
-When implementing CSS, prefer WordPress admin CSS variables such as `--wp-admin-theme-color`, `--wp-admin-theme-color-darker-10`, `--wp-admin-theme-color-darker-20`, `--wp-admin-border-width-focus`, and `--wp-components-color-accent` where available. The hex values in this file are normative fallbacks and defaults for agents, not a reason to override a user's admin color scheme.
+### Primary
+- **WordPress Blue** (`#3858e9`): Primary CTAs, links, accent surfaces. The brand's signature action color.
+- **Interactive Blue** (`#212cff`): Form submit buttons, focus rings, bright highlights. Reserved for high-emphasis interactive moments.
+- **Charcoal** (`#1d2327`): Dark backgrounds, primary text on light surfaces. Warm and approachable — not pure black.
+- **White** (`#ffffff`): Page background, button text on dark, card surfaces.
 
-## Colors
+### Accent
+- **Core Green** (`#8DC716`): Code-personality accent, always paired with Space Mono. Bridges editorial brand with developer roots.
+- **Hosting Green** (`#069e08`): Gradient endpoint for hosting CTAs. Used in `linear-gradient(90deg, #3858e9 0%, #069e08 100%)` border trick.
+- **Purple** (`#873EFF`): Premium and upgrade contexts, pricing accents.
 
-Use neutral grays for structure and content. Use WordPress blue for links, focus, selected states, and primary actions. Use semantic colors only for status communication. Do not introduce unrelated brand colors into admin UI.
+### Neutral Scale
+- **Near Black** (`#111111`): High-emphasis heading text, chip labels.
+- **Gray 600** (`#666666`): Body text, placeholder text, secondary descriptions.
+- **Gray 500** (`#8C8F94`): Muted labels, tertiary text, pricing headers.
+- **Gray 200** (`#DCDCDE`): Borders on dark surfaces, light descriptions on charcoal.
+- **Gray 100** (`#ebebeb`): Light surface backgrounds, dividers, feature block backgrounds.
+- **Gray 50** (`#f6f7f7`): Subtle background tint, code surfaces, card screenshot areas.
 
-### Core color roles
+### Interactive & Overlay
+- **Blue Tint** (`rgba(30, 44, 255, 0.12)`): Soft blue overlay for hover states, light interactive surfaces.
+- **Chip Surface** (`rgba(0, 0, 0, 0.05)`): Suggestion chip backgrounds with frosted glass (`backdrop-filter: blur(10px)`).
+- **Pink Highlight** (`rgba(254, 212, 248, 0.10)`): Inline text highlight backgrounds, 3px radius.
+- **Light Blue Surface** (`rgba(243, 244, 254, 1)`): Tinted section backgrounds.
 
-- **Primary (#3858E9):** modern WordPress admin theme color for focus, selected UI, and primary component contexts. Prefer `var(--wp-admin-theme-color, #3858e9)` in CSS.
-- **Link (#2271B1):** default admin link and secondary action color. Hover states darken to #135E96.
-- **Text:** use #1E1E1E or #1D2327 for strong text and headings, #3C434A for body copy, #50575E/#646970 for secondary copy and metadata, and #A7AAAD for disabled text.
-- **Surfaces:** use #F0F0F1 for the admin page background, #FFFFFF for panels/tables/cards, and #F6F7F7 for subtle grouped areas, panel footers, disabled controls, and table context.
-- **Borders:** use #C3C4C7 for classic admin containers and #DCDCDE/#E0E0E0 for softer dividers in modern component/editor contexts.
-- **Focus:** use the active admin theme color and visible outline/box-shadow. Never remove focus without an accessible replacement.
+### Shadows & Depth
+- **Subtle Rest** (`0 1px 3px rgba(0, 0, 0, 0.08)`): Resting card shadow — barely visible.
+- **Blue Hover Glow** (`0px 0.83px 12.49px 1.67px rgba(30, 45, 255, 0.2)`): Card hover state — the signature blue-tinted shadow.
+- **Lifted** (`0 10px 28px rgba(0, 0, 0, 0.14)`): Hero CTA hover, elevated panels.
+- **Active** (`0 6px 18px rgba(0, 0, 0, 0.12)`): CTA pressed/active state.
 
-### Status color roles
+## 3. Typography Rules
 
-- **Success:** green, for completed actions and healthy states.
-- **Warning:** yellow/brown, for cautionary states that do not block progress.
-- **Error/destructive:** red, for failed actions, invalid states, and destructive affordances.
-- **Info:** blue, for neutral messages.
-- **Synced/reusable pattern:** purple may be used only where core editor semantics require it.
+### Font Family
+- **Headlines**: `Recoleta`, with fallbacks: `Georgia, serif`
+- **Body / UI**: `Inter`, with fallbacks: `system-ui, -apple-system, sans-serif`
+- **Code Accent**: `Space Mono`, with fallbacks: `monospace`
 
-### Color constraints
+### Hierarchy
 
-Use color semantically, not decoratively. A plugin may have a brand identity, but inside wp-admin that brand should appear as logo or restrained illustration, not as a replacement for WordPress controls. State must never rely on color alone; pair color with text, icons, ARIA state, or shape.
+| Role | Font | Size | Weight | Line Height | Letter Spacing | Notes |
+|------|------|------|--------|-------------|----------------|-------|
+| Display Hero | Recoleta | 100px (desktop) / 50px (mobile) | 600 | 1.0–1.1 | -3px | Maximum impact, tight tracking |
+| Hero Variant | Recoleta | 68–78px | 600 | 1.1 | -3px | Feature-specific hero sizes |
+| Section Heading | Recoleta | 50px | 600 | 1.2 | -1px | Major section titles |
+| Sub-heading | Recoleta | 32px | 600 | 1.25 | normal | Card section headings |
+| Card Title | Inter | 24px | 600 | 1.33 | normal | Feature card headings |
+| Body Large | Inter | 22px | 400 | 1.4 | normal | Introductions, subtitles |
+| Body | Inter | 18px | 400 | 1.5 | normal | Standard reading text |
+| Body Small | Inter | 16px | 400 | 1.5 | normal | UI text, descriptions |
+| Button / Link | Inter | 16px | 500 | 1.5 | normal | Buttons, navigation links |
+| Caption / Nav | Inter | 14px | 500 | 1.43 | normal | Nav links, captions, small buttons |
+| Nano / Badge | Inter | 12px | 600 | 1.25 | normal | Badges, tags, small labels |
+| Code Accent | Space Mono | varies | 400 | 1.5 | normal | Always in Core Green (`#8DC716`) |
 
-## Typography
+### Principles
+- **Serif for display, sans for everything else**: Recoleta is never used below 32px. It's a display face that provides editorial warmth at headline sizes. Inter takes over at 24px and below.
+- **Three weights, strict roles**: 400 (body/reading), 500 (UI/interactive), 600 (headings/emphasis). The system creates hierarchy through font pairing and size, not weight variation.
+- **Compression at scale**: Hero text uses -3px letter-spacing — the tightest tracking on the site. Tracking relaxes to -1px at 50px, and normalizes at 32px and below.
+- **Text wrapping**: `text-wrap: balance` on headlines for clean line breaks. `text-wrap: pretty` on body text for widow prevention.
 
-Use the WordPress admin system font stack:
-
-`-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif`
-
-The classic admin base is compact: 13px body text with about 1.4 line-height. Page titles are 23px regular weight. Section headings, table titles, metabox titles, and panel headings commonly use 13px to 18px with 600 weight. Editor controls and `@wordpress/components` labels also remain compact and system-font based.
-
-Use monospace only for code, paths, slugs, CSS selectors, CLI commands, JSON, database names, and technical values. Do not add custom webfonts in admin experiences unless there is an explicit core-level reason; performance, localization, and platform consistency matter more than brand expression.
-
-### Text hierarchy
-
-- **Page title:** 23px, regular, used once per admin page.
-- **Section title:** 18px, semibold, for major groups on settings or dashboard pages.
-- **Panel/metabox title:** 13px, semibold, for compact containers and editor sidebars.
-- **Table item title:** 14px, semibold, for primary row labels in list tables.
-- **Body:** 13px regular.
-- **Helper text and metadata:** 12px-13px regular, muted color.
-- **Code:** 13px monospace.
-
-Keep copy plain and task-oriented. WordPress admin writing should explain what changed, what action is available, and what consequence follows.
-
-## Layout
-
-WordPress admin layout is compact, content-first, and tool-like. Use a 4px-based rhythm with common steps of 4, 8, 12, 16, 24, and 32px. Prefer existing admin wrappers and classes over custom page frameworks.
-
-### Classic admin shell
-
-- The admin menu occupies the left rail; default full width is about 160px and folded width is about 36px.
-- Main admin content lives in `#wpcontent` / `.wrap`-style flow with roughly 20px left/right gutters.
-- Avoid fixed page widths for ordinary admin pages. Most settings pages, list tables, and dashboard views should fill available width while keeping readable line lengths for prose.
-- Do not create marketing-page hero layouts inside wp-admin. Admin pages should lead with page title, primary action if needed, then task content.
-
-### Layout patterns
-
-- **Single-column settings page:** page title, optional description, settings sections, form controls, submit area.
-- **Two-column classic edit page/metabox layout:** main content region plus secondary column. Preserve this convention where metabox compatibility matters.
-- **List-table page:** page title + action, filters/search/views, top table nav, list table, bottom table nav.
-- **Dashboard page:** widget grid with compact panels, no oversized cards.
-- **Media/admin chooser:** left navigation or filters, main grid/list, detail side panel or modal when required.
-- **Editor page:** top toolbar, optional secondary toolbar, central canvas, right inspector/sidebar, contextual block toolbar and popovers.
-
-### Responsive behavior
-
-Admin UI must remain usable at narrow widths and touch breakpoints. Let toolbars wrap, collapse secondary content, and use larger touch targets around 40px where controls are dense. Avoid hard-coded widths except for known admin rails and editor sidebars. Do not hide essential actions on mobile unless an equivalent menu or control remains available.
-
-## Elevation & Depth
-
-WordPress admin communicates hierarchy mostly through borders, spacing, background color, and typography. Use shadows sparingly.
-
-- **Flat surfaces:** default for admin pages, list tables, settings sections, and metaboxes.
-- **Subtle depth:** allowed for cards, dashboard widgets, popovers, dropdown menus, and temporary floating UI.
-- **Modal depth:** use overlay/backdrop and centered dialog patterns where interruption is required.
-
-Do not use heavy shadows, glassmorphism, neumorphism, blurred translucent panels, dramatic gradients, or layered marketing-card effects.
-
-## Shapes
-
-Use small radii. Classic admin elements are mostly square or nearly square. Modern editor components may use slight rounding, but still should feel precise.
-
-- **0px:** list tables, classic metaboxes, legacy admin containers.
-- **2px:** buttons, inputs, compact editor controls.
-- **4px:** focus rings, small popovers, selected control outlines.
-- **8px:** newer cards or dashboard widgets where core already uses a softer card treatment.
-- **9999px:** pills, badges, avatars, counters, and circular icon buttons.
-
-Avoid large consumer-app radii unless the core component already uses them.
-
-## Components
-
-Prefer WordPress core primitives, existing admin classes, and `@wordpress/components` over custom components. Match the local surface: classic PHP admin screens should feel like wp-admin; React/editor surfaces should use the component package and editor conventions.
+## 4. Component Stylings
 
 ### Buttons
 
-Use the established variants:
-
-- **Primary:** main action on the screen or in a modal. Blue background, white text. Use sparingly; usually one primary action per decision area.
-- **Secondary:** default admin action. White/transparent background, blue text, blue/gray border depending on context.
-- **Tertiary/text/link:** low-emphasis actions, inline actions, toolbar actions, or utility actions.
-- **Destructive:** red text or secondary treatment. Avoid large filled red buttons except for final confirmation dialogs.
-
-Classic admin buttons are often 32px tall. Modern component buttons may use 40px default sizing. In editor/toolbars, compact icon buttons are appropriate when label text would create clutter, but they must have accessible labels and tooltips where helpful.
-
-### Links
-
-Links are blue and visibly interactive. Hover darkens the blue. Focus must be visible. Do not style body text as blue unless it is interactive. Row actions in list tables should remain compact text links.
-
-### Forms and settings controls
-
-Use native WordPress admin form structure where possible:
-
-- Labels should be explicit and programmatically associated with controls.
-- Helper text should be concise and muted.
-- Required/invalid states must include text, not only color.
-- Group related controls with fieldsets and legends when choices belong together.
-- Avoid custom select, checkbox, radio, toggle, and date controls unless using `@wordpress/components` or a core-supported pattern.
-
-For settings pages, align labels and inputs predictably. Keep explanatory copy near the control it explains, not in a distant sidebar.
-
-### List tables
-
-List tables are a defining WordPress admin surface. Use them for collections of posts, pages, comments, users, plugins, media, sites, requests, and plugin-defined records.
-
-A native list-table surface should include, where relevant:
-
-- View links above the table, e.g. All / Published / Draft.
-- Bulk action controls.
-- Filters and search.
-- Sortable column headers.
-- Primary column with item title and row actions.
-- Row actions as compact text links revealed or grouped according to WordPress convention.
-- Pagination and item counts.
-- Screen-reader descriptions for sorting and table context.
-- Responsive row toggle behavior for small screens.
-
-Keep table rows compact. Use strong text for the primary item title, muted text for metadata, and status indicators only where necessary. Do not replace list tables with card grids unless the underlying core screen uses a grid pattern, such as media or themes.
-
-### Notices
-
-Notices communicate prominent but generally non-blocking messages. Place notices at the top of the relevant screen area, below persistent toolbars in editor contexts. Keep them succinct, actionable, and dismissible when appropriate.
-
-Use status color semantically:
-
-- Info: neutral update or guidance.
-- Success: completed action.
-- Warning: caution or recoverable problem.
-- Error: failed action, validation failure, or blocking problem.
-
-Use modals instead of notices for messages that require immediate attention or a forced choice. Do not use notices as decorative cards or persistent layout containers.
-
-### Cards, dashboard widgets, and metaboxes
-
-Use white surfaces, subtle borders, compact padding, and direct headings. Dashboard widgets and modern cards may use 8px radius if consistent with the surrounding screen. Classic metaboxes should remain square and compact. Headers and footers can use subtle gray backgrounds.
-
-### Navigation and tabs
-
-Respect wp-admin navigation conventions and user-selected admin color schemes. Avoid custom sidebars that compete with the admin menu. For horizontal navigation within a page, use WordPress-style nav tabs or `@wordpress/components` `TabPanel` in React contexts. Tabs must represent peer sections, not unrelated actions.
-
-### Popovers, dropdowns, menus, and tooltips
-
-Use temporary surfaces for contextual controls, not permanent layout. Popovers should be close to their trigger, keyboard navigable, dismissible, and visually separated with border and subtle elevation. Tooltips should clarify icon-only or ambiguous controls; they should not carry essential instructions that are unavailable elsewhere.
-
-### Modals and confirmations
-
-Use modals only when the user must make a decision before continuing or when a contained task needs temporary focus. Modal actions should be explicit. Put destructive actions in the expected action area, label them with the object and consequence, and provide a safe cancel path.
-
-### Icons
-
-Use Dashicons in classic admin contexts where the surrounding UI uses Dashicons. Use `@wordpress/icons` in block editor and React component contexts. Icons should support recognition but not replace text for important actions unless the control includes an accessible label.
-
-## Admin Surfaces
-
-### Dashboard
-
-Dashboard widgets should be glanceable, compact, and clearly titled. Prefer short summaries, direct links, and actionable status over large decorative cards. Widgets should not use marketing splash layouts or unrelated brand color schemes.
-
-### Posts, Pages, Comments, Users, Plugins, Tools, and Network Admin lists
-
-These screens are primarily list-table systems. Preserve bulk operations, filters, search, sortable columns, pagination, row actions, and screen-reader behavior. Do not redesign these as cards unless matching an existing core screen pattern.
-
-### Settings pages
-
-Settings pages should be predictable: title, short description, grouped sections, controls, helper copy, and submit action. Do not hide core settings behind custom wizards unless the task genuinely requires step-by-step guidance. Avoid excessive custom JavaScript for simple option forms.
-
-### Media Library and upload flows
-
-Media admin surfaces may use grid and list modes. Preserve clear affordances for selection, details, attachment metadata, copy URL, edit, delete permanently, and modal dismissal. Selection state must be visually obvious and accessible.
-
-### Appearance, menus, widgets, and Customizer-adjacent screens
-
-These screens can be more visual, but still live inside admin. Keep controls WordPress-native, use panels for grouped settings, and make preview/selection state explicit. Do not apply front-end theme aesthetics to the admin controls themselves.
-
-### Plugin admin pages
-
-Plugin pages should feel integrated with WordPress. Use `.wrap`, core notices, core buttons, standard forms, list tables, and `@wordpress/components` where appropriate. A plugin may include brand marks, but should not replace WordPress interaction patterns. Avoid full-screen proprietary dashboards unless the product is intentionally an app-like admin experience and still preserves WordPress accessibility and navigation expectations.
-
-## Block Editor Admin Surfaces
-
-The block editor is an admin editing surface. Its chrome and controls belong in this DESIGN.md; the visitor-facing rendering of block content does not.
-
-### Editor shell
-
-The editor UI is organized around:
-
-- Top toolbar/header for document-level actions and editor tools.
-- Central canvas for editable content.
-- Contextual block toolbar attached near the selected block.
-- Inserter for discovering and adding blocks/patterns/media.
-- List view for document structure and block navigation.
-- Right inspector/sidebar for document and block settings.
-- Publish/pre-publish panels and post-save flows.
-- Popovers, dropdown menus, and command/search surfaces.
-
-Keep the canvas visually separate from editor chrome. Do not make plugin UI look like content unless it is actually part of the editable canvas. Do not let plugin controls obscure selected block controls, writing flow, or the top toolbar.
-
-### Editor chrome
-
-Editor chrome should be quiet, white or neutral, compact, and highly functional. Use icon buttons for frequent tools, but provide accessible labels. Preserve the hierarchy between document-level actions, block-level actions, and plugin actions.
-
-### Block toolbar
-
-Block toolbars group related icon buttons and should appear consistently near the selected block. Actions should be short, recognizable, and ordered by frequency and importance. Do not overload the block toolbar with plugin-specific controls; use a dropdown, block settings menu item, or sidebar panel for lower-priority actions.
-
-### Inspector and document settings sidebar
-
-Use panels for grouped settings. Important or frequently used panels may be open by default; lower-priority panels should be collapsed. Keep panel labels concise. Use `Panel`, `PanelBody`, and `PanelRow` patterns when building React UI. Avoid deep nesting and long scrolling controls.
-
-### Inserter and list view
-
-Inserter UI should emphasize search, clear labels, recognizable icons, and predictable grouping. List view should prioritize structure, selection, hierarchy, and keyboard navigation. Plugin additions should not destabilize core ordering or make common blocks harder to find.
-
-### SlotFills and plugin extensions
-
-Use SlotFills to place plugin UI in predefined editor locations. Choose the least intrusive slot that matches the task:
-
-- `PluginDocumentSettingPanel` for document-level settings in the sidebar.
-- `PluginSidebar` for a dedicated plugin sidebar opened from the editor toolbar/more menu.
-- `PluginBlockSettingsMenuItem` for block-specific menu actions.
-- `PluginPostPublishPanel`, `PluginPrePublishPanel`, and `PluginPostStatusInfo` for publishing/status workflows.
-- `PluginMoreMenuItem` for secondary plugin actions.
-
-Do not inject UI into arbitrary editor DOM locations when a SlotFill exists. Keep plugin sidebars narrow, panel-based, and consistent with editor controls.
-
-### Editor notices
-
-Editor notices should appear below top toolbars, not on top of them. They are persistent, non-modal, and dismissible when appropriate. Use modal dialogs only when the user must act before continuing.
-
-### Selection, focus, and keyboard behavior
-
-The editor has selection states that classic admin screens do not: selected block, multi-selected blocks, inserter focus, list-view focus, writing focus, dragging, and preview modes. Preserve visible selection outlines and focus rings. Do not remove keyboard shortcuts or trap focus in plugin UI. Return focus to the triggering control after closing popovers, sidebars, and modals.
-
-## Accessibility
-
-Accessibility is a core design constraint, not an enhancement.
-
-- Maintain WCAG AA contrast for text and interactive elements.
-- Provide visible focus states for every interactive control.
-- Do not use color alone to convey meaning.
-- Use semantic HTML before custom ARIA.
-- Associate labels with form controls.
-- Provide screen-reader text for icon-only controls, row toggles, sorting state, and ambiguous links.
-- Keep disabled controls discoverable where appropriate; in React components, prefer accessible disabled behavior when recommended by the component API.
-- Respect reduced-motion preferences.
-- Ensure popovers, dropdowns, tabs, modals, and sidebars are keyboard operable.
-
-## Implementation Guidance
-
-### Use the right layer
-
-- **Classic admin PHP screens:** use WordPress admin markup, classes, hooks, settings API patterns, list-table conventions, and admin CSS variables.
-- **React/block editor screens:** use `@wordpress/components`, `@wordpress/icons`, `@wordpress/data`, `@wordpress/i18n`, and SlotFill APIs.
-- **Hybrid plugin pages:** use `@wordpress/components` where the page is React-driven, but still place the page inside native admin shell and notices.
-
-### Prefer existing primitives
-
-Do not recreate buttons, notices, tabs, panels, toolbar groups, dropdowns, or inputs from scratch when WordPress provides an equivalent. Custom controls should be rare, accessible, and visually aligned with surrounding WordPress UI.
-
-### Respect user and site context
-
-Respect admin color schemes, localization, text expansion, RTL, reduced motion, browser zoom, narrow screens, and role/capability differences. Avoid assumptions that all admins use English, a mouse, a wide desktop viewport, or default color settings.
-
-### Backwards compatibility
-
-WordPress admin has long-lived extension points. Designs must tolerate old metaboxes, custom columns, plugin notices, admin color schemes, and third-party CSS. Avoid global CSS that targets broad admin selectors in a way that could break other plugins or core screens.
-
-## Do's and Don'ts
+**Primary Blue (Pill)**
+- Background: `#3858e9`
+- Text: `#ffffff`
+- Padding: 10px 24px
+- Radius: 9999px (full pill)
+- Font: Inter 16px weight 500
+- Hover: slight opacity shift
+- Focus: `2px solid #212cff`, outline-offset 3px
+- Use: Main CTAs ("Get Started", "Start Free")
+
+**Primary Dark (Pill)**
+- Background: `#1d2327`
+- Text: `#ffffff`
+- Padding: 10px 24px
+- Radius: 9999px
+- Font: Inter 16px weight 500
+- Use: Secondary CTAs ("Start Building")
+
+**Outline (Pill)**
+- Background: transparent
+- Text: `#1d2327`
+- Border: 2px solid `#1d2327`
+- Padding: 8px 22px
+- Radius: 9999px
+- Use: Tertiary actions ("Learn More")
+
+**Gradient Border (Hosting CTA)**
+- Background: `#1d2327` (content area)
+- Border: 1px solid transparent with `linear-gradient(90deg, #3858e9 0%, #069e08 100%) border-box`
+- Padding: 10px 24px
+- Radius: 9999px
+- Use: Hosting-specific CTAs
+
+**Circular Submit**
+- Background: `#212cff`
+- Radius: 100%
+- Size: 45×45px
+- Font: 24px (arrow icon)
+- Use: AI prompt form submit button
+
+### Cards & Containers
+
+**Theme / Feature Card**
+- Background: `#ffffff`
+- Radius: 8px
+- Shadow (rest): `0 1px 3px rgba(0, 0, 0, 0.08)`
+- Shadow (hover): `0px 0.83px 12.49px 1.67px rgba(30, 45, 255, 0.2)` — blue-tinted glow
+- Transition: `all 0.3s ease-in-out`
+- Width: min 310px, max 426px, fluid 42vw
+- Screenshot area on top, content below with 16px padding
+
+**Feature Block (Light — Website Builder)**
+- Background: `#ebebeb`
+- Radius: 8px
+- Overlay: dash-pattern background image at 19px repeat
+- Full-width, overflow hidden
+
+**Feature Block (Dark — Hosting)**
+- Background: `#1d2327`
+- Radius: 8px
+- Overlay: dot-pattern (`radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px)` at 14px) with `mask-image: linear-gradient(to bottom, transparent 20%, black 80%)`
+- Text color: `#ffffff`, descriptions in `#DCDCDE`
+
+### Chips & Badges
+
+**Suggestion Chip**
+- Background: `rgba(0, 0, 0, 0.05)`
+- Text: `#111111`
+- Radius: 12px
+- Font: Inter 14px weight 400
+- Backdrop: `backdrop-filter: blur(10px)`
+- Padding: 8px 14px
+
+**Plan Badge**
+- Background: `#1d2327`
+- Text: `#ffffff`
+- Padding: 5px 11px
+- Font: Inter 12px weight 600
+- Line-height: 1.25rem
+- Use: "Most popular", "Best value" labels on pricing
+
+### Navigation
+- Sticky, frosted glass: `backdrop-filter: blur(60px)`, semi-transparent background
+- Radius: 12px on desktop
+- WordPress.com wordmark left-aligned
+- Links: Inter 14px weight 500, `#666666` text
+- CTA: blue pill button ("Get Started") right-aligned
+- Mobile: hamburger menu collapse
+
+### Forms
+
+**AI Prompt Input**
+- Radius: 24px
+- Padding: 20px
+- Background: `#ffffff`
+- Placeholder: `#666666`
+- Height: 100px (collapsed), expands on content
+- Submit: circular `#212cff` button, positioned absolute right
+- Focus: `2px solid #212cff`
+
+## 5. Layout Principles
+
+### Spacing System
+- Scale: `0.44rem` (7px) → `0.67rem` (11px) → `1rem` (16px) → `1.5rem` (24px) → `2.25rem` (36px) → `3.38rem` (54px) → `5.06rem` (81px)
+- The scale follows a ~1.5× multiplier, creating consistent vertical rhythm
+
+### Grid & Container
+- Max outer width: 1440px
+- Content max width: ~1200px centered
+- Subheader max width: 865px
+- Grid gap: 0.5em default
+- Hero: centered single-column with generous top padding
+- Feature sections: 2–3 column grids for cards
+- Dark and light feature blocks span full container width
+
+### Whitespace Philosophy
+- **Publishing-grade spacing**: Generous vertical padding between sections (80px+). The whitespace communicates editorial confidence — this is a platform built for content creators, and the site practices what it preaches.
+- **Hero breathing room**: Hero sections have 96px+ top padding, giving the massive Recoleta headlines room to breathe.
+- **Compact components, spacious sections**: Cards and chips are tightly packed internally, but sections are separated by substantial whitespace.
+
+### Border Radius Scale
+- Inline highlights (3px): Text highlight backgrounds
+- Standard cards (8px): Cards, feature blocks
+- Chips and containers (12px): Suggestion chips, navigation bar
+- Form inputs (24px): Textareas, large inputs
+- Pill (9999px): All buttons — the signature shape
+- Circle (100%): Submit buttons, avatars
+
+## 6. Depth & Elevation
+
+| Level | Treatment | Use |
+|-------|-----------|-----|
+| Flat (Level 0) | No shadow | Page background, text blocks |
+| Subtle (Level 1) | `0 1px 3px rgba(0, 0, 0, 0.08)` | Resting cards, containers |
+| Blue Glow (Level 2) | `0px 0.83px 12.49px 1.67px rgba(30, 45, 255, 0.2)` | Card hover — the signature blue-tinted glow |
+| Lifted (Level 3) | `0 10px 28px rgba(0, 0, 0, 0.14)` | Hero CTA hover, elevated panels |
+| Active (Level 3a) | `0 6px 18px rgba(0, 0, 0, 0.12)` | CTA pressed/active state |
+| Focus (Accessibility) | `2px solid #212cff` outline, 3px offset | Keyboard focus on all interactive elements |
+| Frosted (Surface) | `backdrop-filter: blur(60px)` | Navigation bar, overlay surfaces |
+
+**Shadow Philosophy**: WordPress.com uses shadows sparingly at rest and expressively on interaction. The signature is the **blue-tinted hover glow** — `rgba(30, 45, 255, 0.2)` — which subtly reinforces the brand color when users engage. This is the opposite of structural shadow-as-border approaches; here, shadows are emotional. Cards feel flat until you interact with them, at which point they lift with a warm blue aura. The frosted glass navigation adds a second depth layer — content scrolls behind it with a soft blur, creating spatial hierarchy without heavy shadows.
+
+### Decorative Depth
+- Pattern overlays: dash-pattern on light blocks (`#ebebeb`), dot-pattern on dark blocks (`#1d2327`) with gradient mask
+- Hero CTA: `transform: scale(1.02)` + `filter: contrast(1.01)` on image hover, with `0.35s cubic-bezier(0.4, 0, 0.2, 1)` transition
+- No background color variation between white sections — separation comes from spacing and content density
+
+## 7. Do's and Don'ts
 
 ### Do
-
-- Use WordPress core components, admin classes, and editor SlotFills before inventing new UI.
-- Keep admin screens compact, predictable, and task-focused.
-- Use `--wp-admin-theme-color` and related variables for focus, selected, and primary states when implementing CSS.
-- Use list tables for tabular/admin collections.
-- Use panels for grouped editor/sidebar settings.
-- Keep plugin UI subordinate to the WordPress admin shell.
-- Preserve keyboard navigation, visible focus, screen-reader text, RTL, localization, and responsive behavior.
-- Place notices below top toolbars and near the affected context.
-- Use destructive styling only for genuinely destructive actions.
+- Use Recoleta for all headlines and section headings — it's the brand's editorial voice
+- Use Inter for body text, UI labels, buttons, and navigation
+- Use pill-shaped buttons (`9999px`) for all primary and secondary CTAs
+- Apply the blue-tinted hover glow (`rgba(30, 45, 255, 0.2)`) on interactive cards
+- Use `#1d2327` (charcoal) for dark sections — it's warmer than black
+- Use `#3858e9` as the primary action color across the entire page
+- Apply `backdrop-filter: blur(60px)` on the sticky navigation
+- Use Space Mono in `#8DC716` green for code-personality accents
+- Apply `text-wrap: balance` on headlines for clean line breaks
+- Respect `prefers-reduced-motion` — disable transitions and scale transforms
+- Use the spacing scale (0.44rem → 5.06rem) for consistent vertical rhythm
 
 ### Don't
+- Don't use Inter for headlines — Recoleta is what gives WordPress.com its identity
+- Don't use pure black (`#000000`) for backgrounds — always `#1d2327`
+- Don't use square or slightly-rounded buttons — the pill shape is non-negotiable
+- Don't mix in block editor color presets (vivid-red, luminous-orange) — those are for the editor, not the marketing site
+- Don't use heavy drop shadows at rest — shadows appear on hover and interaction only
+- Don't skip the frosted glass effect on navigation — it's a key signature
+- Don't use `#212cff` (Interactive Blue) for general CTAs — reserve it for form submits and focus rings
+- Don't apply letter-spacing tighter than -3px — that's the maximum compression for hero text
+- Don't use Recoleta below 32px — it's a display face, not a body face
+- Don't use pattern overlays (dots, dashes) outside of feature blocks — they're section-specific
 
-- Do not use this file for front-end theme styling, `theme.json`, global styles, or visitor-facing block presentation.
-- Do not replace wp-admin with a generic SaaS dashboard aesthetic.
-- Do not introduce custom fonts, heavy shadows, gradients, glass effects, large radii, or decorative brand palettes into routine admin UI.
-- Do not override user-selected admin color schemes with hard-coded accent colors.
-- Do not use color alone to communicate state.
-- Do not crowd the block toolbar with low-priority plugin controls.
-- Do not place notices over editor toolbars.
-- Do not inject editor UI into arbitrary DOM locations when a supported SlotFill exists.
-- Do not modify WordPress core files; build through plugins, hooks, packages, and supported APIs.
+## 8. Responsive Behavior
 
-## Source Notes
+### Breakpoints
+| Name | Width | Key Changes |
+|------|-------|-------------|
+| Small Mobile | <480px | Full-width buttons, tight single column |
+| Mobile | 480–767px | Stacked layout, side images hidden |
+| Tablet | 768–959px | Frosted nav visible, subheader max 865px |
+| Desktop | 960–1079px | Hero text jumps to 70–100px, full card grids |
+| Large Desktop | 1080–1151px | Image layout adjustments, tighter margins |
+| XL Desktop | >1152px | Full layout, maximum container width |
 
-This DESIGN.md was derived from public WordPress core/admin and Gutenberg documentation and should be treated as a living admin design contract. Review it against current WordPress core CSS, `@wordpress/components`, Block Editor Handbook docs, and active WordPress design discussions before using it as a final upstream standard.
+### Touch Targets
+- Pill buttons: 10px+ vertical padding, comfortable tap area
+- Suggestion chips: 8px 14px padding with 14px font size
+- Navigation links: adequate spacing at 14px
+- Circular submit button: 45×45px — generous touch target
+
+### Collapsing Strategy
+- Hero: 100px Recoleta → 50px below 960px, maintains negative tracking proportionally
+- Navigation: frosted bar with links + CTA → hamburger menu below 768px
+- Feature cards: fluid grid → single column stacked
+- Theme cards: 42vw fluid → full width on mobile
+- Decorative images: side images hidden on mobile (display: none)
+- Animated paths: bent SVG lines → straight lines on mobile
+- Full-width buttons: `.is-mobile-full-width` triggers at <480px
+- Section spacing: 80px+ → reduced on mobile
+
+### Image Behavior
+- Feature screenshots maintain aspect ratio at all sizes
+- Hero CTA images scale with `transform: scale(1.02)` on hover (disabled with reduced motion)
+- Pattern overlays (dots, dashes) maintain their repeat size across breakpoints
+
+## 9. Agent Prompt Guide
+
+### Quick Color Reference
+- Primary CTA: WordPress Blue (`#3858e9`)
+- Background: White (`#ffffff`)
+- Heading text: Charcoal (`#1d2327`)
+- Body text: Gray 600 (`#666666`)
+- Focus ring: Interactive Blue (`#212cff`)
+- Dark surface: Charcoal (`#1d2327`)
+- Code accent: Core Green (`#8DC716`)
+- Card hover shadow: `rgba(30, 45, 255, 0.2)`
+
+### Brand Assets
+- Logo: `https://s1.wp.com/home.logged-out/images/wpcom-logo.png` (512×512 PNG)
+- Favicon: `https://wpcom.files.wordpress.com/2024/04/wp_favicon_512x512px.png`
+- Placement: top-left in navigation, linked to homepage
+
+### Example Component Prompts
+- "Create a hero section on white background. Headline at 100px Recoleta weight 600, line-height 1.0, letter-spacing -3px, color #1d2327. Subtitle at 22px Inter weight 400, line-height 1.4, color #666. Blue pill CTA (#3858e9, 9999px radius, 10px 24px padding) and outline button (2px solid #1d2327, 9999px radius)."
+- "Design a theme card: white background, 8px radius, subtle shadow (0 1px 3px rgba(0,0,0,0.08)) at rest. On hover: blue-tinted glow (0px 0.83px 12.49px 1.67px rgba(30,45,255,0.2)) with 0.3s ease-in-out transition. Screenshot area on top, title in 16px Inter weight 600 below."
+- "Build a sticky navigation: frosted glass effect (backdrop-filter: blur(60px), semi-transparent background), 12px border-radius. WordPress.com wordmark left, nav links at 14px Inter weight 500 in #666, blue pill CTA 'Get Started' right-aligned (#3858e9, 9999px radius)."
+- "Create a dark hosting section: #1d2327 background, 8px radius, dot-pattern overlay (radial-gradient, 14px spacing) masked with linear-gradient (transparent 20%, black 80%). Heading in Recoleta 50px white. CTA with gradient border (linear-gradient 90deg, #3858e9 to #069e08) using border-box trick on #1d2327 background."
+- "Build an AI prompt form: textarea with 24px border-radius, 20px padding, #fff background. Circular submit button (45×45px, #212cff, 100% radius) positioned absolute right. Below, suggestion chips in rgba(0,0,0,0.05) with backdrop-filter: blur(10px), 12px radius, 14px Inter."
+
+### Iteration Guide
+1. Always use Recoleta for headlines, Inter for everything else — never swap them
+2. Pill buttons (`9999px`) are the only button shape — no rounded rectangles
+3. `#3858e9` is the primary blue; `#212cff` is reserved for focus/submit only
+4. Card hover glow is blue-tinted (`rgba(30, 45, 255, 0.2)`), not neutral gray
+5. Dark sections use `#1d2327` with pattern overlays, not flat dark surfaces
+6. Navigation must have frosted glass (`backdrop-filter: blur(60px)`)
+7. Space Mono + `#8DC716` green is the "developer voice" — use sparingly
