@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import fsp from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
@@ -72,6 +73,7 @@ export async function prepareRun(options) {
         }
       : {};
   const mcpLabel = buildMcpLabel(mcp, mcpProfile);
+  const trialNonce = options.trialNonce || crypto.randomBytes(3).toString('hex');
   const runId = [
     utcStamp(),
     agent,
@@ -79,6 +81,7 @@ export async function prepareRun(options) {
     design,
     mcpLabel,
     compactHash(`${screenPrompt}\n${designMd}\n${mcpProfile}\n${JSON.stringify(mcpServers)}`),
+    trialNonce,
   ].join('__');
 
   const runDir = path.join(rootDir, 'runs', runId);

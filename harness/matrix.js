@@ -43,6 +43,15 @@ async function runChild(args) {
   });
 }
 
+function parseTrials(value) {
+  if (value === undefined) return 1;
+  const trials = Number.parseInt(value, 10);
+  if (!Number.isInteger(trials) || trials < 1) {
+    throw new Error(`Invalid --trials value: ${value}`);
+  }
+  return trials;
+}
+
 function parseConcurrency(value) {
   if (value === undefined) {
     return 1;
@@ -57,28 +66,30 @@ function parseConcurrency(value) {
   return concurrency;
 }
 
-function buildJobs({ agents, screens, designs, mcps, args }) {
+function buildJobs({ agents, screens, designs, mcps, trials, args }) {
   const jobs = [];
 
   for (const agent of agents) {
     for (const screen of screens) {
       for (const design of designs) {
         for (const mcp of mcps) {
-          const runArgs = ['--agent', agent, '--screen', screen, '--design', design, '--mcp', mcp];
+          for (let trial = 1; trial <= trials; trial += 1) {
+            const runArgs = ['--agent', agent, '--screen', screen, '--design', design, '--mcp', mcp];
 
-          if (args.model) {
-            runArgs.push('--model', args.model);
+            if (args.model) {
+              runArgs.push('--model', args.model);
+            }
+
+            if (args.mcpProfile) {
+              runArgs.push('--mcp-profile', args.mcpProfile);
+            }
+
+            if (args.dryRun) {
+              runArgs.push('--dry-run');
+            }
+
+            jobs.push(runArgs);
           }
-
-          if (args.mcpProfile) {
-            runArgs.push('--mcp-profile', args.mcpProfile);
-          }
-
-          if (args.dryRun) {
-            runArgs.push('--dry-run');
-          }
-
-          jobs.push(runArgs);
         }
       }
     }
@@ -121,7 +132,8 @@ async function main() {
   const designs = expand(args.designs || args.design || 'all', allDesigns);
   const mcps = expand(args.mcp || 'off', ['off', 'on']);
   const concurrency = parseConcurrency(args.concurrency || args.parallel);
-  const jobs = buildJobs({ agents, screens, designs, mcps, args });
+  const trials = parseTrials(args.trials);
+  const jobs = buildJobs({ agents, screens, designs, mcps, trials, args });
 
   console.log(`Running ${jobs.length} matrix job(s) with concurrency ${concurrency}`);
   await runJobs(jobs, concurrency);
