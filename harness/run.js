@@ -1,9 +1,15 @@
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import fsp from 'node:fs/promises';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
 import { prepareRun } from './prepare-run.js';
 import { ensureDir, parseArgs, rootDir, updateManifest } from './utils.js';
+
+function hashFile(filePath) {
+  if (!fs.existsSync(filePath)) return null;
+  return crypto.createHash('sha256').update(fs.readFileSync(filePath)).digest('hex');
+}
 
 export async function runExperiment(options) {
   const metadata = await prepareRun(options);
@@ -41,17 +47,28 @@ export async function runExperiment(options) {
     });
   }
 
+  const packageJsonPath = path.join(metadata.paths.workspaceDir, 'package.json');
+  const packageHashBefore = hashFile(packageJsonPath);
+
   const agentResult =
     metadata.agent === 'claude'
       ? await runClaude(metadata, transcriptPath)
       : await runCodex(metadata, transcriptPath);
 
-  await append(transcriptPath, '\n=== Post-agent: npm install ===\n');
-  const installResult = await runCommand('npm', ['install', '--silent'], {
-    cwd: metadata.paths.workspaceDir,
-    transcriptPath,
-    env: process.env,
-  });
+  const packageHashAfter = hashFile(packageJsonPath);
+  const packageChanged = packageHashBefore !== packageHashAfter;
+
+  let installResult = { code: 0, skipped: true };
+  if (packageChanged) {
+    await append(transcriptPath, '\n=== Post-agent: npm install (package.json changed) ===\n');
+    installResult = await runCommand('npm', ['install', '--silent'], {
+      cwd: metadata.paths.workspaceDir,
+      transcriptPath,
+      env: process.env,
+    });
+  } else {
+    await append(transcriptPath, '\n=== Post-agent: npm install skipped (package.json unchanged) ===\n');
+  }
 
   const status = agentResult.code === 0 ? 'generated' : 'agent-failed';
   await append(transcriptPath, `\n=== Run complete: ${status} ===\n`);
