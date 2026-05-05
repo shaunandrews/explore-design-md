@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import fsp from 'node:fs/promises';
 import path from 'node:path';
-import { spawn } from 'node:child_process';
+import { execSync, spawn } from 'node:child_process';
 import { chromium } from 'playwright';
 import { ensureDir, loadManifest, parseArgs, rootDir, updateManifest } from './utils.js';
 
@@ -28,6 +28,23 @@ async function waitForServer(url, timeoutMs = 30000) {
   throw new Error(`Timed out waiting for ${url}`);
 }
 
+function reservePort(label) {
+  try {
+    const output = execSync(`portman request 1 -n ${JSON.stringify(label)} --json`, {
+      encoding: 'utf8',
+    });
+    const parsed = JSON.parse(output);
+    const port = Array.isArray(parsed.ports) ? parsed.ports[0] : parsed.port;
+    if (Number.isInteger(port)) {
+      return port;
+    }
+  } catch {
+    // Fall through to random port.
+  }
+
+  return 4300 + Math.floor(Math.random() * 1000);
+}
+
 async function captureRun(run) {
   const workspaceDir = run.paths.workspaceDir;
 
@@ -35,7 +52,7 @@ async function captureRun(run) {
     throw new Error(`node_modules missing for ${run.runId}. Run npm install in ${workspaceDir} first.`);
   }
 
-  const port = 4300 + Math.floor(Math.random() * 1000);
+  const port = reservePort(`explore-design-md-${run.runId.slice(-12)}`);
   const server = spawn('npm', ['run', 'dev', '--', '--host', '127.0.0.1', '--port', String(port)], {
     cwd: workspaceDir,
     detached: true,
@@ -70,6 +87,7 @@ async function captureRun(run) {
     });
     const screenshots = [];
     const canonicalScreenshots = [];
+    const consoleErrorsByViewport = {};
 
     for (const [name, viewport] of Object.entries(viewports)) {
       const pageErrorStart = pageErrors.length;
@@ -86,8 +104,10 @@ async function captureRun(run) {
         );
       }
       if (newConsoleErrors.length > 0) {
-        throw new Error(
-          [`Console error while screenshotting ${run.runId} (${name}):`, ...newConsoleErrors].join('\n')
+        consoleErrorsByViewport[name] = newConsoleErrors;
+        fs.appendFileSync(
+          serverLogPath,
+          `\n[console errors @ ${name}]\n${newConsoleErrors.join('\n')}\n`
         );
       }
 
@@ -127,15 +147,44 @@ async function captureRun(run) {
       screenshotDir: path.relative(rootDir, namedScreenshotDir),
       canonicalScreenshotDir: path.relative(rootDir, screenshotDir),
       screenshotAt: new Date().toISOString(),
+      consoleErrors: consoleErrorsByViewport,
       updatedAt: new Date().toISOString(),
     });
   } finally {
+    await stopServer(server);
+  }
+}
+
+async function stopServer(server) {
+  if (!server || server.killed) return;
+
+  const pid = server.pid;
+  try {
+    if (pid) {
+      process.kill(-pid, 'SIGTERM');
+    }
+  } catch {
     try {
-      process.kill(-server.pid, 'SIGTERM');
-    } catch {
       server.kill('SIGTERM');
+    } catch {
+      // already gone
     }
   }
+
+  await new Promise((resolve) => {
+    const timer = setTimeout(() => {
+      try {
+        if (pid) process.kill(-pid, 'SIGKILL');
+      } catch {
+        try { server.kill('SIGKILL'); } catch {}
+      }
+      resolve();
+    }, 3000);
+    server.on('close', () => {
+      clearTimeout(timer);
+      resolve();
+    });
+  });
 }
 
 function safeSegment(value) {
@@ -156,7 +205,7 @@ async function main() {
   const manifest = await loadManifest();
   const runs = args.run
     ? manifest.filter((entry) => entry.runId === args.run)
-    : manifest.filter((entry) => ['generated', 'evaluated', 'screenshotted'].includes(entry.status));
+    : manifest.filter((entry) => ['generated', 'screenshotted'].includes(entry.status));
 
   if (runs.length === 0) {
     throw new Error(args.run ? `Run not found: ${args.run}` : 'No generated runs found to screenshot.');
