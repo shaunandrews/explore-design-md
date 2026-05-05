@@ -46,12 +46,16 @@ npm run run -- --agent codex --screen 05-domains-list --design airbnb --mcp-prof
 # Refresh imported Automattic brand DESIGN.md packs from a local clone.
 npm run import-a8c-design-md -- --source /private/tmp/A8c-design-md
 
+# Run multiple trials per cell for variety.
+npm run matrix -- --agent claude --screen 01-analytics-dashboard --designs a8c-wordpress-com,a8c-tumblr --mcp off --trials 2
+
 # After generated runs exist:
 npm run screenshot
+npm run contact-sheet  # writes results/contact-sheet.html (grid of all screenshots, grouped by screen)
 npm run viewer
 ```
 
-Claude runs require `ANTHROPIC_API_KEY` in the environment or `/tmp/geode-claude-key`, matching the pattern from the Geode experiment. Codex runs use a scoped `CODEX_HOME` inside the generated workspace and symlink `~/.codex/auth.json`.
+Claude runs require `ANTHROPIC_API_KEY`. Copy `.env.example` to `.env` and fill in the key — the harness loads it automatically. You can also export it in your shell. Codex runs use a scoped `CODEX_HOME` inside the generated workspace and symlink `~/.codex/auth.json`.
 
 Imported Automattic brand packs use the `a8c-*` prefix, for example `a8c-woocommerce`, `a8c-jetpack`, `a8c-wordpress-com`, and `a8c-wpvip`. The plain open-source WordPress admin/block-editor system is `wordpress`.
 
