@@ -72,14 +72,7 @@ async function runClaude(metadata, transcriptPath) {
   const env = { ...process.env };
 
   if (!env.ANTHROPIC_API_KEY) {
-    const tmpKeyPath = '/tmp/geode-claude-key';
-    if (fs.existsSync(tmpKeyPath)) {
-      env.ANTHROPIC_API_KEY = fs.readFileSync(tmpKeyPath, 'utf8').trim();
-    }
-  }
-
-  if (!env.ANTHROPIC_API_KEY) {
-    throw new Error('ANTHROPIC_API_KEY is required for Claude runs. Set it in the environment or /tmp/geode-claude-key.');
+    throw new Error('ANTHROPIC_API_KEY is required for Claude runs. Add it to .env (see .env.example) or export it.');
   }
 
   return runCommand(
