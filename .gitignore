@@ -8,6 +8,7 @@ runs/
 **/node_modules/
 
 # Keep result directories, but generated artifacts can be large.
+results/contact-sheet.html
 results/manifest.json
 results/screenshots/*
 results/transcripts/*
