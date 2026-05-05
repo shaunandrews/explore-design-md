@@ -169,7 +169,6 @@ export async function prepareRun(options) {
       runDir,
       workspaceDir,
       transcript: path.join(rootDir, 'results', 'transcripts', `${runId}.txt`),
-      evaluation: path.join(rootDir, 'results', 'evaluations', `${runId}.json`),
       screenshots: path.join(rootDir, 'results', 'screenshots', runId),
     },
     hashes: {

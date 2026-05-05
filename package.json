@@ -9,12 +9,12 @@
     "matrix": "node harness/matrix.js",
     "import-a8c-design-md": "node harness/import-a8c-design-md.js",
     "screenshot": "node harness/screenshot.js",
-    "evaluate": "node harness/evaluate.js",
+    "render-references": "node harness/render-references.js",
+    "contact-sheet": "node harness/contact-sheet.js",
     "viewer": "node harness/viewer.js",
     "check": "node --check harness/*.js"
   },
   "devDependencies": {
-    "@google/design.md": "^0.1.1",
     "playwright": "^1.52.0"
   },
   "engines": {

@@ -18,7 +18,7 @@ This repo can spin up isolated agent workspaces for a matrix of:
 - Agent: Claude Code or Codex.
 - MCP: off or on.
 
-Each run gets its own copied Vite + React workspace under `runs/`, its own `AGENTS.md`, optional `DESIGN.md`, optional MCP config, transcript, screenshots, and evaluation JSON.
+Each run gets its own copied Vite + React workspace under `runs/`, its own `AGENTS.md`, optional `DESIGN.md`, optional MCP config, transcript, and screenshots.
 
 ## Quick Commands
 
@@ -48,7 +48,6 @@ npm run import-a8c-design-md -- --source /private/tmp/A8c-design-md
 
 # After generated runs exist:
 npm run screenshot
-npm run evaluate
 npm run viewer
 ```
 

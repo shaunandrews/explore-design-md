@@ -76,7 +76,6 @@ function renderRun(run) {
       <a href="/runs/${run.runId}/workspace/DESIGN.md">DESIGN.md</a>
       <a href="/runs/${run.runId}/prompt.md">Prompt</a>
       <a href="/results/transcripts/${run.runId}.txt">Transcript</a>
-      <a href="/results/evaluations/${run.runId}.json">Evaluation</a>
       <a href="/runs/${run.runId}/workspace/${run.targetFile}">Generated screen</a>
     </div>
   `;
