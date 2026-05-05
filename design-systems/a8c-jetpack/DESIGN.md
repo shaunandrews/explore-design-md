@@ -1,292 +1,638 @@
-# Design System: Jetpack
+---
+version: alpha
+name: Jetpack
+description: Jetpack plugin admin and component design system for AI coding agents. Use these tokens and guidelines when generating Jetpack admin pages (My Jetpack, Boost, Protect, Search, Stats, Social, VideoPress, Backup, AI Assistant, Forms, CRM), settings screens, dashboard widgets, editor SlotFills, block UI provided by Jetpack, and any plugin/admin surface that should feel like Jetpack. Jetpack admin lives inside `wp-admin`, so this file builds on top of the WordPress admin design system and intentionally inherits from it; where Jetpack and WordPress differ, this file documents the Jetpack-specific layer (Emerald visual style, `--jp-*` tokens, `@automattic/jetpack-components`, brand color, plan/upgrade surfaces). This file excludes front-end theme styling, block content rendered to visitors, theme.json palettes, and Calypso/WordPress.com Cloud chrome.
+colors:
+  brand: "#069E08"
+  brand-secondary: "#2FB41F"
+  brand-dark: "#007117"
+  brand-darker: "#005B18"
+  green-0: "#F0F2EB"
+  green-5: "#D0E6B8"
+  green-10: "#9DD977"
+  green-20: "#64CA43"
+  green-30: "#2FB41F"
+  green-40: "#069E08"
+  green-50: "#008710"
+  green-60: "#007117"
+  green-70: "#005B18"
+  green-80: "#004515"
+  green-90: "#003010"
+  green-100: "#001C09"
+  green-mint: "#D3F6D5"
+  black: "#000000"
+  black-80: "#2C3338"
+  white: "#FFFFFF"
+  white-off: "#F9F9F6"
+  gray-0: "#F6F7F7"
+  gray-5: "#DCDCDE"
+  gray-10: "#C3C4C7"
+  gray-20: "#A7AAAD"
+  gray-30: "#8C8F94"
+  gray-40: "#787C82"
+  gray-50: "#646970"
+  gray-60: "#50575E"
+  gray-70: "#3C434A"
+  gray-80: "#2C3338"
+  gray-90: "#1D2327"
+  gray-100: "#101517"
+  gray-off: "#E2E2DF"
+  text-primary: "#1D2327"
+  text-body: "#3C434A"
+  text-secondary: "#50575E"
+  text-muted: "#646970"
+  text-disabled: "#A7AAAD"
+  background-page: "#F9F9F6"
+  background-surface: "#FFFFFF"
+  background-subtle: "#F6F7F7"
+  border-strong: "#8C8F94"
+  border: "#C3C4C7"
+  border-subtle: "#DCDCDE"
+  link: "#2271B1"
+  link-hover: "#135E96"
+  focus: "#3858E9"
+  red-0: "#F7EBEC"
+  red-5: "#FACFD2"
+  red-40: "#E65054"
+  red-50: "#D63638"
+  red-60: "#B32D2E"
+  red-70: "#8A2424"
+  red-80: "#691C1C"
+  yellow-5: "#F5E6B3"
+  yellow-10: "#F2CF75"
+  yellow-20: "#F0C930"
+  yellow-30: "#DEB100"
+  yellow-40: "#C08C00"
+  yellow-50: "#9D6E00"
+  yellow-60: "#7D5600"
+  blue-20: "#68B3E8"
+  blue-40: "#1689DB"
+  blue-5: "#CED9F2"
+  orange-20: "#FAA754"
+  pink: "#C9356E"
+  success: "#069E08"
+  success-background: "#F0F2EB"
+  warning: "#C08C00"
+  warning-background: "#F5E6B3"
+  error: "#D63638"
+  error-background: "#F7EBEC"
+  info: "#1689DB"
+  info-background: "#CED9F2"
+  destructive: "#B32D2E"
+  paid-plan: "#069E08"
+  paid-plan-dark: "#007117"
+typography:
+  headline-medium:
+    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif"
+    fontSize: 48px
+    fontWeight: 700
+    lineHeight: "52px"
+  headline-small:
+    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif"
+    fontSize: 36px
+    fontWeight: 700
+    lineHeight: "40px"
+  headline-small-regular:
+    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif"
+    fontSize: 36px
+    fontWeight: 400
+    lineHeight: "40px"
+  title-medium:
+    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif"
+    fontSize: 24px
+    fontWeight: 500
+    lineHeight: "32px"
+  title-medium-semi-bold:
+    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif"
+    fontSize: 24px
+    fontWeight: 600
+    lineHeight: "32px"
+  title-small:
+    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif"
+    fontSize: 20px
+    fontWeight: 500
+    lineHeight: "30px"
+  body:
+    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif"
+    fontSize: 16px
+    fontWeight: 400
+    lineHeight: "24px"
+  body-small:
+    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif"
+    fontSize: 14px
+    fontWeight: 400
+    lineHeight: "24px"
+  body-extra-small:
+    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif"
+    fontSize: 12px
+    fontWeight: 400
+    lineHeight: "20px"
+  label:
+    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif"
+    fontSize: 12px
+    fontWeight: 600
+    lineHeight: "16px"
+  code:
+    fontFamily: "Consolas, Monaco, monospace"
+    fontSize: 13px
+    fontWeight: 400
+    lineHeight: 1.5
+rounded:
+  none: 0px
+  sm: 2px
+  md: 4px
+  lg: 8px
+  full: 9999px
+spacing:
+  base: 8px
+  xxs: 2px
+  xs: 4px
+  sm: 8px
+  md: 16px
+  lg: 24px
+  xl: 32px
+  xxl: 48px
+  gap: 16px
+  gutter: 24px
+  modal-padding-small: 16px
+  modal-padding: 24px
+  modal-padding-large: 32px
+  jp-grid-max-width: 1128px
+breakpoints:
+  phone-up: 600px
+  tablet-up: 960px
+components:
+  admin-page:
+    backgroundColor: "{colors.white}"
+    textColor: "{colors.text-body}"
+    typography: "{typography.body}"
+    padding: "0"
+    notes: "Jetpack admin pages neutralize the wp-admin #wpcontent left padding (-20px on desktop, -10px below 782px) and provide a white background by default."
+  admin-section:
+    backgroundColor: "{colors.white}"
+    textColor: "{colors.text-body}"
+    rounded: "{rounded.lg}"
+    padding: "24px"
+    borderColor: "{colors.gray-5}"
+  admin-card:
+    backgroundColor: "{colors.white}"
+    textColor: "{colors.text-body}"
+    rounded: "{rounded.md}"
+    padding: "24px"
+    borderColor: "{colors.gray-5}"
+  pricing-card:
+    backgroundColor: "{colors.white}"
+    textColor: "{colors.text-primary}"
+    rounded: "{rounded.lg}"
+    padding: "24px"
+    borderColor: "{colors.gray-5}"
+  product-offer:
+    backgroundColor: "{colors.white-off}"
+    textColor: "{colors.text-primary}"
+    rounded: "{rounded.lg}"
+    padding: "24px"
+    borderColor: "{colors.gray-5}"
+  button-primary:
+    backgroundColor: "{colors.black}"
+    textColor: "{colors.white}"
+    typography: "{typography.body}"
+    fontWeight: 600
+    rounded: "{rounded.md}"
+    padding: "8px 24px"
+    notes: "Legacy Emerald style is a black filled button with white text. New work should defer to @wp/components Button (admin theme color) per Jetpack design principles. Use the Jetpack-styled primary only for Jetpack-branded surfaces (My Jetpack header CTAs, upgrade banners)."
+  button-primary-jetpack:
+    backgroundColor: "{colors.brand}"
+    textColor: "{colors.white}"
+    typography: "{typography.body}"
+    fontWeight: 600
+    rounded: "{rounded.md}"
+    padding: "8px 24px"
+    notes: "Reserved for upgrade/CTA actions where Jetpack identity is intentional."
+  button-secondary:
+    backgroundColor: "transparent"
+    textColor: "{colors.black}"
+    typography: "{typography.body}"
+    fontWeight: 600
+    rounded: "{rounded.md}"
+    padding: "8px 24px"
+    borderColor: "{colors.black}"
+  button-small:
+    typography: "{typography.body-extra-small}"
+    fontWeight: 600
+    rounded: "{rounded.md}"
+    padding: "4px 8px"
+  icon-button:
+    rounded: "{rounded.md}"
+    padding: "8px"
+    width: "40px"
+    height: "40px"
+  icon-button-small:
+    rounded: "{rounded.md}"
+    padding: "4px"
+    width: "32px"
+    height: "32px"
+  notice:
+    backgroundColor: "{colors.white}"
+    textColor: "{colors.text-primary}"
+    typography: "{typography.body}"
+    rounded: "{rounded.md}"
+    padding: "24px 31px 27px 18px"
+    borderColor: "{colors.gray-5}"
+    borderLeftWidth: "6px"
+  notice-success:
+    borderLeftColor: "{colors.success}"
+  notice-warning:
+    borderLeftColor: "{colors.yellow-20}"
+  notice-error:
+    borderLeftColor: "{colors.error}"
+  notice-info:
+    borderLeftColor: "{colors.black}"
+  modal:
+    backgroundColor: "{colors.white}"
+    rounded: "{rounded.lg}"
+    padding: "{spacing.modal-padding}"
+  upsell-banner:
+    backgroundColor: "{colors.white-off}"
+    textColor: "{colors.text-primary}"
+    rounded: "{rounded.lg}"
+    padding: "24px"
+    borderColor: "{colors.brand}"
+  decorative-card:
+    backgroundColor: "{colors.green-0}"
+    textColor: "{colors.text-primary}"
+    rounded: "{rounded.lg}"
+    padding: "24px"
+  status-success:
+    color: "{colors.success}"
+    backgroundColor: "{colors.green-0}"
+  status-warning:
+    color: "{colors.yellow-40}"
+    backgroundColor: "{colors.yellow-5}"
+  status-error:
+    color: "{colors.error}"
+    backgroundColor: "{colors.red-0}"
+  jp-cut-link:
+    backgroundColor: "transparent"
+    textColor: "{colors.text-primary}"
+    rounded: "{rounded.md}"
+    padding: "16px 64px 16px 24px"
+    borderColor: "{colors.brand}"
+    notes: "The signature Jetpack 'cut' link: a 2px green-bordered card with an arrow indicator that animates on hover. Used for primary navigation between admin sections."
+  jp-grid:
+    columns: 12
+    gap: "24px"
+    maxWidth: "1128px"
+    notes: "Phone (<600px): 4 columns, 16px margin. Phone-up (≥600px): 8 columns, 18px margin. Tablet-up (≥960px): 12 columns, 1128px max-width, 24px margin."
+---
 
-## 1. Visual Theme & Atmosphere
+# Jetpack Design System
 
-Jetpack's website projects security and reliability -- a calm, confident system that communicates "your WordPress site is protected" without resorting to aggressive dark themes or alarm-bell aesthetics. The page opens on a clean white canvas (`#ffffff`) with near-black text (`#000000`) and a distinctive Jetpack Green (`#008710`) that serves as both brand anchor and trust signal. This green isn't the playful lime of a startup; it's a deep, authoritative green that reads as established and dependable -- the color of a security shield, not a lawn.
+## Overview
 
-The typography is built on `Inter`, loaded as a web font with system fallbacks. At display sizes (48px-84px), Inter runs with fluid `clamp()` scaling for seamless responsiveness. The site uses generous pill-shaped buttons (`border-radius: 9999px`) that create an approachable, modern feel against the otherwise structured layout. Combined with blurred gradient blob animations in the background (on capable devices) and ample whitespace, the overall impression is of a premium security product that doesn't need to shout.
+Jetpack is a WordPress plugin that lives inside `wp-admin`. Jetpack admin UI should feel like a calm, capable, editorial extension of WordPress — not a separate SaaS product, and not a marketing site. The default posture is white surfaces, generous whitespace, restrained green accents, system typography at slightly larger sizes than classic wp-admin, and clear status communication.
 
-What distinguishes Jetpack visually is its restraint. Where competitor security products use dark palettes and warning colors, Jetpack stays light, clean, and green-accented. The result is a site that feels more like a wellness product than a firewall -- protection as peace of mind, not as battle armor.
+This document covers Jetpack admin and component surfaces only:
 
-**Key Characteristics:**
-- Inter as the primary typeface -- clean, modern, highly legible at all sizes
-- Fluid typography using CSS `clamp()` for seamless responsive scaling
-- Jetpack Green (`#008710`) as the singular, defining brand color
-- Pill-shaped buttons (`9999px` radius) as the default interactive pattern
-- Clean white canvas with generous whitespace
-- 1200px max content width -- tighter and more focused than typical marketing sites
-- Blurred gradient blob animations as subtle background decoration
-- Green SVG icons as a consistent visual language for features
-- Dark gray (`#32373c`) as the primary button background -- not black, not green
-- WordPress block-based layout system with a modular spacing scale
+- Jetpack core admin pages: My Jetpack, the legacy Jetpack Dashboard/Settings, and product-specific admin pages such as Boost, Protect, Search, Stats, Social, VideoPress, Backup, CRM, AI Assistant, and Forms.
+- Standalone Jetpack plugins (Boost, Protect, Search, Social, VideoPress, CRM) that ship their own React-based admin UI built on `@automattic/jetpack-components` and `@automattic/jetpack-base-styles`.
+- Editor SlotFills, block sidebar panels, prepublish/postpublish surfaces, and inspector controls contributed by Jetpack to the block editor.
+- Shared Jetpack chrome: page headers with the Jetpack logo, footer, breadcrumbs, upgrade banners, paid-plan badges, connection prompts, onboarding tours, and notice toasts.
 
-## 2. Color Palette & Roles
+This document explicitly excludes:
 
-### Primary Brand
-- **Jetpack Green 50** (`#008710`): Primary brand color, icons, links, trust signal. A deep, authoritative green.
-- **Jetpack Green 40** (`#069e08`): Secondary actions, hover states, testimonial quote marks, icon variant.
-- **Jetpack Green 30** (`#2fb41f`): Lighter green for decorative accents and highlights.
-- **Jetpack Green 60** (`#007117`): Darker green for emphasis and contrast on light surfaces.
+- Front-end theme styling, block output rendered to visitors, `theme.json`-driven presentation.
+- The WordPress.com Cloud / Calypso interface.
+- WooCommerce, VIP, Pocket Casts, Day One, and other Automattic product UIs.
+- Email templates and marketing site styling.
 
-### Neutral Scale
-- **Black** (`#000000`): Primary heading color. Pure black for maximum contrast.
-- **Gray 70** (`#3c434a`): Secondary text, descriptions.
-- **Gray 40** (`#787c82`): Muted text, placeholders, tertiary labels.
-- **Dark Gray** (`#32373c`): Primary button background. Not pure black -- a warm, approachable dark.
-- **Very Dark Gray** (`#313131`): Footer backgrounds, dark section surfaces.
-- **Gray 0** (`#f6f7f7`): Light background surfaces, section fills.
-- **Light Gray** (`#eee`): Subtle borders, separator lines.
-- **White** (`#ffffff`): Page background, card surfaces, button text on dark.
+This file builds on top of the WordPress admin design system and inherits from it. When Jetpack admin code lives inside `wp-admin`, prefer the WordPress admin shell, classic notices, list tables, and `@wordpress/components` defaults. Apply the Jetpack-specific layer documented here only where Jetpack identity, the `@automattic/jetpack-components` library, or the Emerald visual style genuinely apply. Jetpack's published design principles are explicit on this point: align with Core color schemes, embrace `@wordpress/components` fully, and define branding strategically rather than uniformly.
 
-### Accent Colors (decorative / WordPress presets)
-- **Vivid Cyan Blue** (`#0693e3`): Informational highlights, gradient starts.
-- **Vivid Purple** (`#9b51e0`): Gradient accents, decorative elements.
-- **Vivid Red** (`#cf2e2e`): Error states, destructive actions.
-- **Luminous Vivid Orange** (`#ff6900`): Warning highlights.
-- **Luminous Vivid Amber** (`#fcb900`): Attention, promotional elements.
+## Design Principles
 
-### Interactive States
-- **Link Default**: `#008710` (Jetpack Green 50)
-- **Button Background**: `#32373c` (Dark Gray)
-- **Focus Ring**: standard browser outline
-- **Outline Button Border**: `2px solid currentColor`
+These four principles are canonical (Jetpack Design, Nov 2024) and supersede earlier custom-styled patterns when in conflict.
 
-### Shadow Colors
-- **Shadow Standard** (`rgba(0,0,0,0.2)`): Natural and sharp shadow base.
-- **Shadow Deep** (`rgba(0,0,0,0.4)`): Maximum elevation.
+1. **Align with Core color schemes.** Adopt the user-selected admin color scheme as Jetpack's primary palette. Do not impose custom black buttons, oversized green toggles, or beige callouts on routine admin chrome. In CSS, prefer `var(--wp-admin-theme-color)` for primary actions, focus, and selected states. The `--jp-*` token set still exists but is increasingly reserved for Jetpack-branded surfaces and legacy Emerald screens.
+2. **Embrace `@wordpress/components` fully.** Reach for `Button`, `Card`, `Notice`, `Panel`, `DataViews`, `ToggleControl`, `TextControl`, `Modal`, etc. before reaching for a Jetpack equivalent. Don't override Core component styles with Jetpack styles. Where a needed component is missing, contribute it upstream rather than forking inside Jetpack.
+3. **Create a seamless experience.** Jetpack appears in many contexts (self-hosted wp-admin, Atomic, WordPress.com). The visual language must feel continuous across them. Use shared components, shared patterns, shared tokens. Cohesion across Jetpack > visual novelty within one screen.
+4. **Define branding points strategically.** Jetpack identity should appear at deliberate touchpoints — the Jetpack logo in page headers, the green accent on connection states, the Jetpack footer, upgrade banners, onboarding flows, plan badges — not as a coat of paint over every control. Restraint is the rule; brand expression is the exception.
 
-## 3. Typography Rules
+The earlier Emerald guiding principles still inform Jetpack's standalone plugins (Boost, Protect, Search) and remain useful where a more distinct Jetpack chrome is appropriate:
 
-### Font Family
-- **Primary**: `Inter, sans-serif`
-- **System Fallback**: `-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif`
-- **Serif Display**: `Recoleta` (used sparingly for editorial moments)
+- **Black-and-white dominant.** Pages lean on near-black text, white surfaces, and very limited gray. Green is an accent, not a base.
+- **Unboxed.** Avoid wrapping content in nested cards. Let the underlying grid and generous padding do the separation work. Aim for at most ~50% of the page enclosed in visible boxes.
+- **Off-white warmth.** The page background is `#F9F9F6` (token: `--jp-white-off`), a warmer alternative to wp-admin's `#F0F0F1`. It makes green and near-black both feel intentional.
+- **1px lines.** Dividers are 1px. If a line is needed, it is a near-black 1px line, not a heavy border.
+- **Functionally editorial.** The interface should feel like a confident editorial layout — calm typography, real headlines, breathing room — unless the task is purely transactional (a settings toggle, a quick switch), in which case compactness wins.
 
-### Hierarchy
+## Colors
 
-| Role | Font | Size | Weight | Line Height | Letter Spacing | Notes |
-|------|------|------|--------|-------------|----------------|-------|
-| Display Hero | Inter | clamp(68px, 4.25rem + 1.25vw, 84px) | 700 | 1.0 (tight) | -0.5px | Maximum impact headlines |
-| Display Large | Inter | clamp(28px, 1.75rem + 1.563vw, 48px) | 700 | 1.1 (tight) | -0.3px | Section hero headlines |
-| Section Heading | Inter | clamp(25px, 1.563rem + 1.327vw, 42px) | 700 | 1.15 (tight) | -0.2px | Feature section titles |
-| Sub-heading | Inter | 24px | 600 | 1.3 | normal | Card headings, sub-sections |
-| Body Large | Inter | clamp(14px, 0.875rem + 0.469vw, 20px) | 400 | 1.6 | normal | Feature descriptions |
-| Body | Inter | 18px | 400 | 1.6 | normal | Standard reading text |
-| Body Small | Inter | 15px | 400 | 1.5 | normal | Secondary text, metadata |
-| Button | Inter | inherit | 400 | 1.0 | normal | Inherits from parent |
-| Quote Mark | Inter | 5rem (80px) | 700 | 1.0 | normal | Testimonial open-quote character |
+Use neutral grays for structure, near-black for primary text and Emerald accents, white and off-white for surfaces, and Jetpack green only for brand moments and paid/healthy state.
 
-### Principles
-- **Bold headings, light body**: Weight 700 for all headings creates strong visual hierarchy. Body text stays at 400 for comfortable reading.
-- **Fluid display scaling**: Hero and section headings use `clamp()` for responsive scaling without breakpoint jumps.
-- **Generous line-height**: Body text uses 1.5-1.6 line-height for excellent readability on white backgrounds.
-- **Pure black headings**: Unlike sites that soften to dark gray, Jetpack uses `#000000` for maximum contrast and authority.
-- **Single typeface discipline**: Inter handles every role from 84px hero to 15px caption. No secondary display font in the primary UI.
+### Core color roles
 
-## 4. Component Stylings
+- **Brand green (`--jp-green-40`, `#069E08`):** The Jetpack identity color. Use for the Jetpack logo accent, paid-plan badges, healthy/secured status, the signature `jp-cut` link border, upgrade callouts, and connection success states. Use sparingly. Do not use as a routine button color across the admin shell — that conflicts with Principle 1. Reserved palette: `--jp-green-30 #2FB41F` (secondary), `--jp-green-50 #008710` (legacy primary), `--jp-green-60 #007117` (paid-plan-dark).
+- **Near-black (`--jp-black #000`, `--jp-black-80 #2C3338`, `--jp-gray-90 #1D2327`):** Heading and primary text, Emerald-style filled buttons, 1px dividers, icon strokes.
+- **Gray scale (`--jp-gray-0` through `--jp-gray-100`):** A 10-step warm-neutral scale shared with WordPress core's `#F6F7F7…#101517` ramp. Use `--jp-gray-5 #DCDCDE` for borders and dividers, `--jp-gray-10 #C3C4C7` for stronger borders, `--jp-gray-50 #646970` for muted/secondary text, `--jp-gray-60 #50575E` for body text accents, `--jp-gray-90 #1D2327` for headings.
+- **Surfaces:** `--jp-white #FFFFFF` for cards, sections, modals, and the inside of admin pages. `--jp-white-off #F9F9F6` for the warm Emerald page background and for upsell/promo containers. `--jp-gray-0 #F6F7F7` for subtle grouped areas inherited from wp-admin.
+- **Link blue (`#2271B1`):** Standard wp-admin link color; Jetpack does not override it. Hover darkens to `#135E96`.
+- **Focus:** Use the active wp-admin theme color (`var(--wp-admin-theme-color)`) for focus outlines and selected states. Do not hard-code a Jetpack focus color in admin chrome.
+
+### Status color roles
+
+- **Success / healthy / connected:** `--jp-green-40 #069E08` against `--jp-green-0 #F0F2EB`. This is also the paid-plan color.
+- **Warning:** `--jp-yellow-20 #F0C930` for accents (e.g., notice borders) or `--jp-yellow-40 #C08C00` for text against `--jp-yellow-5 #F5E6B3`.
+- **Error / destructive:** `--jp-red-50 #D63638` for primary error, `--jp-red-60 #B32D2E` for destructive button text, `--jp-red-0 #F7EBEC` for backgrounds. These match WordPress core error tokens.
+- **Info:** `--jp-blue-40 #1689DB` is reserved for informational accents in standalone Jetpack plugins. In admin chrome, prefer the wp-admin link blue (`#2271B1`) instead.
+- **Pink (`--jp-pink #C9356E`)** and **orange (`--jp-orange-20 #FAA754`)** exist for product-specific surfaces (e.g., Stats, certain VideoPress states). Do not introduce them into routine admin chrome.
+
+### Color constraints
+
+Use color semantically, not decoratively. Status must never rely on color alone — pair it with a label, an icon, or a shape. Do not place green on green (e.g., a `--jp-green-40` button on `--jp-green-0`) without sufficient contrast for the text. Respect the user's wp-admin color scheme: do not paint the masterbar, admin menu, or focus rings green.
+
+## Typography
+
+Use the WordPress admin system font stack. Jetpack does not load custom webfonts.
+
+`-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif`
+
+Jetpack's Emerald scale runs larger than classic wp-admin (16px body vs. 13px) and uses a stricter set of steps. The named scale is exposed by `@automattic/jetpack-components` as the `Text` component variants and as `--font-*` CSS variables.
+
+### Text hierarchy (Emerald scale)
+
+- **Headline Medium** — 48px / 700 / 52px line-height. Page-level hero headlines on standalone Jetpack pages. One per page maximum.
+- **Headline Small** — 36px / 700 / 40px line-height. Default page title for Jetpack admin pages and section titles in onboarding. Available in a `headline-small-regular` (400 weight) variant for less emphatic page titles.
+- **Title Medium** — 24px / 500 / 32px line-height. Card titles, major section headings, modal titles. Available in a 600-weight variant (`title-medium-semi-bold`) when more emphasis is needed.
+- **Title Small** — 20px / 500 / 30px line-height. Subsection headings, panel titles in standalone plugins.
+- **Body** — 16px / 400 / 24px line-height. The default reading size and default button text size. This is the most important deviation from classic wp-admin.
+- **Body Small** — 14px / 400 / 24px line-height. Secondary copy, helper text where 12px would feel too small.
+- **Body Extra Small** — 12px / 400 / 20px line-height. Metadata, tertiary captions, small button text. A 700-weight variant exists for emphasis.
+- **Label** — 12px / 600 / 16px line-height. Form labels, badges, status pills, table column headers.
+- **Code** — 13px monospace. CLI commands, slugs, technical values.
+
+Keep copy direct, friendly, and active. Jetpack's brand voice is **knowledgeable, friendly, and informative**. Speak simply, avoid jargon, and use active voice ("Jetpack helped the user," not "the user was helped by Jetpack"). Sentence case for setting titles, button labels, and headings. Product names retain their proper-noun capitalization ("Jetpack Anti-spam," "Jetpack Boost"). Refer to paid tiers as **plans**, not packages, bundles, or upgrades.
+
+## Layout
+
+Jetpack admin layout is grid-driven, generous, and editorial. Use a 12-column grid centered in the page with an 8px module and 24px gaps. Cap content width at 1128px on desktop. Below tablet, the grid collapses gracefully.
+
+### The Jetpack grid
+
+- **Module:** 8px (the `--spacing-base` token).
+- **Gap:** 24px between grid columns.
+- **Columns:** 12 on desktop (≥960px), 8 on tablet (600–959px), 4 on phone (<600px).
+- **Page max-width:** 1128px, centered.
+- **Page margins:** 24px desktop, 18px tablet, 16px phone.
+
+Jetpack's React `AdminPage` component handles this for you: it neutralizes wp-admin's `#wpcontent` left padding, centers content in `Container`/`Col`, applies the white background, and renders the standard Jetpack header (logo + title + actions) and footer. Use it for any new full-screen Jetpack admin page.
+
+### Spacing rhythm
+
+Use 8-step spacing: `0, 4, 8, 16, 24, 32, 40, 48, 56, 64`. The `Text` component exposes these as `m`, `mt`, `mb`, `mx`, `my`, `p`, `pt`, etc. props (`mb={3}` = 24px bottom margin). Default gaps in flex containers and modals: 16px (the `--jp-gap` token). Modal padding: 16px (small), 24px (default), 32px (large).
+
+### Layout patterns
+
+When composing a screen, pick the pattern that best matches the task. Each option below is a complete spatial recipe, not a suggestion. Once you pick, follow it. If two patterns could fit, prefer the one with less chrome.
+
+#### Page header
+
+- **Editorial header (default):** title (Headline Small, 36/700) + subtitle (Body Large, 16/400) on the left, primary action on the right, separated from page content by 32px below. Best for most surfaces.
+- **Compact header:** title only, inline with primary action, 16px below. Use for dense list views or when the page lives inside a wp-admin shell that already provides context.
+- **Hero header:** title (Headline Medium), subtitle, optional illustration or product mark, single CTA, centered or left-aligned. Use only for empty states, marketing/upgrade screens, or first-run onboarding.
+
+#### Dashboard / overview surface
+
+- **KPI strip + 2-column main:** Row of 3–4 KPI cards across the top (equal width, 16–24px gap). Below, two columns at roughly 8/4 — a primary visualization on the left, a stack of supporting cards on the right. Optional full-width tertiary section below. Best for parallel content (chart + filters + feedback).
+- **Single column scan:** KPI strip → primary visualization full-width → 2–3 supporting cards in a row → tertiary list. Use when content is sequential rather than parallel, or when one visualization deserves the full width.
+
+#### Settings surface
+
+- **Sectioned single column:** Vertical stack of titled sections, each containing a label-and-control row pattern. Sections separated by a 1px `--jp-gray-5` divider with 32px vertical spacing above and below. Best for ≤6 sections.
+- **Two-column with anchor nav:** Left column (~240px, sticky) is a list of anchor links to each section. Right column is the sectioned form (max 720px reading width). Best for ≥6 sections or long forms.
+- **Tabbed groups:** Tabs at the top (`@wordpress/components` `TabPanel`), each tab is a single-column sectioned form. Best when categories are orthogonal (Profile / Billing / Security / Integrations) and users won't need to compare across them.
+
+Never lay out settings sections as side-by-side vertical columns. Never put more than one control per row unless they are naturally paired (start time + end time, two related selects).
+
+#### List / collection surface
+
+- **DataViews + side panel:** Main region is `@wordpress/dataviews` `DataViews` (~8/12 columns); right side panel (~4/12) holds health summary, recent activity, or recommended actions. Page header above both. Best when secondary context adds real value.
+- **DataViews full-width:** `DataViews` fills the content area. Use when no side context adds value, or when the dataset is dense enough to need every column.
+
+In either case, always include search, sortable columns, a filter affordance, bulk select, per-row primary action, and an overflow menu for secondary actions.
+
+#### Multi-step flow / onboarding
+
+- **Stepper + form + aside:** Step indicator (numbered or named) across the top with the current step emphasized. Main form panel on the left (~8/12). Aside on the right (~4/12) with help, setup health, or time-remaining. Footer with Back + Continue.
+- **Centered single column:** Step indicator at the top, then a narrow centered column (560–640px) containing the step content, then a sticky footer with Back + Continue. Use when the step is reading-heavy or when an aside would distract.
+
+#### Side panel
+
+When using a side panel anywhere, the panel is ~320–360px wide on desktop, contains 2–3 stacked cards (each titled), and stacks below the main region under 1080px. Cards inside a side panel use lighter chrome than primary cards: no header bar, 16–20px padding, smaller titles.
+
+#### Empty states and zero-data
+
+Centered illustration or icon, headline (Headline Small), body (Body Default), single primary action. Don't show empty tables or empty charts — replace the entire region with the empty state until there's data to display.
+
+### Responsive behavior
+
+Jetpack admin must remain usable on touch devices and narrow widths. The grid collapses to 4 columns under 600px. Buttons remain comfortably tappable (minimum 32px / preferred 40px). Page headers stack vertically. Cards become full-width. Side navigation collapses behind a toggle. Notices switch to a stacked layout with the icon, title, and close button repositioned at the top.
+
+## Elevation & Depth
+
+Jetpack admin communicates hierarchy primarily through whitespace, typography, and 1px borders — not through shadow.
+
+- **Flat surfaces:** the default for admin pages, sections, cards, and notices. White on off-white, separated by spacing or a 1px `--jp-gray-5` border.
+- **Subtle shadow:** allowed on mobile notice containers (`0 4px 8px rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.06)`), popovers, and hover states on interactive cards.
+- **Modal depth:** standard backdrop + centered dialog. 8px radius, 24px padding, drop shadow inherited from `@wordpress/components` `Modal`.
+
+Do not use heavy drop shadows, glassmorphism, neumorphism, blurred translucent panels, decorative gradients, or layered marketing-card effects. Jetpack is not a SaaS dashboard.
+
+## Shapes
+
+Jetpack uses small to medium radii. The Emerald style is more rounded than classic wp-admin but stops short of consumer-app curvature.
+
+- **0px:** legacy Jetpack admin tables and metaboxes inherited from wp-admin.
+- **2px:** very compact elements when matching surrounding wp-admin chrome.
+- **4px (`--jp-border-radius`, `--jp-button-radius`):** the default. Buttons, inputs, notices, small cards, focus outlines.
+- **8px (`--jp-border-radius-rna`, `--jp-modal-radius`):** larger cards, modals, decorative cards, pricing cards, the primary container in Boost/Protect/Search dashboards.
+- **9999px:** badges, status pills, plan tags, avatars, circular icon buttons.
+
+## Components
+
+Jetpack ships components in three layers. Choose the highest layer that fits — don't reimplement what already exists.
+
+1. **`@wordpress/components`** (Core). The default and preferred source. `Button`, `Card`, `Notice`, `Panel`, `Modal`, `ToggleControl`, `TextControl`, `SelectControl`, `DataViews`, `Tooltip`, `Popover`, `TabPanel`. Use these unless a Jetpack-specific behavior or visual is genuinely required.
+2. **`@automattic/jetpack-components`** (Jetpack). Provides Jetpack-flavored building blocks that aren't (yet) in Core: `AdminPage`, `AdminSection`, `JetpackLogo`, `JetpackFooter`, `Text` (with the Emerald scale), `Container` / `Col`, `Notice`, `Dialog`, `PricingCard`, `PricingTable`, `ProductOffer`, `ProductPrice`, `DecorativeCard`, `UpsellBanner`, `ContextualUpgradeTrigger`, `BoostScoreBar`, `BoostScoreGraph`, `DonutMeter`, `RecordMeterBar`, `StatCard`, `Status`, `Spinner`, `LoadingPlaceholder`, `ActionButton`, `ActionPopover`, `SplitButton`, `Chip`, `IconTooltip`, `Gridicon`, `JetpackProtectLogo`, `JetpackSearchLogo`, `JetpackVaultPressBackupLogo`, `JetpackVideoPressLogo`, `ThemeProvider`. Wrap product surfaces in `<ThemeProvider>` so the `--jp-*` tokens resolve.
+3. **`@automattic/jetpack-base-styles`** (SCSS layer). Forward-imports `@wordpress/base-styles` (z-index, colors, variables, breakpoints, mixins, animations) and adds Jetpack admin layout mixins, the `:root` variable set, the responsive `jp-row` / `jp-wrap` grid utilities, and the `jp-cut` link pattern.
 
 ### Buttons
 
-**Primary Dark**
-- Background: `#32373c`
-- Text: `#ffffff`
-- Padding: `calc(0.667em + 2px) calc(1.333em + 2px)`
-- Radius: `9999px` (pill)
-- Border: none
-- Font: inherit from parent
-- Use: Primary CTA ("Get started", "Secure your site")
+Jetpack's standalone plugins use a custom button treatment with a near-black filled primary; My Jetpack and admin chrome are increasingly migrating to the `@wordpress/components` `Button` so they pick up the user's admin theme color (Principle 1). When in doubt, use Core's `Button` and let it be blue.
 
-**Primary Green**
-- Background: `#008710`
-- Text: `#ffffff`
-- Padding: `calc(0.667em + 2px) calc(1.333em + 2px)`
-- Radius: `9999px` (pill)
-- Border: none
-- Hover: `#069e08` background
-- Use: Brand-specific CTA, key conversion points
+The Jetpack `Button` (`@automattic/jetpack-components/Button`) variants:
 
-**Outline**
-- Background: transparent
-- Text: currentColor (typically `#000000` or `#32373c`)
-- Padding: `0.667em 1.333em`
-- Radius: `9999px` (pill)
-- Border: `2px solid currentColor`
-- Hover: slight opacity change
-- Use: Secondary actions
+- **Primary (filled, near-black):** the Emerald default. White text on near-black, 4px radius, 600 weight, 24px horizontal padding, 24px line-height. Use for the dominant action on a Jetpack-branded page.
+- **Primary (filled, brand green):** reserved for upgrade and connection CTAs where Jetpack identity is intentional.
+- **Secondary (outlined):** transparent fill, near-black text, 1px near-black border, same 4px radius. The default for non-primary actions.
+- **Link / Tertiary:** unstyled link presentation; uses `is-link` from `@wordpress/components`. For low-emphasis inline actions and toolbar text actions.
+- **Destructive:** secondary treatment with red text, or a Core destructive variant. Avoid large filled red buttons except in final confirmation dialogs.
+- **Sizes:** Normal (16px text, 8px/24px padding) and Small (12px text, 4px/8px padding).
+- **Icon buttons:** 40px square (Normal) or 32px square (Small). Always include an accessible label.
+- **States:** loading replaces children with a centered spinner while preserving width; full-width sets `min-width: 100%`.
 
-### Cards & Containers
-- Background: `#ffffff` or transparent
-- Border: none (clean, borderless design) or subtle gray
-- Radius: `2.043625rem` (~33px) for premium cards, or `1.25em` for standard
-- Shadow: none by default (clean flat design)
-- Padding: `1.25em 2.375em` (default with background)
-- Gap: 24px (default block gap)
+One primary action per decision area. Primary is for the action that closes the loop (Save, Connect, Upgrade, Activate). Everything else is secondary or link.
 
-### Badges / Tags
-- Minimal use -- Jetpack favors icon + text patterns over badges
-- When used: pill-shaped with `9999px` radius, green or gray background
+### Notices
 
-### Inputs & Forms
-- Inherits system styling
-- Focus: standard browser outline enhanced
-- Button style applied to submit elements (`#32373c` background, pill shape)
+Use the Jetpack `Notice` component (or `@wordpress/components` `Notice` in Core-aligned screens). Jetpack notices use a 6px-wide left border in the status color, a 1px gray-5 border on the remaining sides, a 4px radius, and a flex layout: status icon → title + body + actions → close button.
 
-### Navigation
-- Transparent/white header with logo left-aligned
-- Product submenu with dropdown structure
-- Links: Inter, standard size, green (`#008710`) for active/current
-- Right side: Search, Login text link, "Get started" CTA pill button
-- Mobile: toggle-based hamburger menu (id-based system)
+- **Success:** `--jp-green` left border, green check icon.
+- **Warning:** `--jp-yellow-20` left border, yellow alert icon.
+- **Error:** `--jp-red` left border, red alert icon.
+- **Info:** near-black left border (Emerald uses black, not blue, for neutral info to keep the page calm), info icon.
 
-### Icons
-- Custom SVG icons in Jetpack Green (`#008710` or `#069e08`)
-- Standard size: 24px x 24px (some at 28px)
-- Display: inline-block, vertically centered
-- Margin-right: 12px when paired with text
-- Categories: security (shield, key), performance (speed, cloud), growth (stats, social), content (forms, newsletter, video)
+Place notices at the top of the relevant page area, after the page header. On mobile (<600px) the layout reflows: padding-top expands, the icon moves to the absolute top-left, and the close button moves to the absolute top-right.
 
-### Testimonials
-- Large open-quote character at 5rem (80px), colored `#069e08`
-- Quote text at body or body-large size
-- Clean layout without decorative borders
+### Cards and sections
 
-## 5. Layout Principles
+- **`AdminSection`:** a top-level grouping inside `AdminPage`. Use to separate distinct concerns on a single screen (e.g., "Performance" vs. "Security" on My Jetpack).
+- **`Card` / `AdminCard`:** the standard container. White surface, 1px gray-5 border, 4–8px radius, 24px padding. Headers and footers can use `--jp-gray-0` for subtle separation.
+- **`DecorativeCard`:** a softer, brand-tinted card (typically green-0 background) used for promotional, onboarding, or feature-introduction surfaces.
+- **`PricingCard` / `PricingTable`:** structured plan presentation. Each card includes plan name, price (use `ProductPrice` for currency formatting), feature list, primary CTA, and optional "recommended" badge.
+- **`ProductOffer`:** the My Jetpack product summary card. Combines a product logo, headline, status, plan tier, and a primary action.
+- **`UpsellBanner`:** off-white background with a brand-green left border, used to surface upgrade opportunities inline with related content.
 
-### Spacing System
-- Base: rem-based modular scale
-- Scale:
-  - 20: `0.44rem` (~7px)
-  - 30: `0.67rem` (~11px)
-  - 40: `1rem` (16px)
-  - 50: `1.5rem` (24px)
-  - 60: `2.25rem` (36px)
-  - 70: `3.38rem` (~54px)
-  - 80: `5.06rem` (~81px)
-- Default block gap: 24px
+### Forms and settings controls
 
-### Grid & Container
-- Max content width: 1200px (both content-size and wide-size)
-- Constrained layouts: 640px, 880px for focused content
-- WordPress block-based flex layout
-- Feature sections: 2-column flex grids with 24px gap
-- Columns: flex-based with responsive wrapping
-- Alignment: center, left, right, space-between
+Prefer `@wordpress/components` `ToggleControl`, `TextControl`, `SelectControl`, `RadioControl`, `CheckboxControl`, and `RangeControl`. They handle accessibility, RTL, and admin theme color out of the box. Where Jetpack provides a wrapper (e.g., `ToggleControl` from `@automattic/jetpack-components`), it exists for layout/label consistency, not to restyle the underlying control.
 
-### Whitespace Philosophy
-- **Spacious and calm**: Generous vertical spacing between sections (80px+ via spacing-80) creates a sense of breathing room that reinforces the security/peace-of-mind brand message.
-- **Focused content width**: 1200px max-width is narrower than many marketing sites, keeping the eye focused on a single column of content.
-- **Constrained reading widths**: Key content blocks use 640px or 880px constraints for optimal line lengths.
+- Labels above the control, programmatically associated.
+- Helper text in 14px gray-50, immediately below the control.
+- Required/invalid state must include text, not only color.
+- Group related toggles and inputs in a `Card` or `Panel` rather than scattering them across the page.
 
-### Border Radius Scale
-- Standard (0px): Some containers remain sharp-cornered
-- Card (1.25em / ~20px): Standard rounded containers
-- Premium card (2.043625rem / ~33px): Featured/pricing cards
-- Pill (9999px): Buttons, badges, tags
+### Connection states and the Jetpack "cut" link
 
-## 6. Depth & Elevation
+The `jp-cut` link is a signature Jetpack pattern: a 2px brand-green-bordered card with a right-aligned arrow that translates 8px on hover/focus, plus an underline on the last line of text. Use it for primary navigation between major Jetpack admin areas (e.g., "Continue to Stats →"). It is intentionally distinct from a regular button — it implies progression, not commitment.
 
-| Level | Treatment | Use |
-|-------|-----------|-----|
-| Flat (Level 0) | No shadow | Default for most elements -- clean, flat design |
-| Natural (Level 1) | `6px 6px 9px rgba(0,0,0,0.2)` | Subtle card elevation |
-| Sharp (Level 2) | `6px 6px 0px rgba(0,0,0,0.2)` | Hard-edge decorative shadow |
-| Deep (Level 3) | `12px 12px 50px rgba(0,0,0,0.4)` | Modals, prominent panels |
-| Crisp (Decorative) | `6px 6px 0px rgb(0,0,0)` | Bold editorial shadow |
+The connection prompt (the screen a site sees before it has linked to WordPress.com) uses the Jetpack logo prominently, a Headline Small title, body copy, the brand-green primary `Connect Jetpack` button, and a secondary `Not now` link.
 
-**Shadow Philosophy**: Jetpack takes a notably flat approach -- most elements have zero shadow, relying on whitespace and color contrast for visual hierarchy. When shadows are used, they follow the WordPress preset system with a directional 6px/6px offset that creates a subtle 3D effect. The deep shadow (50px blur) is reserved for truly elevated elements like modals. This restraint keeps the visual noise low, reinforcing the "calm protection" brand message.
+### Plan and product badges
 
-### Decorative Depth
-- Blurred gradient blobs as background elements (disabled on reduced-motion and mobile)
-- `translate3d()` transforms for smooth animation performance
-- Green-tinted SVG icons provide color depth without shadow complexity
+Paid-plan badges and active-product chips use brand green (`--jp-green-40`) text on a green-0 background, full-radius pill shape, label typography (12px / 600). Free/inactive states use gray-50 on gray-0. Don't gild a free state with brand color — paid users earn the green.
 
-## 7. Do's and Don'ts
+### Modals and confirmations
+
+Use `@wordpress/components` `Modal` with Jetpack content. Jetpack uses the small/default/large modal padding tokens (16/24/32px) for consistency. Reserve modals for decisions that must complete before the user continues (disconnect, delete data, confirm destructive plan changes). Modal action area: secondary on the left, primary on the right, with the destructive option clearly labeled (`Disconnect Jetpack`, not just `OK`).
+
+### Charts and meters
+
+Jetpack ships several visualization components for product surfaces:
+
+- **`BoostScoreBar` / `BoostScoreGraph`:** Boost performance scores. Use the green/yellow/red status ramp.
+- **`DonutMeter`:** for proportional values (storage used, completion).
+- **`RecordMeterBar`:** for record/quota-style limits (videos used out of plan).
+- **`ProgressBar` / `IndeterminateProgressBar`:** for in-progress operations.
+- **`StatCard`:** a number + label + optional delta arrow card used in Stats and Search analytics surfaces.
+
+These are Jetpack-specific. Don't reach for them outside Jetpack product UI.
+
+### Icons and logos
+
+- **Core block-editor surfaces:** use `@wordpress/icons`.
+- **Jetpack admin chrome:** use `Gridicon` (still bundled) for legacy parity, or import the named SVG icons from `@automattic/jetpack-components/icons`.
+- **Brand logos:** `JetpackLogo`, `JetpackProtectLogo`, `JetpackSearchLogo`, `JetpackVaultPressBackupLogo`, `JetpackVideoPressLogo`, `AutomatticByline`, `AutomatticForAgenciesLogo`, `AutomatticIconLogo`. Use these as components — don't inline the SVGs.
+
+The Jetpack logo has a `showText` prop. In header positions where a textual page title follows, use `showText={false}` and let the page title carry the words.
+
+## Voice and Microcopy
+
+Jetpack's voice is **knowledgeable, friendly, and informative**. Source: Jetpack Brand Strategy / Jetpack Microcopy Guidelines.
+
+**Writing principles:**
+
+- **Simple.** Short sentences. Plain language. No jargon. Clear as day.
+- **Active.** "Jetpack secured your site," not "your site has been secured."
+- **Sentence case** for setting titles, button labels, and section headings (e.g., "Enable spam protection"). Product names keep their capitalization (e.g., "Jetpack Anti-spam," "Jetpack Boost").
+- **Plans, not packages.** Refer to paid tiers as plans. Do not say "upgrade your bundle" or "purchase the package."
+- **Jetpack, not Automattic.** Users get features from Jetpack, not from Automattic, WordPress, or sub-brands. Users sign up for Jetpack and/or WordPress.com.
+- **Direct outcomes.** Tell the user what changed and what to do next. Don't apologize, don't editorialize, don't pad.
+- **Connection language.** "Connect," "disconnect," "in sync," "synced." Avoid "link," "unlink," "pair."
+
+Microcopy review checklist (from Jetpack Microcopy Guidelines):
+
+1. Is it short and simple?
+2. Is it active voice?
+3. Does it match Jetpack's tone of voice?
+4. Is sentence case applied correctly?
+5. Are product names capitalized correctly?
+6. Does it use "plan" rather than "package"?
+
+## Implementation Guidance
+
+### Use the right layer
+
+- **Inside legacy Jetpack admin (PHP `_inc/client` screens):** the older Calypso-derived stack is in maintenance. Don't add new screens there if you can avoid it — push new work to the React/standalone-plugin model.
+- **Inside a standalone Jetpack plugin (Boost, Protect, Search, Social, VideoPress):** mount on `AdminPage` from `@automattic/jetpack-components`, wrap in `<ThemeProvider>`, compose with `Container`/`Col` from the Jetpack layout package, and use `@wordpress/components` for primitives.
+- **Inside My Jetpack:** use the `@automattic/my-jetpack` patterns (`ProductOffer`, onboarding tour, global notices) plus `@automattic/jetpack-components`. Honor My Jetpack's product-card grid before introducing new layouts.
+- **Inside the block editor (SlotFills):** use `@wordpress/components`, `@wordpress/icons`, `@wordpress/data`, `@wordpress/i18n`, and the editor SlotFill APIs (`PluginDocumentSettingPanel`, `PluginSidebar`, `PluginPrePublishPanel`, `PluginPostPublishPanel`, `PluginBlockSettingsMenuItem`, `PluginMoreMenuItem`). Apply Jetpack identity sparingly — a logo in a sidebar header is appropriate; restyling the inspector is not.
+
+### Tokens and CSS
+
+- Wrap React surfaces in `<ThemeProvider>` so `--font-*`, `--jp-*`, `--spacing-base`, and `--jp-border-radius` resolve. Without it, components fall back to whatever the host page provides.
+- In SCSS, `@use "@automattic/jetpack-base-styles/style"` for the full base layer or `@use "@automattic/jetpack-base-styles/gutenberg-base-styles" as gb` to forward only `@wordpress/base-styles`.
+- Prefer CSS variables to hard-coded hex values so the design can theme. The existing `_colors.scss` files in `projects/plugins/jetpack/scss/` and `projects/plugins/jetpack/_inc/client/scss/` are legacy and increasingly deprecated; new code should use `--jp-*` from the theme provider.
+- `--wp-admin-theme-color` (Core) and `--jp-green-*` (Jetpack) coexist. Use the former for admin chrome focus/primary; use the latter for Jetpack identity and product visualization.
+
+### Localization, RTL, motion
+
+- Wrap all user-facing strings in `__()`, `_x()`, `_n()` from `@wordpress/i18n` with the `'jetpack'` or per-package text domain (e.g., `'jetpack-components'`, `'jetpack-boost'`).
+- Don't bake left/right into layout — use logical properties or the SCSS RTL mixins from `@wordpress/base-styles`.
+- Respect `prefers-reduced-motion`. The `jp-cut` link's arrow translation, hover transitions, and spinners all degrade to no animation in that mode.
+
+### Backwards compatibility
+
+Jetpack ships behind WordPress core's release cadence, so its bundled `@wordpress/components` is often months behind Gutenberg trunk. Don't depend on bleeding-edge component APIs without checking the Jetpack monorepo's pinned `@wordpress/components` version. When a needed Core capability isn't yet available in the Jetpack-bundled version, prefer contributing the gap upstream and waiting, over forking the component locally.
+
+## Do's and Don'ts
 
 ### Do
-- Use `Inter` as the only typeface with system font fallbacks
-- Use fluid `clamp()` values for heading typography
-- Use `#008710` (Jetpack Green 50) as the primary brand accent
-- Use `#32373c` (dark gray) for primary button backgrounds -- not black, not green
-- Use `9999px` radius for all buttons (pill shape is the signature)
-- Use pure `#000000` for headings -- Jetpack uses true black
-- Keep most elements flat (no shadow) -- shadows are the exception, not the rule
-- Use green SVG icons (24px) as the primary visual language for features
-- Use `#f6f7f7` for alternating section backgrounds
-- Keep max-width at 1200px for focused content presentation
+
+- Use `@wordpress/components` and `@automattic/jetpack-components` before inventing new UI.
+- Mount new full-screen Jetpack admin pages on `AdminPage` and wrap them in `<ThemeProvider>`.
+- Default to the user's wp-admin color scheme for primary actions and focus.
+- Reserve Jetpack green for brand moments (logo, paid plans, healthy/connected status, upgrade CTAs, the `jp-cut` link).
+- Use the Emerald typographic scale (16px body, generous headlines) on standalone Jetpack pages.
+- Keep notices factual, sentence-case, and active-voice.
+- Use sentence case for buttons, settings, and section titles.
+- Refer to paid tiers as plans.
+- Place the Jetpack logo in page headers and the Jetpack footer at the bottom of standalone admin pages.
+- Pair color with text, icon, or shape for status communication.
+- Localize every user-facing string.
 
 ### Don't
-- Don't use border-radius between 8px and 9999px on buttons -- it's either sharp or pill
-- Don't add shadows to standard cards -- Jetpack is intentionally flat
-- Don't use the accent colors (cyan, purple, orange) for interactive elements -- they're decorative WordPress presets
-- Don't use multiple brand colors -- green is the single accent; everything else is grayscale
-- Don't use dark/black backgrounds for main content sections -- Jetpack stays light
-- Don't use heavy button styling (gradients, shadows, borders) -- buttons are simple, pill-shaped, solid-color
-- Don't mix `Recoleta` with `Inter` in the same component -- serif is only for rare editorial moments
-- Don't use the green for body text -- it's for icons, links, and accents only
-- Don't add decorative borders to cards -- whitespace and layout do the separation work
 
-## 8. Responsive Behavior
+- Don't override `@wordpress/components` styles to enforce a Jetpack look on routine admin chrome.
+- Don't use brand green as the default primary button color across the admin shell — use the admin theme color, and use green for Jetpack-identity moments.
+- Don't introduce custom webfonts, heavy drop shadows, gradients, glassmorphism, or oversized consumer-app radii.
+- Don't replicate marketing-page hero layouts in admin pages. The page header (logo + title + actions) is enough.
+- Don't paint the wp-admin masterbar or admin menu green.
+- Don't use 13px body type from classic wp-admin in new Jetpack standalone surfaces — use the 16px Emerald body. (Conversely, don't push the 16px Emerald body into screens that live inside legacy wp-admin chrome where 13px is the local norm.)
+- Don't say "package," "bundle," or "upgrade your subscription." Plans.
+- Don't say users get features from Automattic. They get them from Jetpack.
+- Don't crowd the editor with Jetpack SlotFills. Pick the least intrusive slot for the task.
+- Don't ship green-on-green text without verifying contrast.
+- Don't introduce pink, orange, or non-`--jp-*` brand colors into routine admin chrome — they are reserved for specific product surfaces.
+- Don't fork `@wordpress/components` in Jetpack just to restyle. Contribute upstream or live with the default.
 
-### Breakpoints
-| Name | Width | Key Changes |
-|------|-------|-------------|
-| Mobile | <600px | Single column, reduced spacing, no blob animations |
-| Tablet | 600-781px | 2-column where appropriate, moderate padding |
-| Desktop | 782-900px | Full layout begins, animations enabled |
-| Large Desktop | >900px | Full layout, blob animations active, maximum spacing |
+## Source Notes
 
-### Touch Targets
-- Pill buttons: comfortable padding via `calc(0.667em + 2px)` vertical
-- Navigation: adequate spacing for touch
-- Icons: 24px+ tap targets with surrounding padding
-- Lightbox controls: 4px radius, adequate sizing
+This DESIGN.md was synthesized from the public Jetpack monorepo (`Automattic/jetpack` on GitHub) — specifically `projects/js-packages/base-styles/root-variables.scss`, `projects/js-packages/components/components/theme-provider/index.tsx`, the `@automattic/jetpack-components` package, the `@automattic/jetpack-base-styles` package, and `projects/plugins/jetpack/scss/atoms/colors/_colors.scss` — and from the following internal references:
 
-### Collapsing Strategy
-- Hero: 84px display -> 68px on mobile via `clamp()` (smooth, no breakpoints)
-- Navigation: full horizontal nav -> mobile toggle menu
-- Columns: flex-wrap handles column stacking naturally
-- Spacing: rem-based scale compresses proportionally
-- Background animations: disabled entirely below 900px and on prefers-reduced-motion
-- Images: responsive with `max-width: 100%`
-- Block gap maintained at 24px across breakpoints
+- *Design Principles for Jetpack* — Filipe Varela, Jetpack Division P2, 2024-11-01.
+- *Jetpack and the Design System* — Filipe Varela, Design Systems P2, 2024-11-14.
+- *Jetpack Emerald Style Snapshot i3* — Erin Casali, Jetpack Design P2, 2021-02-22.
+- *Jetpack Microcopy Guidelines* — Jetpack Design P2, 2019-06-27.
+- *Jetpack Brand Messaging Guidelines* — Field Guide.
+- *Automattic Brands Voice and Tone Style Guide* and *The Automattic Writing Style Guide* — Field Guide.
 
-### Animation Behavior
-- Transition duration: 0.2s for interactive elements
-- Background blobs: blurred gradient animations (desktop only, motion-safe only)
-- `translate3d()` for GPU-accelerated transforms
-- Respects `prefers-reduced-motion` -- all animations disabled
-
-## 9. Agent Prompt Guide
-
-### Quick Color Reference
-- Primary CTA background: Dark Gray (`#32373c`)
-- Brand accent: Jetpack Green 50 (`#008710`)
-- Brand accent hover: Jetpack Green 40 (`#069e08`)
-- Background: White (`#ffffff`)
-- Alt Background: Gray 0 (`#f6f7f7`)
-- Heading text: Black (`#000000`)
-- Body text: Black (`#000000`)
-- Secondary text: Gray 70 (`#3c434a`)
-- Muted text: Gray 40 (`#787c82`)
-- Link: Green 50 (`#008710`)
-- Icon fill: Green 50 (`#008710`) or Green 40 (`#069e08`)
-- Dark section: Very Dark Gray (`#313131`)
-
-### Example Component Prompts
-- "Create a hero section on white background. Headline using Inter at clamp(68px, 4.25rem + 1.25vw, 84px), weight 700, line-height 1.0, letter-spacing -0.5px, color #000000. Subtitle at 18px Inter weight 400, line-height 1.6, color #3c434a. Dark pill CTA button (#32373c, 9999px radius, calc(0.667em + 2px) calc(1.333em + 2px) padding, white text) and outline pill button (transparent, 2px solid currentColor, 9999px radius)."
-- "Design a feature card: white background, no shadow, no border (flat). Title at 24px Inter weight 600, color #000000. Body at 18px weight 400, line-height 1.6, color #3c434a. Green SVG icon (24px, #008710) above the title with 12px bottom margin. 24px gap between elements."
-- "Build a navigation bar: white/transparent background. Inter font. Logo left, links center, 'Get started' dark pill button right (#32373c, 9999px radius, white text). Active link color: #008710. Mobile: hamburger toggle."
-- "Create a testimonial section: large open-quote character at 5rem, color #069e08, weight 700. Quote text at clamp(25px, 1.563rem + 1.327vw, 42px) Inter weight 700, color #000000. Attribution at 18px weight 400, color #3c434a."
-- "Design a 2-column feature grid: max-width 1200px, gap 24px. Each feature: green icon (24px, #008710) left-aligned, title at 24px Inter weight 600, description at 18px weight 400 color #3c434a. No card borders or shadows -- separation through whitespace only."
-
-### Iteration Guide
-1. Always use `Inter` as the sole typeface with system font fallbacks
-2. Use `clamp()` for all heading sizes -- seamless responsive scaling
-3. Buttons are always pill-shaped (`9999px` radius) -- never rounded-rectangle
-4. Primary button is dark gray (`#32373c`), not green -- green is for accents and icons
-5. Headings are pure `#000000`, body text is also `#000000`, secondary is `#3c434a`
-6. Keep cards and containers flat -- no shadow is the default; shadows are exceptions
-7. Icons are 24px green SVGs (`#008710`) -- the primary visual vocabulary for features
-8. Max content width is 1200px -- tighter than most sites for focused reading
-9. Spacing uses a rem-based modular scale: 0.44, 0.67, 1, 1.5, 2.25, 3.38, 5.06rem
-10. Green is the ONLY brand color -- everything else is black, white, or gray
+Treat this file as a living design contract. The Jetpack design layer is mid-migration: from the bespoke Emerald visual style toward Core-aligned `@wordpress/components` styling. Until that migration completes, both modes coexist in the codebase. When in doubt, default to Core; reserve Jetpack-specific styling for branded touchpoints.
